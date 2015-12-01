@@ -51,16 +51,17 @@ bool GameFrame::Initialize(POINT screen, HWND hWnd){
 bool GameFrame::Updatar(){
 	bool result;
 
-	result = m_sceneManager->SceneRender();
-	if (!result)
-	{
-		MessageBox(NULL, L"Do not Render", L"Error", MB_OK);
-	}
 
 	result = m_sceneManager->SceneUpdatar();
 	if (!result)
 	{
 		MessageBox(NULL, L"Do not Updater", L"Error", MB_OK);
+	}
+
+	result = m_sceneManager->SceneRender();
+	if (!result)
+	{
+		MessageBox(NULL, L"Do not Render", L"Error", MB_OK);
 	}
 
 	return true;

@@ -45,18 +45,7 @@ void SceneManager::SceneInitialize(){
 	}
 	m_currentScene->Initialize();
 
-	m_gameState = eGameState::eRender;
-}
-
-bool SceneManager::SceneRender(){
-	if (m_gameState != eGameState::eRender)
-	{
-		return true;
-	}
-
-	m_currentScene->Render();
 	m_gameState = eGameState::eUpData;
-	return true;
 }
 
 bool SceneManager::SceneUpdatar(){
@@ -71,6 +60,17 @@ bool SceneManager::SceneUpdatar(){
 		SceneChanger(m_currentScene->GetChangeAfterSceneName());
 	}
 	m_gameState = eGameState::eRender;
+	return true;
+}
+
+bool SceneManager::SceneRender(){
+	if (m_gameState != eGameState::eRender)
+	{
+		return true;
+	}
+
+	m_currentScene->Render();
+	m_gameState = eGameState::eUpData;
 	return true;
 }
 
