@@ -17,7 +17,7 @@ class SceneBase
 
 		virtual ~SceneBase() = default;
 		
-		virtual void Initialize() = 0;
+		virtual void Initialize(Dx11::Direct3DManager*, HWND) = 0;
 		virtual void Updata() = 0;
 		virtual void Render() = 0;
 		virtual void Shutdown() = 0;

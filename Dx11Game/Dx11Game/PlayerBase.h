@@ -6,6 +6,8 @@
 
 */
 #include <Windows.h>
+
+#include <Direct3DManager.h>
 struct Vector3{
 	float _x, _y, _z;
 };
@@ -14,25 +16,31 @@ class PlayerBase
 {
 
 	protected:
-		struct Status{
-			Status(){
+
+		// 基本ステータス
+		struct PlayerStatus{
+			PlayerStatus(){
 				SecureZeroMemory(&_vector, sizeof(_vector));
 				_speed = 0.0f;
 			}
 			Vector3 _vector;
 			float _speed;
 		};
+
+		// 状態を追加していく
+		enum class ePlayerState{
+			eNull,
+			eStand,
+		};
 	public:
 		PlayerBase();
 		~PlayerBase();
 
-		Status& GetStatus();
-		void Process();
+		PlayerStatus& GetStatus();
+		ePlayerState GetNowState();
+		void SetState(ePlayerState);
 	private:
-		static Status m_status;
-
-	private:
-		virtual bool InitializeObject() = 0;
-		virtual void Run() = 0;
+		static PlayerStatus m_status;
+		static ePlayerState m_state;
 };
 #endif

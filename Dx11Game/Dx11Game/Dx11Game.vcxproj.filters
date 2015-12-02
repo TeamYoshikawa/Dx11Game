@@ -13,13 +13,13 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Player">
+    <Filter Include="PlayerFile">
       <UniqueIdentifier>{49b8c163-d903-40cd-9b52-a9914aab3afb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Player\cpp">
+    <Filter Include="PlayerFile\cpp">
       <UniqueIdentifier>{291cbdb8-a4c0-44c2-8fac-b16aa6ceedd7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Player\h">
+    <Filter Include="PlayerFile\h">
       <UniqueIdentifier>{2d9fd3a9-ce46-42df-bd3c-a2e8aa753293}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -43,16 +43,16 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="PlayerBase.cpp">
-      <Filter>Player\cpp</Filter>
+      <Filter>PlayerFile\cpp</Filter>
     </ClCompile>
     <ClCompile Include="PlayerRender.cpp">
-      <Filter>Player\cpp</Filter>
+      <Filter>PlayerFile\cpp</Filter>
     </ClCompile>
     <ClCompile Include="PlayerUpdater.cpp">
-      <Filter>Player\cpp</Filter>
+      <Filter>PlayerFile\cpp</Filter>
     </ClCompile>
     <ClCompile Include="PlayerManager.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>PlayerFile\cpp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -75,16 +75,16 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="PlayerBase.h">
-      <Filter>Player\h</Filter>
+      <Filter>PlayerFile\h</Filter>
     </ClInclude>
     <ClInclude Include="PlayerRender.h">
-      <Filter>Player\h</Filter>
+      <Filter>PlayerFile\h</Filter>
     </ClInclude>
     <ClInclude Include="PlayerUpdater.h">
-      <Filter>Player\h</Filter>
+      <Filter>PlayerFile\h</Filter>
     </ClInclude>
     <ClInclude Include="PlayerManager.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>PlayerFile\h</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

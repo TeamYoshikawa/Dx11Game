@@ -39,7 +39,7 @@ bool GameFrame::Initialize(POINT screen, HWND hWnd){
 		return false;
 	}
 
-	result = m_sceneManager->Initialize();
+	result = m_sceneManager->Initialize(m_d3d11Manager.get(),hWnd);
 	if (!result)
 	{
 		return false;
@@ -51,7 +51,7 @@ bool GameFrame::Initialize(POINT screen, HWND hWnd){
 bool GameFrame::Updatar(){
 	bool result;
 
-
+	m_d3d11Manager->BeginScene(Color(0.5f, 0.5f, 0.5f, 1.0f));
 	result = m_sceneManager->SceneUpdatar();
 	if (!result)
 	{
@@ -63,6 +63,8 @@ bool GameFrame::Updatar(){
 	{
 		MessageBox(NULL, L"Do not Render", L"Error", MB_OK);
 	}
+
+	m_d3d11Manager->EndScene();
 
 	return true;
 }

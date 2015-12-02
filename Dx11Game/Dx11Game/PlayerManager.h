@@ -20,8 +20,8 @@ class PlayerManager
 		PlayerManager();
 		~PlayerManager();
 
-		bool Initialize();
-		void Render();
+		bool Initialize(std::shared_ptr<DxCamera::ViewCamera>,std::string fileName="null");
+		void Render(DxShader::ShaderBase*, DxModel::eRenderWay);
 		void Update();
 };
 

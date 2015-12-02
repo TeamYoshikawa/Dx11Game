@@ -9,7 +9,7 @@ class SceneGame :
 		SceneGame(SceneManager*);
 		~SceneGame();
 
-		void Initialize()override;
+		void Initialize(Dx11::Direct3DManager*, HWND)override;
 		void Updata()override;
 		void Render()override;
 		void Shutdown()override;

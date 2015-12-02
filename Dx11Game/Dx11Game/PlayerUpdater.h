@@ -11,13 +11,14 @@
 class PlayerUpdater :
 	private PlayerBase
 {
-	private:
-		bool InitializeObject()override; 
-		void Run()override;
+	
 	public:
 		PlayerUpdater();
 		PlayerUpdater(PlayerUpdater&);
 		~PlayerUpdater();
+		bool Initialize();
+		void Frame();
+		
 
 };
 

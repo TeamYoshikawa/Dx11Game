@@ -2,6 +2,7 @@
 #define _SCENEMANAGER_H
 #include <memory>
 #include <unordered_map>
+#include <Direct3DManager.h>
 class SceneBase;
 
 class SceneManager
@@ -11,7 +12,7 @@ class SceneManager
 		SceneManager(SceneManager&);
 		~SceneManager();
 
-		bool Initialize();
+		bool Initialize(Dx11::Direct3DManager*,HWND&);
 		
 		bool SceneUpdatar();
 		bool SceneRender();
@@ -37,6 +38,8 @@ class SceneManager
 		static std::unordered_map<std::string, std::shared_ptr<SceneBase>> m_scenesMap;
 		static std::shared_ptr<SceneBase> m_currentScene;
 		static eGameState m_gameState;
+		HWND* m_hWnd;
+		Dx11::Direct3DManager* m_direct3d;
 };
 
 #endif

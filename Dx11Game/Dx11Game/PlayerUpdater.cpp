@@ -6,6 +6,11 @@ PlayerUpdater::PlayerUpdater(PlayerUpdater& other){}
 
 PlayerUpdater::~PlayerUpdater(){}
 
-void PlayerUpdater::Run(){
+void PlayerUpdater::Frame(){
+
 	return;
+}
+
+bool PlayerUpdater::Initialize(){
+	return true;
 }

@@ -13,7 +13,7 @@ SceneGame::~SceneGame()
 {
 }
 
-void SceneGame::Initialize(){
+void SceneGame::Initialize(Dx11::Direct3DManager* direct3d, HWND hWnd){
 	std::cout << "Start game" << std::endl;
 	std::cout << "ƒtƒ‰ƒO" << IsChange() << std::endl;
 	return;
