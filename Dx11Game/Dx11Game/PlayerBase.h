@@ -14,33 +14,42 @@ struct Vector3{
 
 class PlayerBase
 {
+	public:
 
-	protected:
+		
+		// 状態を追加していく
+		enum class ePlayerState{
+			eNull = 0,
+			eStand,
+		};
 
 		// 基本ステータス
 		struct PlayerStatus{
 			PlayerStatus(){
 				SecureZeroMemory(&_vector, sizeof(_vector));
+				m_state = ePlayerState::eNull;
 				_speed = 0.0f;
 			}
 			Vector3 _vector;
+			ePlayerState m_state;
 			float _speed;
 		};
 
-		// 状態を追加していく
-		enum class ePlayerState{
-			eNull,
-			eStand,
-		};
+
 	public:
 		PlayerBase();
-		~PlayerBase();
+		virtual ~PlayerBase();
 
-		PlayerStatus& GetStatus();
-		ePlayerState GetNowState();
-		void SetState(ePlayerState);
+		virtual PlayerStatus& SendShareStatus();
+		virtual PlayerStatus& SendStatus();
+		virtual void SendStatus(PlayerStatus&);
+	private:
+		virtual void Initialize() = 0;
+		virtual void Destroy() = 0;
+
 	private:
 		static PlayerStatus m_status;
-		static ePlayerState m_state;
+
+
 };
 #endif

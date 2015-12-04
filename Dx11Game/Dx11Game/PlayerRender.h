@@ -8,6 +8,7 @@
 #include "PlayerBase.h"
 #include <ShaderBase.h>
 #include <ModelBase.h>
+#include <FbxStaticMesh.h>
 class PlayerRender :
 	private PlayerBase
 {
@@ -17,11 +18,14 @@ class PlayerRender :
 		PlayerRender(PlayerRender&);
 		~PlayerRender();
 
-		bool Initialize(const std::shared_ptr<DxCamera::ViewCamera>, std::string fileName = "null");
-		void Frame(DxShader::ShaderBase*, DxModel::eRenderWay);
-
+		void Initialize()override; 
+		PlayerBase::PlayerStatus& SendStatus()override;
+		void SendStatus(PlayerBase::PlayerStatus&)override;
+		void Rendering(const std::shared_ptr<DxModel::FbxStaticMesh>,const std::shared_ptr<DxShader::ShaderBase>);
+		bool PlayAnimation();
 	private:
-		std::shared_ptr<DxModel::ModelBase> m_playerObject;
+		void Destroy()override;
+
 };
 
 #endif

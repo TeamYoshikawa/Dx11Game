@@ -1,9 +1,8 @@
 #include "PlayerRender.h"
-#include <Cube.h>
 
 PlayerRender::PlayerRender()
 {
-	m_playerObject = nullptr;
+
 }
 PlayerRender::PlayerRender(PlayerRender& other){}
 
@@ -12,13 +11,30 @@ PlayerRender::~PlayerRender()
 
 }
 
-bool PlayerRender::Initialize(const std::shared_ptr<DxCamera::ViewCamera> camera, std::string fileName){
-	m_playerObject = std::make_shared<DxModel::Cube>();
-	m_playerObject->Initialize(camera.get(), fileName.c_str());
+void PlayerRender::Initialize(){
+
+	return;
+}
+
+void PlayerRender::Destroy(){
+
+	return;
+}
+
+void PlayerRender::Rendering(const std::shared_ptr<DxModel::FbxStaticMesh> object, const std::shared_ptr<DxShader::ShaderBase> shader){
+	object->Render(shader.get(),DxModel::eRenderWay::eTexture);
+	return;
+}
+
+bool PlayerRender::PlayAnimation(){
+
 	return true;
 }
 
-void PlayerRender::Frame(DxShader::ShaderBase* shader, DxModel::eRenderWay way){
-	m_playerObject->Render(shader, way);
+void PlayerRender::SendStatus(PlayerBase::PlayerStatus&){
+	return;
+}
+
+PlayerBase::PlayerStatus& PlayerRender::SendStatus(){
 	return;
 }

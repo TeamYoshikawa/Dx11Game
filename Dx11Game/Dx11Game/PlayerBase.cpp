@@ -11,10 +11,10 @@ PlayerBase::~PlayerBase()
 {
 }
 
-PlayerBase::PlayerStatus& PlayerBase::GetStatus(){
+PlayerBase::PlayerStatus& PlayerBase::SendShareStatus(){
 	return m_status;
 }
 
-void PlayerBase::SetState(ePlayerState state){
-	m_state = state;
+PlayerBase::PlayerStatus& PlayerBase::SendStatus(){
+	return SendShareStatus();
 }
