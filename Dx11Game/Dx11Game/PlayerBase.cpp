@@ -18,3 +18,9 @@ PlayerBase::PlayerStatus& PlayerBase::SendShareStatus(){
 PlayerBase::PlayerStatus& PlayerBase::SendStatus(){
 	return SendShareStatus();
 }
+
+void PlayerBase::SendStatus(PlayerBase::PlayerStatus& status){
+
+
+	return;
+}

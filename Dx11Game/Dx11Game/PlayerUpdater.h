@@ -8,6 +8,9 @@
 
 */
 #include "PlayerBase.h"
+#include <memory>
+#include <FbxStaticMesh.h>
+#include <ModelBase.h>
 class PlayerUpdater :
 	private PlayerBase
 {

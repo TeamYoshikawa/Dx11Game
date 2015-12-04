@@ -22,7 +22,7 @@ void PlayerRender::Destroy(){
 }
 
 void PlayerRender::Rendering(const std::shared_ptr<DxModel::FbxStaticMesh> object, const std::shared_ptr<DxShader::ShaderBase> shader){
-	object->Render(shader.get(),DxModel::eRenderWay::eTexture);
+	object->Render(shader,DxModel::eRenderWay::eTexture);
 	return;
 }
 
@@ -36,5 +36,5 @@ void PlayerRender::SendStatus(PlayerBase::PlayerStatus&){
 }
 
 PlayerBase::PlayerStatus& PlayerRender::SendStatus(){
-	return;
+	return SendShareStatus();
 }
