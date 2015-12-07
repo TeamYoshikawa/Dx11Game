@@ -9,6 +9,7 @@ namespace DxModel{
 		~Line() = default;
 		Line(const Line&);
 
+	private:
 		bool InitializeBuffers() override;
 		void ShutdownBuffers() override;
 		void RenderBuffers() override;

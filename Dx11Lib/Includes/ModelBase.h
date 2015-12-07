@@ -4,10 +4,12 @@
 #include <D3DX10math.h>
 #include <memory>
 #include "Texture.h"
+#include"Vector3.h"
 #include"Direct3DManager.h"
 #include "TextureShader.h"
 #include "ViewCamera.h"
 #include "ModelProperty.h"
+
 namespace DxModel{
 
 	enum class eRenderWay{
@@ -18,31 +20,37 @@ namespace DxModel{
 	class ModelBase
 	{
 	private:
-		D3DXVECTOR3 scale;
-		D3DXVECTOR3 translation;
-		D3DXVECTOR3 rotation;
+		Dx11Math::Vector3 scale;
+		Dx11Math::Vector3 translation;
+		Dx11Math::Vector3 rotation;
 		void TransMatrix(D3DXMATRIX*);
+
 	public:
-		D3DXVECTOR3& Rotation();
-		void Rotation(D3DXVECTOR3 transform);
+		Dx11Math::Vector3& Rotation();
+		void Rotation(Dx11Math::Vector3 transform);
 
-		D3DXVECTOR3& Translation();
-		void Translation(D3DXVECTOR3 transform);
+		Dx11Math::Vector3& Translation();
+		void Translation(Dx11Math::Vector3 transform);
 
-		D3DXVECTOR3& Scaling();
-		void Scaling(D3DXVECTOR3 transform);
+		Dx11Math::Vector3& Scaling();
+		void Scaling(Dx11Math::Vector3 transform);
+
+	public:
+		bool RayPick(Dx11Math::Vector3&, ModelBase*, Dx11Math::Vector3);
 
 	public:
 		ModelBase();
 		ModelBase(const ModelBase&);
 		virtual ~ModelBase() = default;
 
-		bool Initialize(DxCamera::ViewCamera*,std::string textureFileName = "null");
+		bool Initialize(DxCamera::ViewCamera*, std::string textureFileName = "null");
 		void Shutdown();
-		void Render(DxShader::ShaderBase*,const eRenderWay);
-
+		void Render(const std::shared_ptr<DxShader::ShaderBase>,const eRenderWay);
 		void SetCamera(DxCamera::ViewCamera*);
 		int GetIndexCount();
+
+		
+
 		ID3D11ShaderResourceView* GetTexture();
 		static void CopyManagerAddress(Dx11::Direct3DManager*);
 	protected:
@@ -65,7 +73,6 @@ namespace DxModel{
 	private:
 		
 		void ReleaseTexture();
-
 	private:
 		DxCamera::ViewCamera* m_camera;
 	};

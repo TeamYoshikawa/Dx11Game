@@ -3,8 +3,8 @@
 #pragma comment (lib,"libfbxsdk-md.lib")
 #include <fbxsdk.h>
 #include "FbxModelProperty.h"
-
-namespace MyFbx{
+#include "ModelProperty.h"
+namespace DxFbx{
 	class FbxLoader
 	{
 
@@ -22,16 +22,17 @@ namespace MyFbx{
 
 		bool FileOpen(std::string, eAxisSystem);
 
-		void GetInfo();
-
 		std::vector<FbxModelProperty::FbxMeshNode> GetMeshNode();
 
 		void Release();
 
 
-		ModelProperty::VertexType* GetVertex();
-		unsigned long* GetIndex();
-		void GetMeshElements(ModelProperty::MeshElements&);
+		ModelProperty::VertexType* GetVertex(int id);
+		unsigned long* GetIndex(int id);
+		void GetMeshElements(ModelProperty::MeshElements&,int id);
+
+		unsigned int GetMeshNodeCount();
+
 	private:
 		void TriangulatedPolygons(FbxScene*, FbxNode*);
 		void GetMesh(FbxNode* node);
@@ -58,23 +59,23 @@ namespace MyFbx{
 		void ComputeNodeMatrix(FbxNode*, FbxModelProperty::FbxMeshNode*, FbxScene*);
 
 		static void FbxMatrixToFloat16(FbxMatrix*, float matrix[16]);
+
 	private:
 
-		std::vector<FbxModelProperty::FbxMeshNode> m_meshNode;
-
-		unsigned long m_polygonCount;
-		unsigned long* m_polygonSize;
-
+		unsigned int m_meshNodeCounter;
 
 		ModelProperty::VertexType* m_vertexBuffer;
 		unsigned long* m_indexBuffer;
 		ModelProperty::MeshElements m_meshElements;
 
-		
-		
+		std::vector<FbxModelProperty::FbxMeshNode> m_meshNode;
+		std::vector<unsigned long*> m_polygonSizeArray;
 
-
+		std::vector<ModelProperty::VertexType*> m_vertexBufferArray;
+		std::vector<unsigned long*> m_indexBufferArray;
+		std::vector<ModelProperty::MeshElements> m_meshElementsArray;
 
 	};
 }
+
 #endif

@@ -1,24 +1,23 @@
 #pragma once
-#include "ModelBase.h"
+#include "FbxBase.h"
 #include "FbxLoader.h"
 
 namespace DxModel{
 
 	class FbxStaticMesh :
-		public DxModel::ModelBase
+		public DxModel::FbxBase
 	{
 	public:
 		FbxStaticMesh();
 		~FbxStaticMesh();
 
-		void LoadFBX(std::string, MyFbx::FbxLoader::eAxisSystem);
+		void LoadFBX(std::string, DxFbx::FbxLoader::eAxisSystem);
+		
 	private:
 		bool InitializeBuffers()override;
 		void ShutdownBuffers()override;
-		void RenderBuffers()override;
-
-	private:
-		std::unique_ptr<MyFbx::FbxLoader> m_fbxLoader;
+		void NodeRenderBuffers(int id)override;
+	
 	};
 
 }

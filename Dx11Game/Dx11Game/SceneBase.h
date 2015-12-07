@@ -4,6 +4,8 @@
 #include <iostream>
 #include <Windows.h>
 #include "SceneManager.h"
+
+#include <FbxStaticMesh.h>
 class SceneBase
 {
 	
@@ -38,7 +40,7 @@ class SceneBase
 		const std::string m_sceneName;
 		std::string m_afterSceneName;
 		bool m_isChange;
-		
+	
 };
 
 #endif

@@ -16,6 +16,7 @@ class SceneGame :
 
 	public:
 		static const std::string m_thisName;
+		std::shared_ptr<DxModel::FbxStaticMesh> m_static;
 };
 
 #endif

@@ -146,6 +146,7 @@ namespace ModelProperty{
 			_normalCount = 0;
 			_materialCount = 0;
 		}
+		unsigned long _polygonCount;
 		unsigned long _vertexCount;
 		unsigned long _indexCount;
 		unsigned long _uvCount;

@@ -15,7 +15,12 @@ SceneGame::~SceneGame()
 
 void SceneGame::Initialize(Dx11::Direct3DManager* direct3d, HWND hWnd){
 	std::cout << "Start game" << std::endl;
-	std::cout << "ƒtƒ‰ƒO" << IsChange() << std::endl;
+
+	m_static = std::make_shared<DxModel::FbxStaticMesh>();
+
+	m_static->LoadFBX("Box_Sample.fbx", DxFbx::FbxLoader::eAxisSystem::eAxisOpenGL);
+
+	//m_static->Initialize()
 	return;
 }
 
