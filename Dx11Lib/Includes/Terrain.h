@@ -1,7 +1,7 @@
 #pragma once
 #include "ModelBase.h"
 namespace DxModel{
-	class TerrainClass :
+	class Terrain :
 		public ModelBase
 	{
 	private:
@@ -11,9 +11,9 @@ namespace DxModel{
 		};
 
 	public:
-		TerrainClass();
-		TerrainClass(const TerrainClass&);
-		~TerrainClass();
+		Terrain();
+		Terrain(const Terrain&);
+		~Terrain();
 
 		bool InitializeBuffers();
 		void ShutdownBuffers();

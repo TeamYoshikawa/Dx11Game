@@ -5,7 +5,7 @@
 #include <Windows.h>
 #include "SceneManager.h"
 
-#include <FbxStaticMesh.h>
+
 class SceneBase
 {
 	
