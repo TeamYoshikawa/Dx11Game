@@ -8,9 +8,7 @@
 #include <Windows.h>
 
 #include <Direct3DManager.h>
-struct Vector3{
-	float _x, _y, _z;
-};
+#include <Vector3.h>
 
 class PlayerBase
 {
@@ -20,21 +18,22 @@ class PlayerBase
 		// 状態を追加していく
 		enum class ePlayerMoveState{
 			eNull = 0,
-			eStand,
-			eRight,
-			eStraight,
-			eBack,
+			eMove,
+			eStatnd,
+			eFall,
 		};
 
 		// 基本ステータス
 		struct PlayerStatus{
 			PlayerStatus(){
-				SecureZeroMemory(&_vector, sizeof(_vector));
-				m_state = ePlayerMoveState::eNull;
+				_vector = 0.0f;
+				_moveState = ePlayerMoveState::eNull;
 				_speed = 0.0f;
+				_nextMoveDirection = 0.0f;
 			}
-			Vector3 _vector;
-			ePlayerMoveState m_state;
+			DxMath::Vector3 _vector;
+			DxMath::Vector3 _nextMoveDirection;
+			ePlayerMoveState _moveState;
 			float _speed;
 		};
 

@@ -21,11 +21,13 @@ class PlayerManager
 		
 		void Render(const std::shared_ptr<DxShader::ShaderBase>);
 		void Update(float);
-		PlayerBase::PlayerStatus Status();
+		PlayerBase::PlayerStatus& Status();
 		void Status(PlayerBase::PlayerStatus&);
 
 		bool HitMesh(const std::shared_ptr<DxModel::ModelBase>&);
 		bool HitMesh(const std::shared_ptr<DxModel::FbxStaticMesh>&);
+
+		void SerchNextPoint(const std::shared_ptr<DxModel::ModelBase>&);
 
 	private:
 		std::unique_ptr<PlayerUpdater> m_updater;

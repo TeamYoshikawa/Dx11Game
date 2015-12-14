@@ -23,6 +23,7 @@ class PlayerUpdater :
 		PlayerBase::PlayerStatus& SendStatus()override;
 		void SendStatus(PlayerBase::PlayerStatus&)override;
 		void Updating(const std::shared_ptr<DxModel::FbxStaticMesh>&, float);
+		void FaceTheObject(const std::shared_ptr<DxModel::FbxStaticMesh>&, const std::shared_ptr<DxModel::ModelBase>&);
 		bool HittingProcessor(const std::shared_ptr<DxModel::FbxStaticMesh>&);
 		bool HIttingProcessor(const std::shared_ptr<DxModel::ModelBase>&);
 	private:

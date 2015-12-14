@@ -1,5 +1,5 @@
 #include "PlayerManager.h"
-
+#include <iostream>
 
 PlayerManager::PlayerManager()
 {
@@ -21,6 +21,9 @@ bool PlayerManager::Initialize(const std::shared_ptr<DxCamera::ViewCamera> camer
 	m_playerObject = std::make_shared<DxModel::FbxStaticMesh>();
 	m_playerObject->LoadFBX("ModelData/models/player5.fbx",DxFbx::FbxLoader::eAxisSystem::eAxisOpenGL);
 	m_playerObject->Initialize(camera.get(), "ModelData/textures/tex.png");
+	m_playerObject->Transform()._translation = DxMath::Vector3(-20.0f, 0.0f, 0.0f);
+	
+	m_playerObject->Transform()._scale = DxMath::Vector3(0.05f, 0.05f, 0.05f);
 
 	return true;
 }
@@ -35,19 +38,29 @@ void PlayerManager::Update(float frame){
 	return;
 }
 
+// 引数で指定されたオブジェクトに対して向かう
+void PlayerManager::SerchNextPoint(const std::shared_ptr<DxModel::ModelBase>& nextPointObject){
+	
+	// アップデーターに役割を任せる
+	m_updater->FaceTheObject(m_playerObject, nextPointObject);
 
-PlayerBase::PlayerStatus PlayerManager::Status(){
+	return;
+}
+
+PlayerBase::PlayerStatus& PlayerManager::Status(){
 	return m_updater->SendStatus();
 }
 
-void PlayerManager::Status(PlayerBase::PlayerStatus&){
+void PlayerManager::Status(PlayerBase::PlayerStatus& status){
 
 	return;
 }
 
 bool PlayerManager::HitMesh(const std::shared_ptr<DxModel::ModelBase>&){
+
 	return true;
 }
 bool PlayerManager::HitMesh(const std::shared_ptr<DxModel::FbxStaticMesh>&){
+
 	return true;
 }

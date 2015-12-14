@@ -2,13 +2,16 @@
 #include <memory>
 #include <ModelBase.h>
 #include <FbxStaticMesh.h>
+#include <iostream>
+
+#define PI 3.14159265358979323846264338327950288
+
 PlayerUpdater::PlayerUpdater(){}
 PlayerUpdater::PlayerUpdater(PlayerUpdater& other){}
 
 
 PlayerUpdater::~PlayerUpdater(){
 
-	// 基本ここから動かすなよ！絶対動かすなよ！！！
 	Destroy();
 
 }
@@ -20,10 +23,7 @@ void PlayerUpdater::Initialize(){
 }
 
 void PlayerUpdater::Destroy(){
-	/*
-	解放処理
 
-	*/
 	return;
 }
 
@@ -35,9 +35,36 @@ void PlayerUpdater::SendStatus(PlayerBase::PlayerStatus&){
 	return;
 }
 
-void PlayerUpdater::Updating(const std::shared_ptr<DxModel::FbxStaticMesh>&, float){
+void PlayerUpdater::Updating(const std::shared_ptr<DxModel::FbxStaticMesh>& playerObject, float frame){
+
+
+	if (playerObject->Transform()._translation._x > SendStatus()._nextMoveDirection._x)
+	{
+		std::cout << "止まってるよ" << std::endl;
+		//return;
+	}
+
+
+	playerObject->Transform()._translation += SendStatus()._nextMoveDirection / 100;
+	float length = SendStatus()._nextMoveDirection._x - playerObject->Transform()._translation._x;
+	if (length < 1)
+	{
+		//playerObject->Transform()._translation._x = SendStatus()._nextMoveDirection._x;
+	}
 
 	return;
+}
+
+// 指定されたオブジェクトに向かって追いかける
+void PlayerUpdater::FaceTheObject(const std::shared_ptr<DxModel::FbxStaticMesh>& player, const std::shared_ptr<DxModel::ModelBase>& object){
+	SendStatus()._nextMoveDirection = object->Translation() - player->Transform()._translation;
+
+	float rad = atan2(SendStatus()._nextMoveDirection._x, SendStatus()._nextMoveDirection._z);
+	float hoge = rad / PI * 180;
+	std::cout << "rotation:" << hoge << std::endl;
+	std::cout << "player rotation:" << player->Transform()._rotation._y << std::endl;
+
+	player->Transform()._rotation._y = hoge;
 }
 
 
