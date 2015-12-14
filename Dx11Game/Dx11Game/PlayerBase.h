@@ -18,20 +18,23 @@ class PlayerBase
 
 		
 		// 状態を追加していく
-		enum class ePlayerState{
+		enum class ePlayerMoveState{
 			eNull = 0,
 			eStand,
+			eRight,
+			eStraight,
+			eBack,
 		};
 
 		// 基本ステータス
 		struct PlayerStatus{
 			PlayerStatus(){
 				SecureZeroMemory(&_vector, sizeof(_vector));
-				m_state = ePlayerState::eNull;
+				m_state = ePlayerMoveState::eNull;
 				_speed = 0.0f;
 			}
 			Vector3 _vector;
-			ePlayerState m_state;
+			ePlayerMoveState m_state;
 			float _speed;
 		};
 

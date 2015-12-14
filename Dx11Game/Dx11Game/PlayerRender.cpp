@@ -21,8 +21,11 @@ void PlayerRender::Destroy(){
 	return;
 }
 
-void PlayerRender::Rendering(const std::shared_ptr<DxModel::FbxStaticMesh> object, const std::shared_ptr<DxShader::ShaderBase> shader){
+void PlayerRender::Rendering(const std::shared_ptr<DxModel::FbxStaticMesh> object, 
+	const std::shared_ptr<DxShader::ShaderBase> shader){
+	
 	object->AllNodeRender(shader,DxModel::eRenderWay::eTexture);
+	
 	return;
 }
 

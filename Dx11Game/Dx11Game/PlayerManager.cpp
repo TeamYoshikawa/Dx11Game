@@ -19,8 +19,8 @@ bool PlayerManager::Initialize(const std::shared_ptr<DxCamera::ViewCamera> camer
 	m_render->Initialize();
 
 	m_playerObject = std::make_shared<DxModel::FbxStaticMesh>();
-	//m_playerObject->LoadFBX("パス名");
-	//m_playerObject->Initialize(camera.get(), "テクスチャのパス名");
+	m_playerObject->LoadFBX("ModelData/models/player5.fbx",DxFbx::FbxLoader::eAxisSystem::eAxisOpenGL);
+	m_playerObject->Initialize(camera.get(), "ModelData/textures/tex.png");
 
 	return true;
 }
@@ -42,7 +42,6 @@ PlayerBase::PlayerStatus PlayerManager::Status(){
 
 void PlayerManager::Status(PlayerBase::PlayerStatus&){
 
-	
 	return;
 }
 

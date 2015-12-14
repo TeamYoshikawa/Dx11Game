@@ -18,31 +18,27 @@ void SceneGame::Initialize(Dx11::Direct3DManager* direct3d, HWND hWnd){
 
 
 	m_camera = std::make_shared<DxCamera::ViewCamera>();
-	m_camera->Translation(Dx11Math::Vector3(0, 0, -50));
+	m_camera->Translation(DxMath::Vector3(0, 0, -500));
 
-	m_color = std::make_shared<DxShader::ColorShader>();
-	m_color->Initialize(direct3d->GetDevice(), hWnd, L"Shader/color.vs", L"Shader/color.ps");
+	m_shader = std::make_shared<DxShader::TextureShader>();
+	m_shader->Initialize(direct3d->GetDevice(), hWnd, L"Shader/texture.vs", L"Shader/texture.ps");
 
+	m_player = std::make_shared<PlayerManager>();
+	m_player->Initialize(m_camera);
 
-	m_static = std::make_shared<DxModel::FbxStaticMesh>();
-	m_static->LoadFBX("Box_Sample.fbx", DxFbx::FbxLoader::eAxisSystem::eAxisOpenGL);
-	m_static->Initialize(m_camera.get());
-
-	m_cube = std::make_shared<DxModel::Cube>();
-	m_cube->Initialize(m_camera.get());
 	return;
 }
 
 
 void SceneGame::Updata(){
-
+	m_player->Update(5);
 	return;
 }
 
 
 void SceneGame::Render(){
 	m_camera->Render();
-	m_static->AllNodeRender(m_color, DxModel::eRenderWay::eColor);
+	m_player->Render(m_shader);
 	return;
 }
 
