@@ -20,23 +20,35 @@ namespace DxModel{
 	class ModelBase
 	{
 	private:
-		Dx11Math::Vector3 scale;
-		Dx11Math::Vector3 translation;
-		Dx11Math::Vector3 rotation;
+		DxMath::Vector3 m_scale;
+		DxMath::Vector3 m_translation;
+		DxMath::Vector3 m_rotation;
 		void TransMatrix(D3DXMATRIX*);
 
-	public:
-		Dx11Math::Vector3& Rotation();
-		void Rotation(Dx11Math::Vector3 transform);
-
-		Dx11Math::Vector3& Translation();
-		void Translation(Dx11Math::Vector3 transform);
-
-		Dx11Math::Vector3& Scaling();
-		void Scaling(Dx11Math::Vector3 transform);
+	private:
+		DxMath::Vector3 m_axisX;
+		DxMath::Vector3 m_axisY;
+		DxMath::Vector3 m_axisZ;
 
 	public:
-		bool RayPick(Dx11Math::Vector3&, ModelBase*, Dx11Math::Vector3);
+		DxMath::Vector3& Rotation();
+		void Rotation(DxMath::Vector3 transform);
+
+		DxMath::Vector3& Translation();
+		void Translation(DxMath::Vector3 transform);
+
+		DxMath::Vector3& Scaling();
+		void Scaling(DxMath::Vector3 transform);
+
+	public:
+		bool RayPick(DxMath::Vector3&, ModelBase*, DxMath::Vector3);
+
+		DxMath::Vector3& AxisX();
+		void AxisX(DxMath::Vector3&);
+		DxMath::Vector3& AxisY();
+		void AxisY(DxMath::Vector3&);
+		DxMath::Vector3& AxisZ();
+		void AxisZ(DxMath::Vector3&);
 
 	public:
 		ModelBase();
@@ -49,6 +61,8 @@ namespace DxModel{
 		void SetCamera(DxCamera::ViewCamera*);
 		int GetIndexCount();
 
+		D3DXMATRIX YawPitchRoll(float, float, float);
+		void UpdateAxisAll();
 		
 
 		ID3D11ShaderResourceView* GetTexture();

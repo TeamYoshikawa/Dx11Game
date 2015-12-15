@@ -7,63 +7,11 @@
 #include <list>
 #include <memory>
 #include <unordered_map>
+
+#include "Vector2.h"
+#include "Vector3.h"
+#include "Vector4.h"
 namespace ModelProperty{
-
-	struct VertexPosition{
-		VertexPosition(){
-			_x = _y = _z = 0.0f;
-		}
-		~VertexPosition() = default;
-
-		void operator =(D3DXVECTOR3 vector){
-			_x = vector.x;
-			_y = vector.y;
-			_z = vector.z;
-		}
-		// 座標の位置
-		float _x, _y, _z;
-	};
-
-	struct VertexNomal{
-		VertexNomal(){
-
-			_x = _y = _z = 0.0f;
-		}
-		~VertexNomal() = default;
-		void operator =(D3DXVECTOR3 vector){
-			_x = vector.x;
-			_y = vector.y;
-			_z = vector.z;
-		}
-		// 法線の位置
-		float _x, _y, _z;
-	};
-
-	struct UVPoint{
-		UVPoint(){
-			_u = _v = 0.0f;
-		}
-		UVPoint(const float u,const float v){
-			_u = u;
-			_v = v;
-		}
-		~UVPoint() = default;
-		bool operator==(UVPoint& val)
-		{
-			if (this->_u == val._u&&this->_v == val._v)
-			{
-				return true;
-			}
-			return false;
-		}
-
-		void operator =(D3DXVECTOR2 vector){
-			_u = vector.x;
-			_v = vector.y;
-		}
-
-		float _u, _v;
-	};
 
 	struct UVSet{
 		UVSet(){
@@ -77,25 +25,6 @@ namespace ModelProperty{
 		std::list<std::string> _texture;
 	};
 
-	struct Color{
-		Color(){
-			_red = _blue =
-				_green = _alpha = 0.0f;
-		}
-		~Color() = default;
-
-		void operator =(D3DXVECTOR4 vector){
-			_red = vector.x;
-			_green = vector.y;
-			_blue = vector.z;
-			_alpha = vector.w;
-		}
-		float _red;
-		float _green;
-		float _blue;
-		float _alpha;
-	};
-
 	struct VertexType{
 		VertexType(){
 	
@@ -103,7 +32,7 @@ namespace ModelProperty{
 			SecureZeroMemory(&_position, sizeof(_position));
 			SecureZeroMemory(&_color, sizeof(_color));
 			SecureZeroMemory(&_uv, sizeof(_uv));
-			_normal = nullptr;
+			SecureZeroMemory(&_normal, sizeof(_normal));
 		}
 		~VertexType(){
 			Deleter();
@@ -113,18 +42,14 @@ namespace ModelProperty{
 			SecureZeroMemory(&_position, sizeof(_position));
 			SecureZeroMemory(&_color, sizeof(_color));
 			SecureZeroMemory(&_uv, sizeof(_uv));
-			if (_normal)
-			{
-				delete _normal;
-				_normal = nullptr;
-			}
+			SecureZeroMemory(&_normal, sizeof(_normal));
 
 		}
 
-		VertexPosition _position;
-		Color _color;
-		UVPoint _uv;
-		VertexNomal* _normal;
+		DxMath::Vector3 _position;
+		DxMath::Vector4 _color;
+		DxMath::Vector2 _uv;
+		DxMath::Vector3 _normal;
 		
 		
 		UVSet _uvSet;
@@ -170,10 +95,11 @@ namespace ModelProperty{
 		// UVセット名,テクスチャパス名(1つのUVSetに複数のテクスチャがある場合がある)
 		std::unordered_map<std::string, std::vector<std::string>> _texture;
 		eMaterialElementType _type;
-		Color _color;
+		DxMath::Vector4 _color;
 	};
 
 	struct Material{
+
 		// FBXのマテリアルは二種類しかない
 		enum class eMaterialType{
 			eMaterialLambert = 0,
@@ -191,17 +117,17 @@ namespace ModelProperty{
 	};
 
 	struct MaterialConstantData{
-		Color _ambient;
-		Color _diffuse;
-		Color _specular;
-		Color _emmisive;
+		DxMath::Vector4 _ambient;
+		DxMath::Vector4 _diffuse;
+		DxMath::Vector4 _specular;
+		DxMath::Vector4 _emmisive;
 	};
 
 	struct MaterialData{
-		Color _ambient;
-		Color _diffuse;
-		Color _specular;
-		Color _emmisive;
+		DxMath::Vector4 _ambient;
+		DxMath::Vector4 _diffuse;
+		DxMath::Vector4 _specular;
+		DxMath::Vector4 _emmisive;
 		float _specularPower;
 		float _tranceparencyFactory;
 		MaterialConstantData _materialConstantData;

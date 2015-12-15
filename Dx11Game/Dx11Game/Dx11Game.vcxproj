@@ -84,23 +84,33 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CameraMAnager.cpp" />
     <ClCompile Include="Entry.cpp" />
     <ClCompile Include="GameFrame.cpp" />
     <ClCompile Include="PlayerBase.cpp" />
     <ClCompile Include="PlayerManager.cpp" />
     <ClCompile Include="PlayerRender.cpp" />
     <ClCompile Include="PlayerUpdater.cpp" />
+    <ClCompile Include="Rock.cpp" />
+    <ClCompile Include="RockManager.cpp" />
+    <ClCompile Include="RockRender.cpp" />
+    <ClCompile Include="RockUpdater.cpp" />
     <ClCompile Include="SceneGame.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SceneTitle.cpp" />
     <ClCompile Include="System.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CameraMAnager.h" />
     <ClInclude Include="GameFrame.h" />
     <ClInclude Include="PlayerBase.h" />
     <ClInclude Include="PlayerManager.h" />
     <ClInclude Include="PlayerRender.h" />
     <ClInclude Include="PlayerUpdater.h" />
+    <ClInclude Include="Rock.h" />
+    <ClInclude Include="RockManager.h" />
+    <ClInclude Include="RockRender.h" />
+    <ClInclude Include="RockUpdater.h" />
     <ClInclude Include="SceneBase.h" />
     <ClInclude Include="SceneGame.h" />
     <ClInclude Include="SceneManager.h" />

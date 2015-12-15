@@ -22,6 +22,18 @@
     <Filter Include="PlayerFile\h">
       <UniqueIdentifier>{2d9fd3a9-ce46-42df-bd3c-a2e8aa753293}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Trap">
+      <UniqueIdentifier>{074ff9e6-3634-44a9-9b2b-f57d8c9792da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Trap\Rock">
+      <UniqueIdentifier>{170b37b6-593c-4f2e-890c-792ad7e10cf3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Trap\Rock\cpp">
+      <UniqueIdentifier>{7a5c7ee9-4bcc-41f2-9381-627c4bc3e81b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Trap\Rock\h">
+      <UniqueIdentifier>{04e82489-55f9-4721-b283-367556f9680c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Entry.cpp">
@@ -54,6 +66,21 @@
     <ClCompile Include="PlayerManager.cpp">
       <Filter>PlayerFile\cpp</Filter>
     </ClCompile>
+    <ClCompile Include="RockUpdater.cpp">
+      <Filter>Trap\Rock\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="RockManager.cpp">
+      <Filter>Trap\Rock\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Rock.cpp">
+      <Filter>Trap\Rock\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="RockRender.cpp">
+      <Filter>Trap\Rock\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraMAnager.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SceneBase.h">
@@ -85,6 +112,21 @@
     </ClInclude>
     <ClInclude Include="PlayerManager.h">
       <Filter>PlayerFile\h</Filter>
+    </ClInclude>
+    <ClInclude Include="Rock.h">
+      <Filter>Trap\Rock\h</Filter>
+    </ClInclude>
+    <ClInclude Include="RockManager.h">
+      <Filter>Trap\Rock\h</Filter>
+    </ClInclude>
+    <ClInclude Include="RockRender.h">
+      <Filter>Trap\Rock\h</Filter>
+    </ClInclude>
+    <ClInclude Include="RockUpdater.h">
+      <Filter>Trap\Rock\h</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraMAnager.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -37,14 +37,6 @@ void PlayerUpdater::SendStatus(PlayerBase::PlayerStatus&){
 
 void PlayerUpdater::Updating(const std::shared_ptr<DxModel::FbxStaticMesh>& playerObject, float frame){
 
-
-	if (playerObject->Transform()._translation._x > SendStatus()._nextMoveDirection._x)
-	{
-		std::cout << "Ž~‚Ü‚Á‚Ä‚é‚æ" << std::endl;
-		//return;
-	}
-
-
 	playerObject->Transform()._translation += SendStatus()._nextMoveDirection / 100;
 	float length = SendStatus()._nextMoveDirection._x - playerObject->Transform()._translation._x;
 	if (length < 1)
@@ -68,15 +60,17 @@ void PlayerUpdater::FaceTheObject(const std::shared_ptr<DxModel::FbxStaticMesh>&
 }
 
 
+bool PlayerUpdater::HIttingProcessor(const std::shared_ptr<DxModel::ModelBase>& player, const std::shared_ptr<DxModel::ModelBase>& other){
+
+	if (!m_boxCllider.IsCollideOBB(player, other))
+	{
+		return false;
+	}
+	return true;
+}
+
+
 bool PlayerUpdater::HittingProcessor(const std::shared_ptr<DxModel::FbxStaticMesh>&){
 
 	return true;
 }
-
-
-bool PlayerUpdater::HIttingProcessor(const std::shared_ptr<DxModel::ModelBase>&){
-
-	return true;
-}
-
-

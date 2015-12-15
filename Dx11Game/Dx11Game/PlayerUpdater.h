@@ -11,6 +11,7 @@
 #include <memory>
 #include <FbxStaticMesh.h>
 #include <ModelBase.h>
+#include <CollideBoxOBB.h>
 class PlayerUpdater :
 	private PlayerBase
 {
@@ -25,9 +26,13 @@ class PlayerUpdater :
 		void Updating(const std::shared_ptr<DxModel::FbxStaticMesh>&, float);
 		void FaceTheObject(const std::shared_ptr<DxModel::FbxStaticMesh>&, const std::shared_ptr<DxModel::ModelBase>&);
 		bool HittingProcessor(const std::shared_ptr<DxModel::FbxStaticMesh>&);
-		bool HIttingProcessor(const std::shared_ptr<DxModel::ModelBase>&);
+		bool HIttingProcessor(const std::shared_ptr<DxModel::ModelBase>&, const std::shared_ptr<DxModel::ModelBase>&);
 	private:
 		void Destroy()override;
+
+	private:
+		CollideBoxOBB m_boxCllider;
+
 };
 
 #endif

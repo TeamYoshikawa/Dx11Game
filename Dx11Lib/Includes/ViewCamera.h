@@ -13,24 +13,24 @@ namespace DxCamera{
 		
 
 		//Accessor Methods
-		Dx11Math::Vector3& Rotation();
-		void Rotation(Dx11Math::Vector3 transform);
-		Dx11Math::Vector3& Translation();
-		void Translation(Dx11Math::Vector3 transform);
-		Dx11Math::Vector3& LookUp();
-		void LookUp(Dx11Math::Vector3 transform);
-		Dx11Math::Vector3& LookAt();
-		void LookAt(Dx11Math::Vector3 transform);
+		DxMath::Vector3& Rotation();
+		void Rotation(DxMath::Vector3 transform);
+		DxMath::Vector3& Translation();
+		void Translation(DxMath::Vector3 transform);
+		DxMath::Vector3& LookUp();
+		void LookUp(DxMath::Vector3 transform);
+		DxMath::Vector3& LookAt();
+		void LookAt(DxMath::Vector3 transform);
 
 
 		void Render();
 		void GetViewMatrix(D3DXMATRIX&);
 
 	private:
-		Dx11Math::Vector3 m_translation;		//Camera's position in world
-		Dx11Math::Vector3 m_rotation;		//Camera's rotation in world
-		Dx11Math::Vector3 m_lookUp;			//Camera's Upper space on view
-		Dx11Math::Vector3 m_lookAt;			//Camera's LookAt position, default z(1.0)
+		DxMath::Vector3 m_translation;		//Camera's position in world
+		DxMath::Vector3 m_rotation;		//Camera's rotation in world
+		DxMath::Vector3 m_lookUp;			//Camera's Upper space on view
+		DxMath::Vector3 m_lookAt;			//Camera's LookAt position, default z(1.0)
 
 		D3DXMATRIX m_viewMatrix;
 	};

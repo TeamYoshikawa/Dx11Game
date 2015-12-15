@@ -10,6 +10,7 @@
 #include "PlayerUpdater.h"
 #include "PlayerRender.h"
 #include <memory>
+#include <CollideBoxOBB.h>
 class PlayerManager
 {
 
@@ -33,6 +34,7 @@ class PlayerManager
 		std::unique_ptr<PlayerUpdater> m_updater;
 		std::unique_ptr<PlayerRender> m_render;
 		std::shared_ptr<DxModel::FbxStaticMesh> m_playerObject;
+		std::shared_ptr<DxModel::ModelBase> m_collideBox;
 };
 
 #endif

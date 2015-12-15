@@ -11,7 +11,7 @@ namespace DxModel{
 		FbxStaticMesh();
 		~FbxStaticMesh();
 
-		void LoadFBX(std::string, DxFbx::FbxLoader::eAxisSystem);
+		
 		
 	private:
 		bool InitializeBuffers()override;

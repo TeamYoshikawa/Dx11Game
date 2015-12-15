@@ -9,22 +9,11 @@
 namespace DxModel{
 	class FbxBase
 	{
-
-	public:
-		Dx11Math::Vector3& Rotation();
-		void Rotation(Dx11Math::Vector3 transform);
-
-		Dx11Math::Vector3& Translation();
-		void Translation(Dx11Math::Vector3 transform);
-
-		Dx11Math::Vector3& Scaling();
-		void Scaling(Dx11Math::Vector3 transform);
-
 	public:
 		FbxBase();
 		FbxBase(const FbxBase&);
 		virtual ~FbxBase() = default;
-
+		virtual void LoadFBX(std::string, DxFbx::FbxLoader::eAxisSystem);
 		virtual bool Initialize(DxCamera::ViewCamera*, std::string textureFileName = "null");
 		virtual void Shutdown();
 		virtual void AllNodeRender(const std::shared_ptr<DxShader::ShaderBase>,const eRenderWay);
@@ -38,6 +27,9 @@ namespace DxModel{
 		virtual int GetMeshNodeCount()const;
 
 		static void CopyManagerAddressToFbx(Dx11::Direct3DManager*);
+
+		virtual DxMath::Transform& Transform();
+		virtual void Transform(DxMath::Transform);
 	private:
 		// ê‚ëŒÇ…åpè≥ÇµÇƒoverrideÇµÇƒÇ≠ÇæÇ≥Ç¢
 		virtual bool InitializeBuffers() = 0;
@@ -45,7 +37,7 @@ namespace DxModel{
 		virtual void NodeRenderBuffers(int id) = 0;
 	protected:
 		virtual bool LoadTexture(std::string);
-		
+		virtual bool LoadMeshNodeTexture(DxModel::Texture*, std::string);
 
 	protected:
 		static Dx11::Direct3DManager* m_direct3d;
@@ -58,15 +50,14 @@ namespace DxModel{
 
 	private:
 		virtual void ReleaseTexture();
-		virtual void TransMatrix(D3DXMATRIX*);
+		virtual void TransMatrix(D3DXMATRIX*,int);
 
 	private:
 
 		DxCamera::ViewCamera* m_camera;
 
-		Dx11Math::Vector3 scale;
-		Dx11Math::Vector3 translation;
-		Dx11Math::Vector3 rotation;
+		DxMath::Transform m_transform;
+		
 		
 	};
 
