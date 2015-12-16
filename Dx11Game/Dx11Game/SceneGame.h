@@ -31,7 +31,6 @@ class SceneGame :
 		std::shared_ptr<DxShader::LightShader> m_lightshader;
 
 		std::shared_ptr<DxLight::Light>m_light;
-		std::shared_ptr<DxModel::Cube> m_cube;
 		std::shared_ptr<DxModel::FbxStaticMesh> m_stage;
 };
 

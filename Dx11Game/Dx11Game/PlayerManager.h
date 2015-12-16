@@ -9,6 +9,7 @@
 #include "PlayerBase.h"
 #include "PlayerUpdater.h"
 #include "PlayerRender.h"
+#include "PlayerNavigation.h"
 #include <memory>
 #include <CollideBoxOBB.h>
 class PlayerManager
@@ -28,11 +29,15 @@ class PlayerManager
 		bool HitMesh(const std::shared_ptr<DxModel::ModelBase>&);
 		bool HitMesh(const std::shared_ptr<DxModel::FbxStaticMesh>&);
 
-		void SerchNextPoint(const std::shared_ptr<DxModel::ModelBase>&);
+		void NextSerch();
 
+	private:
+		void SerchNextPoint(const std::shared_ptr<DxModel::ModelBase>&);
 	private:
 		std::unique_ptr<PlayerUpdater> m_updater;
 		std::unique_ptr<PlayerRender> m_render;
+
+		std::unique_ptr<PlayerNavigation> m_navigation;
 		std::shared_ptr<DxModel::FbxStaticMesh> m_playerObject;
 		std::shared_ptr<DxModel::ModelBase> m_collideBox;
 };

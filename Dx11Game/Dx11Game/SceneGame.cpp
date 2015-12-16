@@ -37,13 +37,6 @@ void SceneGame::Initialize(Dx11::Direct3DManager* direct3d, HWND hWnd){
 	m_player = std::make_shared<PlayerManager>();
 	m_player->Initialize(m_camera->GetCamera());
 
-	m_cube = std::make_shared<DxModel::Cube>();
-	m_cube->Initialize(m_camera->GetCamera().get(), "ModelData/textures/tex.png");
-	m_cube->Translation(Vector3(320.0f, -100.f, 200.0f));
-	m_cube->Scaling(Vector3(10.0f, 10.0f, 10.0f));
-
-	m_player->SerchNextPoint(m_cube);
-
 	m_stage = std::make_shared<DxModel::FbxStaticMesh>();
 	m_stage->LoadFBX("ModelData/models/STAGEMODEL.fbx", DxFbx::FbxLoader::eAxisSystem::eAxisOpenGL);
 	m_stage->Initialize(m_camera->GetCamera().get(), "ModelData/textures/texture.jpg");
@@ -57,12 +50,14 @@ void SceneGame::Initialize(Dx11::Direct3DManager* direct3d, HWND hWnd){
 int a = 0;
 void SceneGame::Updata(){
 	DxController::GameController::GetPointer()->Frame();
+
+
 	if (DxController::GameController::GetPointer()->IsLeftButtonTrigger())
 	{
-		m_camera->ChangeCamera(a);
-		++a;
-		return;
+		m_camera->ChangeCamera(1);
+		m_player->NextSerch();
 	}
+
 	m_player->Update(1);
 
 
@@ -78,7 +73,9 @@ void SceneGame::Render(){
 	m_stage->AllNodeRender(m_shader, DxModel::eRenderWay::eTexture);
 
 	m_player->Render(m_shader);
-	m_cube->Render(m_shader, DxModel::eRenderWay::eTexture);
+
+	
+
 	return;
 }
 
