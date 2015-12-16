@@ -27,6 +27,13 @@ void SceneGame::Initialize(Dx11::Direct3DManager* direct3d, HWND hWnd){
 	m_shader = std::make_shared<DxShader::TextureShader>();
 	m_shader->Initialize(direct3d->GetDevice(), hWnd, L"Shader/texture.vs", L"Shader/texture.ps");
 
+	m_lightshader = std::make_shared<DxShader::LightShader>();
+	m_lightshader->Initialize(direct3d->GetDevice(), hWnd, L"Shader/DiffuseLightVS.hlsl", L"Shader/DiffuseLightPS.hlsl");
+
+	m_light = std::make_shared<DxLight::Light>();
+	m_light->Translation(DxMath::Vector3(-50, 50, -50));
+	m_lightshader->SetLight(m_light.get());
+
 	m_player = std::make_shared<PlayerManager>();
 	m_player->Initialize(m_camera->GetCamera());
 
@@ -40,7 +47,6 @@ void SceneGame::Initialize(Dx11::Direct3DManager* direct3d, HWND hWnd){
 	m_stage = std::make_shared<DxModel::FbxStaticMesh>();
 	m_stage->LoadFBX("ModelData/models/STAGEMODEL.fbx", DxFbx::FbxLoader::eAxisSystem::eAxisOpenGL);
 	m_stage->Initialize(m_camera->GetCamera().get(), "ModelData/textures/texture.jpg");
-	m_stage->Transform()._scale = Vector3(1.0f, 1.0f, -1.0f);
 	HINSTANCE hInstance = GetModuleHandle(NULL);
 	DxController::GameController::Create(hInstance, hWnd);
 
@@ -59,62 +65,38 @@ void SceneGame::Updata(){
 
 	DxController::GameController::GetPointer()->Frame();
 
-	if (DxController::GameController::GetPointer()->IsKeyDown(DIK_W))
-	{
-		m_cube->Translation()._z += 1.0f;
-	}
-
-	if (DxController::GameController::GetPointer()->IsKeyDown(DIK_S))
-	{
-		m_cube->Translation()._z -= 1.0f;
-	}
-
-	if (DxController::GameController::GetPointer()->IsKeyDown(DIK_A))
-	{
-		m_cube->Translation()._x -= 1.0f;
-	}
-
-	if (DxController::GameController::GetPointer()->IsKeyDown(DIK_D))
-	{
-		m_cube->Translation()._x += 1.0f;
-	}
-
-	if (DxController::GameController::GetPointer()->IsKeyDown(DIK_LSHIFT))
-	{
-		if (DxController::GameController::GetPointer()->IsKeyDown(DIK_W))
-		{
-			m_cube->Rotation()._y += 1.0f;
-		}
-
-		if (DxController::GameController::GetPointer()->IsKeyDown(DIK_S))
-		{
-			m_cube->Rotation()._y -= 1.0f;
-		}
-
-		if (DxController::GameController::GetPointer()->IsKeyDown(DIK_A))
-		{
-			m_cube->Rotation()._x -= 1.0f;
-		}
-
-		if (DxController::GameController::GetPointer()->IsKeyDown(DIK_D))
-		{
-			m_cube->Rotation()._x += 1.0f;
-		}
-	}
-
-	std::cout << "X :" << m_cube->Translation()._x << "\t";
-	std::cout << "Y :" << m_cube->Translation()._y << "\t";
-	std::cout << "Z :" << m_cube->Translation()._z << std::endl;
-
-
-
+	
 	return;
 }
 
 
 void SceneGame::Render(){
+	if (GetAsyncKeyState('W') & 0x8000)
+	{
+	}
+
+	if (GetAsyncKeyState('S') & 0x8000)
+	{
+	}
+
+	if (GetAsyncKeyState('A') & 0x8000)
+	{
+	}
+
+	if (GetAsyncKeyState('D') & 0x8000)
+	{
+	}
+	std::cout << m_light->Translation()._x << "\n";
+	std::cout << m_light->Translation()._z << "\n";
+
 	m_camera->Render();
+	if (GetAsyncKeyState('X') & 0x8000){
+	m_stage->AllNodeRender(m_lightshader, DxModel::eRenderWay::eDiffuseLight);
+	}
+	else{
 	m_stage->AllNodeRender(m_shader, DxModel::eRenderWay::eTexture);
+	}
+
 	m_player->Render(m_shader);
 	m_cube->Render(m_shader, DxModel::eRenderWay::eTexture);
 	return;
