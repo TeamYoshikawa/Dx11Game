@@ -7,6 +7,10 @@
 #include "SceneBase.h"
 #include "PlayerManager.h"
 #include "CameraMAnager.h"
+#include"LightShader.h"
+#include"Light.h"
+
+
 class SceneGame :
 	public SceneBase
 {
@@ -24,6 +28,9 @@ class SceneGame :
 		std::shared_ptr<PlayerManager> m_player;
 		std::shared_ptr<CameraManager> m_camera;
 		std::shared_ptr<DxShader::ShaderBase> m_shader;
+		std::shared_ptr<DxShader::LightShader> m_lightshader;
+
+		std::shared_ptr<DxLight::Light>m_light;
 		std::shared_ptr<DxModel::Cube> m_cube;
 		std::shared_ptr<DxModel::FbxStaticMesh> m_stage;
 };

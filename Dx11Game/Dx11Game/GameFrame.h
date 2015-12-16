@@ -10,7 +10,7 @@
 namespace{
 	const bool kFullScreen = false;
 	const bool kVsyncEnabled = true;
-	const float kScreenDepth = 1000.0f;
+	const float kScreenDepth = 1000000.0f;
 	const float kScreenNear = 0.1f;
 }
 
