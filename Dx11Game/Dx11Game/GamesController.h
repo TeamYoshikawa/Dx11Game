@@ -15,8 +15,8 @@
 #pragma comment(lib,"dinput8.lib")
 #pragma comment(lib,"dxguid.lib")
 
-namespace GAMEController{
-	class GameController
+namespace Gamescontroller{
+	class Gamescontroller
 	{
 	private:
 		struct DXMOUSE3D
@@ -29,7 +29,7 @@ namespace GAMEController{
 	public:
 		static bool Create(HINSTANCE, HWND);
 
-		static GameController* GetPointer();
+		static Gamescontroller* GetPointer();
 		static void Shutdown();
 
 		bool Frame();
@@ -54,9 +54,9 @@ namespace GAMEController{
 		void Intersection(DxMath::Vector3&, DxMath::Vector3&);
 		void SetCamera(DxCamera::ViewCamera*);
 	private:
-		GameController();
-		GameController(const GameController&);
-		~GameController();
+		Gamescontroller();
+		Gamescontroller(const Gamescontroller&);
+		~Gamescontroller();
 
 		bool Initialize(HINSTANCE&, HWND&);
 		bool ReadKeybord();
@@ -79,7 +79,7 @@ namespace GAMEController{
 
 		unsigned char m_keybordState[256];
 
-		static GameController* m_controller;
+		static Gamescontroller* m_controller;
 		static Dx11::Direct3DManager* m_direct3d;
 
 		DxCamera::ViewCamera* m_camera;

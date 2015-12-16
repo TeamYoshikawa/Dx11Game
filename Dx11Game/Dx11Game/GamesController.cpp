@@ -1,29 +1,29 @@
-#include "GameController.h"
+#include "Gamescontroller.h"
 #include <iostream>
 
-namespace GAMEController{
+namespace Gamescontroller{
 
-	GameController* GameController::m_controller = nullptr;
-	Dx11::Direct3DManager* GameController::m_direct3d = nullptr;
+	Gamescontroller* Gamescontroller::m_controller = nullptr;
+	Dx11::Direct3DManager* Gamescontroller::m_direct3d = nullptr;
 
-	GameController::GameController()
+	Gamescontroller::Gamescontroller()
 	{
 		m_directInput = 0;
 		m_keybord = 0;
 		m_mouse = 0;
 	}
 
-	GameController::GameController(const GameController& other){}
+	Gamescontroller::Gamescontroller(const Gamescontroller& other){}
 
-	GameController::~GameController(){}
+	Gamescontroller::~Gamescontroller(){}
 
-	bool GameController::Create(HINSTANCE hInstance, HWND hWnd){
+	bool Gamescontroller::Create(HINSTANCE hInstance, HWND hWnd){
 		if (m_controller)
 		{
 			return true;
 		}
 
-		m_controller = new GameController;
+		m_controller = new Gamescontroller;
 		if (!m_controller)
 		{
 			return false;
@@ -32,7 +32,7 @@ namespace GAMEController{
 		return true;
 	}
 
-	bool GameController::Initialize(HINSTANCE& hInstance, HWND& hWnd){
+	bool Gamescontroller::Initialize(HINSTANCE& hInstance, HWND& hWnd){
 
 		HRESULT result;
 
@@ -66,7 +66,7 @@ namespace GAMEController{
 		return true;
 	}
 
-	bool GameController::Frame()
+	bool Gamescontroller::Frame()
 	{
 		bool result;
 
@@ -90,7 +90,7 @@ namespace GAMEController{
 	}
 
 
-	bool GameController::ReadKeybord()
+	bool Gamescontroller::ReadKeybord()
 	{
 		HRESULT result;
 
@@ -111,7 +111,7 @@ namespace GAMEController{
 	}
 
 
-	bool GameController::ReadMouse()
+	bool Gamescontroller::ReadMouse()
 	{
 		HRESULT result;
 
@@ -131,7 +131,7 @@ namespace GAMEController{
 	}
 
 
-	void GameController::ProcessInput()
+	void Gamescontroller::ProcessInput()
 	{
 		m_mouseX += m_mouseState.lX;
 		m_mouseY += m_mouseState.lY;
@@ -145,11 +145,11 @@ namespace GAMEController{
 		return;
 	}
 
-	GameController* GameController::GetPointer(){
+	Gamescontroller* Gamescontroller::GetPointer(){
 		return m_controller;
 	}
 
-	void GameController::Shutdown(){
+	void Gamescontroller::Shutdown(){
 		if (!m_controller)
 		{
 			return;
@@ -181,7 +181,7 @@ namespace GAMEController{
 		return;
 	}
 
-	bool GameController::IsLeftButtonDown()
+	bool Gamescontroller::IsLeftButtonDown()
 	{
 		if (m_mouseState.rgbButtons[0] & 0x80)
 		{
@@ -190,7 +190,7 @@ namespace GAMEController{
 		return false;
 	}
 
-	bool GameController::IsRightButtonDown()
+	bool Gamescontroller::IsRightButtonDown()
 	{
 		if (m_mouseState.rgbButtons[1] & 0x80)
 		{
@@ -200,7 +200,7 @@ namespace GAMEController{
 	}
 
 
-	bool GameController::IsWheelDown()
+	bool Gamescontroller::IsWheelDown()
 	{
 		if (m_mouseState.rgbButtons[2] & 0x80)
 		{
@@ -209,7 +209,7 @@ namespace GAMEController{
 		return false;
 	}
 
-	bool GameController::IsLeftButtonTrigger()
+	bool Gamescontroller::IsLeftButtonTrigger()
 	{
 		static bool prevState[sizeof(m_mouseState.rgbButtons) / sizeof(m_mouseState.rgbButtons[0])];
 		bool current = m_mouseState.rgbButtons[0] & 0x80;
@@ -219,7 +219,7 @@ namespace GAMEController{
 		return ret;
 	}
 
-	bool GameController::IsRightButtonTrigger()
+	bool Gamescontroller::IsRightButtonTrigger()
 	{
 		static bool prevState[sizeof(m_mouseState.rgbButtons) / sizeof(m_mouseState.rgbButtons[1])];
 		bool current = m_mouseState.rgbButtons[1] & 0x80;
@@ -229,7 +229,7 @@ namespace GAMEController{
 		return ret;
 	}
 
-	bool GameController::IsWheelTrigger()
+	bool Gamescontroller::IsWheelTrigger()
 	{
 		static bool prevState[sizeof(m_mouseState.rgbButtons) / sizeof(m_mouseState.rgbButtons[2])];
 		bool current = m_mouseState.rgbButtons[2] & 0x80;
@@ -239,7 +239,7 @@ namespace GAMEController{
 		return ret;
 	}
 
-	bool GameController::IsKeyDown(unsigned int buffer)
+	bool Gamescontroller::IsKeyDown(unsigned int buffer)
 	{
 		if (m_keybordState[buffer] & 0x80)
 		{
@@ -248,34 +248,34 @@ namespace GAMEController{
 		return false;
 	}
 
-	float GameController::GetMouseX()
+	float Gamescontroller::GetMouseX()
 	{
 		return m_MousePos.x;
 	}
 
 
-	float GameController::GetMouseY()
+	float Gamescontroller::GetMouseY()
 	{
 		return m_MousePos.y;
 	}
 
-	DxMath::Vector3 GameController::GetMouseDirection()
+	DxMath::Vector3 Gamescontroller::GetMouseDirection()
 	{
 		return m_mouseDirection;
 	}
 
-	HWND GameController::GetWindowHandle()
+	HWND Gamescontroller::GetWindowHandle()
 	{
 		return m_hWnd;
 	}
 
-	void GameController::CopyManagerAddress(Dx11::Direct3DManager* d3d){
+	void Gamescontroller::CopyManagerAddress(Dx11::Direct3DManager* d3d){
 		// ƒAƒhƒŒƒX‚Ì‘ã“ü
 		m_direct3d = d3d;
 		return;
 	}
 
-	void GameController::Intersection(DxMath::Vector3& Rayorigin, DxMath::Vector3& Raydirection)
+	void Gamescontroller::Intersection(DxMath::Vector3& Rayorigin, DxMath::Vector3& Raydirection)
 	{
 		float pointX, pointY;
 		D3DXMATRIX projectionMatrix, viewMatrix, inverseViewMatrix, worldMatrix, translateMatrix, inverseWorldMatrix;
@@ -338,7 +338,7 @@ namespace GAMEController{
 		//m_mouseDirection._x = rayOrigin.z;
 	}
 
-	void GameController::SetCamera(DxCamera::ViewCamera* camera)
+	void Gamescontroller::SetCamera(DxCamera::ViewCamera* camera)
 	{
 		m_camera = &(*camera);
 	}
