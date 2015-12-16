@@ -23,21 +23,32 @@ void CameraManager::Initialize()
 	m_camera = std::make_shared<DxCamera::ViewCamera>();
 	m_camera->Translation(m_propaty[0].m_changeCameraTranslationArray);
 	m_camera->Rotation(m_propaty[0].m_changeCameraRotationArray);
-	
+	m_cameraID = 0;
 }
 
 void CameraManager::Render()
 {
+	m_camera->Translation(m_propaty[m_cameraID].m_changeCameraTranslationArray);
+	m_camera->Rotation(m_propaty[m_cameraID].m_changeCameraRotationArray);
 	m_camera->Render();
 }
 
 void CameraManager::ChangeCamera(int id)
 {
-	m_camera->Translation(m_propaty[id].m_changeCameraTranslationArray);
-	m_camera->Rotation(m_propaty[id].m_changeCameraRotationArray);
+	m_camera->Translation(m_propaty[m_cameraID].m_changeCameraTranslationArray);
+	m_camera->Rotation(m_propaty[m_cameraID].m_changeCameraRotationArray);
 }
 
 std::shared_ptr<DxCamera::ViewCamera>& CameraManager::GetCamera(){
 	return m_camera;
 
+}
+
+
+void CameraManager::NextCameraSet(){
+	m_cameraID += 1;
+	if (m_cameraID > 3)
+	{
+		m_cameraID = 3;
+	}
 }
