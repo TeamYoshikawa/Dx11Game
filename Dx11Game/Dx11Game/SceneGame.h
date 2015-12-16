@@ -24,9 +24,10 @@ class SceneGame :
 		void Updata()override;
 		void Render()override;
 		void Shutdown()override;
-
-	public:
 		static const std::string m_thisName;
+	
+	private:
+	
 		std::shared_ptr<PlayerManager> m_player;
 		std::shared_ptr<CameraManager> m_camera;
 
@@ -38,6 +39,8 @@ class SceneGame :
 
 		std::shared_ptr<DxLight::Light>m_light;
 		std::shared_ptr<DxModel::FbxStaticMesh> m_stage;
+
+		std::shared_ptr<DxModel::ModelBase> m_positionCheck;
 };
 
 #endif

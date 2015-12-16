@@ -30,11 +30,13 @@ class CameraManager
 		void Render();
 		void ChangeCamera(int);
 		std::shared_ptr<DxCamera::ViewCamera>& GetCamera();
+
+		void NextCameraSet();
 		
 	private:
 	    
 		std::shared_ptr<DxCamera::ViewCamera> m_camera;
-		
+		int m_cameraID;
 		static CameraPropaty m_propaty[];
 };
 

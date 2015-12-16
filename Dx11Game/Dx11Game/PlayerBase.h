@@ -35,6 +35,7 @@ class PlayerBase
 			DxMath::Vector3 _nextMoveDirection;
 			ePlayerMoveState _moveState;
 			float _speed;
+			int _navigationID;
 		};
 
 

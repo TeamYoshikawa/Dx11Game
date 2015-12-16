@@ -26,20 +26,29 @@ class PlayerManager
 		PlayerBase::PlayerStatus& Status();
 		void Status(PlayerBase::PlayerStatus&);
 
+		// 外部オブジェクトとの当たり判定用
 		bool HitMesh(const std::shared_ptr<DxModel::ModelBase>&);
 		bool HitMesh(const std::shared_ptr<DxModel::FbxStaticMesh>&);
 
 		void NextSerch();
 
+		bool IsChangeCamera();	// カメラを切り替えるかの判別用
+		std::unique_ptr<PlayerNavigation> m_navigation; // プレイヤーのルート用オブジェクト
 	private:
-		void SerchNextPoint(const std::shared_ptr<DxModel::ModelBase>&);
-	private:
-		std::unique_ptr<PlayerUpdater> m_updater;
-		std::unique_ptr<PlayerRender> m_render;
+		// 次に行く道をセット
+		void SetNextPoint(const std::shared_ptr<DxModel::ModelBase>&);
 
-		std::unique_ptr<PlayerNavigation> m_navigation;
-		std::shared_ptr<DxModel::FbxStaticMesh> m_playerObject;
-		std::shared_ptr<DxModel::ModelBase> m_collideBox;
+	private:
+		std::unique_ptr<PlayerUpdater> m_updater;		// プレイヤーの更新オブジェクト
+		std::unique_ptr<PlayerRender> m_render;	        // プレイヤーの描画オブジェくト
+		
+
+		std::shared_ptr<DxModel::FbxStaticMesh> m_playerObject; // プレイヤーのモデルオブジェクト
+		std::shared_ptr<DxModel::ModelBase> m_collideBox;	// 実際に当たり判定を行うオブジェクト
+
+		CollideBoxOBB m_collider;	// 当たり判定を行う関数
+		bool m_isCahngeCamera;		// カメラを切り替えるフラグ
+		
 };
 
 #endif

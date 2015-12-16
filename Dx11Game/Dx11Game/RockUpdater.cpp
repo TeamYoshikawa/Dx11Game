@@ -34,9 +34,9 @@ void RockUpdater::Close(Cube*Rock){
 	
 	if (Rock->Translation()._y<2.5f){
 
-		Rock->Rotation()._x -= 5.0f;
-		Rock->Translation()._y += 0.28f;
-		Rock->Translation()._z -= 0.1f;
+		Rock->Rotation()._x -= 25.0f;
+		Rock->Translation()._y += 2.0f;
+		Rock->Translation()._z -= 8.0f;
 	}
 }
 
