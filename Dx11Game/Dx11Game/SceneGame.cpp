@@ -47,6 +47,8 @@ void SceneGame::Initialize(Dx11::Direct3DManager* direct3d, HWND hWnd){
 	m_stage = std::make_shared<DxModel::FbxStaticMesh>();
 	m_stage->LoadFBX("ModelData/models/STAGEMODEL.fbx", DxFbx::FbxLoader::eAxisSystem::eAxisOpenGL);
 	m_stage->Initialize(m_camera->GetCamera().get(), "ModelData/textures/texture.jpg");
+	m_stage->Transform()._scale = Vector3(1.0f, 1.0f, -1.0f);
+
 	HINSTANCE hInstance = GetModuleHandle(NULL);
 	DxController::GameController::Create(hInstance, hWnd);
 
@@ -54,7 +56,7 @@ void SceneGame::Initialize(Dx11::Direct3DManager* direct3d, HWND hWnd){
 }
 int a = 0;
 void SceneGame::Updata(){
-	
+	DxController::GameController::GetPointer()->Frame();
 	if (DxController::GameController::GetPointer()->IsLeftButtonTrigger())
 	{
 		m_camera->ChangeCamera(a);
@@ -63,7 +65,7 @@ void SceneGame::Updata(){
 	}
 	m_player->Update(1);
 
-	DxController::GameController::GetPointer()->Frame();
+
 
 	
 	return;
@@ -71,31 +73,9 @@ void SceneGame::Updata(){
 
 
 void SceneGame::Render(){
-	if (GetAsyncKeyState('W') & 0x8000)
-	{
-	}
-
-	if (GetAsyncKeyState('S') & 0x8000)
-	{
-	}
-
-	if (GetAsyncKeyState('A') & 0x8000)
-	{
-	}
-
-	if (GetAsyncKeyState('D') & 0x8000)
-	{
-	}
-	std::cout << m_light->Translation()._x << "\n";
-	std::cout << m_light->Translation()._z << "\n";
 
 	m_camera->Render();
-	if (GetAsyncKeyState('X') & 0x8000){
-	m_stage->AllNodeRender(m_lightshader, DxModel::eRenderWay::eDiffuseLight);
-	}
-	else{
 	m_stage->AllNodeRender(m_shader, DxModel::eRenderWay::eTexture);
-	}
 
 	m_player->Render(m_shader);
 	m_cube->Render(m_shader, DxModel::eRenderWay::eTexture);

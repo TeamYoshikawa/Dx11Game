@@ -28,7 +28,6 @@ void CameraManager::Initialize()
 
 void CameraManager::Render()
 {
-	
 	m_camera->Render();
 }
 
