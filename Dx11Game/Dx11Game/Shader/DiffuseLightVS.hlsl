@@ -1,0 +1,66 @@
+
+
+// Global //
+cbuffer MatrixBuffer
+{
+	matrix worldMatrix;
+	matrix viewMatrix;
+	matrix projectionMatrix;
+};
+
+cbuffer LightBuffer
+{
+	float4 Light;
+};
+
+
+//Vertex Shader InputData
+struct VertexInputType
+{
+	float4 position : POSITION;
+	float4 color : COLOR;
+	float2 tex : TEXCOORD0;
+	float3 normal : NORMAL0;
+
+};
+
+//Pixel Shader InputData
+struct PixelInputType
+{
+	float4 position : SV_POSITION;
+	float4 color : COLOR;
+	float2 tex : TEXCOORD0;
+	float4 col2 : COL2;
+
+};
+
+
+////////////////////////////////////////////////////////////////////////////////
+// Vertex Shader
+////////////////////////////////////////////////////////////////////////////////
+PixelInputType vs_main(VertexInputType input)
+{
+
+	PixelInputType output;
+	input.position.w = 1.0f;
+
+	output.position = mul(input.position, worldMatrix);
+	output.position = mul(output.position, viewMatrix);
+	output.position = mul(output.position, projectionMatrix);
+	output.color = input.color;
+	output.tex = input.tex;
+
+
+	float3 normal;
+	normal = mul(input.normal, (float3x3)worldMatrix);
+	normal = normalize(normal);
+
+	float3 light = normalize(Light.xyz);
+
+	//	// Store the input color for the pixel shader to use.
+	output.col2 = dot(normal, light);
+	output.col2.a = 1.0f;
+
+	return output;
+}
+

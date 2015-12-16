@@ -4,8 +4,8 @@
 CameraManager::CameraPropaty CameraManager::m_propaty[] = {
 	{ DxMath::Vector3(575, -442, 447), DxMath::Vector3(-160.0f, 48.0f, 1.0f) },
 	{ DxMath::Vector3(-580, -282, 450), DxMath::Vector3(-170.0f, -60.0f, 1.0f) },
-	{ DxMath::Vector3(2986, -460, -360), DxMath::Vector3(-160.0f, 115.0f, 1.0f) },
-	{ DxMath::Vector3(-500, -446, 446), DxMath::Vector3(160.0f, 70.0f, 1.0f) }
+	{ DxMath::Vector3(2968, -460, -360), DxMath::Vector3(-160.0f, 115.0f, 1.0f) },
+	{ DxMath::Vector3(2176, -212, -426), DxMath::Vector3(-180.0f, 200.0f, 1.0f) }
 };
 
 CameraManager::CameraManager()

@@ -22,6 +22,7 @@ public:
 
 	
 	void Renderring(DxModel::Cube*, std::shared_ptr<DxShader::ShaderBase>, DxModel::eRenderWay);
+	void Initialize();
 
 };
 

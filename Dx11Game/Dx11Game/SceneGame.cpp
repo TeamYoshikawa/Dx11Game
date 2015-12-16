@@ -42,11 +42,18 @@ void SceneGame::Initialize(Dx11::Direct3DManager* direct3d, HWND hWnd){
 	m_stage->Initialize(m_camera->GetCamera().get(), "ModelData/textures/texture.jpg");
 	m_stage->Transform()._scale = Vector3(1.0f, 1.0f, -1.0f);
 
+	m_spear = std::make_shared<SpearManager>();
+	m_spear->Initialize(m_camera->GetCamera().get());
+
+	m_rock = std::make_shared<RockManager>();
+	m_rock->Initialize(m_camera->GetCamera().get());
+
 	HINSTANCE hInstance = GetModuleHandle(NULL);
 	DxController::GameController::Create(hInstance, hWnd);
 
 	return;
 }
+
 int a = 0;
 void SceneGame::Updata(){
 	DxController::GameController::GetPointer()->Frame();
@@ -54,15 +61,16 @@ void SceneGame::Updata(){
 
 	if (DxController::GameController::GetPointer()->IsLeftButtonTrigger())
 	{
-		m_camera->ChangeCamera(1);
+		m_camera->ChangeCamera(a);
 		m_player->NextSerch();
+		a += 1;
 	}
 
 	m_player->Update(1);
 
+	m_spear->Update(true);
 
-
-	
+	//m_rock->Update();
 	return;
 }
 
@@ -74,7 +82,9 @@ void SceneGame::Render(){
 
 	m_player->Render(m_shader);
 
+	m_spear->Render(m_shader, DxModel::eRenderWay::eTexture);
 	
+	m_rock->Render(m_shader, DxModel::eRenderWay::eTexture);
 
 	return;
 }

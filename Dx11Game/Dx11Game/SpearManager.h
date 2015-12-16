@@ -45,7 +45,7 @@ public:
 
 	bool Initialize(DxCamera::ViewCamera*);
 	void Render(const std::shared_ptr<DxShader::ShaderBase>,const DxModel::eRenderWay);
-	void Update(bool &);
+	void Update(bool);
 	void Shutdown();
 
 	

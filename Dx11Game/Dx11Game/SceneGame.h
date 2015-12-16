@@ -7,6 +7,8 @@
 #include "SceneBase.h"
 #include "PlayerManager.h"
 #include "CameraMAnager.h"
+#include "SpearManager.h"
+#include "RockManager.h"
 #include"LightShader.h"
 #include"Light.h"
 
@@ -27,6 +29,10 @@ class SceneGame :
 		static const std::string m_thisName;
 		std::shared_ptr<PlayerManager> m_player;
 		std::shared_ptr<CameraManager> m_camera;
+
+		std::shared_ptr<SpearManager> m_spear;
+		std::shared_ptr<RockManager> m_rock;
+
 		std::shared_ptr<DxShader::ShaderBase> m_shader;
 		std::shared_ptr<DxShader::LightShader> m_lightshader;
 
