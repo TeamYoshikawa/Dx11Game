@@ -89,6 +89,7 @@
     <ClCompile Include="GameFrame.cpp" />
     <ClCompile Include="PlayerBase.cpp" />
     <ClCompile Include="PlayerManager.cpp" />
+    <ClCompile Include="PlayerNavigation.cpp" />
     <ClCompile Include="PlayerRender.cpp" />
     <ClCompile Include="PlayerUpdater.cpp" />
     <ClCompile Include="Rock.cpp" />
@@ -105,6 +106,7 @@
     <ClInclude Include="GameFrame.h" />
     <ClInclude Include="PlayerBase.h" />
     <ClInclude Include="PlayerManager.h" />
+    <ClInclude Include="PlayerNavigation.h" />
     <ClInclude Include="PlayerRender.h" />
     <ClInclude Include="PlayerUpdater.h" />
     <ClInclude Include="Rock.h" />

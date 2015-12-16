@@ -53,14 +53,12 @@ void PlayerUpdater::FaceTheObject(const std::shared_ptr<DxModel::FbxStaticMesh>&
 
 	float rad = atan2(SendStatus()._nextMoveDirection._x, SendStatus()._nextMoveDirection._z);
 	float hoge = rad / PI * 180;
-	std::cout << "rotation:" << hoge << std::endl;
-	std::cout << "player rotation:" << player->Transform()._rotation._y << std::endl;
 
 	player->Transform()._rotation._y = hoge;
 }
 
 
-bool PlayerUpdater::HIttingProcessor(const std::shared_ptr<DxModel::ModelBase>& player, const std::shared_ptr<DxModel::ModelBase>& other){
+bool PlayerUpdater::HittingProcessor(const std::shared_ptr<DxModel::ModelBase>& player, const std::shared_ptr<DxModel::ModelBase>& other){
 
 	if (!m_boxCllider.IsCollideOBB(player, other))
 	{

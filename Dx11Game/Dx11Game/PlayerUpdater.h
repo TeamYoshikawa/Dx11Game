@@ -26,7 +26,7 @@ class PlayerUpdater :
 		void Updating(const std::shared_ptr<DxModel::FbxStaticMesh>&, float);
 		void FaceTheObject(const std::shared_ptr<DxModel::FbxStaticMesh>&, const std::shared_ptr<DxModel::ModelBase>&);
 		bool HittingProcessor(const std::shared_ptr<DxModel::FbxStaticMesh>&);
-		bool HIttingProcessor(const std::shared_ptr<DxModel::ModelBase>&, const std::shared_ptr<DxModel::ModelBase>&);
+		bool HittingProcessor(const std::shared_ptr<DxModel::ModelBase>&, const std::shared_ptr<DxModel::ModelBase>&);
 	private:
 		void Destroy()override;
 

@@ -21,28 +21,32 @@ bool PlayerManager::Initialize(const std::shared_ptr<DxCamera::ViewCamera> camer
 	m_playerObject = std::make_shared<DxModel::FbxStaticMesh>();
 	m_playerObject->LoadFBX("ModelData/models/player5.fbx",DxFbx::FbxLoader::eAxisSystem::eAxisOpenGL);
 	m_playerObject->Initialize(camera.get(), "ModelData/textures/tex.png");
-	m_playerObject->Transform()._translation = DxMath::Vector3(-20.0f, 0.0f, 0.0f);
-	m_playerObject->Transform()._scale = DxMath::Vector3(1.f, 1.f, -1.f);
+	m_playerObject->Transform()._translation = DxMath::Vector3(-280.0f, -100.f, 185.0f);
+	m_playerObject->Transform()._scale = DxMath::Vector3(1.f, -1.f, 1.f);
 
 
 	m_collideBox = std::make_shared<DxModel::Cube>();
-	m_collideBox->Initialize(camera.get(),"ModelData/textures/texture.jpg");
+	m_collideBox->Initialize(camera.get(),"ModelData/textures/Chips_Cover.jpg");
 	
-	m_collideBox->Translation() = m_playerObject->Transform()._translation;
-	m_collideBox->Scaling(DxMath::Vector3(5.0f, 5.0f, 5.0f));
+	const DxMath::Vector3 translation = m_playerObject->Transform()._translation;
+	m_collideBox->Translation(translation);
+	m_collideBox->Scaling(DxMath::Vector3(20.0f, 100.0f, 20.0f));
 	
 
 	return true;
 }
 void PlayerManager::Render(const std::shared_ptr<DxShader::ShaderBase> shader){
 	m_render->Rendering(m_playerObject,shader);
-	m_collideBox->Render(shader, DxModel::eRenderWay::eTexture);
+	//m_collideBox->Render(shader, DxModel::eRenderWay::eTexture);
 	return;
 }
 void PlayerManager::Update(float frame){
 	m_updater->Updating(m_playerObject,frame);
 	m_collideBox->Translation() = m_playerObject->Transform()._translation;
-	m_collideBox->Translation()._x = m_playerObject->Transform()._translation._x-0.95;
+
+	// コリジョンボックスがプレイヤーの中心に来る計算
+	const DxMath::Vector3 translation = m_playerObject->Transform()._translation;// + (m_playerObject->Transform()._scale - m_collideBox->Scaling());
+	m_collideBox->Translation(translation);
 	return;
 }
 
@@ -65,7 +69,7 @@ void PlayerManager::Status(PlayerBase::PlayerStatus& status){
 }
 
 bool PlayerManager::HitMesh(const std::shared_ptr<DxModel::ModelBase>& other){
-	if (!m_updater->HIttingProcessor(m_collideBox, other))
+	if (!m_updater->HittingProcessor(m_collideBox, other))
 	{
 		return false;
 	}
