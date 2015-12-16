@@ -26,7 +26,8 @@ namespace DxModel
 		D3D11_SUBRESOURCE_DATA vertexData, indexData;
 		HRESULT result;
 		
-		LoadFile("ModelData/sphere.txt");
+		LoadFile("ModelData/models/sphere.txt");
+		
 		
 		// Create the vertex array.
 		vertices = new ModelProperty::VertexType[m_vertexCount];
