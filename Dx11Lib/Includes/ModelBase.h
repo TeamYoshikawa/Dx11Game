@@ -15,6 +15,7 @@ namespace DxModel{
 	enum class eRenderWay{
 		eColor,
 		eTexture,
+		eDiffuseLight
 	};
 
 	class ModelBase

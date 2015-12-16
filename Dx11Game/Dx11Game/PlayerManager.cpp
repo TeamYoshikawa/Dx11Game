@@ -22,14 +22,14 @@ bool PlayerManager::Initialize(const std::shared_ptr<DxCamera::ViewCamera> camer
 	m_playerObject->LoadFBX("ModelData/models/player5.fbx",DxFbx::FbxLoader::eAxisSystem::eAxisOpenGL);
 	m_playerObject->Initialize(camera.get(), "ModelData/textures/tex.png");
 	m_playerObject->Transform()._translation = DxMath::Vector3(-20.0f, 0.0f, 0.0f);
-	m_playerObject->Transform()._scale = DxMath::Vector3(0.05f, 0.05f, 0.05f);
+	m_playerObject->Transform()._scale = DxMath::Vector3(1.f, 1.f, -1.f);
 
 
 	m_collideBox = std::make_shared<DxModel::Cube>();
 	m_collideBox->Initialize(camera.get(),"ModelData/textures/texture.jpg");
 	
 	m_collideBox->Translation() = m_playerObject->Transform()._translation;
-	m_collideBox->Scaling(DxMath::Vector3(1.0f, 2.0f, 1.0f));
+	m_collideBox->Scaling(DxMath::Vector3(5.0f, 5.0f, 5.0f));
 	
 
 	return true;

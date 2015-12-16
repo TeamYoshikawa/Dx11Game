@@ -32,12 +32,14 @@ void SceneGame::Initialize(Dx11::Direct3DManager* direct3d, HWND hWnd){
 
 	m_cube = std::make_shared<DxModel::Cube>();
 	m_cube->Initialize(m_camera->GetCamera().get(), "ModelData/textures/tex.png");
+	m_cube->Scaling(DxMath::Vector3(10.0f, 10.0f, 10.0f));
 
 	prev = m_cube->Translation();
 
 	m_player->SerchNextPoint(m_cube);
 
 	m_stage = std::make_shared<DxModel::FbxStaticMesh>();
+	m_stage->LoadFBX("ModelData/models/STAGEMODEL.fbx", DxFbx::FbxLoader::eAxisSystem::eAxisOpenGL);
 	m_stage->Initialize(m_camera->GetCamera().get(), "ModelData/textures/texture.jpg");
 
 	HINSTANCE hInstance = GetModuleHandle(NULL);
@@ -59,22 +61,22 @@ void SceneGame::Updata(){
 
 	if (DxController::GameController::GetPointer()->IsKeyDown(DIK_W))
 	{
-		m_cube->Translation()._z += 1.0f;
+		m_cube->Translation()._z += 10.0f;
 	}
 
 	if (DxController::GameController::GetPointer()->IsKeyDown(DIK_S))
 	{
-		m_cube->Translation()._z -= 1.0f;
+		m_cube->Translation()._z -= 10.0f;
 	}
 
 	if (DxController::GameController::GetPointer()->IsKeyDown(DIK_A))
 	{
-		m_cube->Translation()._x -= 1.0f;
+		m_cube->Translation()._x -= 10.0f;
 	}
 
 	if (DxController::GameController::GetPointer()->IsKeyDown(DIK_D))
 	{
-		m_cube->Translation()._x += 1.0f;
+		m_cube->Translation()._x += 10.0f;
 	}
 
 	return;
@@ -83,6 +85,7 @@ void SceneGame::Updata(){
 
 void SceneGame::Render(){
 	m_camera->Render();
+	m_stage->AllNodeRender(m_shader, DxModel::eRenderWay::eTexture);
 	m_player->Render(m_shader);
 	m_cube->Render(m_shader, DxModel::eRenderWay::eTexture);
 	return;
