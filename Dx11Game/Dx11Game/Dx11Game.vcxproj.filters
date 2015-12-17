@@ -34,6 +34,15 @@
     <Filter Include="Trap\Rock\h">
       <UniqueIdentifier>{04e82489-55f9-4721-b283-367556f9680c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Trap\Spear">
+      <UniqueIdentifier>{39a46deb-877b-4127-bf11-f7d8413bc534}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Trap\Spear\cpp">
+      <UniqueIdentifier>{5cd03540-1d31-4d37-abd3-792d076a1139}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Trap\Spear\h">
+      <UniqueIdentifier>{5cc3077b-2924-4ebb-bee7-00ef8cc57de7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Entry.cpp">
@@ -83,6 +92,27 @@
     </ClCompile>
     <ClCompile Include="PlayerNavigation.cpp">
       <Filter>PlayerFile\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Spear.cpp">
+      <Filter>Trap\Spear\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="SpearUpdater.cpp">
+      <Filter>Trap\Spear\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="SpearRender.cpp">
+      <Filter>Trap\Spear\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="SpearManager.cpp">
+      <Filter>Trap\Spear\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="GamesController.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Sphere.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="SphereRay.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -134,5 +164,26 @@
     <ClInclude Include="PlayerNavigation.h">
       <Filter>PlayerFile\h</Filter>
     </ClInclude>
+    <ClInclude Include="SpearUpdater.h">
+      <Filter>Trap\Spear\h</Filter>
+    </ClInclude>
+    <ClInclude Include="SpearRender.h">
+      <Filter>Trap\Spear\h</Filter>
+    </ClInclude>
+    <ClInclude Include="SpearManager.h">
+      <Filter>Trap\Spear\h</Filter>
+    </ClInclude>
+    <ClInclude Include="Spear.h">
+      <Filter>Trap\Spear\h</Filter>
+    </ClInclude>
+    <ClInclude Include="GamesController.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Sphere.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Box_Sample.fbx" />
   </ItemGroup>
 </Project>

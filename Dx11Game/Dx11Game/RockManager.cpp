@@ -8,12 +8,12 @@ using namespace DxController;
 bool RockManager::Initialize(ViewCamera* camera){
 
 	m_Rock = std::make_shared<DxModel::Cube>();
-	if (!m_Rock->Initialize(camera,"seafloor.jpg")){
+	if (!m_Rock->Initialize(camera,"ModelData/textures/cocoa.jpg")){
 		return false;
 	}
 
-	m_Rock->Translation(DxMath::Vector3(0.0f, 12.0f, 0.0f));
-	m_Rock->Scaling(DxMath::Vector3(1.0f, 1.0f, 1.0f));
+	m_Rock->Translation(DxMath::Vector3(2620.0f, -412.f, 2030.0f));
+	m_Rock->Scaling(DxMath::Vector3(100.0f, 100.0f, 100.0f));
 
 	m_updater = std::make_shared<RockUpdater>();
 	m_render = std::make_shared<RockRender>();

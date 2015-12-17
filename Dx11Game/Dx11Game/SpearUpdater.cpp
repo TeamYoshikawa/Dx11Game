@@ -6,7 +6,7 @@ SpearUpdater::SpearUpdater(){}
 
 SpearUpdater::~SpearUpdater(){}
 
-void SpearUpdater::Updating(DxModel::Cube* spear, bool buttonState = false)
+void SpearUpdater::Updating(DxModel::Cube* spear, bool buttonState = true)
 {
 	if (!spear){
 		MessageBox(NULL, L"missing Object", ERROR, MB_OK);

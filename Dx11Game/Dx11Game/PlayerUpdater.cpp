@@ -27,22 +27,21 @@ void PlayerUpdater::Destroy(){
 	return;
 }
 
+// ゲッター
 PlayerBase::PlayerStatus& PlayerUpdater::SendStatus(){
 	return SendShareStatus();
 }
 
+// セッター
 void PlayerUpdater::SendStatus(PlayerBase::PlayerStatus&){
+	
 	return;
 }
 
 void PlayerUpdater::Updating(const std::shared_ptr<DxModel::FbxStaticMesh>& playerObject, float frame){
 
-	playerObject->Transform()._translation += SendStatus()._nextMoveDirection / 100;
-	float length = SendStatus()._nextMoveDirection._x - playerObject->Transform()._translation._x;
-	if (length < 1)
-	{
-		//playerObject->Transform()._translation._x = SendStatus()._nextMoveDirection._x;
-	}
+	// 移動の処理
+	playerObject->Transform()._translation += SendStatus()._nextMoveDirection / 500;
 
 	return;
 }
@@ -52,9 +51,9 @@ void PlayerUpdater::FaceTheObject(const std::shared_ptr<DxModel::FbxStaticMesh>&
 	SendStatus()._nextMoveDirection = object->Translation() - player->Transform()._translation;
 
 	float rad = atan2(SendStatus()._nextMoveDirection._x, SendStatus()._nextMoveDirection._z);
-	float hoge = rad / PI * 180;
+	float rotationY = rad / PI * 180;
 
-	player->Transform()._rotation._y = hoge;
+	player->Transform()._rotation._y = rotationY;
 }
 
 

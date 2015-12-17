@@ -19,7 +19,7 @@ bool SceneManager::Initialize(Dx11::Direct3DManager* manager,HWND& hWnd){
 	Register(std::make_shared<SceneTitle>(this));
 	Register(std::make_shared<SceneGame>(this));
 
-	m_currentScene = FindScene(SceneGame::m_thisName);
+	m_currentScene = FindScene(SceneTitle::m_thisName);
 	if (!m_currentScene){
 
 		return false;

@@ -24,7 +24,6 @@ namespace DxModel
 		bool InitializeBuffers()override;
 		void ShutdownBuffers()override;
 		void RenderBuffers()override;
-
 		bool LoadFile(char*);
 	};
 }

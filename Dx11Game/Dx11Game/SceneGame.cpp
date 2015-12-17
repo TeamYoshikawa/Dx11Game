@@ -42,26 +42,72 @@ void SceneGame::Initialize(Dx11::Direct3DManager* direct3d, HWND hWnd){
 	m_stage->Initialize(m_camera->GetCamera().get(), "ModelData/textures/texture.jpg");
 	m_stage->Transform()._scale = Vector3(1.0f, 1.0f, -1.0f);
 
+	m_positionCheck = std::make_shared<DxModel::Cube>();
+	m_positionCheck->Initialize(m_camera->GetCamera().get(),"ModelData/textures/cylinder_template.jpg");
+	m_positionCheck->Scaling(Vector3(50, 50, 50));
+	m_positionCheck->Translation(Vector3(-280.0f, -100.f, 185.0f));
+
+	m_rock = std::make_shared<RockManager>();
+	m_rock->Initialize(m_camera->GetCamera().get());
+
 	HINSTANCE hInstance = GetModuleHandle(NULL);
 	DxController::GameController::Create(hInstance, hWnd);
 
 	return;
 }
-int a = 0;
+
+
 void SceneGame::Updata(){
 	DxController::GameController::GetPointer()->Frame();
 
+	if (DxController::GameController::GetPointer()->IsKeyDown(DIK_W))
+	{
+		m_positionCheck->Translation()._z += 1;
+	}
+
+	if (DxController::GameController::GetPointer()->IsKeyDown(DIK_S))
+	{
+		m_positionCheck->Translation()._z -= 1;
+	}
+
+
+	if (DxController::GameController::GetPointer()->IsKeyDown(DIK_A))
+	{
+		m_positionCheck->Translation()._x += 1;
+	}
+
+
+	if (DxController::GameController::GetPointer()->IsKeyDown(DIK_D))
+	{
+		m_positionCheck->Translation()._x -= 1;
+	}
+
+	if (DxController::GameController::GetPointer()->IsKeyDown(DIK_Q))
+	{
+		m_positionCheck->Translation()._y += 1;
+	}
+
+	if (DxController::GameController::GetPointer()->IsKeyDown(DIK_E))
+	{
+		m_positionCheck->Translation()._y -= 1;
+	}
+
+	std::cout << "X :" << m_positionCheck->Translation()._x << "\t";
+	std::cout << "Y :" << m_positionCheck->Translation()._y << "\t";
+	std::cout << "Z :" << m_positionCheck->Translation()._z << std::endl;
 
 	if (DxController::GameController::GetPointer()->IsLeftButtonTrigger())
 	{
-		m_camera->ChangeCamera(1);
-		m_player->NextSerch();
+		m_camera->NextCameraSet();
+
 	}
 
-	m_player->Update(1);
+	m_player->Update(0.01f);
 
-
-
+	if (m_player->Status()._navigationID == 3)
+	{
+		m_rock->Update();
+	}
 	
 	return;
 }
@@ -73,9 +119,9 @@ void SceneGame::Render(){
 	m_stage->AllNodeRender(m_shader, DxModel::eRenderWay::eTexture);
 
 	m_player->Render(m_shader);
-
 	
-
+	m_rock->Render(m_shader, DxModel::eRenderWay::eTexture);
+	m_positionCheck->Render(m_shader, DxModel::eRenderWay::eTexture);
 	return;
 }
 

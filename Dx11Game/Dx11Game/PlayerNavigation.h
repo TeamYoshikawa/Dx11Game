@@ -4,6 +4,11 @@
 #include <Cube.h>
 #include <Vector3.h>
 #include <ViewCamera.h>
+/*
+	プレイヤーが次に通る道を案内するためのボックスを配置するクラス
+
+
+*/
 class PlayerNavigation
 {
 	public:
@@ -16,11 +21,13 @@ class PlayerNavigation
 		void NextSet();
 
 		void Render(std::shared_ptr<DxShader::ShaderBase>);
+
+		int GetNavigationID()const;
 	private:
 		static std::shared_ptr<DxModel::Cube> m_navigationBox;
 		static DxMath::Vector3 m_navigationBoxPosition[];
 
-		static int m_navigationNumber;
+		static int m_navigationID;
 		int m_navigationArrayElement;
 };
 
