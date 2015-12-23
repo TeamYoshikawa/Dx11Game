@@ -8,7 +8,7 @@ using namespace DxController;
 bool RockManager::Initialize(ViewCamera* camera){
 
 	m_Rock = std::make_shared<DxModel::Cube>();
-	if (!m_Rock->Initialize(camera,"ModelData/textures/cocoa.jpg")){
+	if (!m_Rock->Initialize(camera,"ModelData/textures/seafloor.dds")){
 		return false;
 	}
 

@@ -129,7 +129,7 @@ void System::InitializeWindows(POINT& screen){
 	m_hInstance = ::GetModuleHandle(NULL);
 
 	// Give the application a name
-	m_appName = L"Ç‚Ç≠Ç¥ÅiâºÅj";
+	m_appName = L"Palm Of God";
 
 	// Setup the windows class with default settings
 	wc.style = CS_HREDRAW | CS_VREDRAW | CS_OWNDC;

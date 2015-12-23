@@ -44,7 +44,7 @@ bool PlayerManager::Initialize(const std::shared_ptr<DxCamera::ViewCamera> camer
 // 描画処理
 void PlayerManager::Render(const std::shared_ptr<DxShader::ShaderBase> shader){
 	m_render->Rendering(m_playerObject,shader);
-	m_collideBox->Render(shader, DxModel::eRenderWay::eTexture);
+	//m_collideBox->Render(shader, DxModel::eRenderWay::eTexture);
 
 
 	// ナビゲーションの確認用描画

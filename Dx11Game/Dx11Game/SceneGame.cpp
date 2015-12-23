@@ -92,14 +92,15 @@ void SceneGame::Updata(){
 		m_positionCheck->Translation()._y -= 1;
 	}
 
-	std::cout << "X :" << m_positionCheck->Translation()._x << "\t";
+	/*std::cout << "X :" << m_positionCheck->Translation()._x << "\t";
 	std::cout << "Y :" << m_positionCheck->Translation()._y << "\t";
 	std::cout << "Z :" << m_positionCheck->Translation()._z << std::endl;
-
-	if (DxController::GameController::GetPointer()->IsLeftButtonTrigger())
+*/
+	if (m_player->IsChangeCamera())
 	{
 		m_camera->NextCameraSet();
-
+	
+		std::cout << "‚«‚½" << std::endl;
 	}
 
 	m_player->Update(0.01f);
@@ -116,12 +117,12 @@ void SceneGame::Updata(){
 void SceneGame::Render(){
 
 	m_camera->Render();
-	m_stage->AllNodeRender(m_shader, DxModel::eRenderWay::eTexture);
+	m_stage->AllNodeRender(m_lightshader, DxModel::eRenderWay::eTexture);
 
 	m_player->Render(m_shader);
 	
 	m_rock->Render(m_shader, DxModel::eRenderWay::eTexture);
-	m_positionCheck->Render(m_shader, DxModel::eRenderWay::eTexture);
+//	m_positionCheck->Render(m_shader, DxModel::eRenderWay::eTexture);
 	return;
 }
 

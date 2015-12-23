@@ -56,12 +56,12 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\yuta\Documents\FrameWork\Includes;C:\Users\yuta\Documents\FrameWork\Includes;C:\FBX SDK\2015.1\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\nwuser.DA\Desktop\TeamYoshikawa\Dx11Game\Dx11Lib\Includes;C:\FBX\FBX SDK\2015.1\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\FBX SDK\2015.1\lib\vs2013\x86\debug;C:\Users\yuta\Downloads\lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\FBX\FBX SDK\2015.1\lib\vs2013\x86\debug;C:\Users\nwuser.DA\Desktop\TeamYoshikawa\Dx11Game\Dx11Lib\Lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -73,14 +73,14 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\yuta\Documents\FrameWork\Includes;C:\Users\yuta\Downloads\lib;C:\Users\yuta\Documents\FrameWork\Includes;C:\FBX SDK\2015.1\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\nwuser.DA\Desktop\TeamYoshikawa\Dx11Game\Dx11Lib\Includes;C:\FBX\FBX SDK\2015.1\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>C:\Users\yuta\Downloads\lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\yuta\Downloads\lib;C:\FBX\FBX SDK\2015.1\lib\vs2013\x86\release;C:\Users\nwuser.DA\Desktop\TeamYoshikawa\Dx11Game\Dx11Lib\Lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
