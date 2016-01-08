@@ -1,5 +1,6 @@
 #include "SceneManager.h"
 #include "SceneTitle.h"
+#include "SceneEnd.h"
 #include "SceneGame.h"
 
 std::unordered_map<std::string, std::shared_ptr<SceneBase>> SceneManager::m_scenesMap;
@@ -18,8 +19,10 @@ bool SceneManager::Initialize(Dx11::Direct3DManager* manager,HWND& hWnd){
 	//@ƒV[ƒ“‚ª‘‚¦‚Ä‚­‚²‚Æ‚É’Ç‰Á‚µ‚Ä‚¢‚­
 	Register(std::make_shared<SceneTitle>(this));
 	Register(std::make_shared<SceneGame>(this));
+	Register(std::make_shared<SceneEnd>(this));
 
-	m_currentScene = FindScene(SceneGame::m_thisName);
+	m_currentScene = FindScene(SceneEnd::m_thisName);
+
 	if (!m_currentScene){
 
 		return false;
