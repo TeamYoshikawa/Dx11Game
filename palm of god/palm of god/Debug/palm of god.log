@@ -1,0 +1,29 @@
+﻿2016/01/18 16:24:56 にビルドを開始しました。
+     1>ノード 2 上のプロジェクト "C:\Users\nwuser.DA\Documents\Visual Studio 2013\Projects\c++\palm of god\palm of god\palm of god.vcxproj" (Build ターゲット)。
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Program Files\Autodesk\FBX\FBX SDK\2015.1\include" /IC:\Users\nwuser.DA\Desktop\Git\Aether\Includes /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt GutioScene.cpp HirokiScene.cpp
+         HirokiScene.cpp
+         GutioScene.cpp
+         コードを生成中...
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\nwuser.DA\Documents\Visual Studio 2013\Projects\c++\palm of god\Debug\palm of god.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files\Autodesk\FBX\FBX SDK\2015.1\lib\vs2013\x86\debug" /LIBPATH:C:\Users\nwuser.DA\Desktop\Git\Lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\nwuser.DA\Documents\Visual Studio 2013\Projects\c++\palm of god\Debug\palm of god.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\nwuser.DA\Documents\Visual Studio 2013\Projects\c++\palm of god\Debug\palm of god.lib" /MACHINE:X86 Debug\Entry.obj
+         Debug\GutioScene.obj
+         Debug\HirokiScene.obj
+     1>Aether.lib(Color.obj) : warning LNK4099: PDB 'vc120.pdb' が 'Aether.lib(Color.obj)' で、または 'C:\Users\nwuser.DA\Documents\Visual Studio 2013\Projects\c++\palm of god\Debug\vc120.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+     1>Aether.lib(ConsoleWindow.obj) : warning LNK4099: PDB 'vc120.pdb' が 'Aether.lib(ConsoleWindow.obj)' で、または 'C:\Users\nwuser.DA\Documents\Visual Studio 2013\Projects\c++\palm of god\Debug\vc120.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+     1>Aether.lib(Direct3DManager.obj) : warning LNK4099: PDB 'vc120.pdb' が 'Aether.lib(Direct3DManager.obj)' で、または 'C:\Users\nwuser.DA\Documents\Visual Studio 2013\Projects\c++\palm of god\Debug\vc120.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+     1>Aether.lib(DirectXEntity.obj) : warning LNK4099: PDB 'vc120.pdb' が 'Aether.lib(DirectXEntity.obj)' で、または 'C:\Users\nwuser.DA\Documents\Visual Studio 2013\Projects\c++\palm of god\Debug\vc120.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+     1>Aether.lib(GameController.obj) : warning LNK4099: PDB 'vc120.pdb' が 'Aether.lib(GameController.obj)' で、または 'C:\Users\nwuser.DA\Documents\Visual Studio 2013\Projects\c++\palm of god\Debug\vc120.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+     1>Aether.lib(GameEntry.obj) : warning LNK4099: PDB 'vc120.pdb' が 'Aether.lib(GameEntry.obj)' で、または 'C:\Users\nwuser.DA\Documents\Visual Studio 2013\Projects\c++\palm of god\Debug\vc120.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+     1>Aether.lib(GameFrame.obj) : warning LNK4099: PDB 'vc120.pdb' が 'Aether.lib(GameFrame.obj)' で、または 'C:\Users\nwuser.DA\Documents\Visual Studio 2013\Projects\c++\palm of god\Debug\vc120.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+     1>Aether.lib(GameSceneManager.obj) : warning LNK4099: PDB 'vc120.pdb' が 'Aether.lib(GameSceneManager.obj)' で、または 'C:\Users\nwuser.DA\Documents\Visual Studio 2013\Projects\c++\palm of god\Debug\vc120.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+     1>Aether.lib(Matrix4x4.obj) : warning LNK4099: PDB 'vc120.pdb' が 'Aether.lib(Matrix4x4.obj)' で、または 'C:\Users\nwuser.DA\Documents\Visual Studio 2013\Projects\c++\palm of god\Debug\vc120.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+     1>Aether.lib(NullScene.obj) : warning LNK4099: PDB 'vc120.pdb' が 'Aether.lib(NullScene.obj)' で、または 'C:\Users\nwuser.DA\Documents\Visual Studio 2013\Projects\c++\palm of god\Debug\vc120.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+     1>Aether.lib(Vector3.obj) : warning LNK4099: PDB 'vc120.pdb' が 'Aether.lib(Vector3.obj)' で、または 'C:\Users\nwuser.DA\Documents\Visual Studio 2013\Projects\c++\palm of god\Debug\vc120.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+     1>Aether.lib(Vector4.obj) : warning LNK4099: PDB 'vc120.pdb' が 'Aether.lib(Vector4.obj)' で、または 'C:\Users\nwuser.DA\Documents\Visual Studio 2013\Projects\c++\palm of god\Debug\vc120.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+         palm of god.vcxproj -> C:\Users\nwuser.DA\Documents\Visual Studio 2013\Projects\c++\palm of god\Debug\palm of god.exe
+     1>プロジェクト "C:\Users\nwuser.DA\Documents\Visual Studio 2013\Projects\c++\palm of god\palm of god\palm of god.vcxproj" (Build ターゲット) のビルドが完了しました。
+
+ビルドに成功しました。
+
+経過時間 00:00:03.04
