@@ -1,14 +1,14 @@
 #include "RockUpdater.h"
-
+#include <Sphere.h>
 using namespace n_Rock;
-using namespace DxModel;
+using namespace aetherClass;
 
 RockUpdater::RockUpdater(){
 
 }
 
 //Update process
-void RockUpdater::Update(Sphere *Rock, bool buttonState = false){
+void RockUpdater::Update(ModelBase *Rock, bool buttonState = false){
 	if (!Rock){
 		MessageBox(NULL, L"missing Object", ERROR, MB_OK);
 		return;
@@ -22,21 +22,21 @@ void RockUpdater::Update(Sphere *Rock, bool buttonState = false){
 	
 }
 
-void RockUpdater::Open(Sphere*Rock){
+void RockUpdater::Open(ModelBase*Rock){
 	
-	Rock->Translation()._y -= 0.0f;
+	Rock->GetTransform()._translation._y -= 0.0f;
 
 }
 
-void RockUpdater::Close(Sphere*Rock){
+void RockUpdater::Close(ModelBase*Rock){
 
-	Rock->Translation()._y -= 0.3f;
+	Rock->GetTransform()._translation._y -= 0.3f;
 	
-	if (Rock->Translation()._y<2.5f){
+	if (Rock->GetTransform()._translation._y<2.5f){
 
-		Rock->Rotation()._x += 25.0f;
-		Rock->Translation()._y += 2.0f;
-		Rock->Translation()._z -= 8.0f;
+		Rock->GetTransform()._rotation._x += 25.0f;
+		Rock->GetTransform()._translation._y += 2.0f;
+		Rock->GetTransform()._translation._z -= 8.0f;
 	}
 }
 

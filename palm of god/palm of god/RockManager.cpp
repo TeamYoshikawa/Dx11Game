@@ -1,19 +1,20 @@
 #include "RockManager.h"
 
-using namespace DxCamera;
+using namespace aetherClass;
 using namespace n_Rock;
-using namespace DxMath;
-using namespace DxController;
+
 
 bool RockManager::Initialize(ViewCamera* camera){
-
-	m_Rock = std::make_shared<DxModel::Sphere>();
-	if (!m_Rock->Initialize(camera,"ModelData/textures/seafloor.dds")){
+	m_rockTexture = std::make_shared<Texture>();
+	m_rockTexture->Load("ModelData/textures/seafloor.dds");
+	m_Rock = std::make_shared<Sphere>();
+	if (!m_Rock->Initialize()){
 		return false;
 	}
-
-	m_Rock->Translation(DxMath::Vector3(2620.0f, -412.f, 2030.0f));
-	m_Rock->Scaling(DxMath::Vector3(100.0f, 100.0f, 100.0f));
+	m_Rock->SetCamera(camera);
+	m_Rock->SetTexture(m_rockTexture.get());
+	m_Rock->GetTransform()._translation = Vector3(2620.0f, -412.f, 2030.0f);
+	m_Rock->GetTransform()._scale= Vector3(100.0f, 100.0f, 100.0f);
 
 	m_updater = std::make_shared<RockUpdater>();
 	m_render = std::make_shared<RockRender>();
@@ -30,9 +31,9 @@ void RockManager::Update(){
 }
 
 void RockManager::Shutdown(){
-	m_Rock->Shutdown();
+	m_Rock->Finalize();
 }
 
-void RockManager::Render(std::shared_ptr<DxShader::ShaderBase>shader, DxModel::eRenderWay eRen){
-	m_render->Render(m_Rock.get(), shader, eRen);
+void RockManager::Render(std::shared_ptr<ShaderBase>shader){
+	m_render->Render(m_Rock.get(), shader);
 }

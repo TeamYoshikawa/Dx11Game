@@ -1,9 +1,9 @@
 #include "PitFallRender.h"
 
 using namespace Pitfall;
-
-void PitFallRender::Render(DxModel::ModelBase* model, std::shared_ptr<DxShader::ShaderBase>shader, DxModel::eRenderWay eRen){
-	model->Render(shader, eRen);
+using namespace aetherClass;
+void PitFallRender::Render(ModelBase* model, std::shared_ptr<ShaderBase>shader){
+	model->Render(shader.get());
 
 }
 

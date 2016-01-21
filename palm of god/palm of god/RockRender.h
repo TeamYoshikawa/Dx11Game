@@ -1,9 +1,7 @@
 #pragma once
-#include"Rock.h"
 #include"ShaderBase.h"
 #include<memory>
 #include"Sphere.h"
-
 namespace n_Rock{
 	class RockRender
 	{
@@ -16,6 +14,6 @@ namespace n_Rock{
 		RockRender() = default;
 		~RockRender() = default;
 
-		void Render(DxModel::Sphere* model, std::shared_ptr<DxShader::ShaderBase>shader, DxModel::eRenderWay eRen);
+		void Render(aetherClass::ModelBase* model, std::shared_ptr<aetherClass::ShaderBase>shader);
 	};
 }

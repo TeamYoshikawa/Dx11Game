@@ -16,6 +16,6 @@ namespace n_Rock{
 		RockRender() = default;
 		~RockRender() = default;
 
-		void Render(DxModel::Sphere* model, std::shared_ptr<DxShader::ShaderBase>shader, DxModel::eRenderWay eRen);
+		void Render(DxModel::ModelBase* model, std::shared_ptr<DxShader::ShaderBase>shader, DxModel::eRenderWay eRen);
 	};
 }

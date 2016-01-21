@@ -5,8 +5,7 @@
 #include <GameController.h>
 #include <ConsoleWindow.h>
 #include <GameSceneManager.h>
-
-#include "HirokiScene.h"
+#include "SceneGame.h"
 
 using namespace aetherClass;
 // エントリーポイントを作成
@@ -32,7 +31,7 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, LPSTR, INT){
 	entry->SetGameFrame(frame);
 
 	// 最初のシーンのオブジェクトを作成
-	GameScene* firstScene = new HirokiScene();
+	GameScene* firstScene = new SceneGame();
 
 	// 最初のシーンの設定
 	GameSceneManager::SetCurrentScene(firstScene);

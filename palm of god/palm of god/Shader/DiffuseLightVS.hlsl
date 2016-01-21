@@ -1,14 +1,14 @@
 
 
 // Global //
-cbuffer MatrixBuffer
+cbuffer MatrixBuffer : register(b0)
 {
 	matrix worldMatrix;
 	matrix viewMatrix;
 	matrix projectionMatrix;
 };
 
-cbuffer LightBuffer
+cbuffer LightBuffer : register(b1)
 {
 	float4 Light;
 };
@@ -18,7 +18,6 @@ cbuffer LightBuffer
 struct VertexInputType
 {
 	float4 position : POSITION;
-	float4 color : COLOR;
 	float2 tex : TEXCOORD0;
 	float3 normal : NORMAL0;
 
@@ -28,7 +27,6 @@ struct VertexInputType
 struct PixelInputType
 {
 	float4 position : SV_POSITION;
-	float4 color : COLOR;
 	float2 tex : TEXCOORD0;
 	float4 col2 : COL2;
 
@@ -47,7 +45,6 @@ PixelInputType vs_main(VertexInputType input)
 	output.position = mul(input.position, worldMatrix);
 	output.position = mul(output.position, viewMatrix);
 	output.position = mul(output.position, projectionMatrix);
-	output.color = input.color;
 	output.tex = input.tex;
 
 
@@ -55,9 +52,10 @@ PixelInputType vs_main(VertexInputType input)
 	normal = mul(input.normal, (float3x3)worldMatrix);
 	normal = normalize(normal);
 
+
 	float3 light = normalize(Light.xyz);
 
-	//	// Store the input color for the pixel shader to use.
+	// Store the input color for the pixel shader to use.
 	output.col2 = dot(normal, light);
 	output.col2.a = 1.0f;
 

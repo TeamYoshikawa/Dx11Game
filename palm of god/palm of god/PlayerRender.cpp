@@ -1,5 +1,6 @@
 #include "PlayerRender.h"
-
+#include <FbxStaticModel.h>
+using namespace aetherClass;
 PlayerRender::PlayerRender()
 {
 
@@ -21,10 +22,10 @@ void PlayerRender::Destroy(){
 	return;
 }
 
-void PlayerRender::Rendering(const std::shared_ptr<DxModel::FbxStaticMesh> object, 
-	const std::shared_ptr<DxShader::ShaderBase> shader){
+void PlayerRender::Rendering(const std::shared_ptr<FbxStaticModel> object, 
+	const std::shared_ptr<ShaderBase> shader){
 	
-	object->AllNodeRender(shader,DxModel::eRenderWay::eTexture);
+	object->Render(shader.get());
 	
 	return;
 }

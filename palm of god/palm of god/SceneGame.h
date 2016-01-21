@@ -1,29 +1,29 @@
 #ifndef _SCENEGAME_H
 #define _SCENEGAME_H
 #include <Cube.h>
-#include <FbxStaticMesh.h>
+#include <FbxStaticModel.h>
 #include <Color.h>
 #include <Cube.h>
-#include "SceneBase.h"
+#include <GameScene.h>
 #include "PlayerManager.h"
 #include "CameraMAnager.h"
 #include "SpearManager.h"
 #include "RockManager.h"
-#include"LightShader.h"
-#include"Light.h"
+#include "LightShader.h"
+#include "Light.h"
 
 
 class SceneGame :
-	public SceneBase
+	public aetherClass::GameScene
 {
 	public:
-		SceneGame(SceneManager*);
+		SceneGame();
 		~SceneGame();
 
-		void Initialize(aetherClass::Direct3DManager*, HWND)override;
-		void Updata()override;
+		bool Initialize()override;
+		bool Updater()override;
 		void Render()override;
-		void Shutdown()override;
+		void Finalize()override;
 		static const std::string m_thisName;
 	
 	private:
@@ -34,13 +34,14 @@ class SceneGame :
 		std::shared_ptr<SpearManager> m_spear;
 		std::shared_ptr<RockManager> m_rock;
 
-		std::shared_ptr<DxShader::ShaderBase> m_shader;
-		std::shared_ptr<DxShader::LightShader> m_lightshader;
+		std::shared_ptr<aetherClass::ShaderBase> m_shader;
+		std::shared_ptr<aetherClass::LightShader> m_lightshader;
 
-		std::shared_ptr<DxLight::Light>m_light;
-		std::shared_ptr<DxModel::FbxStaticMesh> m_stage;
+		std::shared_ptr<aetherClass::Light>m_light;
+		std::shared_ptr<aetherClass::FbxStaticModel> m_stage;
 
-		std::shared_ptr<DxModel::ModelBase> m_positionCheck;
+		std::shared_ptr<aetherClass::ModelBase> m_positionCheck;
+		std::shared_ptr<aetherClass::Texture> m_positionCheckBoxTexture;
 };
 
 #endif

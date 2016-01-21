@@ -1,5 +1,5 @@
 #pragma once
-#include"Rock.h"
+#include <ModelBase.h>
 //#include"Sphere.h"
 
 namespace n_Rock{
@@ -9,15 +9,15 @@ namespace n_Rock{
 		RockUpdater(const RockUpdater&) = default;
 		void operator =(const RockUpdater &);
 
-		void Open(aetherClass::Cube*);
-		void Close(aetherClass::Cube*);
+		void Open(aetherClass::ModelBase*);
+		void Close(aetherClass::ModelBase*);
 
 		
 	public:
 		RockUpdater();
 		~RockUpdater() = default;
 
-		void Update(aetherClass::Cube*model, bool buttonState);
+		void Update(aetherClass::ModelBase*model, bool buttonState);
 		
 	};
 }

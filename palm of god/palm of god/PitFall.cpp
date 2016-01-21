@@ -1,13 +1,10 @@
 #include "PitFall.h"
 #include<iostream>
-
-
+#include <VertexType.h>
 	using namespace Pitfall;
-	using namespace DxModel;
-	using namespace DxMath;
-
+	using namespace aetherClass;
 	bool PitFall::InitializeBuffers(){
-		ModelProperty::VertexType* vertices;
+		VertexType* vertices;
 		unsigned long* indices;
 		D3D11_BUFFER_DESC vertexBufferDesc, indexBufferDesc;
 		D3D11_SUBRESOURCE_DATA vertexData, indexData;
@@ -21,7 +18,7 @@
 		m_indexCount = 16;
 
 		// Create the vertex array.
-		vertices = new ModelProperty::VertexType[m_vertexCount];
+		vertices = new VertexType[m_vertexCount];
 		if (!vertices)
 		{
 			return false;
@@ -42,75 +39,55 @@
 		//Fore
 		vertices[3]._position = Vector3(-1.0f, origin._y + -1.0f, -1.0f);
 		vertices[3]._uv = Vector2(0.0f, 1.0f);
-		vertices[3]._color = BLACK;
-
-
+	
 		vertices[2]._position = Vector3(-1.0f, origin._y + 1.0f, -1.0f);
 		vertices[2]._uv = Vector2(0.0f, 0.0f);
-		vertices[2]._color = WHITE;
-
+	
 		vertices[1]._position = Vector3(1.0f, origin._y + -1.0f, -1.0f);
 		vertices[1]._uv = Vector2(1.0f, 1.0f);
-		vertices[1]._color = BLACK;
-
+	
 		vertices[0]._position = Vector3(1.0f, origin._y + 1.0f, -1.0f);
 		vertices[0]._uv = Vector2(1.0f, 0.0f);
-		vertices[0]._color = WHITE;
-
+		
 		//Side left
 		vertices[7]._position = Vector3(-1.0f, origin._y + -1.0f, 1.0f);
 		vertices[7]._uv = Vector2(0.0f, 1.0f);
-		vertices[7]._color = BLACK;
-
+		
 		vertices[6]._position = Vector3(-1.0f, origin._y, 1.0f);
 		vertices[6]._uv = Vector2(0.0f, 0.0f);
-		vertices[6]._color = WHITE;
-
+		
 		vertices[5]._position = Vector3(-1.0f, origin._y + -1.0f, -1.0f);
 		vertices[5]._uv = Vector2(1.0f, 1.0f);
-		vertices[5]._color = BLACK;
-
+		
 		vertices[4]._position = Vector3(-1.0f, origin._y, -1.0f);
 		vertices[4]._uv = Vector2(1.0f, 0.0f);
-		vertices[4]._color = WHITE;
-
+	
 		//Back
 		vertices[11]._position = Vector3(1.0f, origin._y + -1.0f, 1.0f);
 		vertices[11]._uv = Vector2(0.0f, 1.0f);
-		vertices[11]._color = BLACK;
-
+	
 		vertices[10]._position = Vector3(1.0f, origin._y + 1.0f, 1.0f);
 		vertices[10]._uv = Vector2(0.0f, 0.0f);
-		vertices[10]._color = WHITE;
-
+	
 		vertices[9]._position = Vector3(-1.0f, origin._y + -1.0f, 1.0f);
 		vertices[9]._uv = Vector2(1.0f, 1.0f);
-		vertices[9]._color = BLACK;
-
+	
 		vertices[8]._position = Vector3(-1.0f, origin._y + 1.0f, 1.0f);
 		vertices[8]._uv = Vector2(1.0f, 0.0f);
-		vertices[8]._color = WHITE;
-
+		
 
 		//Side right
 		vertices[15]._position = Vector3(1.0f, origin._y + -1.0f, -1.0f);
 		vertices[15]._uv = Vector2(0.0f, 1.0f);
-		vertices[15]._color = BLACK;
-
+		
 		vertices[14]._position = Vector3(1.0f, origin._y, -1.0f);
 		vertices[14]._uv = Vector2(0.0f, 0.0f);
-		vertices[14]._color = WHITE;
-
+	
 		vertices[13]._position = Vector3(1.0f, origin._y + -1.0f, 1.0f);
 		vertices[13]._uv = Vector2(1.0f, 1.0f);
-		vertices[13]._color = BLACK;
-
+		
 		vertices[12]._position = Vector3(1.0f, origin._y, 1.0f);
 		vertices[12]._uv = Vector2(1.0f, 0.0f);
-		vertices[12]._color = WHITE;
-
-
-
 
 
 		// Load the index array with data.
@@ -123,7 +100,7 @@
 
 		// Set up the description of the static vertex buffer.
 		vertexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
-		vertexBufferDesc.ByteWidth = sizeof(ModelProperty::VertexType) * m_vertexCount;
+		vertexBufferDesc.ByteWidth = sizeof(VertexType) * m_vertexCount;
 		vertexBufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
 		vertexBufferDesc.CPUAccessFlags = 0;
 		vertexBufferDesc.MiscFlags = 0;
@@ -135,7 +112,7 @@
 		vertexData.SysMemSlicePitch = 0;
 
 		// Now create the vertex buffer.
-		result = m_direct3d->GetDevice()->CreateBuffer(&vertexBufferDesc, &vertexData, &m_vertexBuffer);
+		result = GetDirect3DManager()->GetDevice()->CreateBuffer(&vertexBufferDesc, &vertexData, &m_vertexBuffer);
 		if (FAILED(result))
 		{
 			return false;
@@ -155,7 +132,7 @@
 		indexData.SysMemSlicePitch = 0;
 
 		// Create the index buffer.
-		result = m_direct3d->GetDevice()->CreateBuffer(&indexBufferDesc, &indexData, &m_indexBuffer);
+		result = GetDirect3DManager()->GetDevice()->CreateBuffer(&indexBufferDesc, &indexData, &m_indexBuffer);
 		if (FAILED(result))
 		{
 			return false;
@@ -173,7 +150,7 @@
 	}
 
 
-	void PitFall::ShutdownBuffers(){
+	void PitFall::FinalizeBuffers(){
 		if (m_indexBuffer)
 		{
 			m_indexBuffer->Release();
@@ -197,17 +174,17 @@
 
 
 		// Set vertex buffer stride and offset.
-		stride = sizeof(ModelProperty::VertexType);
+		stride = sizeof(VertexType);
 		offset = 0;
 
 		// Set the vertex buffer to active in the input assembler so it can be rendered.
-		m_direct3d->GetDeviceContext()->IASetVertexBuffers(0, 1, &m_vertexBuffer, &stride, &offset);
+		GetDirect3DManager()->GetDeviceContext()->IASetVertexBuffers(0, 1, &m_vertexBuffer, &stride, &offset);
 
 		// Set the index buffer to active in the input assembler so it can be rendered.
-		m_direct3d->GetDeviceContext()->IASetIndexBuffer(m_indexBuffer, DXGI_FORMAT_R32_UINT, 0);
+		GetDirect3DManager()->GetDeviceContext()->IASetIndexBuffer(m_indexBuffer, DXGI_FORMAT_R32_UINT, 0);
 
 		// Set the type of primitive that should be rendered from this vertex buffer, in this case triangles.
-		m_direct3d->GetDeviceContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
+		GetDirect3DManager()->GetDeviceContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
 
 		return;
 	}
@@ -217,20 +194,20 @@
 
 		float rayVector = -1;
 
-		float rayEnd = rayVector + other.Translation()._y;
+		float rayEnd = rayVector + other.GetTransform()._translation._y;
 
 		//		printf("Cube = %f\n", Translation().y);
 		//		printf("Other = %f\nrayEnd = %f\n\n", other.Translation().y, rayEnd);
 
-		Vector2 origin(Translation()._x - (Scaling()._x), Translation()._z + (Scaling()._z));
-		Vector2 uv(Translation()._x + (Scaling()._x), Translation()._z - (Scaling()._z));
+		Vector2 origin(GetTransform()._translation._x - (GetTransform()._scale._x), GetTransform()._translation._z + (GetTransform()._scale._z));
+		Vector2 uv(GetTransform()._translation._x + (GetTransform()._scale._x), GetTransform()._translation._z - (GetTransform()._scale._z));
 
-		Vector2 other_origin(other.Translation()._x, other.Translation()._z);
+		Vector2 other_origin(other.GetTransform()._translation._x, other.GetTransform()._translation._z);
 
 		std::cout << origin._y << other_origin._y << std::endl;
 
 		if (origin._x < other_origin._x && other_origin._x < uv._x && uv._y < other_origin._y && other_origin._y < origin._y){
-			if (Translation()._y > other.Translation()._y){
+			if (GetTransform()._translation._y > other.GetTransform()._translation._y){
 				//				std::cout << "\n///Falling?///\n";
 				return true;
 			}

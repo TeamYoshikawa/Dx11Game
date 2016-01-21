@@ -26,10 +26,10 @@ public:
 	PitFallManager() = default;
 	~PitFallManager() = default;
 
-	bool Initialize(DxCamera::ViewCamera* camera,DxMath::Vector3 origin);
-	void Render(std::shared_ptr<DxShader::ShaderBase>shader, DxModel::eRenderWay);
+	bool Initialize(aetherClass::ViewCamera* camera,aetherClass::Vector3 origin);
+	void Render(std::shared_ptr<aetherClass::ShaderBase>shader);
 	void Update();
 	void Shutdown();
-	void ChangeCamera(DxCamera::ViewCamera* camera);
+	void ChangeCamera(aetherClass::ViewCamera* camera);
 };
 

@@ -1,11 +1,10 @@
 #include "PlayerUpdater.h"
 #include <memory>
 #include <ModelBase.h>
-#include <FbxStaticMesh.h>
+#include <FbxStaticModel.h>
+#include <MathUtility.h>
 #include <iostream>
-
-#define PI 3.14159265358979323846264338327950288
-
+using namespace aetherClass;
 PlayerUpdater::PlayerUpdater(){}
 PlayerUpdater::PlayerUpdater(PlayerUpdater& other){}
 
@@ -38,36 +37,33 @@ void PlayerUpdater::SendStatus(PlayerBase::PlayerStatus&){
 	return;
 }
 
-void PlayerUpdater::Updating(const std::shared_ptr<DxModel::FbxStaticMesh>& playerObject, float frame){
+void PlayerUpdater::Updating(const std::shared_ptr<FbxStaticModel>& playerObject, float frame){
 
 	// 移動の処理
-	playerObject->Transform()._translation += SendStatus()._nextMoveDirection / 500;
+	playerObject->GetTransform()._translation += SendStatus()._nextMoveDirection / 500;
 
 	return;
 }
 
 // 指定されたオブジェクトに向かって追いかける
-void PlayerUpdater::FaceTheObject(const std::shared_ptr<DxModel::FbxStaticMesh>& player, const std::shared_ptr<DxModel::ModelBase>& object){
-	SendStatus()._nextMoveDirection = object->Translation() - player->Transform()._translation;
+void PlayerUpdater::FaceTheObject(const std::shared_ptr<FbxStaticModel>& player, const std::shared_ptr<ModelBase>& object){
+	SendStatus()._nextMoveDirection = object->GetTransform()._translation- player->GetTransform()._translation;
 
 	float rad = atan2(SendStatus()._nextMoveDirection._x, SendStatus()._nextMoveDirection._z);
-	float rotationY = rad / PI * 180;
+	float rotationY = rad / kAetherPI * 180;
 
-	player->Transform()._rotation._y = rotationY;
+	player->GetTransform()._rotation._y = rotationY;
 }
 
 
-bool PlayerUpdater::HittingProcessor(const std::shared_ptr<DxModel::ModelBase>& player, const std::shared_ptr<DxModel::ModelBase>& other){
+bool PlayerUpdater::HittingProcessor(const std::shared_ptr<FbxStaticModel>& player, const std::shared_ptr<ModelBase>& other){
 
-	if (!m_boxCllider.IsCollideOBB(player, other))
-	{
-		return false;
-	}
+	// TODO: 当たったかを調べる条件式を記載
 	return true;
 }
 
 
-bool PlayerUpdater::HittingProcessor(const std::shared_ptr<DxModel::FbxStaticMesh>&){
+bool PlayerUpdater::HittingProcessor(const std::shared_ptr<aetherClass::FbxStaticModel>&){
 
 	return true;
 }

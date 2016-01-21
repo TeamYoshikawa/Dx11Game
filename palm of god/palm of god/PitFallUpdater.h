@@ -8,15 +8,15 @@ namespace Pitfall{
 		PitFallUpdater(const PitFallUpdater&){};
 		void operator =(const PitFallUpdater &){};
 
-		void Open(DxModel::ModelBase*);
-		void Close(DxModel::ModelBase*);
+		void Open(aetherClass::ModelBase*);
+		void Close(aetherClass::ModelBase*);
 		
 		float m_speed;
 	public:
 		PitFallUpdater();
 		~PitFallUpdater() = default;
 
-		void Update(DxModel::ModelBase*model,bool buttonState);
+		void Update(aetherClass::ModelBase*model,bool buttonState);
 
 	};
 

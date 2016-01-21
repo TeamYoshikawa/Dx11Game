@@ -1,12 +1,12 @@
 #pragma once
-#include "ModelBase.h"
+#include <ModelBase.h>
 
 
 //origin is x(1.0), Base lib type is Right side.
 //
 namespace Pitfall{
 	class PitFallLib :
-		public DxModel::ModelBase
+		public aetherClass::ModelBase
 	{
 	public:
 		PitFallLib() = default;
@@ -14,7 +14,7 @@ namespace Pitfall{
 		~PitFallLib() = default;
 
 		bool InitializeBuffers()override;
-		void ShutdownBuffers()override;
+		void FinalizeBuffers()override;
 		void RenderBuffers()override;
 
 

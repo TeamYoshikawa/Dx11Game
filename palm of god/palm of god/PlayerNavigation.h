@@ -15,18 +15,18 @@ class PlayerNavigation
 		PlayerNavigation();
 		~PlayerNavigation();
 
-		void Initialize(std::shared_ptr<DxCamera::ViewCamera>);
+		void Initialize(std::shared_ptr<aetherClass::ViewCamera>);
 
-		std::shared_ptr<DxModel::Cube> GetNavigationBox();
+		std::shared_ptr<aetherClass::Cube> GetNavigationBox();
 		void NextSet();
 
-		void Render(std::shared_ptr<DxShader::ShaderBase>);
+		void Render(std::shared_ptr<aetherClass::ShaderBase>);
 
 		int GetNavigationID()const;
 	private:
-		static std::shared_ptr<DxModel::Cube> m_navigationBox;
-		static DxMath::Vector3 m_navigationBoxPosition[];
-
+		static std::shared_ptr<aetherClass::Cube> m_navigationBox;
+		static aetherClass::Vector3 m_navigationBoxPosition[];
+		static std::shared_ptr<aetherClass::Texture> m_texture;
 		static int m_navigationID;
 		int m_navigationArrayElement;
 };

@@ -1,6 +1,6 @@
 #include "SpearRender.h"
 
-
+using namespace aetherClass;
 SpearRender::SpearRender(){}
 
 SpearRender::SpearRender(SpearRender& other){}
@@ -10,8 +10,8 @@ SpearRender::~SpearRender()
 }
 
 
-void SpearRender::Renderring(DxModel::Cube *model, std::shared_ptr<DxShader::ShaderBase>shaderBase, DxModel::eRenderWay eRen)
+void SpearRender::Renderring(ModelBase* model, std::shared_ptr<ShaderBase>shaderBase)
 {
-	model->Render(shaderBase, eRen);
+	model->Render(shaderBase.get());
 	
 }

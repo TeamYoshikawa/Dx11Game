@@ -13,33 +13,15 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="ソース ファイル\Trap">
+      <UniqueIdentifier>{0dbe9d0f-4975-4c61-b60d-b1d6b114fe61}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Entry.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="HirokiScene.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="GutioScene.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="CameraMAnager.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="PitFall.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="PitFallLib.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="PitFallManager.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="PitFallRender.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="PitFallUpdater.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="PlayerBase.cpp">
@@ -57,63 +39,36 @@
     <ClCompile Include="PlayerUpdater.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Rock.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="RockManager.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="RockRender.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="RockUpdater.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="SceneGame.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="SceneManager.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="PitFall.cpp">
+      <Filter>ソース ファイル\Trap</Filter>
     </ClCompile>
-    <ClCompile Include="SceneTitle.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="PitFallLib.cpp">
+      <Filter>ソース ファイル\Trap</Filter>
     </ClCompile>
-    <ClCompile Include="Spear.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="PitFallManager.cpp">
+      <Filter>ソース ファイル\Trap</Filter>
     </ClCompile>
-    <ClCompile Include="SpearManager.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="PitFallRender.cpp">
+      <Filter>ソース ファイル\Trap</Filter>
     </ClCompile>
-    <ClCompile Include="SpearRender.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="PitFallUpdater.cpp">
+      <Filter>ソース ファイル\Trap</Filter>
     </ClCompile>
-    <ClCompile Include="SpearUpdater.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="RockManager.cpp">
+      <Filter>ソース ファイル\Trap</Filter>
+    </ClCompile>
+    <ClCompile Include="RockRender.cpp">
+      <Filter>ソース ファイル\Trap</Filter>
+    </ClCompile>
+    <ClCompile Include="RockUpdater.cpp">
+      <Filter>ソース ファイル\Trap</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="HirokiScene.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="GutioScene.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="CameraMAnager.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="PitFall.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="PitFallLib.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="PitFallManager.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="PitFallRender.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="PitFallUpdater.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="PlayerBase.h">
@@ -131,41 +86,32 @@
     <ClInclude Include="PlayerUpdater.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Rock.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="RockManager.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="RockRender.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="RockUpdater.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneBase.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="SceneGame.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="SceneManager.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="PitFall.h">
+      <Filter>ソース ファイル\Trap</Filter>
     </ClInclude>
-    <ClInclude Include="SceneTitle.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="PitFallLib.h">
+      <Filter>ソース ファイル\Trap</Filter>
     </ClInclude>
-    <ClInclude Include="Spear.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="PitFallManager.h">
+      <Filter>ソース ファイル\Trap</Filter>
     </ClInclude>
-    <ClInclude Include="SpearManager.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="PitFallRender.h">
+      <Filter>ソース ファイル\Trap</Filter>
     </ClInclude>
-    <ClInclude Include="SpearRender.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="PitFallUpdater.h">
+      <Filter>ソース ファイル\Trap</Filter>
     </ClInclude>
-    <ClInclude Include="SpearUpdater.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="RockManager.h">
+      <Filter>ソース ファイル\Trap</Filter>
+    </ClInclude>
+    <ClInclude Include="RockRender.h">
+      <Filter>ソース ファイル\Trap</Filter>
+    </ClInclude>
+    <ClInclude Include="RockUpdater.h">
+      <Filter>ソース ファイル\Trap</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

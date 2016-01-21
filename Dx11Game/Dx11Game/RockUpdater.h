@@ -9,15 +9,15 @@ namespace n_Rock{
 		RockUpdater(const RockUpdater&) = default;
 		void operator =(const RockUpdater &);
 
-		void Open(DxModel::Sphere*);
-		void Close(DxModel::Sphere*);
+		void Open(DxModel::ModelBase*);
+		void Close(DxModel::ModelBase*);
 
 		
 	public:
 		RockUpdater();
 		~RockUpdater() = default;
 
-		void Update(DxModel::Sphere*model, bool buttonState);
+		void Update(DxModel::ModelBase*model, bool buttonState);
 		
 	};
 }

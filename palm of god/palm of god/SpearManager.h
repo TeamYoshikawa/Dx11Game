@@ -43,8 +43,8 @@ public:
 	~SpearManager() = default;
 
 
-	bool Initialize(DxCamera::ViewCamera*);
-	void Render(const std::shared_ptr<DxShader::ShaderBase>,const DxModel::eRenderWay);
+	bool Initialize(aetherClass::ViewCamera*);
+	void Render(const std::shared_ptr<aetherClass::ShaderBase>);
 	void Update(bool);
 	void Shutdown();
 

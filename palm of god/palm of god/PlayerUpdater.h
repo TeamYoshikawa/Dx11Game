@@ -9,9 +9,9 @@
 */
 #include "PlayerBase.h"
 #include <memory>
-#include <FbxStaticMesh.h>
+#include <FbxStaticModel.h>
 #include <ModelBase.h>
-#include <CollideBoxOBB.h>
+
 class PlayerUpdater :
 	private PlayerBase
 {
@@ -23,15 +23,12 @@ class PlayerUpdater :
 		void Initialize()override;
 		PlayerBase::PlayerStatus& SendStatus()override;
 		void SendStatus(PlayerBase::PlayerStatus&)override;
-		void Updating(const std::shared_ptr<DxModel::FbxStaticMesh>&, float);
-		void FaceTheObject(const std::shared_ptr<DxModel::FbxStaticMesh>&, const std::shared_ptr<DxModel::ModelBase>&);
-		bool HittingProcessor(const std::shared_ptr<DxModel::FbxStaticMesh>&);
-		bool HittingProcessor(const std::shared_ptr<DxModel::ModelBase>&, const std::shared_ptr<DxModel::ModelBase>&);
+		void Updating(const std::shared_ptr<aetherClass::FbxStaticModel>&, float);
+		void FaceTheObject(const std::shared_ptr<aetherClass::FbxStaticModel>&, const std::shared_ptr<aetherClass::ModelBase>&);
+		bool HittingProcessor(const std::shared_ptr<aetherClass::FbxStaticModel>&);
+		bool HittingProcessor(const std::shared_ptr<aetherClass::FbxStaticModel>&, const std::shared_ptr<aetherClass::ModelBase>&);
 	private:
 		void Destroy()override;
-
-	private:
-		CollideBoxOBB m_boxCllider;
 
 };
 

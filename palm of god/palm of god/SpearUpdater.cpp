@@ -1,12 +1,12 @@
 #include "SpearUpdater.h"
 #include<ModelBase.h>
 
-
+using namespace aetherClass;
 SpearUpdater::SpearUpdater(){}
 
 SpearUpdater::~SpearUpdater(){}
 
-void SpearUpdater::Updating(DxModel::Cube* spear, bool buttonState = true)
+void SpearUpdater::Updating(ModelBase* spear, bool buttonState = true)
 {
 	if (!spear){
 		MessageBox(NULL, L"missing Object", ERROR, MB_OK);
@@ -24,18 +24,18 @@ void SpearUpdater::Updating(DxModel::Cube* spear, bool buttonState = true)
 	return;
 }
 
-void SpearUpdater::ButtonOn(DxModel::Cube* spear)
+void SpearUpdater::ButtonOn(ModelBase* spear)
 {
-	spear->Translation()._y += 1.0f;
+	spear->GetTransform()._translation._y += 1.0f;
 
-	if (spear->Translation()._y > 1.5f)spear->Translation()._y = 1.5f; 
+	if (spear->GetTransform()._translation._y > 1.5f)spear->GetTransform()._translation._y = 1.5f;
 		
 		
 }
 
-void SpearUpdater::ButtonOff(DxModel::Cube* spear)
+void SpearUpdater::ButtonOff(ModelBase* spear)
 {
-	spear->Translation()._y -= 1.0f;
-	if (spear->Translation()._y < -1.5f)spear->Translation()._y = -1.5f;
+	spear->GetTransform()._translation._y -= 1.0f;
+	if (spear->GetTransform()._translation._y < -1.5f)spear->GetTransform()._translation._y = -1.5f;
 	
 }

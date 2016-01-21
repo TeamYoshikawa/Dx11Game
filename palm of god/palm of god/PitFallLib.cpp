@@ -1,9 +1,9 @@
 #include "PitFallLib.h"
-
-using namespace DxMath;
+#include <VertexType.h>
+using namespace aetherClass;
 using namespace Pitfall;
 bool PitFallLib::InitializeBuffers(){
-	ModelProperty::VertexType* vertices;
+	VertexType* vertices;
 	unsigned long* indices;
 	D3D11_BUFFER_DESC vertexBufferDesc, indexBufferDesc;
 	D3D11_SUBRESOURCE_DATA vertexData, indexData;
@@ -17,7 +17,7 @@ bool PitFallLib::InitializeBuffers(){
 	m_indexCount = 4;
 
 	// Create the vertex array.
-	vertices = new ModelProperty::VertexType[m_vertexCount];
+	vertices = new VertexType[m_vertexCount];
 	if (!vertices)
 	{
 		return false;
@@ -37,19 +37,15 @@ bool PitFallLib::InitializeBuffers(){
 	//Fore
 	vertices[0]._position = Vector3(origin._x, origin._y, -1.0f);
 	vertices[0]._uv = Vector2(0.0f, 1.0f);
-	vertices[0]._color = COLOR;
 
 	vertices[1]._position = Vector3(origin._x, origin._y, 1.0f);
 	vertices[1]._uv = Vector2(0.0f, 0.0f);
-	vertices[1]._color = COLOR;
 
 	vertices[2]._position = Vector3(origin._x + 1.0f, origin._y, -1.0f);
 	vertices[2]._uv = Vector2(1.0f, 1.0f);
-	vertices[2]._color = COLOR;
 
 	vertices[3]._position = Vector3(origin._x + 1.0f, origin._y, 1.0f);
 	vertices[3]._uv = Vector2(1.0f, 0.0f);
-	vertices[3]._color = COLOR;
 
 
 	// Load the index array with data.
@@ -62,7 +58,7 @@ bool PitFallLib::InitializeBuffers(){
 
 	// Set up the description of the static vertex buffer.
 	vertexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
-	vertexBufferDesc.ByteWidth = sizeof(ModelProperty::VertexType) * m_vertexCount;
+	vertexBufferDesc.ByteWidth = sizeof(VertexType) * m_vertexCount;
 	vertexBufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
 	vertexBufferDesc.CPUAccessFlags = 0;
 	vertexBufferDesc.MiscFlags = 0;
@@ -74,7 +70,7 @@ bool PitFallLib::InitializeBuffers(){
 	vertexData.SysMemSlicePitch = 0;
 
 	// Now create the vertex buffer.
-	result = m_direct3d->GetDevice()->CreateBuffer(&vertexBufferDesc, &vertexData, &m_vertexBuffer);
+	result = GetDirect3DManager()->GetDevice()->CreateBuffer(&vertexBufferDesc, &vertexData, &m_vertexBuffer);
 	if (FAILED(result))
 	{
 		return false;
@@ -94,7 +90,7 @@ bool PitFallLib::InitializeBuffers(){
 	indexData.SysMemSlicePitch = 0;
 
 	// Create the index buffer.
-	result = m_direct3d->GetDevice()->CreateBuffer(&indexBufferDesc, &indexData, &m_indexBuffer);
+	result = GetDirect3DManager()->GetDevice()->CreateBuffer(&indexBufferDesc, &indexData, &m_indexBuffer);
 	if (FAILED(result))
 	{
 		return false;
@@ -112,7 +108,7 @@ bool PitFallLib::InitializeBuffers(){
 }
 
 
-void PitFallLib::ShutdownBuffers(){
+void PitFallLib::FinalizeBuffers(){
 	if (m_indexBuffer)
 	{
 		m_indexBuffer->Release();
@@ -136,17 +132,17 @@ void PitFallLib::RenderBuffers(){
 
 
 	// Set vertex buffer stride and offset.
-	stride = sizeof(ModelProperty::VertexType);
+	stride = sizeof(VertexType);
 	offset = 0;
 
 	// Set the vertex buffer to active in the input assembler so it can be rendered.
-	m_direct3d->GetDeviceContext()->IASetVertexBuffers(0, 1, &m_vertexBuffer, &stride, &offset);
+	GetDirect3DManager()->GetDeviceContext()->IASetVertexBuffers(0, 1, &m_vertexBuffer, &stride, &offset);
 
 	// Set the index buffer to active in the input assembler so it can be rendered.
-	m_direct3d->GetDeviceContext()->IASetIndexBuffer(m_indexBuffer, DXGI_FORMAT_R32_UINT, 0);
+	GetDirect3DManager()->GetDeviceContext()->IASetIndexBuffer(m_indexBuffer, DXGI_FORMAT_R32_UINT, 0);
 
 	// Set the type of primitive that should be rendered from this vertex buffer, in this case triangles.
-	m_direct3d->GetDeviceContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
+	GetDirect3DManager()->GetDeviceContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
 
 	return;
 }

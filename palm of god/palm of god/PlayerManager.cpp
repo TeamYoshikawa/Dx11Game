@@ -1,6 +1,6 @@
 #include "PlayerManager.h"
 #include <iostream>
-
+using namespace aetherClass;
 PlayerManager::PlayerManager()
 {
 }
@@ -11,29 +11,31 @@ PlayerManager::~PlayerManager()
 }
 
 
-bool PlayerManager::Initialize(const std::shared_ptr<DxCamera::ViewCamera> camera){
+bool PlayerManager::Initialize(const std::shared_ptr<ViewCamera> camera){
 	m_updater = std::make_unique<PlayerUpdater>();
 	m_updater->Initialize();
 
 	m_render = std::make_unique<PlayerRender>();
 	m_render->Initialize();
 
-	m_playerObject = std::make_shared<DxModel::FbxStaticMesh>();
-	m_playerObject->LoadFBX("ModelData/models/player5.fbx",DxFbx::FbxLoader::eAxisSystem::eAxisOpenGL);
-	m_playerObject->Initialize(camera.get(), "ModelData/textures/tex.png");
-	m_playerObject->Transform()._translation = DxMath::Vector3(-280.0f, -100.f, 185.0f);
-	m_playerObject->Transform()._scale = DxMath::Vector3(1.f, -1.f, 1.f);
+	m_playerObject = std::make_shared<FbxStaticModel>();
+	m_playerObject->LoadFBX("ModelData/models/player5.fbx",eAxisSystem::eAxisOpenGL);
+	m_playerObject->LoadTexture("ModelData/textures/tex.png");
+	m_playerObject->SetCamera(camera.get());
+	m_playerObject->GetTransform()._translation = Vector3(-280.0f, -100.f, 185.0f);
+	m_playerObject->GetTransform()._scale = Vector3(1.f, -1.f, 1.f);
 
 	m_navigation = std::make_unique<PlayerNavigation>();
 	m_navigation->Initialize(camera);
 
-
-	m_collideBox = std::make_shared<DxModel::Cube>();
-	m_collideBox->Initialize(camera.get(),"ModelData/textures/Chips_Cover.jpg");
-	
-	const DxMath::Vector3 translation = m_playerObject->Transform()._translation;
-	m_collideBox->Translation(translation);
-	m_collideBox->Scaling(DxMath::Vector3(20.0f, 100.0f, 20.0f));
+	m_collideTexture = std::make_shared<Texture>();
+	m_collideTexture->Load("ModelData/textures/Chips_Cover.jpg");
+	m_collideBox = std::make_shared<Cube>();
+	m_collideBox->SetTexture(m_collideTexture.get());
+	m_collideBox->SetCamera(camera.get());
+	const Vector3 translation = m_playerObject->GetTransform()._translation;
+	m_collideBox->GetTransform()._translation = translation;;
+	m_collideBox->GetTransform()._scale = Vector3(20.0f, 100.0f, 20.0f);
 	
 	SetNextPoint(m_navigation->GetNavigationBox());
 
@@ -42,7 +44,7 @@ bool PlayerManager::Initialize(const std::shared_ptr<DxCamera::ViewCamera> camer
 }
 
 // 描画処理
-void PlayerManager::Render(const std::shared_ptr<DxShader::ShaderBase> shader){
+void PlayerManager::Render(const std::shared_ptr<ShaderBase> shader){
 	m_render->Rendering(m_playerObject,shader);
 	//m_collideBox->Render(shader, DxModel::eRenderWay::eTexture);
 
@@ -63,13 +65,14 @@ void PlayerManager::Update(float frame){
 		return;
 	}
 	m_updater->Updating(m_playerObject,frame);
-	m_collideBox->Translation() = m_playerObject->Transform()._translation;
+	m_collideBox->GetTransform()._translation = m_playerObject->GetTransform()._translation;
 
 	// コリジョンボックスがプレイヤーを囲むようにする
-	const DxMath::Vector3 translation = m_playerObject->Transform()._translation;
-	m_collideBox->Translation(translation);
+	const Vector3 translation = m_playerObject->GetTransform()._translation;
+	m_collideBox->GetTransform()._translation = translation;
 
-	if (m_collider.IsCollideOBB(m_collideBox, m_navigation->GetNavigationBox()))
+	// TODO : ナビゲーションにぶつかった時の処理
+	/*if (m_collider.IsCollideOBB(m_collideBox, m_navigation->GetNavigationBox()))
 	{
 		m_navigation->NextSet();
 		SetNextPoint(m_navigation->GetNavigationBox());
@@ -78,12 +81,12 @@ void PlayerManager::Update(float frame){
 	else
 	{
 		m_isCahngeCamera = false;
-	}
+	}*/
 	return;
 }
 
 // 引数で指定されたオブジェクトに対して向かう
-void PlayerManager::SetNextPoint(const std::shared_ptr<DxModel::ModelBase>& nextPointObject){
+void PlayerManager::SetNextPoint(const std::shared_ptr<ModelBase>& nextPointObject){
 	
 	// アップデーターに役割を任せる
 	m_updater->FaceTheObject(m_playerObject, nextPointObject);
@@ -102,18 +105,18 @@ void PlayerManager::Status(PlayerBase::PlayerStatus& status){
 }
 
 // ModelBaseの派生オブジェクトとの当たり判定用
-bool PlayerManager::HitMesh(const std::shared_ptr<DxModel::ModelBase>& other){
+bool PlayerManager::HitMesh(const std::shared_ptr<ModelBase>& other){
 
-	if (!m_updater->HittingProcessor(m_collideBox, other))
-	{
-		return false;
-	}
+	//if (!m_updater->HittingProcessor(m_collideBox, other))
+	//{
+	//	return false;
+	//}
 	
 	return true;
 }
 
 // Fbx同士の当たり判定用
-bool PlayerManager::HitMesh(const std::shared_ptr<DxModel::FbxStaticMesh>&){
+bool PlayerManager::HitMesh(const std::shared_ptr<FbxStaticModel>&){
 
 	return true;
 }

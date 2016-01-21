@@ -16,7 +16,7 @@ namespace Pitfall{
 		PitFallRender() = default;
 		~PitFallRender() = default;
 
-		void Render(DxModel::ModelBase*, std::shared_ptr<DxShader::ShaderBase>, DxModel::eRenderWay);
+		void Render(aetherClass::ModelBase*, std::shared_ptr<aetherClass::ShaderBase>);
 
 	};
 

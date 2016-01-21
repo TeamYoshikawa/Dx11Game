@@ -5,15 +5,13 @@
 #include"Spear.h"
 #include <memory>
 #include <ModelBase.h>
-#include <FbxStaticMesh.h>
-
 class SpearUpdater
 {
 private:
 	//‘„‚Ì”ò‚Ño‚µ
-	void ButtonOn(DxModel::Cube*);
+	void ButtonOn(aetherClass::ModelBase*);
 	//‘„‚Ìû”[
-	void ButtonOff(DxModel::Cube*);
+	void ButtonOff(aetherClass::ModelBase*);
 
 	void operator =(const SpearUpdater &);
 
@@ -21,7 +19,7 @@ public:
 	SpearUpdater();
 	~SpearUpdater();
 
-	void Updating(DxModel::Cube*, bool buttonState);
+	void Updating(aetherClass::ModelBase*, bool buttonState);
 
 
 };

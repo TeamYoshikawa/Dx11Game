@@ -1,100 +1,110 @@
 #include "SceneGame.h"
-#include "FbxBase.h"
-
 #include <GameController.h>
-#include <CollideBoxOBB.h>
-
+#include <iostream>
+#include <PixelShader.h>
+#include "FbxStaticModel.h"
 using namespace aetherClass;
 const std::string SceneGame::m_thisName = "Game";
-SceneGame::SceneGame(SceneManager* manager) :
-SceneBase(m_thisName, *manager){
-
-
-}
+SceneGame::SceneGame() :
+GameScene(m_thisName, GetManager()){}
 
 
 SceneGame::~SceneGame()
 {
 }
 
-void SceneGame::Initialize(Direct3DManager* direct3d, HWND hWnd){
+bool SceneGame::Initialize(){
 	std::cout << "Start game" << std::endl;
 
 
 	m_camera = std::make_shared<CameraManager>();
 	m_camera->Initialize();
 
-	m_shader = std::make_shared<DxShader::TextureShader>();
-	m_shader->Initialize(direct3d->GetDevice(), hWnd, L"Shader/texture.vs", L"Shader/texture.ps");
+	m_shader = std::make_shared<PixelShader>();
+	ShaderDesc textureDesc;
+	textureDesc._vertex._entryName = "vs_main";
+	textureDesc._vertex._srcFile = L"Shader/VertexShaderBase.hlsl";
 
-	m_lightshader = std::make_shared<DxShader::LightShader>();
-	m_lightshader->Initialize(direct3d->GetDevice(), hWnd, L"Shader/DiffuseLightVS.hlsl", L"Shader/DiffuseLightPS.hlsl");
+	textureDesc._pixel._entryName = "ps_main";
+	textureDesc._pixel._srcFile = L"Shader/ColorTextureAdd2.ps";
+	m_shader->Initialize(textureDesc, ShaderType::eVertex | ShaderType::ePixel);
+	
+	m_lightshader = std::make_shared<LightShader>();
+	ShaderDesc lightDesc;
+	lightDesc._vertex._entryName = "vs_main";
+	lightDesc._vertex._srcFile = L"Shader/DiffuseLightVS.hlsl";
 
-	m_light = std::make_shared<DxLight::Light>();
-	m_light->Translation(DxMath::Vector3(-50, 50, -50));
+	lightDesc._pixel._entryName = "ps_main";
+	lightDesc._pixel._srcFile = L"Shader/DiffuseLightPS.hlsl";
+	m_lightshader->Initialize(lightDesc,ShaderType::eVertex|ShaderType::ePixel);
+
+	m_light = std::make_shared<Light>();
+	m_light->Translation() = Vector3(-50, 50, -50);
 	m_lightshader->SetLight(m_light.get());
 
 	m_player = std::make_shared<PlayerManager>();
 	m_player->Initialize(m_camera->GetCamera());
 
-	m_stage = std::make_shared<DxModel::FbxStaticMesh>();
-	m_stage->LoadFBX("ModelData/models/STAGEMODEL.fbx", DxFbx::FbxLoader::eAxisSystem::eAxisOpenGL);
-	m_stage->Initialize(m_camera->GetCamera().get(), "ModelData/textures/texture.jpg");
-	m_stage->Transform()._scale = Vector3(1.0f, 1.0f, -1.0f);
+	m_stage = std::make_shared<FbxStaticModel>();
+	m_stage->LoadFBX("ModelData/models/STAGEMODEL.fbx", eAxisSystem::eAxisOpenGL);
+	m_stage->SetCamera(m_camera->GetCamera().get());
+	m_stage->LoadTexture("ModelData/textures/texture.jpg");
+	m_stage->GetTransform()._scale = Vector3(1.0f, 1.0f, -1.0f);
 
-	m_positionCheck = std::make_shared<DxModel::Cube>();
-	m_positionCheck->Initialize(m_camera->GetCamera().get(),"ModelData/textures/cylinder_template.jpg");
-	m_positionCheck->Scaling(Vector3(50, 50, 50));
-	m_positionCheck->Translation(Vector3(-280.0f, -100.f, 185.0f));
+	m_positionCheckBoxTexture = std::make_shared<Texture>();
+	m_positionCheckBoxTexture->Load("ModelData/textures/cylinder_template.jpg");
+	m_positionCheck = std::make_shared<Cube>();
+	m_positionCheck->Initialize();
+	m_positionCheck->SetCamera(m_camera->GetCamera().get());
+	m_positionCheck->SetTexture(m_positionCheckBoxTexture.get());
+	m_positionCheck->GetTransform()._scale = Vector3(50, 50, 50);
+	m_positionCheck->GetTransform()._translation=Vector3(-280.0f, -100.f, 185.0f);
 
 	m_rock = std::make_shared<RockManager>();
 	m_rock->Initialize(m_camera->GetCamera().get());
 
-	HINSTANCE hInstance = GetModuleHandle(NULL);
-	DxController::GameController::Create(hInstance, hWnd);
-
-	return;
+	return true;
 }
 
 
-void SceneGame::Updata(){
-	DxController::GameController::GetPointer()->Frame();
+bool SceneGame::Updater(){
+	GameController::GetPointer()->Frame();
 
-	if (DxController::GameController::GetPointer()->IsKeyDown(DIK_W))
+	if (GameController::GetPointer()->IsKeyDown(DIK_W))
 	{
-		m_positionCheck->Translation()._z += 1;
+		m_positionCheck->GetTransform()._translation._z += 1;
 	}
 
-	if (DxController::GameController::GetPointer()->IsKeyDown(DIK_S))
+	if (GameController::GetPointer()->IsKeyDown(DIK_S))
 	{
-		m_positionCheck->Translation()._z -= 1;
-	}
-
-
-	if (DxController::GameController::GetPointer()->IsKeyDown(DIK_A))
-	{
-		m_positionCheck->Translation()._x += 1;
+		m_positionCheck->GetTransform()._translation._z -= 1;
 	}
 
 
-	if (DxController::GameController::GetPointer()->IsKeyDown(DIK_D))
+	if (GameController::GetPointer()->IsKeyDown(DIK_A))
 	{
-		m_positionCheck->Translation()._x -= 1;
+		m_positionCheck->GetTransform()._translation._x += 1;
 	}
 
-	if (DxController::GameController::GetPointer()->IsKeyDown(DIK_Q))
+
+	if (GameController::GetPointer()->IsKeyDown(DIK_D))
 	{
-		m_positionCheck->Translation()._y += 1;
+		m_positionCheck->GetTransform()._translation._x -= 1;
 	}
 
-	if (DxController::GameController::GetPointer()->IsKeyDown(DIK_E))
+	if (GameController::GetPointer()->IsKeyDown(DIK_Q))
 	{
-		m_positionCheck->Translation()._y -= 1;
+		m_positionCheck->GetTransform()._translation._y += 1;
 	}
 
-	/*std::cout << "X :" << m_positionCheck->Translation()._x << "\t";
-	std::cout << "Y :" << m_positionCheck->Translation()._y << "\t";
-	std::cout << "Z :" << m_positionCheck->Translation()._z << std::endl;
+	if (GameController::GetPointer()->IsKeyDown(DIK_E))
+	{
+		m_positionCheck->GetTransform()._translation._y -= 1;
+	}
+
+	/*std::cout << "X :" << m_positionCheck->GetTransform()._translation._x << "\t";
+	std::cout << "Y :" << m_positionCheck->GetTransform()._translation._y << "\t";
+	std::cout << "Z :" << m_positionCheck->GetTransform()._translation._z << std::endl;
 */
 	if (m_player->IsChangeCamera())
 	{
@@ -110,23 +120,23 @@ void SceneGame::Updata(){
 		m_rock->Update();
 	}
 	
-	return;
+	return true;
 }
 
 
 void SceneGame::Render(){
 
 	m_camera->Render();
-	m_stage->AllNodeRender(m_lightshader, DxModel::eRenderWay::eTexture);
+	m_stage->Render(m_lightshader.get());
 
 	m_player->Render(m_shader);
 	
-	m_rock->Render(m_shader, DxModel::eRenderWay::eTexture);
+	m_rock->Render(m_shader);
 //	m_positionCheck->Render(m_shader, DxModel::eRenderWay::eTexture);
 	return;
 }
 
-void SceneGame::Shutdown(){
+void SceneGame::Finalize(){
 
 	return;
 }

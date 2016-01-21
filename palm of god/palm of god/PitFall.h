@@ -1,7 +1,7 @@
 #ifndef _PITFALL_H
 #define _PITFALL_H
 
-#include "ModelBase.h"
+#include <ModelBase.h>
 
 
 /*///////////////////
@@ -11,7 +11,7 @@
 
 namespace Pitfall{
 	class PitFall :
-		public DxModel::ModelBase
+		public aetherClass::ModelBase
 	{
 	public:
 		PitFall() = default;
@@ -22,7 +22,7 @@ namespace Pitfall{
 
 	private:
 		bool InitializeBuffers()override;
-		void ShutdownBuffers()override;
+		void FinalizeBuffers()override;
 		void RenderBuffers()override;
 
 	};

@@ -1,9 +1,6 @@
 #ifndef _CAMERAMANAGER_H
 #define _CAMERAMANAGER_H
-#include <d3d11.h>
-#include <D3DX11.h>
-#include <D3D10.h>
-#include <D3DX10.h>
+
 #include <ViewCamera.h>
 #include <memory>
 #include <Vector3.h>
@@ -17,8 +14,8 @@ class CameraManager
 
 	struct CameraPropaty
 	{
-	     DxMath::Vector3 m_changeCameraTranslationArray;
-		 DxMath::Vector3 m_changeCameraRotationArray;
+	     aetherClass::Vector3 m_changeCameraTranslationArray;
+		 aetherClass::Vector3 m_changeCameraRotationArray;
 
 	};
 
@@ -29,13 +26,13 @@ class CameraManager
 		void Initialize();
 		void Render();
 		void ChangeCamera(int);
-		std::shared_ptr<DxCamera::ViewCamera>& GetCamera();
+		std::shared_ptr<aetherClass::ViewCamera>& GetCamera();
 
 		void NextCameraSet();
 		
 	private:
 	    
-		std::shared_ptr<DxCamera::ViewCamera> m_camera;
+		std::shared_ptr<aetherClass::ViewCamera> m_camera;
 		int m_cameraID;
 		static CameraPropaty m_propaty[];
 };

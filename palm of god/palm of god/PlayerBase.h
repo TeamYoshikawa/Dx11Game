@@ -31,8 +31,8 @@ class PlayerBase
 				_speed = 0.0f;
 				_nextMoveDirection = 0.0f;
 			}
-			DxMath::Vector3 _vector;
-			DxMath::Vector3 _nextMoveDirection;
+			aetherClass::Vector3 _vector;
+			aetherClass::Vector3 _nextMoveDirection;
 			ePlayerMoveState _moveState;
 			float _speed;
 			int _navigationID;

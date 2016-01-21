@@ -5,7 +5,6 @@
 #include"Spear.h"
 #include <ShaderBase.h>
 #include <ModelBase.h>
-#include <FbxStaticMesh.h>
 
 /*
      
@@ -21,7 +20,7 @@ public:
 	~SpearRender();
 
 	
-	void Renderring(DxModel::Cube*, std::shared_ptr<DxShader::ShaderBase>, DxModel::eRenderWay);
+	void Renderring(aetherClass::ModelBase*, std::shared_ptr<aetherClass::ShaderBase>);
 	void Initialize();
 
 };

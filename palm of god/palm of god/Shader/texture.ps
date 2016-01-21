@@ -1,34 +1,23 @@
 
 // Global
-Texture2D shaderTexture;
-SamplerState SampleType;
-
-cbuffer Material:register(b0)
-{
-	float4 ambient;
-	float4 diffuse;
-	float4 emmisive;
-	float3 specular;
-	float power;
+Texture2D shaderTexture : register(t0);
+SamplerState SampleType : register(s0);
 	
-}
 // Typedef
 struct PixelInputType
 {
     float4 position : SV_POSITION;
-	float4 color : COLOR;
-    float2 tex : TEXCOORD0;
+	float2 tex : TEXCOORD0;
+	float3 normal : NORMAL;
 };
 
 
 
-float4 main(PixelInputType input) : SV_TARGET
+float4 ps_main(PixelInputType input) : SV_TARGET
 {
-	//float4 textureColor;
+	float4 output;
 
-
-    // Sample the pixel color from the texture using the sampler at this texture coordinate location.
-    return shaderTexture.Sample(SampleType, input.tex);
-
-    //return textureColor;
+	output = shaderTexture.Sample(SampleType, input.tex);
+	return output;
+    
 }
