@@ -11,13 +11,95 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CameraMAnager.cpp" />
     <ClCompile Include="Entry.cpp" />
     <ClCompile Include="GutioScene.cpp" />
     <ClCompile Include="HirokiScene.cpp" />
+    <ClCompile Include="PitFall.cpp" />
+    <ClCompile Include="PitFallLib.cpp" />
+    <ClCompile Include="PitFallManager.cpp" />
+    <ClCompile Include="PitFallRender.cpp" />
+    <ClCompile Include="PitFallUpdater.cpp" />
+    <ClCompile Include="PlayerBase.cpp" />
+    <ClCompile Include="PlayerManager.cpp" />
+    <ClCompile Include="PlayerNavigation.cpp" />
+    <ClCompile Include="PlayerRender.cpp" />
+    <ClCompile Include="PlayerUpdater.cpp" />
+    <ClCompile Include="Rock.cpp" />
+    <ClCompile Include="RockManager.cpp" />
+    <ClCompile Include="RockRender.cpp" />
+    <ClCompile Include="RockUpdater.cpp" />
+    <ClCompile Include="SceneGame.cpp" />
+    <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="SceneTitle.cpp" />
+    <ClCompile Include="Spear.cpp" />
+    <ClCompile Include="SpearManager.cpp" />
+    <ClCompile Include="SpearRender.cpp" />
+    <ClCompile Include="SpearUpdater.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CameraMAnager.h" />
     <ClInclude Include="GutioScene.h" />
     <ClInclude Include="HirokiScene.h" />
+    <ClInclude Include="PitFall.h" />
+    <ClInclude Include="PitFallLib.h" />
+    <ClInclude Include="PitFallManager.h" />
+    <ClInclude Include="PitFallRender.h" />
+    <ClInclude Include="PitFallUpdater.h" />
+    <ClInclude Include="PlayerBase.h" />
+    <ClInclude Include="PlayerManager.h" />
+    <ClInclude Include="PlayerNavigation.h" />
+    <ClInclude Include="PlayerRender.h" />
+    <ClInclude Include="PlayerUpdater.h" />
+    <ClInclude Include="Rock.h" />
+    <ClInclude Include="RockManager.h" />
+    <ClInclude Include="RockRender.h" />
+    <ClInclude Include="RockUpdater.h" />
+    <ClInclude Include="SceneBase.h" />
+    <ClInclude Include="SceneGame.h" />
+    <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="SceneTitle.h" />
+    <ClInclude Include="Spear.h" />
+    <ClInclude Include="SpearManager.h" />
+    <ClInclude Include="SpearRender.h" />
+    <ClInclude Include="SpearUpdater.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ModelData\models\BoxUnityChan.fbx" />
+    <None Include="ModelData\models\Box_Sample.fbx" />
+    <None Include="ModelData\models\Chips.fbx" />
+    <None Include="ModelData\models\Creepar.fbx" />
+    <None Include="ModelData\models\mario.fbx" />
+    <None Include="ModelData\models\model1.fbx" />
+    <None Include="ModelData\models\player5.fbx" />
+    <None Include="ModelData\models\sotai.fbx" />
+    <None Include="ModelData\models\stage.fbx" />
+    <None Include="ModelData\models\STAGEMODEL.FBX" />
+    <None Include="ModelData\models\testmodel.fbx" />
+    <None Include="ModelData\models\unitychan.fbx" />
+    <None Include="ModelData\models\zombie_idle.fbx" />
+    <None Include="Shader\color.ps" />
+    <None Include="Shader\color.vs" />
+    <None Include="Shader\texture.ps" />
+    <None Include="Shader\texture.vs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ModelData\models\sphere.txt" />
+    <Text Include="ModelData\README.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="ModelData\textures\button.jpg" />
+    <Image Include="ModelData\textures\Chips_Cover.jpg" />
+    <Image Include="ModelData\textures\cocoa.jpg" />
+    <Image Include="ModelData\textures\cylinder_template.jpg" />
+    <Image Include="ModelData\textures\seafloor.dds" />
+    <Image Include="ModelData\textures\tex.png" />
+    <Image Include="ModelData\textures\texture.jpg" />
+    <Image Include="ModelData\textures\tiles.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Shader\DiffuseLightPS.hlsl" />
+    <FxCompile Include="Shader\DiffuseLightVS.hlsl" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{19B50B42-F217-48B8-8014-35CD274AD1C3}</ProjectGuid>

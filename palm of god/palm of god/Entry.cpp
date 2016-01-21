@@ -21,12 +21,12 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, LPSTR, INT){
 	// 独自に作成したフレームオブジェクトのオブジェクトを作成
 	GameFrame* frame = new GameFrame();
 	// 初期化
-	entry->Initialize(false, L"Sample");
+	entry->Initialize(false, L"Palm of God");
 	frame->Initialize(*entry->GetWindowHandle());
 
 	// この関数を呼び出すことによって、画面の背景色の変更ができる
 	// デフォルトの設定では黒が設定されている
-	frame->BackgroundColor(Color(0.3f, 0.4f, 0.2f, 1.0f));
+	frame->BackgroundColor(Color(0.0f, 0.0f, 0.0f, 1.0f));
 	
 	// エントリークラスにメインループに使うFrameオブジェクトを設定
 	entry->SetGameFrame(frame);
