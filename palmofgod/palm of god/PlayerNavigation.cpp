@@ -24,6 +24,7 @@ PlayerNavigation::~PlayerNavigation()
 
 void PlayerNavigation::Initialize(std::shared_ptr<ViewCamera> camera){
 
+	m_texture = std::make_shared <Texture>();
 	m_texture->Load("ModelData/textures/cylinder_template.jpg");
 	m_navigationBox = std::make_shared<Cube>();
 	m_navigationBox->Initialize();

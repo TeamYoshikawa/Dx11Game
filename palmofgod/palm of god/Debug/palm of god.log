@@ -1,8 +1,8 @@
-﻿2016/01/22 0:02:53 にビルドを開始しました。
-     1>ノード 2 上のプロジェクト "C:\Users\nwuser.DA\Desktop\TeamYoshikawa\Dx11Game\palm of god\palm of god\palm of god.vcxproj" (Build ターゲット)。
+﻿2016/01/22 10:43:29 にビルドを開始しました。
+     1>ノード 2 上のプロジェクト "C:\Users\nwuser.DA\Desktop\palmofgod\palm of god\palm of god.vcxproj" (Build ターゲット)。
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\FBX\FBX SDK\2015.1\include" /IC:\Aether\Includes /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt RockManager.cpp
-         RockManager.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\FBX\FBX SDK\2015.1\include" /IC:\Aether\Includes /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt SceneGame.cpp
+         SceneGame.cpp
      1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(12): warning C4005: 'DXGI_STATUS_OCCLUDED' : マクロが再定義されました。
                  c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50092) : 'DXGI_STATUS_OCCLUDED' の前の定義を確認してください
      1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(13): warning C4005: 'DXGI_STATUS_CLIPPED' : マクロが再定義されました。
@@ -62,20 +62,26 @@
      1>c:\aether\includes\vector3.h(112): warning C4521: 'aetherClass::Vector3' : 複数のコピー コンストラクターが指定されています。
      1>c:\aether\includes\vector3.h(112): warning C4522: 'aetherClass::Vector3' : 複数の代入演算子が指定されています。
      1>c:\aether\includes\vector4.h(126): warning C4522: 'aetherClass::Vector4' : 複数の代入演算子が指定されています。
-     1>c:\program files (x86)\microsoft visual studio 12.0\vc\include\memory(932): error C2512: 'aetherClass::Sphere' : クラス、構造体、共用体に既定のコンストラクターがありません。
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\memory(1003) : コンパイルされたクラスの テンプレート のインスタンス化 'std::_Ref_count_obj<_Ty>::_Ref_count_obj<>(void)' の参照を確認してください
-                 with
-                 [
-                     _Ty=aetherClass::Sphere
-                 ]
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\memory(1003) : コンパイルされたクラスの テンプレート のインスタンス化 'std::_Ref_count_obj<_Ty>::_Ref_count_obj<>(void)' の参照を確認してください
-                 with
-                 [
-                     _Ty=aetherClass::Sphere
-                 ]
-                 c:\users\nwuser.da\desktop\teamyoshikawa\dx11game\palm of god\palm of god\rockmanager.cpp(10) : コンパイルされたクラスの テンプレート のインスタンス化 'std::shared_ptr<aetherClass::Sphere> std::make_shared<aetherClass::Sphere,>(void)' の参照を確認してください
-     1>プロジェクト "C:\Users\nwuser.DA\Desktop\TeamYoshikawa\Dx11Game\palm of god\palm of god\palm of god.vcxproj" (Build ターゲット) のビルドが終了しました -- 失敗。
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\nwuser.DA\Desktop\palmofgod\Debug\palm of god.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\FBX\FBX SDK\2015.1\lib\vs2013\x86\debug" /LIBPATH:C:\Aether\Lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\nwuser.DA\Desktop\palmofgod\Debug\palm of god.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\nwuser.DA\Desktop\palmofgod\Debug\palm of god.lib" /MACHINE:X86 Debug\CameraMAnager.obj
+         Debug\Entry.obj
+         Debug\PitFall.obj
+         Debug\PitFallLib.obj
+         Debug\PitFallManager.obj
+         Debug\PitFallRender.obj
+         Debug\PitFallUpdater.obj
+         Debug\PlayerBase.obj
+         Debug\PlayerManager.obj
+         Debug\PlayerNavigation.obj
+         Debug\PlayerRender.obj
+         Debug\PlayerUpdater.obj
+         Debug\RockManager.obj
+         Debug\RockRender.obj
+         Debug\RockUpdater.obj
+         Debug\SceneGame.obj
+         palm of god.vcxproj -> C:\Users\nwuser.DA\Desktop\palmofgod\Debug\palm of god.exe
+     1>プロジェクト "C:\Users\nwuser.DA\Desktop\palmofgod\palm of god\palm of god.vcxproj" (Build ターゲット) のビルドが完了しました。
 
-ビルドに失敗しました。
+ビルドに成功しました。
 
-経過時間 00:00:01.46
+経過時間 00:00:02.76

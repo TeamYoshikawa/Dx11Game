@@ -48,7 +48,7 @@ bool SceneGame::Initialize(){
 	m_stage = std::make_shared<FbxStaticModel>();
 	m_stage->LoadFBX("ModelData/models/STAGEMODEL.fbx", eAxisSystem::eAxisOpenGL);
 	m_stage->SetCamera(m_camera->GetCamera().get());
-	m_stage->LoadTexture("ModelData/textures/texture.jpg");
+	
 	m_stage->GetTransform()._scale = Vector3(1.0f, 1.0f, -1.0f);
 
 	m_positionCheckBoxTexture = std::make_shared<Texture>();
