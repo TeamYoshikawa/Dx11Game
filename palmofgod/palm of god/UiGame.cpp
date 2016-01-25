@@ -109,17 +109,15 @@ void UiGame::Update()
 	std::cout <<  "‚²‚İ:"<< location->GetTransform()._translation._y << std::endl;
 
 	if (location->GetTransform()._translation._y > 907.0f){
+
+		//heart->Finalize();
+		//heart.reset();
 		flag = ON;
 
 
 	}
 	if (flag == OFF){
-
-		//heart->Finalize();
-		//heart.reset();
-
-
-		location->GetTransform()._translation._y += 0.01f;
+		location->GetTransform()._translation._y += 0.1f;
 	}
 
 
@@ -134,7 +132,10 @@ void UiGame::Render(){
 	start->Render(m_shader.get());
 	goal->Render(m_shader.get());
 	road->Render(m_shader.get());
-	heart->Render(m_shader.get());
+	if (heart){
+		std::cout << "ŒÄ‚Î‚ê‚½\n";
+		heart->Render(m_shader.get());
+	}
 	heart1->Render(m_shader.get());
 	heart2->Render(m_shader.get());
 

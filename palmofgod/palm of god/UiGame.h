@@ -11,8 +11,6 @@
 
 #include"PixelShader.h"
 #include"ViewCamera.h"
-#include"UiCamera.h"
-
 
 #define ON 1
 #define OFF 0
@@ -34,7 +32,7 @@ private:
 
 	std::shared_ptr<aetherClass::PixelShader> m_shader;
 
-	std::shared_ptr<UiRender>m_render;
+	
 
 
 
