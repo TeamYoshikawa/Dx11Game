@@ -7,10 +7,20 @@ std::shared_ptr<aetherClass::Texture> PlayerNavigation::m_texture = nullptr;
 int PlayerNavigation::m_navigationID = 0;
 // ナビげーション用の位置
 Vector3 PlayerNavigation::m_navigationBoxPosition[] = {
-	{ Vector3(320.0f, -100.f, 200.0f) },
-	{ Vector3(1265.0f, -100.f, 251.0f) },
-	{ Vector3(2200.0f, -100.f, 100.0f) },
-	{ Vector3(2555.0f, -100.f, 100.0f) }
+	{ Vector3(700.0f, 100.f, 750.0f) },
+	{ Vector3(1265.0f, 100.f, 700.0f) },
+	{ Vector3(2200.0f, 100.f, 650.0f) },
+	{ Vector3(2400.0f, 100.f, 650.0f) },
+	{ Vector3(2800.0f, 100.f, 700.0f) },
+	{ Vector3(2800.0f, 100.f, 2200.0f) },
+	{ Vector3(4100.0f, 100.f, 2200.0f) },
+	{ Vector3(5500.0f, 100.f, 2200.0f) },
+	{ Vector3(5500.0f, 100.f, 650.0f) },
+	{ Vector3(7200.0f, 100.f, 650.0f) },
+	{ Vector3(8750.0f, 100.f, 700.0f) },
+	{ Vector3(8750.0f, 100.f, 2150.0f) },
+	{ Vector3(9300.0f, 100.f, 2150.0f) }
+	
 };
 
 PlayerNavigation::PlayerNavigation()

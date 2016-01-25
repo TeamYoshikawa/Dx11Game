@@ -37,6 +37,7 @@ class CameraManager
 			eID12,
 			eID13,
 			eID14,
+			eID15,
 			eNULL
 		};
 

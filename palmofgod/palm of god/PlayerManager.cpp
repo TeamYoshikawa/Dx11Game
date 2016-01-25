@@ -23,7 +23,7 @@ bool PlayerManager::Initialize(const std::shared_ptr<ViewCamera> camera){
 	m_playerObject = std::make_shared<FbxModel>();
 	m_playerObject->LoadFBX("ModelData/models/player5.fbx",eAxisSystem::eAxisOpenGL);
 	m_playerObject->SetCamera(camera.get());
-	m_playerObject->GetTransform()._translation = Vector3(-280.0f, -100.f, 185.0f);
+	m_playerObject->GetTransform()._translation = Vector3(-100.0f, 100.0f, 670.0f);
 	m_playerObject->GetTransform()._scale = Vector3(1.f, -1.f, 1.f);
 	
 	m_navigation = std::make_unique<PlayerNavigation>();
@@ -61,7 +61,7 @@ void PlayerManager::Render(const std::shared_ptr<ShaderBase> shader){
 void PlayerManager::Update(float frame){
 	// 現在のナビゲーションの場所を取得
 	Status()._navigationID = m_navigation->GetNavigationID();
-	if (m_navigation->GetNavigationID() == 3)
+	if (m_navigation->GetNavigationID() == 13)
 	{
 		return;
 	}
