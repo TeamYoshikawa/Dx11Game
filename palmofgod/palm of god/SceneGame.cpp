@@ -60,9 +60,14 @@ bool SceneGame::Initialize(){
 	m_player->Initialize(m_camera->GetCamera());
 
 	m_stage = std::make_shared<FbxModel>();
-	m_stage->LoadFBX("ModelData/models/STAGEMODEL.fbx", eAxisSystem::eAxisOpenGL);
+	m_stage->LoadFBX("ModelData/models/abcd.fbx", eAxisSystem::eAxisOpenGL);
 	m_stage->SetCamera(m_camera->GetCamera().get());
 	m_stage->GetTransform()._scale = Vector3(1.0f, 1.0f, -1.0f);
+
+
+	m_stage->SetModelMaterialColor(Color(0.2, 0.0, 0.2, 1), eMatrerialType::eAmbient);
+	m_stage->SetModelMaterialColor(Color(1, 1, 1, 1.0), eMatrerialType::eDiffuse);
+	m_stage->SetModelMaterialColor(Color(1, 0, 0, 1.0), eMatrerialType::eSpecular);
 
 	m_positionCheckBoxTexture = std::make_shared<Texture>();
 	m_positionCheckBoxTexture->Load("ModelData/textures/cylinder_template.jpg");
@@ -98,45 +103,52 @@ bool SceneGame::Initialize(){
 bool SceneGame::Updater(){
 	GameController::GetPointer()->Frame();
 	
-
+	
 	m_ui->Update();
 
-	if (GameController::GetPointer()->IsKeyDown(DIK_W))
+	if (GameController::GetPointer()->IsKeyDown(DIK_UP))
 	{
-		m_lightmanager->GetLight()->Translation()._z += 1;
+		m_lightmanager->GetLight()->Translation()._z += 10;
 	}
 
-	if (GameController::GetPointer()->IsKeyDown(DIK_S))
+	if (GameController::GetPointer()->IsKeyDown(DIK_DOWN))
 	{
-		m_lightmanager->GetLight()->Translation()._z -= 1;
-	}
-
-
-	if (GameController::GetPointer()->IsKeyDown(DIK_A))
-	{
-		m_lightmanager->GetLight()->Translation()._x += 1;
+		m_lightmanager->GetLight()->Translation()._z -= 10;
 	}
 
 
-	if (GameController::GetPointer()->IsKeyDown(DIK_D))
+	if (GameController::GetPointer()->IsKeyDown(DIK_LEFT))
 	{
-		m_lightmanager->GetLight()->Translation()._x -= 1;
+		m_lightmanager->GetLight()->Translation()._x += 10;
+	}
+
+
+	if (GameController::GetPointer()->IsKeyDown(DIK_RIGHT))
+	{
+		m_lightmanager->GetLight()->Translation()._x -= 10;
 	}
 
 	if (GameController::GetPointer()->IsKeyDown(DIK_Q))
 	{
-		m_lightmanager->GetLight()->Translation()._y += 1;
+		m_lightmanager->GetLight()->Translation()._y += 10;
 
 	}
 
 	if (GameController::GetPointer()->IsKeyDown(DIK_E))
 	{
-		m_lightmanager->GetLight()->Translation()._y -= 1;
+		m_lightmanager->GetLight()->Translation()._y -= 10;
 	}
 
 	if (GameController::GetPointer()->IsRightButtonTrigger())
 	{
 		m_camera->NextCameraSet();
+	}
+
+	if (GameController::GetPointer()->IsKeyDown(DIK_4)){
+		m_stage->GetTransform()._translation._x -= 10;
+	}
+	if (GameController::GetPointer()->IsKeyDown(DIK_6)){
+		m_stage->GetTransform()._translation._x += 10;
 	}
 
 	/*std::cout << "X :" << m_positionCheck->GetTransform()._translation._x << "\t";
@@ -161,6 +173,7 @@ bool SceneGame::Updater(){
 	
 	Vector3 translation = m_cube->GetTransform()._translation;
 	printf("%f,%f,%f\n\n", translation._x, translation._y, translation._z);
+
 	return true;
 }
 
@@ -175,7 +188,7 @@ void SceneGame::Render(){
 
 	m_player->Render(m_shader);
 	m_cube->Render(m_lightshader.get());
-	m_rock->Render(m_shader);
+//	m_rock->Render(m_shader);
 	//->Render(m_shader);
 //	m_positionCheck->Render(m_shader, DxModel::eRenderWay::eTexture);
 	return;
