@@ -3,12 +3,14 @@
 #define _SPEARMANAGER_H_
 
 
-#include"Spear.h"
+//#include"Spear.h"
 #include"SpearRender.h"
 #include"SpearUpdater.h"
 #include<memory>
 #include<ViewCamera.h>
 #include<GameController.h>
+#include<Cube.h>
+#include<Texture.h>
 
 /*
    ‘„‚ÌŠÇ—ƒNƒ‰ƒX
@@ -30,11 +32,12 @@
 class SpearManager
 {
 private:
-	std::shared_ptr<Spear>m_spear[3];
-	std::shared_ptr<Spear>m_floor;
+	std::shared_ptr<aetherClass::Cube>m_spear;
+	//std::shared_ptr<Spear>m_floor;
+	std::shared_ptr<aetherClass::Texture>m_spearTexture;
 
-	std::shared_ptr<SpearRender>m_spearRender;
-	std::shared_ptr<SpearUpdater>m_spearUpdater;
+	std::shared_ptr<n_Spear::SpearRender>m_spearRender;
+	std::shared_ptr<n_Spear::SpearUpdater>m_spearUpdater;
 
 
 	

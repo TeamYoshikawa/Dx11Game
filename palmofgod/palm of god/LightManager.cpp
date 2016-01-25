@@ -1,5 +1,5 @@
 #include "LightManager.h"
-
+#include"Cube.h"
 #include <iostream>
 
 using namespace aetherClass;
@@ -17,7 +17,7 @@ LightManager::~LightManager()
 {
 }
 
-#include"Cube.h"
+
 std::shared_ptr<aetherClass::Cube>m_cubed;
 void LightManager::Initialize()
 {

@@ -2,7 +2,7 @@
 #include <GameController.h>
 #include <iostream>
 #include <PixelShader.h>
-#include "FbxStaticModel.h"
+
 using namespace aetherClass;
 const std::string SceneGame::m_thisName = "Game";
 SceneGame::SceneGame() :
@@ -41,19 +41,21 @@ bool SceneGame::Initialize(){
 	material._specular._color = Color(1, 0, 0, 1);
 	material._specularPower = 4;// _color = Color(1, 0, 0, 1);
 	m_cube->GetMaterial() = material;
-	/*
+	
 	m_light = std::make_shared<Light>();
 	m_light->Translation() = Vector3(-50, 50, -50);
+	m_lightshader = std::make_shared<MaterialShader>();
 	m_lightshader->SetLight(m_light.get());
-	*/
+	
 
-	m_stagemanager = std::make_shared<StageManager>();
+	//m_stagemanager = std::make_shared<StageManager>();
+	m_stagemanager = std::make_shared<LightManager>();
 	m_stagemanager->Initialize();
 
 	m_player = std::make_shared<PlayerManager>();
 	m_player->Initialize(m_camera->GetCamera());
 
-	m_stage = std::make_shared<FbxStaticModel>();
+	m_stage = std::make_shared<FbxModel>();
 	m_stage->LoadFBX("ModelData/models/STAGEMODEL.fbx", eAxisSystem::eAxisOpenGL);
 	m_stage->SetCamera(m_camera->GetCamera().get());
 	m_stage->GetTransform()._scale = Vector3(1.0f, 1.0f, -1.0f);
@@ -69,6 +71,10 @@ bool SceneGame::Initialize(){
 
 	m_rock = std::make_shared<RockManager>();
 	m_rock->Initialize(m_camera->GetCamera().get());
+
+	m_spear = std::make_shared<SpearManager>();
+	m_spear->Initialize(m_camera->GetCamera().get());
+
 
 	m_lightshader = std::make_shared<MaterialShader>();
 	ShaderDesc lightDesc;
@@ -154,6 +160,7 @@ void SceneGame::Render(){
 	m_player->Render(m_shader);
 	m_cube->Render(m_lightshader.get());
 	m_rock->Render(m_shader);
+	//->Render(m_shader);
 //	m_positionCheck->Render(m_shader, DxModel::eRenderWay::eTexture);
 	return;
 }

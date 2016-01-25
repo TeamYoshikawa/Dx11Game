@@ -1,7 +1,7 @@
 #include "PlayerUpdater.h"
 #include <memory>
 #include <ModelBase.h>
-#include <FbxStaticModel.h>
+#include <FbxModel.h>
 #include <MathUtility.h>
 #include <iostream>
 using namespace aetherClass;
@@ -37,7 +37,7 @@ void PlayerUpdater::SendStatus(PlayerBase::PlayerStatus&){
 	return;
 }
 
-void PlayerUpdater::Updating(const std::shared_ptr<FbxStaticModel>& playerObject, float frame){
+void PlayerUpdater::Updating(const std::shared_ptr<FbxModel>& playerObject, float frame){
 
 	// 移動の処理
 	playerObject->GetTransform()._translation += SendStatus()._nextMoveDirection / 500;
@@ -46,7 +46,7 @@ void PlayerUpdater::Updating(const std::shared_ptr<FbxStaticModel>& playerObject
 }
 
 // 指定されたオブジェクトに向かって追いかける
-void PlayerUpdater::FaceTheObject(const std::shared_ptr<FbxStaticModel>& player, const std::shared_ptr<ModelBase>& object){
+void PlayerUpdater::FaceTheObject(const std::shared_ptr<FbxModel>& player, const std::shared_ptr<ModelBase>& object){
 	SendStatus()._nextMoveDirection = object->GetTransform()._translation- player->GetTransform()._translation;
 
 	float rad = atan2(SendStatus()._nextMoveDirection._x, SendStatus()._nextMoveDirection._z);
@@ -56,14 +56,14 @@ void PlayerUpdater::FaceTheObject(const std::shared_ptr<FbxStaticModel>& player,
 }
 
 
-bool PlayerUpdater::HittingProcessor(const std::shared_ptr<FbxStaticModel>& player, const std::shared_ptr<ModelBase>& other){
+bool PlayerUpdater::HittingProcessor(const std::shared_ptr<FbxModel>& player, const std::shared_ptr<ModelBase>& other){
 
 	// TODO: 当たったかを調べる条件式を記載
 	return true;
 }
 
 
-bool PlayerUpdater::HittingProcessor(const std::shared_ptr<aetherClass::FbxStaticModel>&){
+bool PlayerUpdater::HittingProcessor(const std::shared_ptr<aetherClass::FbxModel>&){
 
 	return true;
 }

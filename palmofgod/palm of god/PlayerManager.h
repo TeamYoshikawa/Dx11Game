@@ -10,7 +10,7 @@
 #include "PlayerUpdater.h"
 #include "PlayerRender.h"
 #include "PlayerNavigation.h"
-#include <FbxStaticModel.h>
+#include <FbxModel.h>
 #include <Texture.h>
 #include <memory>
 class PlayerManager
@@ -29,7 +29,7 @@ class PlayerManager
 
 		// 外部オブジェクトとの当たり判定用
 		bool HitMesh(const std::shared_ptr<aetherClass::ModelBase>&);
-		bool HitMesh(const std::shared_ptr<aetherClass::FbxStaticModel>&);
+		bool HitMesh(const std::shared_ptr<aetherClass::FbxModel>&);
 
 		void NextSerch();
 
@@ -43,7 +43,7 @@ class PlayerManager
 		std::unique_ptr<PlayerUpdater> m_updater;		// プレイヤーの更新オブジェクト
 		std::unique_ptr<PlayerRender> m_render;	        // プレイヤーの描画オブジェくト
 		std::shared_ptr<aetherClass::Texture> m_collideTexture;
-		std::shared_ptr<aetherClass::FbxStaticModel> m_playerObject; // プレイヤーのモデルオブジェクト
+		std::shared_ptr<aetherClass::FbxModel> m_playerObject; // プレイヤーのモデルオブジェクト
 		std::shared_ptr<aetherClass::ModelBase> m_collideBox;	// 実際に当たり判定を行うオブジェクト
 
 		bool m_isCahngeCamera;		// カメラを切り替えるフラグ

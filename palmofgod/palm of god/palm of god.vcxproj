@@ -13,6 +13,7 @@
   <ItemGroup>
     <ClCompile Include="CameraMAnager.cpp" />
     <ClCompile Include="Entry.cpp" />
+    <ClCompile Include="LightManager.cpp" />
     <ClCompile Include="PitFall.cpp" />
     <ClCompile Include="PitFallLib.cpp" />
     <ClCompile Include="PitFallManager.cpp" />
@@ -23,13 +24,19 @@
     <ClCompile Include="PlayerNavigation.cpp" />
     <ClCompile Include="PlayerRender.cpp" />
     <ClCompile Include="PlayerUpdater.cpp" />
+    <ClCompile Include="Rock.cpp" />
     <ClCompile Include="RockManager.cpp" />
     <ClCompile Include="RockRender.cpp" />
     <ClCompile Include="RockUpdater.cpp" />
     <ClCompile Include="SceneGame.cpp" />
+    <ClCompile Include="Spear.cpp" />
+    <ClCompile Include="SpearManager.cpp" />
+    <ClCompile Include="SpearRender.cpp" />
+    <ClCompile Include="SpearUpdater.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CameraMAnager.h" />
+    <ClInclude Include="LightManager.h" />
     <ClInclude Include="PitFall.h" />
     <ClInclude Include="PitFallLib.h" />
     <ClInclude Include="PitFallManager.h" />
@@ -40,10 +47,18 @@
     <ClInclude Include="PlayerNavigation.h" />
     <ClInclude Include="PlayerRender.h" />
     <ClInclude Include="PlayerUpdater.h" />
+    <ClInclude Include="Rock.h" />
     <ClInclude Include="RockManager.h" />
     <ClInclude Include="RockRender.h" />
     <ClInclude Include="RockUpdater.h" />
+    <ClInclude Include="SceneBase.h" />
     <ClInclude Include="SceneGame.h" />
+    <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="SceneTitle.h" />
+    <ClInclude Include="Spear.h" />
+    <ClInclude Include="SpearManager.h" />
+    <ClInclude Include="SpearRender.h" />
+    <ClInclude Include="SpearUpdater.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ModelData\models\BoxUnityChan.fbx" />
@@ -79,18 +94,20 @@
     <Image Include="ModelData\textures\tiles.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="Shader\DiffuseLightPS.hlsl">
-      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">ps_main</EntryPointName>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
-      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">ps_main</EntryPointName>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
-    </FxCompile>
-    <FxCompile Include="Shader\DiffuseLightVS.hlsl">
-      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">vs_main</EntryPointName>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
-      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">vs_main</EntryPointName>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
-    </FxCompile>
+    <None Include="Shader\DiffuseLightPS.hlsl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="Shader\DiffuseLightVS.hlsl">
+      <FileType>Document</FileType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shader\MaterialPS.hlsl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="Shader\MaterialVS.hlsl">
+      <FileType>Document</FileType>
+    </None>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{19B50B42-F217-48B8-8014-35CD274AD1C3}</ProjectGuid>
@@ -124,12 +141,9 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <LibraryPath>$(DXSDK_DIR)Lib\x86;$(LibraryPath)</LibraryPath>
-    <IncludePath>$(DXSDK_DIR)Include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(DXSDK_DIR)Include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(DXSDK_DIR)Lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -138,13 +152,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\FBX\FBX SDK\2015.1\include;C:\Aether\Includes;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files\Autodesk\FBX\FBX SDK\2015.1\include;C:\Users\nwuser.DA\Desktop\Git\Aether\Includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\FBX\FBX SDK\2015.1\lib\vs2013\x86\debug;C:\Aether\Lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Program Files\Autodesk\FBX\FBX SDK\2015.1\lib\vs2013\x86\debug;C:\Users\nwuser.DA\Desktop\Git\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -156,14 +170,14 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\FBX\FBX SDK\2015.1\include;C:\Aether\Includes;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files\Autodesk\FBX\FBX SDK\2015.1\include;C:\Users\nwuser.DA\Desktop\Git\Aether\Includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>C:\FBX\FBX SDK\2015.1\lib\vs2013\x86\release;C:\Aether\Lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Program Files\Autodesk\FBX\FBX SDK\2015.1\lib\vs2013\x86\debug;C:\Users\nwuser.DA\Desktop\Git\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>d3dxof.lib dxguid.lib d3dx9d.lib winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>

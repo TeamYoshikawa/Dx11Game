@@ -3,7 +3,8 @@
 #include "Cube.h"
 #include"Direct3DManager.h"
 
-class Spear
+class Spear:
+	public aetherClass::Cube
 {
 public:
 	Spear(){};

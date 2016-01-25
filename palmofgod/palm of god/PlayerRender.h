@@ -8,7 +8,7 @@
 #include "PlayerBase.h"
 #include <ShaderBase.h>
 #include <ModelBase.h>
-#include <FbxStaticModel.h>
+#include <FbxModel.h>
 class PlayerRender :
 	private PlayerBase
 {
@@ -21,7 +21,7 @@ class PlayerRender :
 		void Initialize()override; 
 		PlayerBase::PlayerStatus& SendStatus()override;
 		void SendStatus(PlayerBase::PlayerStatus&)override;
-		void Rendering(const std::shared_ptr<aetherClass::FbxStaticModel>, const std::shared_ptr<aetherClass::ShaderBase>);
+		void Rendering(const std::shared_ptr<aetherClass::FbxModel>, const std::shared_ptr<aetherClass::ShaderBase>);
 		bool PlayAnimation();
 	private:
 		void Destroy()override;

@@ -18,7 +18,7 @@ bool PlayerManager::Initialize(const std::shared_ptr<ViewCamera> camera){
 	m_render = std::make_unique<PlayerRender>();
 	m_render->Initialize();
 
-	m_playerObject = std::make_shared<FbxStaticModel>();
+	m_playerObject = std::make_shared<FbxModel>();
 	m_playerObject->LoadFBX("ModelData/models/player5.fbx",eAxisSystem::eAxisOpenGL);
 	m_playerObject->SetCamera(camera.get());
 	m_playerObject->GetTransform()._translation = Vector3(-280.0f, -100.f, 185.0f);
@@ -115,7 +115,7 @@ bool PlayerManager::HitMesh(const std::shared_ptr<ModelBase>& other){
 }
 
 // Fbx“¯Žm‚Ì“–‚½‚è”»’è—p
-bool PlayerManager::HitMesh(const std::shared_ptr<FbxStaticModel>&){
+bool PlayerManager::HitMesh(const std::shared_ptr<FbxModel>&){
 
 	return true;
 }

@@ -1,5 +1,5 @@
 #include "PlayerRender.h"
-#include <FbxStaticModel.h>
+#include <FbxModel.h>
 using namespace aetherClass;
 PlayerRender::PlayerRender()
 {
@@ -22,7 +22,7 @@ void PlayerRender::Destroy(){
 	return;
 }
 
-void PlayerRender::Rendering(const std::shared_ptr<FbxStaticModel> object, 
+void PlayerRender::Rendering(const std::shared_ptr<FbxModel> object, 
 	const std::shared_ptr<ShaderBase> shader){
 	
 	object->Render(shader.get());

@@ -2,26 +2,31 @@
 #ifndef _SPEARUPDATER_H_
 #define _SPEARUPDATER_H_
 
-#include"Spear.h"
+//#include"Spear.h"
 #include <memory>
 #include <ModelBase.h>
-class SpearUpdater
-{
-private:
-	//‘„‚Ì”ò‚Ño‚µ
-	void ButtonOn(aetherClass::ModelBase*);
-	//‘„‚Ìû”[
-	void ButtonOff(aetherClass::ModelBase*);
+//#include<Cube.h>
 
-	void operator =(const SpearUpdater &);
+namespace n_Spear{
+	class SpearUpdater
+	{
+	private:
+		//‘„‚Ì”ò‚Ño‚µ
+		void ButtonOn(aetherClass::ModelBase*);
+		//‘„‚Ìû”[
+		void ButtonOff(aetherClass::ModelBase*);
 
-public:
-	SpearUpdater();
-	~SpearUpdater();
+		void operator =(const SpearUpdater &);
 
-	void Updating(aetherClass::ModelBase*, bool buttonState);
+	public:
+		SpearUpdater();
+		~SpearUpdater();
+
+		void Updating(aetherClass::ModelBase*, bool buttonState);
 
 
-};
+	};
+
+}
 
 #endif

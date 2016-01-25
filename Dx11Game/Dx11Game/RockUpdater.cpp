@@ -8,7 +8,7 @@ RockUpdater::RockUpdater(){
 }
 
 //Update process
-void RockUpdater::Update(ModelBase *Rock, bool buttonState = false){
+void RockUpdater::Update(Cube *Rock, bool buttonState = false){
 	if (!Rock){
 		MessageBox(NULL, L"missing Object", ERROR, MB_OK);
 		return;
@@ -22,13 +22,13 @@ void RockUpdater::Update(ModelBase *Rock, bool buttonState = false){
 	
 }
 
-void RockUpdater::Open(ModelBase*Rock){
+void RockUpdater::Open(Cube*Rock){
 	
 	Rock->Translation()._y -= 0.0f;
 
 }
 
-void RockUpdater::Close(ModelBase*Rock){
+void RockUpdater::Close(Cube*Rock){
 
 	Rock->Translation()._y -= 0.3f;
 	

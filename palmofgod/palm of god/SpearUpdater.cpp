@@ -2,6 +2,7 @@
 #include<ModelBase.h>
 
 using namespace aetherClass;
+using namespace n_Spear;
 SpearUpdater::SpearUpdater(){}
 
 SpearUpdater::~SpearUpdater(){}

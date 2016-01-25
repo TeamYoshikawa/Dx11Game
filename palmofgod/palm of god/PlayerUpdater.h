@@ -9,7 +9,7 @@
 */
 #include "PlayerBase.h"
 #include <memory>
-#include <FbxStaticModel.h>
+#include <FbxModel.h>
 #include <ModelBase.h>
 
 class PlayerUpdater :
@@ -23,10 +23,10 @@ class PlayerUpdater :
 		void Initialize()override;
 		PlayerBase::PlayerStatus& SendStatus()override;
 		void SendStatus(PlayerBase::PlayerStatus&)override;
-		void Updating(const std::shared_ptr<aetherClass::FbxStaticModel>&, float);
-		void FaceTheObject(const std::shared_ptr<aetherClass::FbxStaticModel>&, const std::shared_ptr<aetherClass::ModelBase>&);
-		bool HittingProcessor(const std::shared_ptr<aetherClass::FbxStaticModel>&);
-		bool HittingProcessor(const std::shared_ptr<aetherClass::FbxStaticModel>&, const std::shared_ptr<aetherClass::ModelBase>&);
+		void Updating(const std::shared_ptr<aetherClass::FbxModel>&, float);
+		void FaceTheObject(const std::shared_ptr<aetherClass::FbxModel>&, const std::shared_ptr<aetherClass::ModelBase>&);
+		bool HittingProcessor(const std::shared_ptr<aetherClass::FbxModel>&);
+		bool HittingProcessor(const std::shared_ptr<aetherClass::FbxModel>&, const std::shared_ptr<aetherClass::ModelBase>&);
 	private:
 		void Destroy()override;
 
