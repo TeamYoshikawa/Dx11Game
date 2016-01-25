@@ -20,21 +20,42 @@ class CameraManager
 	};
 
 	public:
+
+		// ÉJÉÅÉâÇÃID
+		enum CameraID{
+			eID1 = 0,
+			eID2,
+			eID3,
+			eID4,
+			eID5,
+			eID6,
+			eID7,
+			eID8,
+			eID9,
+			eID10,
+			eID11,
+			eID12,
+			eID13,
+			eID14,
+			eNULL
+		};
+
 		CameraManager();
 		~CameraManager();
 
 		void Initialize();
 		void Render();
-		void ChangeCamera(int);
 		std::shared_ptr<aetherClass::ViewCamera>& GetCamera();
 
 		void NextCameraSet();
 		
 	private:
-	    
+		CameraID m_cameraID;
 		std::shared_ptr<aetherClass::ViewCamera> m_camera;
-		int m_cameraID;
+		int m_cameraNumber;
+		CameraID GetCameraID(int);
 		static CameraPropaty m_propaty[];
+
 };
 
 #endif
