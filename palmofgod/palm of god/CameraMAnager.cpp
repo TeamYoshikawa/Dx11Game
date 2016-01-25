@@ -59,8 +59,8 @@ std::shared_ptr<ViewCamera>& CameraManager::GetCamera(){
 void CameraManager::NextCameraSet(){
 	m_cameraID += 1;
 	int changeMax = sizeof(m_propaty) / sizeof(m_propaty[0]); // Ø‚è‘Ö‚¦‚é—v‘f”‚ÌŽæ“¾
-	if (m_cameraID > changeMax)
+	if (m_cameraID > changeMax-1)
 	{
-		m_cameraID = changeMax;
+		m_cameraID = changeMax-1;
 	}
 }
