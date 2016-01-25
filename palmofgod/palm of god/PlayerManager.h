@@ -35,11 +35,14 @@ class PlayerManager
 
 		bool IsChangeCamera();	// カメラを切り替えるかの判別用
 		std::unique_ptr<PlayerNavigation> m_navigation; // プレイヤーのルート用オブジェクト
+
+		std::shared_ptr<aetherClass::ModelBase> get_collideBox();
 	private:
 		// 次に行く道をセット
 		void SetNextPoint(const std::shared_ptr<aetherClass::ModelBase>&);
 
 	private:
+
 		std::unique_ptr<PlayerUpdater> m_updater;		// プレイヤーの更新オブジェクト
 		std::unique_ptr<PlayerRender> m_render;	        // プレイヤーの描画オブジェくト
 		std::shared_ptr<aetherClass::Texture> m_collideTexture;

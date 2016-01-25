@@ -1,6 +1,8 @@
 #include "PlayerManager.h"
 #include <iostream>
+#include <Physics.h>
 using namespace aetherClass;
+using namespace aetherFunction;
 PlayerManager::PlayerManager()
 {
 }
@@ -23,7 +25,7 @@ bool PlayerManager::Initialize(const std::shared_ptr<ViewCamera> camera){
 	m_playerObject->SetCamera(camera.get());
 	m_playerObject->GetTransform()._translation = Vector3(-280.0f, -100.f, 185.0f);
 	m_playerObject->GetTransform()._scale = Vector3(1.f, -1.f, 1.f);
-
+	
 	m_navigation = std::make_unique<PlayerNavigation>();
 	m_navigation->Initialize(camera);
 
@@ -51,7 +53,7 @@ void PlayerManager::Render(const std::shared_ptr<ShaderBase> shader){
 	// ナビゲーションの確認用描画
 	// 基本的には隠した状態にする
 
-	//m_navigation->Render(shader);
+	m_navigation->Render(shader);
 	return;
 }
 
@@ -71,7 +73,7 @@ void PlayerManager::Update(float frame){
 	m_collideBox->GetTransform()._translation = translation;
 
 	// TODO : ナビゲーションにぶつかった時の処理
-	/*if (m_collider.IsCollideOBB(m_collideBox, m_navigation->GetNavigationBox()))
+	if (aetherFunction::CollideBoxOBB(*m_collideBox, *m_navigation->GetNavigationBox()))
 	{
 		m_navigation->NextSet();
 		SetNextPoint(m_navigation->GetNavigationBox());
@@ -80,7 +82,7 @@ void PlayerManager::Update(float frame){
 	else
 	{
 		m_isCahngeCamera = false;
-	}*/
+	}
 	return;
 }
 

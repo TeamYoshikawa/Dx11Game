@@ -1,7 +1,7 @@
 #ifndef _GAMEUI_H
 #define _GAMEUI_H
 
-#include"UiRender.h"
+//#include"UiRender.h"
 #include"GameController.h"
 
 #include <Cube.h>

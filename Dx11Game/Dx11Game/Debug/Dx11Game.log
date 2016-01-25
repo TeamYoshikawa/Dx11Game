@@ -1,32 +1,117 @@
-﻿2015/12/17 10:55:56 にビルドを開始しました。
-     1>ノード 2 上のプロジェクト "C:\Users\nwuser.DA\Desktop\TeamYoshikawa\Dx11Game\Dx11Game\Dx11Game\Dx11Game.vcxproj" (Build ターゲット)。
-     1>Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\nwuser.DA\Desktop\TeamYoshikawa\Dx11Game\Dx11Game\Debug\Dx11Game.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\FBX\FBX SDK\2015.1\lib\vs2013\x86\debug" /LIBPATH:C:\Users\nwuser.DA\Desktop\TeamYoshikawa\Dx11Game\Dx11Lib\Lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\nwuser.DA\Desktop\TeamYoshikawa\Dx11Game\Dx11Game\Debug\Dx11Game.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\nwuser.DA\Desktop\TeamYoshikawa\Dx11Game\Dx11Game\Debug\Dx11Game.lib" /MACHINE:X86 Debug\CameraMAnager.obj
-         Debug\Entry.obj
-         Debug\GameFrame.obj
-         Debug\GamesController.obj
-         Debug\PlayerBase.obj
-         Debug\PlayerManager.obj
-         Debug\PlayerNavigation.obj
-         Debug\PlayerRender.obj
-         Debug\PlayerUpdater.obj
-         Debug\Rock.obj
-         Debug\RockManager.obj
-         Debug\RockRender.obj
-         Debug\RockUpdater.obj
-         Debug\SceneGame.obj
-         Debug\SceneManager.obj
-         Debug\SceneTitle.obj
-         Debug\Spear.obj
-         Debug\SpearManager.obj
-         Debug\SpearRender.obj
-         Debug\SpearUpdater.obj
-         Debug\Sphere.obj
-         Debug\SphereRay.obj
-         Debug\System.obj
-         Dx11Game.vcxproj -> C:\Users\nwuser.DA\Desktop\TeamYoshikawa\Dx11Game\Dx11Game\Debug\Dx11Game.exe
-     1>プロジェクト "C:\Users\nwuser.DA\Desktop\TeamYoshikawa\Dx11Game\Dx11Game\Dx11Game\Dx11Game.vcxproj" (Build ターゲット) のビルドが完了しました。
+﻿2016/01/25 9:54:12 にビルドを開始しました。
+     1>ノード 2 上のプロジェクト "C:\Users\nwuser.DA\Documents\Dx11Game\Dx11\Dx11Game\Dx11Game\Dx11Game.vcxproj" (Build ターゲット)。
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IC:\Users\nwuser.DA\Desktop\TeamYoshikawa\Dx11Game\Dx11Lib\Includes /I"C:\FBX\FBX SDK\2015.1\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt CameraMAnager.cpp Entry.cpp GameFrame.cpp GamesController.cpp PlayerBase.cpp PlayerManager.cpp PlayerNavigation.cpp PlayerRender.cpp PlayerUpdater.cpp Rock.cpp RockManager.cpp RockRender.cpp RockUpdater.cpp SceneGame.cpp SceneManager.cpp SceneTitle.cpp Spear.cpp SpearManager.cpp SpearRender.cpp SpearUpdater.cpp Sphere.cpp SphereRay.cpp System.cpp
+         System.cpp
+     1>c:\users\nwuser.da\documents\dx11game\dx11\dx11game\dx11game\system.cpp(1): error C2059: 構文エラー : '<<'
+     1>c:\program files (x86)\microsoft visual studio 12.0\vc\include\sal.h(2381): error C2143: 構文エラー : ';' が '{' の前にありません。
+     1>c:\program files (x86)\microsoft visual studio 12.0\vc\include\sal.h(2381): error C2447: '{' : 対応する関数ヘッダーがありません (旧形式の仮引数リスト?)
+     1>c:\users\nwuser.da\documents\dx11game\dx11\dx11game\dx11game\scenemanager.h(5): fatal error C1083: include ファイルを開けません。'Direct3DManager.h':No such file or directory
+         SphereRay.cpp
+     1>c:\users\nwuser.da\documents\dx11game\dx11\dx11game\dx11game\sphere.h(2): fatal error C1083: include ファイルを開けません。'ModelBase.h':No such file or directory
+         Sphere.cpp
+     1>c:\users\nwuser.da\documents\dx11game\dx11\dx11game\dx11game\sphere.h(2): fatal error C1083: include ファイルを開けません。'ModelBase.h':No such file or directory
+         SpearUpdater.cpp
+     1>c:\users\nwuser.da\documents\dx11game\dx11\dx11game\dx11game\spear.h(3): fatal error C1083: include ファイルを開けません。'Cube.h':No such file or directory
+         SpearRender.cpp
+     1>c:\users\nwuser.da\documents\dx11game\dx11\dx11game\dx11game\spear.h(3): fatal error C1083: include ファイルを開けません。'Cube.h':No such file or directory
+         SpearManager.cpp
+     1>c:\users\nwuser.da\documents\dx11game\dx11\dx11game\dx11game\spear.h(3): fatal error C1083: include ファイルを開けません。'Cube.h':No such file or directory
+         Spear.cpp
+     1>c:\users\nwuser.da\documents\dx11game\dx11\dx11game\dx11game\spear.h(3): fatal error C1083: include ファイルを開けません。'Cube.h':No such file or directory
+         SceneTitle.cpp
+     1>c:\users\nwuser.da\documents\dx11game\dx11\dx11game\dx11game\scenemanager.h(5): fatal error C1083: include ファイルを開けません。'Direct3DManager.h':No such file or directory
+         SceneManager.cpp
+     1>c:\users\nwuser.da\documents\dx11game\dx11\dx11game\dx11game\scenemanager.h(5): fatal error C1083: include ファイルを開けません。'Direct3DManager.h':No such file or directory
+         SceneGame.cpp
+     1>c:\users\nwuser.da\documents\dx11game\dx11\dx11game\dx11game\scenegame.h(3): fatal error C1083: include ファイルを開けません。'Cube.h':No such file or directory
+         RockUpdater.cpp
+     1>c:\users\nwuser.da\documents\dx11game\dx11\dx11game\dx11game\rock.h(4): fatal error C1083: include ファイルを開けません。'Cube.h':No such file or directory
+         RockRender.cpp
+     1>c:\users\nwuser.da\documents\dx11game\dx11\dx11game\dx11game\rock.h(4): fatal error C1083: include ファイルを開けません。'Cube.h':No such file or directory
+         RockManager.cpp
+     1>c:\users\nwuser.da\documents\dx11game\dx11\dx11game\dx11game\rock.h(4): fatal error C1083: include ファイルを開けません。'Cube.h':No such file or directory
+         Rock.cpp
+     1>c:\users\nwuser.da\documents\dx11game\dx11\dx11game\dx11game\rock.h(4): fatal error C1083: include ファイルを開けません。'Cube.h':No such file or directory
+         PlayerUpdater.cpp
+     1>c:\users\nwuser.da\documents\dx11game\dx11\dx11game\dx11game\playerbase.h(10): fatal error C1083: include ファイルを開けません。'Direct3DManager.h':No such file or directory
+         PlayerRender.cpp
+     1>c:\users\nwuser.da\documents\dx11game\dx11\dx11game\dx11game\playerbase.h(10): fatal error C1083: include ファイルを開けません。'Direct3DManager.h':No such file or directory
+         PlayerNavigation.cpp
+     1>c:\users\nwuser.da\documents\dx11game\dx11\dx11game\dx11game\playernavigation.h(4): fatal error C1083: include ファイルを開けません。'Cube.h':No such file or directory
+         PlayerManager.cpp
+     1>c:\users\nwuser.da\documents\dx11game\dx11\dx11game\dx11game\playerbase.h(10): fatal error C1083: include ファイルを開けません。'Direct3DManager.h':No such file or directory
+         PlayerBase.cpp
+     1>c:\users\nwuser.da\documents\dx11game\dx11\dx11game\dx11game\playerbase.h(10): fatal error C1083: include ファイルを開けません。'Direct3DManager.h':No such file or directory
+         GamesController.cpp
+     1>c:\users\nwuser.da\documents\dx11game\dx11\dx11game\dx11game\gamescontroller.h(12): fatal error C1083: include ファイルを開けません。'Direct3DManager.h':No such file or directory
+         コードを生成中...
+         コンパイル中...
+         GameFrame.cpp
+     1>c:\users\nwuser.da\documents\dx11game\dx11\dx11game\dx11game\gameframe.h(4): fatal error C1083: include ファイルを開けません。'Direct3DManager.h':No such file or directory
+         Entry.cpp
+     1>c:\users\nwuser.da\documents\dx11game\dx11\dx11game\dx11game\scenemanager.h(5): fatal error C1083: include ファイルを開けません。'Direct3DManager.h':No such file or directory
+         CameraMAnager.cpp
+     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(12): warning C4005: 'DXGI_STATUS_OCCLUDED' : マクロが再定義されました。
+                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50002) : 'DXGI_STATUS_OCCLUDED' の前の定義を確認してください
+     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(13): warning C4005: 'DXGI_STATUS_CLIPPED' : マクロが再定義されました。
+                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50011) : 'DXGI_STATUS_CLIPPED' の前の定義を確認してください
+     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(14): warning C4005: 'DXGI_STATUS_NO_REDIRECTION' : マクロが再定義されました。
+                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50020) : 'DXGI_STATUS_NO_REDIRECTION' の前の定義を確認してください
+     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(15): warning C4005: 'DXGI_STATUS_NO_DESKTOP_ACCESS' : マクロが再定義されました。
+                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50029) : 'DXGI_STATUS_NO_DESKTOP_ACCESS' の前の定義を確認してください
+     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(16): warning C4005: 'DXGI_STATUS_GRAPHICS_VIDPN_SOURCE_IN_USE' : マクロが再定義されました。
+                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50038) : 'DXGI_STATUS_GRAPHICS_VIDPN_SOURCE_IN_USE' の前の定義を確認してください
+     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(17): warning C4005: 'DXGI_STATUS_MODE_CHANGED' : マクロが再定義されました。
+                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50047) : 'DXGI_STATUS_MODE_CHANGED' の前の定義を確認してください
+     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(18): warning C4005: 'DXGI_STATUS_MODE_CHANGE_IN_PROGRESS' : マクロが再定義されました。
+                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50056) : 'DXGI_STATUS_MODE_CHANGE_IN_PROGRESS' の前の定義を確認してください
+     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(21): warning C4005: 'DXGI_ERROR_INVALID_CALL' : マクロが再定義されました。
+                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50071) : 'DXGI_ERROR_INVALID_CALL' の前の定義を確認してください
+     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(22): warning C4005: 'DXGI_ERROR_NOT_FOUND' : マクロが再定義されました。
+                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50080) : 'DXGI_ERROR_NOT_FOUND' の前の定義を確認してください
+     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(23): warning C4005: 'DXGI_ERROR_MORE_DATA' : マクロが再定義されました。
+                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50089) : 'DXGI_ERROR_MORE_DATA' の前の定義を確認してください
+     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(24): warning C4005: 'DXGI_ERROR_UNSUPPORTED' : マクロが再定義されました。
+                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50098) : 'DXGI_ERROR_UNSUPPORTED' の前の定義を確認してください
+     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(25): warning C4005: 'DXGI_ERROR_DEVICE_REMOVED' : マクロが再定義されました。
+                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50107) : 'DXGI_ERROR_DEVICE_REMOVED' の前の定義を確認してください
+     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(26): warning C4005: 'DXGI_ERROR_DEVICE_HUNG' : マクロが再定義されました。
+                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50116) : 'DXGI_ERROR_DEVICE_HUNG' の前の定義を確認してください
+     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(27): warning C4005: 'DXGI_ERROR_DEVICE_RESET' : マクロが再定義されました。
+                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50126) : 'DXGI_ERROR_DEVICE_RESET' の前の定義を確認してください
+     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(28): warning C4005: 'DXGI_ERROR_WAS_STILL_DRAWING' : マクロが再定義されました。
+                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50135) : 'DXGI_ERROR_WAS_STILL_DRAWING' の前の定義を確認してください
+     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(29): warning C4005: 'DXGI_ERROR_FRAME_STATISTICS_DISJOINT' : マクロが再定義されました。
+                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50145) : 'DXGI_ERROR_FRAME_STATISTICS_DISJOINT' の前の定義を確認してください
+     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(30): warning C4005: 'DXGI_ERROR_GRAPHICS_VIDPN_SOURCE_IN_USE' : マクロが再定義されました。
+                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50154) : 'DXGI_ERROR_GRAPHICS_VIDPN_SOURCE_IN_USE' の前の定義を確認してください
+     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(31): warning C4005: 'DXGI_ERROR_DRIVER_INTERNAL_ERROR' : マクロが再定義されました。
+                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50164) : 'DXGI_ERROR_DRIVER_INTERNAL_ERROR' の前の定義を確認してください
+     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(32): warning C4005: 'DXGI_ERROR_NONEXCLUSIVE' : マクロが再定義されました。
+                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50173) : 'DXGI_ERROR_NONEXCLUSIVE' の前の定義を確認してください
+     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(33): warning C4005: 'DXGI_ERROR_NOT_CURRENTLY_AVAILABLE' : マクロが再定義されました。
+                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50182) : 'DXGI_ERROR_NOT_CURRENTLY_AVAILABLE' の前の定義を確認してください
+     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(34): warning C4005: 'DXGI_ERROR_REMOTE_CLIENT_DISCONNECTED' : マクロが再定義されました。
+                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50192) : 'DXGI_ERROR_REMOTE_CLIENT_DISCONNECTED' の前の定義を確認してください
+     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(35): warning C4005: 'DXGI_ERROR_REMOTE_OUTOFMEMORY' : マクロが再定義されました。
+                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50201) : 'DXGI_ERROR_REMOTE_OUTOFMEMORY' の前の定義を確認してください
+     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d11.h(917): warning C4005: 'D3D11_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS' : マクロが再定義されました。
+                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50379) : 'D3D11_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS' の前の定義を確認してください
+     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d11.h(918): warning C4005: 'D3D11_ERROR_FILE_NOT_FOUND' : マクロが再定義されました。
+                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50388) : 'D3D11_ERROR_FILE_NOT_FOUND' の前の定義を確認してください
+     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d11.h(919): warning C4005: 'D3D11_ERROR_TOO_MANY_UNIQUE_VIEW_OBJECTS' : マクロが再定義されました。
+                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50398) : 'D3D11_ERROR_TOO_MANY_UNIQUE_VIEW_OBJECTS' の前の定義を確認してください
+     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d11.h(920): warning C4005: 'D3D11_ERROR_DEFERRED_CONTEXT_MAP_WITHOUT_INITIAL_DISCARD' : マクロが再定義されました。
+                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50407) : 'D3D11_ERROR_DEFERRED_CONTEXT_MAP_WITHOUT_INITIAL_DISCARD' の前の定義を確認してください
+     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d10.h(608): warning C4005: 'D3D10_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS' : マクロが再定義されました。
+                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50355) : 'D3D10_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS' の前の定義を確認してください
+     1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d10.h(609): warning C4005: 'D3D10_ERROR_FILE_NOT_FOUND' : マクロが再定義されました。
+                 c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50364) : 'D3D10_ERROR_FILE_NOT_FOUND' の前の定義を確認してください
+     1>c:\users\nwuser.da\documents\dx11game\dx11\dx11game\dx11game\cameramanager.h(7): fatal error C1083: include ファイルを開けません。'ViewCamera.h':No such file or directory
+         コードを生成中...
+     1>プロジェクト "C:\Users\nwuser.DA\Documents\Dx11Game\Dx11\Dx11Game\Dx11Game\Dx11Game.vcxproj" (Build ターゲット) のビルドが終了しました -- 失敗。
 
-ビルドに成功しました。
+ビルドに失敗しました。
 
-経過時間 00:00:01.86
+経過時間 00:00:12.25

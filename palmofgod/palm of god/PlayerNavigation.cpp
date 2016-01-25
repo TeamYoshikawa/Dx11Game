@@ -30,6 +30,7 @@ void PlayerNavigation::Initialize(std::shared_ptr<ViewCamera> camera){
 	m_navigationBox->Initialize();
 	m_navigationBox->SetTexture(m_texture.get());
 	m_navigationBox->SetCamera(camera.get());
+	m_navigationBox->GetTransform()._scale *= 3;
 	
 	// ”z—ñ‚Ì—v‘f”‚ğ‹‚ß‚é
 	m_navigationArrayElement = sizeof(m_navigationBoxPosition) / sizeof(m_navigationBoxPosition[0]);

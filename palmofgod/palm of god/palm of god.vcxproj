@@ -33,6 +33,7 @@
     <ClCompile Include="SpearManager.cpp" />
     <ClCompile Include="SpearRender.cpp" />
     <ClCompile Include="SpearUpdater.cpp" />
+    <ClCompile Include="UiGame.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CameraMAnager.h" />
@@ -51,14 +52,12 @@
     <ClInclude Include="RockManager.h" />
     <ClInclude Include="RockRender.h" />
     <ClInclude Include="RockUpdater.h" />
-    <ClInclude Include="SceneBase.h" />
     <ClInclude Include="SceneGame.h" />
-    <ClInclude Include="SceneManager.h" />
-    <ClInclude Include="SceneTitle.h" />
     <ClInclude Include="Spear.h" />
     <ClInclude Include="SpearManager.h" />
     <ClInclude Include="SpearRender.h" />
     <ClInclude Include="SpearUpdater.h" />
+    <ClInclude Include="UiGame.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ModelData\models\BoxUnityChan.fbx" />
@@ -152,13 +151,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Program Files\Autodesk\FBX\FBX SDK\2015.1\include;C:\Users\nwuser.DA\Desktop\Git\Aether\Includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files\Autodesk\FBX\FBX SDK\2015.1\include;C:\Aether\Includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Program Files\Autodesk\FBX\FBX SDK\2015.1\lib\vs2013\x86\debug;C:\Users\nwuser.DA\Desktop\Git\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Program Files\Autodesk\FBX\FBX SDK\2015.1\lib\vs2013\x86\debug;C:\Aether\Lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -170,14 +169,14 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Program Files\Autodesk\FBX\FBX SDK\2015.1\include;C:\Users\nwuser.DA\Desktop\Git\Aether\Includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files\Autodesk\FBX\FBX SDK\2015.1\include;C:\Aether\Includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>C:\Program Files\Autodesk\FBX\FBX SDK\2015.1\lib\vs2013\x86\debug;C:\Users\nwuser.DA\Desktop\Git\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Program Files\Autodesk\FBX\FBX SDK\2015.1\lib\vs2013\x86\debug;C:\Aether\Lib</AdditionalLibraryDirectories>
       <AdditionalDependencies>d3dxof.lib dxguid.lib d3dx9d.lib winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
