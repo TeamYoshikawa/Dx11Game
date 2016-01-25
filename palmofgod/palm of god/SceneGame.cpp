@@ -49,8 +49,8 @@ bool SceneGame::Initialize(){
 	
 
 	//m_stagemanager = std::make_shared<StageManager>();
-	m_stagemanager = std::make_shared<LightManager>();
-	m_stagemanager->Initialize();
+	m_lightmanager = std::make_shared<LightManager>();
+	m_lightmanager->Initialize();
 
 	m_player = std::make_shared<PlayerManager>();
 	m_player->Initialize(m_camera->GetCamera());
@@ -72,8 +72,8 @@ bool SceneGame::Initialize(){
 	m_rock = std::make_shared<RockManager>();
 	m_rock->Initialize(m_camera->GetCamera().get());
 
-	m_spear = std::make_shared<SpearManager>();
-	m_spear->Initialize(m_camera->GetCamera().get());
+	/*m_spear = std::make_shared<SpearManager>();
+	m_spear->Initialize(m_camera->GetCamera().get());*/
 
 
 	m_lightshader = std::make_shared<MaterialShader>();
@@ -84,9 +84,9 @@ bool SceneGame::Initialize(){
 	lightDesc._pixel._entryName = "ps_main";
 	lightDesc._pixel._srcFile = L"Shader/MaterialPS.hlsl";
 	m_lightshader->Initialize(lightDesc, ShaderType::eVertex | ShaderType::ePixel);
-	m_lightshader->SetLight(m_stagemanager->GetLight().get());
+	m_lightshader->SetLight(m_lightmanager->GetLight().get());
 	m_lightshader->SetCamera(m_camera->GetCamera().get());
-	m_stagemanager->GetLight()->Translation() = m_camera->GetCamera()->Translation();
+	m_lightmanager->GetLight()->Translation() = m_camera->GetCamera()->Translation();
 	return true;
 }
 
@@ -96,34 +96,34 @@ bool SceneGame::Updater(){
 
 	if (GameController::GetPointer()->IsKeyDown(DIK_W))
 	{
-		m_stagemanager->GetLight()->Translation()._z += 1;
+		m_lightmanager->GetLight()->Translation()._z += 1;
 	}
 
 	if (GameController::GetPointer()->IsKeyDown(DIK_S))
 	{
-		m_stagemanager->GetLight()->Translation()._z -= 1;
+		m_lightmanager->GetLight()->Translation()._z -= 1;
 	}
 
 
 	if (GameController::GetPointer()->IsKeyDown(DIK_A))
 	{
-		m_stagemanager->GetLight()->Translation()._x += 1;
+		m_lightmanager->GetLight()->Translation()._x += 1;
 	}
 
 
 	if (GameController::GetPointer()->IsKeyDown(DIK_D))
 	{
-		m_stagemanager->GetLight()->Translation()._x -= 1;
+		m_lightmanager->GetLight()->Translation()._x -= 1;
 	}
 
 	if (GameController::GetPointer()->IsKeyDown(DIK_Q))
 	{
-		m_stagemanager->GetLight()->Translation()._y += 1;
+		m_lightmanager->GetLight()->Translation()._y += 1;
 	}
 
 	if (GameController::GetPointer()->IsKeyDown(DIK_E))
 	{
-		m_stagemanager->GetLight()->Translation()._y -= 1;
+		m_lightmanager->GetLight()->Translation()._y -= 1;
 	}
 
 	/*std::cout << "X :" << m_positionCheck->GetTransform()._translation._x << "\t";
@@ -133,17 +133,17 @@ bool SceneGame::Updater(){
 	if (m_player->IsChangeCamera())
 	{
 		m_camera->NextCameraSet();
-		m_stagemanager->NextLightSet();	
+		m_lightmanager->NextLightSet();	
 	}
 
 	m_player->Update(0.01f);
-	m_stagemanager->Update();
+	m_lightmanager->Update();
 
 	if (m_player->Status()._navigationID == 3)
 	{
 		m_rock->Update();
 	}
-	m_cube->GetTransform()._translation = m_stagemanager->GetLight()->Translation();
+	m_cube->GetTransform()._translation = m_lightmanager->GetLight()->Translation();
 	
 	Vector3 translation = m_cube->GetTransform()._translation;
 	printf("%f,%f,%f\n\n", translation._x, translation._y, translation._z);
@@ -154,7 +154,7 @@ bool SceneGame::Updater(){
 void SceneGame::Render(){
 
 	m_camera->Render();
-	m_stagemanager->Render();
+	m_lightmanager->Render();
 	m_stage->Render(m_lightshader.get());
 
 	m_player->Render(m_shader);
