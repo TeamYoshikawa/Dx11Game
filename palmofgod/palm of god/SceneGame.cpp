@@ -60,7 +60,7 @@ bool SceneGame::Initialize(){
 	m_player->Initialize(m_camera->GetCamera());
 
 	m_stage = std::make_shared<FbxModel>();
-	m_stage->LoadFBX("ModelData/models/abcd.fbx", eAxisSystem::eAxisOpenGL);
+	m_stage->LoadFBX("ModelData/models/STAGEKANZENBAN.fbx", eAxisSystem::eAxisOpenGL);
 	m_stage->SetCamera(m_camera->GetCamera().get());
 	m_stage->GetTransform()._scale = Vector3(1.0f, 1.0f, -1.0f);
 
