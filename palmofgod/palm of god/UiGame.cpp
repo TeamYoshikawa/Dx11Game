@@ -106,7 +106,7 @@ bool UiGame::Initialize(){
 void UiGame::Update()
 {
 
-	std::cout << location->GetTransform()._translation._z << std::endl;
+	std::cout <<  "‚²‚Ý:"<< location->GetTransform()._translation._y << std::endl;
 
 	if (location->GetTransform()._translation._y > 907.0f){
 		flag = ON;
@@ -114,8 +114,12 @@ void UiGame::Update()
 
 	}
 	if (flag == OFF){
-		std::cout << "upd" << std::endl;
-		location->GetTransform()._translation._y += 0.1f;
+
+		//heart->Finalize();
+		//heart.reset();
+
+
+		location->GetTransform()._translation._y += 0.01f;
 	}
 
 
@@ -137,7 +141,4 @@ void UiGame::Render(){
 	return;
 }
 
-void UiGame::Shutdown(){
-
-	return;
-}
+	

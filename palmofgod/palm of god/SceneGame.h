@@ -12,6 +12,7 @@
 #include "RockManager.h"
 #include "LightShader.h"
 #include "Light.h"
+#include "UiGame.h"
 
 
 class SceneGame :
@@ -35,6 +36,8 @@ class SceneGame :
 
 		std::shared_ptr<SpearManager> m_spear;
 		std::shared_ptr<RockManager> m_rock;
+
+		std::shared_ptr<UiGame> m_ui;
 
 		std::shared_ptr<aetherClass::ShaderBase> m_shader;
 		std::shared_ptr<aetherClass::MaterialShader> m_lightshader;

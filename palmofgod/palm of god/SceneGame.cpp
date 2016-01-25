@@ -18,6 +18,10 @@ bool SceneGame::Initialize(){
 	std::cout << "Start game" << std::endl;
 
 
+
+	m_ui = std::make_shared<UiGame>();
+	m_ui->Initialize();
+
 	m_camera = std::make_shared<CameraManager>();
 	m_camera->Initialize();
 
@@ -93,6 +97,9 @@ bool SceneGame::Initialize(){
 
 bool SceneGame::Updater(){
 	GameController::GetPointer()->Frame();
+	
+
+	m_ui->Update();
 
 	if (GameController::GetPointer()->IsKeyDown(DIK_W))
 	{
@@ -119,11 +126,17 @@ bool SceneGame::Updater(){
 	if (GameController::GetPointer()->IsKeyDown(DIK_Q))
 	{
 		m_lightmanager->GetLight()->Translation()._y += 1;
+
 	}
 
 	if (GameController::GetPointer()->IsKeyDown(DIK_E))
 	{
 		m_lightmanager->GetLight()->Translation()._y -= 1;
+	}
+
+	if (GameController::GetPointer()->IsRightButtonTrigger())
+	{
+		m_camera->NextCameraSet();
 	}
 
 	/*std::cout << "X :" << m_positionCheck->GetTransform()._translation._x << "\t";
@@ -138,6 +151,7 @@ bool SceneGame::Updater(){
 
 	m_player->Update(0.01f);
 	m_lightmanager->Update();
+	
 
 	if (m_player->Status()._navigationID == 3)
 	{
@@ -152,6 +166,8 @@ bool SceneGame::Updater(){
 
 
 void SceneGame::Render(){
+
+	m_ui->Render();
 
 	m_camera->Render();
 	m_lightmanager->Render();

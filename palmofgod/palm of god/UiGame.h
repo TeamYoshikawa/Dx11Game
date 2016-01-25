@@ -45,7 +45,5 @@ public:
 	bool Initialize();
 	void Render();
 	void Update();
-	void Shutdown();
-	void Paint();
 };
 #endif
