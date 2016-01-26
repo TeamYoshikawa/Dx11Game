@@ -2,7 +2,6 @@
 
 using namespace aetherClass;
 
-
 bool UiGame::Initialize(){
 
 	flag = OFF;
@@ -106,22 +105,33 @@ bool UiGame::Initialize(){
 void UiGame::Update()
 {
 
-	std::cout <<  "‚²‚Ý:"<< location->GetTransform()._translation._y << std::endl;
-
-	if (location->GetTransform()._translation._y > 907.0f){
-
-		//heart->Finalize();
-		//heart.reset();
+	if (location->GetTransform()._translation._y > 908.0f){
+		
+		/*
+		if (heart){
+			heart->Finalize();
+			heart.reset();
+		}
+		*/
+		
 		flag = ON;
-
-
 	}
+
+
 	if (flag == OFF){
-		location->GetTransform()._translation._y += 0.1f;
+		location->GetTransform()._translation._y += 1.0f;
 	}
 
 
 	return;
+}
+
+void UiGame::Life(){
+
+	if (heart){
+		heart->Finalize();
+		heart.reset();
+	}
 }
 
 void UiGame::Render(){
@@ -133,7 +143,6 @@ void UiGame::Render(){
 	goal->Render(m_shader.get());
 	road->Render(m_shader.get());
 	if (heart){
-		std::cout << "ŒÄ‚Î‚ê‚½\n";
 		heart->Render(m_shader.get());
 	}
 	heart1->Render(m_shader.get());

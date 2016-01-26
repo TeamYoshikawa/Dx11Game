@@ -1,7 +1,7 @@
-#ifndef _GAMEUI_H
-#define _GAMEUI_H
+#ifndef _UIGAME_H
+#define _UIGAME_H
 
-//#include"UiRender.h"
+#include "PlayerManager.h"
 #include"GameController.h"
 
 #include <Cube.h>
@@ -24,24 +24,26 @@ private:
 	std::shared_ptr<aetherClass::Cube>start;
 	std::shared_ptr<aetherClass::Cube>road;
 	std::shared_ptr<aetherClass::Cube>location;
-	std::shared_ptr<aetherClass::Cube>heart;
+	
 	std::shared_ptr<aetherClass::Cube>heart1;
 	std::shared_ptr<aetherClass::Cube>heart2;
 
 	std::shared_ptr<aetherClass::ViewCamera>m_uicamera;
 
+	std::shared_ptr<PlayerManager>m_player;
+
 	std::shared_ptr<aetherClass::PixelShader> m_shader;
-
-	
-
 
 
 public:
 	UiGame() = default;
 	~UiGame() = default;
 
+	
+	std::shared_ptr<aetherClass::Cube>heart;
 	bool Initialize();
 	void Render();
 	void Update();
+	void Life();
 };
 #endif

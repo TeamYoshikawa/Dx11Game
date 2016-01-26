@@ -1,4 +1,5 @@
 #include "RockManager.h"
+#include <iostream>
 
 using namespace aetherClass;
 using namespace n_Rock;
@@ -13,8 +14,11 @@ bool RockManager::Initialize(ViewCamera* camera){
 	}
 	m_Rock->SetCamera(camera);
 	m_Rock->SetTexture(m_rockTexture.get());
-	m_Rock->GetTransform()._translation = Vector3(2620.0f, -412.f, 2030.0f);
-	m_Rock->GetTransform()._scale= Vector3(100.0f, 100.0f, 100.0f);
+
+	m_Rock->GetTransform()._translation = Vector3(2900.0f, -320.0f, 2100.0f);
+	m_Rock->GetTransform()._scale= Vector3(10.0f, 10.0f, 10.0f);
+
+	
 
 	m_updater = std::make_shared<RockUpdater>();
 	m_render = std::make_shared<RockRender>();
@@ -24,10 +28,9 @@ bool RockManager::Initialize(ViewCamera* camera){
 
 void RockManager::Update(){
 	static bool button = false;
-	button = GetKeyState('X') & 0x8000 ? true : false;
+	button = GameController::GetPointer()->IsKeyDown(DIK_X) ? true : false;
 
 	m_updater->Update(m_Rock.get(), button);
-	
 }
 
 void RockManager::Shutdown(){
