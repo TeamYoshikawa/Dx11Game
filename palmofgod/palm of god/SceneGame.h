@@ -39,8 +39,8 @@ class SceneGame :
 
 		std::shared_ptr<UiGame> m_ui;
 
-		std::shared_ptr<aetherClass::ShaderBase> m_shader;
-		std::shared_ptr<aetherClass::MaterialShader> m_lightshader;
+		std::shared_ptr<aetherClass::ShaderBase> m_pixelShader;
+		std::shared_ptr<aetherClass::MaterialShader> m_materialShader;
 
 		std::shared_ptr<aetherClass::Light>m_light;
 		std::shared_ptr<aetherClass::FbxModel> m_stage;

@@ -2,7 +2,7 @@
 #include <GameController.h>
 #include <iostream>
 #include <PixelShader.h>
-
+#include"Cube.h"
 using namespace aetherClass;
 const std::string SceneGame::m_thisName = "Game";
 SceneGame::SceneGame() :
@@ -12,89 +12,73 @@ GameScene(m_thisName, GetManager()){}
 SceneGame::~SceneGame()
 {
 }
-#include"Cube.h"
-std::shared_ptr<aetherClass::Cube>m_cube;
+
 bool SceneGame::Initialize(){
 	std::cout << "Start game" << std::endl;
 
-
-
+	// UIの作成
 	m_ui = std::make_shared<UiGame>();
 	m_ui->Initialize();
 
+	// カメラオブジェクトの作成
 	m_camera = std::make_shared<CameraManager>();
 	m_camera->Initialize();
 
-	m_shader = std::make_shared<PixelShader>();
+	// シェーダーの詳細情報の設定
 	ShaderDesc textureDesc;
 	textureDesc._vertex._entryName = "vs_main";
 	textureDesc._vertex._srcFile = L"Shader/MaterialVS.hlsl";
-
 	textureDesc._pixel._entryName = "ps_main";
 	textureDesc._pixel._srcFile = L"Shader/MaterialPS.hlsl";
-	m_shader->Initialize(textureDesc, ShaderType::eVertex | ShaderType::ePixel);
-	
-	m_cube = std::make_shared<Cube>();
-	m_cube->Initialize();
-	m_cube->SetCamera(m_camera->GetCamera().get());
-	m_cube->GetTransform()._scale = 10;
-	m_cube->GetTransform()._translation = m_camera->GetCamera()->Translation();
+
+	// ピクセルシェーダーの作成
+	m_pixelShader = std::make_shared<PixelShader>();
+	m_pixelShader->Initialize(textureDesc, ShaderType::eVertex | ShaderType::ePixel);
+
 	Material material;
 	material._ambient._color = Color(1, 0, 0, 1);
 	material._diffuse._color = Color(1, 0, 0, 1);
 	material._specular._color = Color(1, 0, 0, 1);
-	material._specularPower = 4;// _color = Color(1, 0, 0, 1);
-	m_cube->GetMaterial() = material;
-	
-	m_light = std::make_shared<Light>();
-	m_light->Translation() = Vector3(-50, 50, -50);
-	m_lightshader = std::make_shared<MaterialShader>();
-	m_lightshader->SetLight(m_light.get());
-	
+	material._specularPower = 4;
 
-	//m_stagemanager = std::make_shared<StageManager>();
+	// ライトの作成
 	m_lightmanager = std::make_shared<LightManager>();
 	m_lightmanager->Initialize();
 
+	// プレイヤーの作成
 	m_player = std::make_shared<PlayerManager>();
 	m_player->Initialize(m_camera->GetCamera());
 
+
+	// ステージモデルの作成
 	m_stage = std::make_shared<FbxModel>();
 	m_stage->LoadFBX("ModelData/models/STAGEKANZENBAN.fbx", eAxisSystem::eAxisOpenGL);
 	m_stage->SetCamera(m_camera->GetCamera().get());
 	m_stage->GetTransform()._scale = Vector3(1.0f, 1.0f, -1.0f);
 
-
 	m_stage->SetModelMaterialColor(Color(0.2, 0.0, 0.2, 1), eMatrerialType::eAmbient);
 	m_stage->SetModelMaterialColor(Color(1, 1, 1, 1.0), eMatrerialType::eDiffuse);
 	m_stage->SetModelMaterialColor(Color(1, 0, 0, 1.0), eMatrerialType::eSpecular);
 
-	m_positionCheckBoxTexture = std::make_shared<Texture>();
-	m_positionCheckBoxTexture->Load("ModelData/textures/cylinder_template.jpg");
-	m_positionCheck = std::make_shared<Cube>();
-	m_positionCheck->Initialize();
-	m_positionCheck->SetCamera(m_camera->GetCamera().get());
-	m_positionCheck->SetTexture(m_positionCheckBoxTexture.get());
-	m_positionCheck->GetTransform()._scale = Vector3(50, 50, 50);
-	m_positionCheck->GetTransform()._translation=Vector3(-280.0f, -100.f, 185.0f);
-
+	// 岩の作成
 	m_rock = std::make_shared<RockManager>();
 	m_rock->Initialize(m_camera->GetCamera().get());
 
 	/*m_spear = std::make_shared<SpearManager>();
 	m_spear->Initialize(m_camera->GetCamera().get());*/
 
+	// マテリアルシェーダー作成時の情報の設定
+	ShaderDesc materialDesc;
+	materialDesc._vertex._entryName = "vs_main";
+	materialDesc._vertex._srcFile = L"Shader/MaterialVS.hlsl";
+	materialDesc._pixel._entryName = "ps_main";
+	materialDesc._pixel._srcFile = L"Shader/MaterialPS.hlsl";
 
-	m_lightshader = std::make_shared<MaterialShader>();
-	ShaderDesc lightDesc;
-	lightDesc._vertex._entryName = "vs_main";
-	lightDesc._vertex._srcFile = L"Shader/MaterialVS.hlsl";
-
-	lightDesc._pixel._entryName = "ps_main";
-	lightDesc._pixel._srcFile = L"Shader/MaterialPS.hlsl";
-	m_lightshader->Initialize(lightDesc, ShaderType::eVertex | ShaderType::ePixel);
-	m_lightshader->SetLight(m_lightmanager->GetLight().get());
-	m_lightshader->SetCamera(m_camera->GetCamera().get());
+	// マテリアルシェーダーの作成
+	m_materialShader = std::make_shared<MaterialShader>();
+	m_materialShader->Initialize(materialDesc, ShaderType::eVertex | ShaderType::ePixel);
+	m_materialShader->SetLight(m_lightmanager->GetLight().get());
+	m_materialShader->SetCamera(m_camera->GetCamera().get());
 	m_lightmanager->GetLight()->Translation() = m_camera->GetCamera()->Translation();
 	return true;
 }
@@ -106,55 +90,11 @@ bool SceneGame::Updater(){
 	
 	m_ui->Update();
 
-	if (GameController::GetPointer()->IsKeyDown(DIK_UP))
-	{
-		m_lightmanager->GetLight()->Translation()._z += 10;
-	}
-
-	if (GameController::GetPointer()->IsKeyDown(DIK_DOWN))
-	{
-		m_lightmanager->GetLight()->Translation()._z -= 10;
-	}
-
-
-	if (GameController::GetPointer()->IsKeyDown(DIK_LEFT))
-	{
-		m_lightmanager->GetLight()->Translation()._x += 10;
-	}
-
-
-	if (GameController::GetPointer()->IsKeyDown(DIK_RIGHT))
-	{
-		m_lightmanager->GetLight()->Translation()._x -= 10;
-	}
-
-	if (GameController::GetPointer()->IsKeyDown(DIK_Q))
-	{
-		m_lightmanager->GetLight()->Translation()._y += 10;
-
-	}
-
-	if (GameController::GetPointer()->IsKeyDown(DIK_E))
-	{
-		m_lightmanager->GetLight()->Translation()._y -= 10;
-	}
-
 	if (GameController::GetPointer()->IsRightButtonTrigger())
 	{
 		m_camera->NextCameraSet();
 	}
 
-	if (GameController::GetPointer()->IsKeyDown(DIK_4)){
-		m_stage->GetTransform()._translation._x -= 10;
-	}
-	if (GameController::GetPointer()->IsKeyDown(DIK_6)){
-		m_stage->GetTransform()._translation._x += 10;
-	}
-
-	/*std::cout << "X :" << m_positionCheck->GetTransform()._translation._x << "\t";
-	std::cout << "Y :" << m_positionCheck->GetTransform()._translation._y << "\t";
-	std::cout << "Z :" << m_positionCheck->GetTransform()._translation._z << std::endl;
-*/
 	if (m_player->IsChangeCamera())
 	{
 		m_camera->NextCameraSet();
@@ -169,10 +109,7 @@ bool SceneGame::Updater(){
 	{
 		m_rock->Update();
 	}
-	m_cube->GetTransform()._translation = m_lightmanager->GetLight()->Translation();
-	
-	Vector3 translation = m_cube->GetTransform()._translation;
-	printf("%f,%f,%f\n\n", translation._x, translation._y, translation._z);
+
 
 	return true;
 }
@@ -184,13 +121,11 @@ void SceneGame::Render(){
 
 	m_camera->Render();
 	m_lightmanager->Render();
-	m_stage->Render(m_lightshader.get());
+	m_stage->Render(m_materialShader.get());
 
-	m_player->Render(m_shader);
-	m_cube->Render(m_lightshader.get());
-//	m_rock->Render(m_shader);
-	//->Render(m_shader);
-//	m_positionCheck->Render(m_shader, DxModel::eRenderWay::eTexture);
+	m_player->Render(m_pixelShader);
+
+//	m_rock->Render(m_pixelShader);
 	return;
 }
 
