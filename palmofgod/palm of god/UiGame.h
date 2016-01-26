@@ -5,6 +5,7 @@
 #include"GameController.h"
 
 #include <Cube.h>
+#include <Sphere.h>
 #include <memory>
 #include<iostream>
 
@@ -20,13 +21,13 @@ class UiGame
 {
 private:
 
-	std::shared_ptr<aetherClass::Cube>goal;
-	std::shared_ptr<aetherClass::Cube>start;
-	std::shared_ptr<aetherClass::Cube>road;
-	std::shared_ptr<aetherClass::Cube>location;
+	std::shared_ptr<aetherClass::ModelBase>goal;
+	std::shared_ptr<aetherClass::ModelBase>start;
+	std::shared_ptr<aetherClass::ModelBase>road;
+	std::shared_ptr<aetherClass::ModelBase>location;
 	
-	std::shared_ptr<aetherClass::Cube>heart1;
-	std::shared_ptr<aetherClass::Cube>heart2;
+	std::shared_ptr<aetherClass::ModelBase>heart1;
+	std::shared_ptr<aetherClass::ModelBase>heart2;
 
 	std::shared_ptr<aetherClass::ViewCamera>m_uicamera;
 

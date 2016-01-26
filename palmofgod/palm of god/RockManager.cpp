@@ -8,6 +8,14 @@ using namespace n_Rock;
 bool RockManager::Initialize(ViewCamera* camera){
 	m_rockTexture = std::make_shared<Texture>();
 	m_rockTexture->Load("ModelData/textures/seafloor.dds");
+
+	m_switch = std::make_shared<Sphere>(10, 10, 10);
+	if (!m_switch->Initialize()){
+		return false;
+	}
+	m_switch->SetCamera(camera);
+	//m_switch->SetTexture();
+
 	m_Rock = std::make_shared<Sphere>(10,10,10);
 	if (!m_Rock->Initialize()){
 		return false;

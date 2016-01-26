@@ -7,7 +7,7 @@ bool UiGame::Initialize(){
 	flag = OFF;
 	std::cout << "init" << std::endl;
 
-	location = std::make_shared<Cube>();
+	location = std::make_shared<Sphere>(1.2,15,15);
 	goal = std::make_shared<Cube>();
 	start = std::make_shared<Cube>();
 	road = std::make_shared<Cube>();
@@ -119,7 +119,7 @@ void UiGame::Update()
 
 
 	if (flag == OFF){
-		location->GetTransform()._translation._y += 1.0f;
+		location->GetTransform()._translation._y += 1.3f;
 	}
 
 

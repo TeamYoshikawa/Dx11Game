@@ -9,13 +9,18 @@
 #include <Texture.h>
 #include <ViewCamera.h>
 
+
 class RockManager
 {
 private:
 	std::shared_ptr<aetherClass::Sphere>m_Rock;
+	std::shared_ptr<aetherClass::Sphere>m_switch;
+
 	std::shared_ptr<aetherClass::Texture> m_rockTexture;
 	std::shared_ptr<n_Rock::RockUpdater>m_updater;
 	std::shared_ptr<n_Rock::RockRender>m_render;
+
+	
 
 public:
 	RockManager() = default;

@@ -26,11 +26,15 @@ bool SceneGame::Initialize(){
 
 	// シェーダーの詳細情報の設定
 	ShaderDesc textureDesc;
+	
 	textureDesc._vertex._entryName = "vs_main";
-	textureDesc._vertex._srcFile = L"Shader/MaterialVS.hlsl";
-	textureDesc._pixel._entryName = "ps_main";
-	textureDesc._pixel._srcFile = L"Shader/MaterialPS.hlsl";
+	textureDesc._vertex._srcFile = L"Shader/VertexShaderBase.hlsl";
 
+	textureDesc._pixel._entryName = "ps_main";
+	textureDesc._pixel._srcFile = L"Shader/ColorTextureAdd2.ps";
+
+
+	
 	// ピクセルシェーダーの作成
 	m_pixelShader = std::make_shared<PixelShader>();
 	m_pixelShader->Initialize(textureDesc, ShaderType::eVertex | ShaderType::ePixel);
@@ -83,12 +87,9 @@ bool SceneGame::Initialize(){
 	return true;
 }
 
-
 bool SceneGame::Updater(){
 	GameController::GetPointer()->Frame();
 	
-	
-	m_ui->Update();
 
 	if (GameController::GetPointer()->IsRightButtonTrigger())
 	{
@@ -97,15 +98,20 @@ bool SceneGame::Updater(){
 
 	if (m_player->IsChangeCamera())
 	{
+		m_ui->Update();
 		m_camera->NextCameraSet();
 		m_lightmanager->NextLightSet();	
+	}
+
+	if (GameController::GetPointer()->IsKeyDown(DIK_F)){
+		
 	}
 
 	m_player->Update(0.01f);
 	m_lightmanager->Update();
 	
 
-	if (m_player->Status()._navigationID == 3)
+	if (m_player->Status()._navigationID >= 4)
 	{
 		m_rock->Update();
 	}
@@ -113,7 +119,6 @@ bool SceneGame::Updater(){
 
 	return true;
 }
-
 
 void SceneGame::Render(){
 
@@ -123,9 +128,9 @@ void SceneGame::Render(){
 	m_lightmanager->Render();
 	m_stage->Render(m_materialShader.get());
 
-	m_player->Render(m_pixelShader);
+	m_player->Render(m_materialShader);
 
-//	m_rock->Render(m_pixelShader);
+	m_rock->Render(m_pixelShader);
 	return;
 }
 
