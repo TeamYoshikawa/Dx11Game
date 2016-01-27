@@ -4,7 +4,9 @@
 #include <FbxModel.h>
 #include <MathUtility.h>
 #include <iostream>
+#include<Physics.h>
 using namespace aetherClass;
+using namespace aetherFunction;
 PlayerUpdater::PlayerUpdater(){}
 PlayerUpdater::PlayerUpdater(PlayerUpdater& other){}
 
@@ -40,8 +42,9 @@ void PlayerUpdater::SendStatus(PlayerBase::PlayerStatus&){
 void PlayerUpdater::Updating(const std::shared_ptr<FbxModel>& playerObject, float frame){
 
 	// ˆÚ“®‚Ìˆ—
-	playerObject->GetTransform()._translation += SendStatus()._nextMoveDirection / 500;
-
+	//if (SendStatus()._navigationID != 4){
+		playerObject->GetTransform()._translation += SendStatus()._nextMoveDirection / 170;
+	//}
 	return;
 }
 
@@ -56,14 +59,18 @@ void PlayerUpdater::FaceTheObject(const std::shared_ptr<FbxModel>& player, const
 }
 
 
-bool PlayerUpdater::HittingProcessor(const std::shared_ptr<FbxModel>& player, const std::shared_ptr<ModelBase>& other){
+bool PlayerUpdater::HittingProcessor(const std::shared_ptr<ModelBase>& player, const std::shared_ptr<ModelBase>& other){
+	
 
 	// TODO: “–‚½‚Á‚½‚©‚ğ’²‚×‚éğŒ®‚ğ‹LÚ
-	return true;
-}
+	if (!CollideBoxOBB(*player, *other)){
+		
+		return false;
+	}
+	if (SendStatus()._muteki == true)return false;
+		std::cout << "“–‚½‚Á‚½‚æ";
+		SendStatus()._life -= 1;
+		SendStatus()._muteki = true;
+		return true;
 
-
-bool PlayerUpdater::HittingProcessor(const std::shared_ptr<aetherClass::FbxModel>&){
-
-	return true;
 }

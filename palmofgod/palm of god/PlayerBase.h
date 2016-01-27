@@ -30,12 +30,15 @@ class PlayerBase
 				_moveState = ePlayerMoveState::eNull;
 				_speed = 0.0f;
 				_nextMoveDirection = 0.0f;
+				_life = 3;
 			}
 			aetherClass::Vector3 _vector;
 			aetherClass::Vector3 _nextMoveDirection;
 			ePlayerMoveState _moveState;
 			float _speed;
 			int _navigationID;
+			int _life;
+			bool _muteki;
 		};
 
 

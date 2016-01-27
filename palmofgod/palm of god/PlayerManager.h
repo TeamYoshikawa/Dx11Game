@@ -28,15 +28,15 @@ class PlayerManager
 		void Status(PlayerBase::PlayerStatus&);
 
 		// 外部オブジェクトとの当たり判定用
-		bool HitMesh(const std::shared_ptr<aetherClass::ModelBase>&);
-		bool HitMesh(const std::shared_ptr<aetherClass::FbxModel>&);
+		bool HitMesh(std::shared_ptr<aetherClass::ModelBase>&);
 
 		void NextSerch();
 
 		bool IsChangeCamera();	// カメラを切り替えるかの判別用
 		std::unique_ptr<PlayerNavigation> m_navigation; // プレイヤーのルート用オブジェクト
+		
+		int LifeGet();
 
-		std::shared_ptr<aetherClass::ModelBase> get_collideBox();
 	private:
 		// 次に行く道をセット
 		void SetNextPoint(const std::shared_ptr<aetherClass::ModelBase>&);
@@ -49,6 +49,7 @@ class PlayerManager
 		std::shared_ptr<aetherClass::FbxModel> m_playerObject; // プレイヤーのモデルオブジェクト
 		std::shared_ptr<aetherClass::ModelBase> m_collideBox;	// 実際に当たり判定を行うオブジェクト
 
+		std::shared_ptr<aetherClass::ShaderBase> m_collideBoxShader;
 		bool m_isCahngeCamera;		// カメラを切り替えるフラグ
 		
 };

@@ -111,11 +111,14 @@ bool SceneGame::Updater(){
 	m_lightmanager->Update();
 	
 
-	if (m_player->Status()._navigationID >= 4)
+	if (m_player->Status()._navigationID >= 3 && m_player->Status()._navigationID <= 6)
 	{
+		m_player->HitMesh(m_rock->Get());
 		m_rock->Update();
+		
 	}
 
+	m_ui->Set(m_player->LifeGet());
 
 	return true;
 }

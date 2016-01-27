@@ -49,7 +49,7 @@ void RockUpdater::Open(ModelBase*Rock){
 
 		if (Rock->GetTransform()._translation._z < 200){
 			r_flag = ON;
-			std::cout << r_flag << "\n";
+			/*std::cout << r_flag << "\n";*/
 		}
 	}
 
