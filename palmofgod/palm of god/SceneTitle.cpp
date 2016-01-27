@@ -1,5 +1,5 @@
 #include "SceneTitle.h"
-
+#include <Rectangle.h>
 using namespace aetherClass;
 using namespace std;
 
@@ -12,8 +12,8 @@ GameScene(m_thisName,GetManager())
 
 SceneTitle::~SceneTitle()
 {
-}
 
+}
 bool SceneTitle::Initialize()
 {
 	cout << "Init SceneTitle" << endl;
@@ -22,6 +22,31 @@ bool SceneTitle::Initialize()
 	InitPixelShader();
 	InitMaterialShader();
 	InitStage();
+
+
+	
+	
+	title = std::make_shared<aetherClass::Rectangle>();
+	title->Initialize();
+
+	Texture *title_tex = new Texture();/*テクスチャ―用*/
+
+	title_tex->Load("Titlelogo.png");	/*画像の読み込み*/
+
+	title->SetTexture(title_tex);
+	title->SetCamera(m_camera.get());
+	title->GetTransform()._translation = m_camera->Translation();
+	title->GetTransform()._translation._z -= 200;
+	title->GetTransform()._translation._y += 35;
+	title->GetTransform()._rotation._x = 180;
+	title->GetTransform()._scale._x = 88;
+	title->GetTransform()._scale._y = 53;
+
+	/*
+	title->GetTransform()._scale = Vector3(0.8f, 0.8f, 0.0f);
+	title->GetTransform()._translation = Vector3(20.0f, -8.2f, 45.0f) + m_uicamera->Translation();
+	title->GetTransform()._rotation = Vector3(0.0f, 0.0f, 0.0f);
+	*/
 	return true;
 }
 
@@ -48,21 +73,34 @@ bool SceneTitle::Updater()
 		m_camera->Translation()._z -= 1;
 	}
 
+	if (GameController::GetPointer()->IsKeyDown(DIK_Q))
+	{
+		m_camera->Translation()._y += 1;
+
+	}
+	if (GameController::GetPointer()->IsKeyDown(DIK_E))
+	{
+		m_camera->Translation()._y -= 1;
+	}
+
 	cout << "X:" <<  m_camera->Translation()._x;
 	cout << "	Y:"<< m_camera->Translation()._y;
 	cout << "	Z:"<< m_camera->Translation()._z << endl;
 
 
-	//m_camera->Rotation()._y += 1;
+//m_camera->Rotation()._y += 1;
+
 	return true;
 }
 
 void SceneTitle::Render()
 {
+
+	
 	m_camera->Render();
 	m_lightmanager->Render();
 	m_stage->Render(m_materialShader.get());
-
+	title->Render(m_pixelShader.get());
 	return;
 }
 
@@ -74,11 +112,11 @@ void SceneTitle::Finalize()
 void SceneTitle::InitPixelShader()
 {
 	ShaderDesc textureDesc;
-	textureDesc._vertex._entryName = "vs_main";
-	textureDesc._vertex._srcFile = L"Shader/MaterialVS.hlsl";
-
+	textureDesc._pixel._srcFile = L"Shader/texture.ps";
 	textureDesc._pixel._entryName = "ps_main";
-	textureDesc._pixel._srcFile = L"Shader/MaterialPS.hlsl";
+
+	textureDesc._vertex._srcFile = L"Shader/VertexShaderBase.hlsl";
+	textureDesc._vertex._entryName = "vs_main";
 	
 	m_pixelShader = std::make_shared<PixelShader>();
 	m_pixelShader->Initialize(textureDesc, ShaderType::eVertex | ShaderType::ePixel);

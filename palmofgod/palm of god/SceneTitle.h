@@ -4,7 +4,7 @@
 
 #include <GameScene.h>
 #include <FbxModel.h>
-
+#include <Cube.h>
 #include "ViewCamera.h"
 #include "LightManager.h"
 #include "LightShader.h"
@@ -36,6 +36,10 @@ private:
 	std::shared_ptr<aetherClass::ShaderBase> m_pixelShader;
 	std::shared_ptr<aetherClass::MaterialShader> m_materialShader;
 	std::shared_ptr<aetherClass::FbxModel> m_keyObject;
+
+
+	std::shared_ptr<aetherClass::ModelBase>title;
+	std::shared_ptr<aetherClass::ViewCamera>m_uicamera;
 
 private:
 	void SceneChange();
