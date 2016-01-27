@@ -11,7 +11,9 @@
 #include <memory>
 #include <FbxModel.h>
 #include <ModelBase.h>
-
+namespace{
+	const int kDamageWaitTime = 1000;
+}
 class PlayerUpdater :
 	private PlayerBase
 {
@@ -23,12 +25,21 @@ class PlayerUpdater :
 		void Initialize()override;
 		PlayerBase::PlayerStatus& SendStatus()override;
 		void SendStatus(PlayerBase::PlayerStatus&)override;
-		void Updating(const std::shared_ptr<aetherClass::FbxModel>&, float);
+		void Updating(const std::shared_ptr<aetherClass::FbxModel>&);
 		void FaceTheObject(const std::shared_ptr<aetherClass::FbxModel>&, const std::shared_ptr<aetherClass::ModelBase>&);
 		bool HittingProcessor(const std::shared_ptr<aetherClass::ModelBase>&, const std::shared_ptr<aetherClass::ModelBase>&);
+
+		bool IsDamage();
 	private:
+		void Move(const std::shared_ptr<aetherClass::FbxModel>& playerObject);  // “®‚¢‚Ä‚é‚Æ‚«‚Ìˆ—
+		void Stand(const std::shared_ptr<aetherClass::FbxModel>& playerObject); // —§‚¿~‚Ü‚é‚Æ‚«‚Ìˆ—
+		void Fall(const std::shared_ptr<aetherClass::FbxModel>& playerObject);  // —‚¿‚é‚Ìˆ—
+		void Damage(const std::shared_ptr<aetherClass::FbxModel>& playerObject); // ƒ_ƒ[ƒWó‚¯‚½‚Ìˆ—
 		void Destroy()override;
 
+	private:
+		int m_damageCounter;
+		bool m_damageFlg;
 };
 
 #endif

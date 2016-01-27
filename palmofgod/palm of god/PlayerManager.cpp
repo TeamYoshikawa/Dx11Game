@@ -59,31 +59,24 @@ bool PlayerManager::Initialize(const std::shared_ptr<ViewCamera> camera){
 // 描画処理
 void PlayerManager::Render(const std::shared_ptr<ShaderBase> shader){
 	m_render->Rendering(m_playerObject,shader);
-	m_collideBox->Render(m_collideBoxShader.get());
-
 
 	// ナビゲーションの確認用描画
 	// 基本的には隠した状態にする
-
+	m_collideBox->Render(m_collideBoxShader.get());
 	m_navigation->Render(shader);
 	return;
 }
 
 // 更新処理
-void PlayerManager::Update(float frame){
+void PlayerManager::Update(){
 	// 現在のナビゲーションの場所を取得
 	Status()._navigationID = m_navigation->GetNavigationID();
 	if (m_navigation->GetNavigationID() == 14)
 	{
 		return;
 	}
-	m_updater->Updating(m_playerObject,frame);
-
-	// コリジョンボックスがプレイヤーを囲むようにする
-	const Vector3 translation = m_playerObject->GetTransform()._translation;
-	m_collideBox->GetTransform()._translation = translation;
-	const Vector3 rotation = m_playerObject->GetTransform()._rotation;
-	m_collideBox->GetTransform()._rotation = rotation;
+	m_updater->Updating(m_playerObject);
+	UpdateColliderBox();
 
 	// TODO : ナビゲーションにぶつかった時の処理
 	if (aetherFunction::CollideBoxOBB(*m_collideBox, *m_navigation->GetNavigationBox()))
@@ -98,10 +91,20 @@ void PlayerManager::Update(float frame){
 	{
 		m_isCahngeCamera = false;
 	}
-	
-	
 
 	return;
+}
+
+void PlayerManager::SetState(PlayerBase::ePlayerMoveState state){
+	Status()._moveState = state;
+}
+
+void PlayerManager::UpdateColliderBox(){
+	// コリジョンボックスがプレイヤーを囲むようにする
+	const Vector3 translation = m_playerObject->GetTransform()._translation;
+	m_collideBox->GetTransform()._translation = translation;
+	const Vector3 rotation = m_playerObject->GetTransform()._rotation;
+	m_collideBox->GetTransform()._rotation = rotation;
 }
 
 // 引数で指定されたオブジェクトに対して向かう
@@ -149,4 +152,8 @@ bool PlayerManager::IsChangeCamera(){
 
 	NextSerch();
 	return true;
+}
+
+bool PlayerManager::GetIsDamage(){
+	return m_updater->IsDamage();
 }

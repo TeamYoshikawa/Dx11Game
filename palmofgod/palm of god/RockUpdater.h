@@ -5,7 +5,7 @@
 
 #define ON 1
 #define OFF 0
-
+#define SAVE 2
 namespace n_Rock{
 	class RockUpdater
 	{
@@ -24,7 +24,7 @@ namespace n_Rock{
 
 		int FlagGet();
 	
-		int r_flag = ON;
+		int r_flag = SAVE;
 
 		void Update(aetherClass::ModelBase*model, bool m_isButton);
 		

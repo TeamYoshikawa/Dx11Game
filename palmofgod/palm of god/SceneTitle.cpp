@@ -93,41 +93,6 @@ bool SceneTitle::Updater()
 	GameController::GetPointer()->Frame();
 	SceneChange();
 
-	if (GameController::GetPointer()->IsKeyDown(DIK_A))
-	{
-		m_camera->Translation()._x += 1;
-	}
-	if (GameController::GetPointer()->IsKeyDown(DIK_D))
-	{
-		m_camera->Translation()._x -= 1;
-	}
-	if (GameController::GetPointer()->IsKeyDown(DIK_W))
-	{
-		m_camera->Translation()._z += 1;
-
-	}
-	if (GameController::GetPointer()->IsKeyDown(DIK_S))
-	{
-		m_camera->Translation()._z -= 1;
-	}
-
-	if (GameController::GetPointer()->IsKeyDown(DIK_Q))
-	{
-		m_camera->Translation()._y += 1;
-
-	}
-	if (GameController::GetPointer()->IsKeyDown(DIK_E))
-	{
-		m_camera->Translation()._y -= 1;
-	}
-
-	cout << "X:" <<  m_camera->Translation()._x;
-	cout << "	Y:"<< m_camera->Translation()._y;
-	cout << "	Z:"<< m_camera->Translation()._z << endl;
-
-
-//m_camera->Rotation()._y += 1;
-
 	return true;
 }
 

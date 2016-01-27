@@ -54,7 +54,7 @@ void RockManager::Update(){
 	
 	if (m_rockEvent == eEvent::eCheckingInput)
 	{
-		m_isButton = GameController::GetPointer()->IsKeyDown(DIK_X) ? true : false;
+		m_isButton = GameController::GetPointer()->IsLeftButtonTrigger() ? true : false;
 		if (m_isButton){
 			m_rockEvent = eEvent::eStart;
 	}
@@ -86,4 +86,12 @@ void RockManager::Render(std::shared_ptr<ShaderBase>shader){
 std::shared_ptr<aetherClass::ModelBase> RockManager::Get(){
 
 	return m_Rock;
+}
+
+int RockManager::FlagGet(){
+	return m_updater->FlagGet();
+}
+
+bool RockManager::GetIsPushButton(){
+	return m_isButton;
 }

@@ -52,6 +52,12 @@ std::shared_ptr<ViewCamera>& CameraManager::GetCamera(){
 
 }
 
+//
+///
+CameraManager::CameraID CameraManager::GetNowID(){
+	return m_cameraID;
+}
+
 
 void CameraManager::NextCameraSet(){
 	m_cameraNumber += 1;

@@ -19,26 +19,25 @@ void RockUpdater::Update(ModelBase *Rock, bool buttonState = false){
 		return;
 	}
 
-	if (buttonState){
-		Open(Rock);
-	}
-	else {
-		Close(Rock);
-	}
-
-
+	r_flag = ON;
+	Open(Rock);
 }
 
 void RockUpdater::Open(ModelBase*Rock){
 
 		FlagGet();
-
+		static int counter = 0;
+		counter += 1;
+		const int waitTime = 15;
 		//std::cout << "‚¨‚³‚ê‚½\n";
 
-		Rock->GetTransform()._translation._y += speed;
+		if (counter > waitTime)
+		{
+			Rock->GetTransform()._translation._y += speed;
 
-		speed *= 1.12;
-
+			speed *= 1.12;
+		}
+	
 		if (Rock->GetTransform()._translation._y > 120.0f){
 
 			Rock->GetTransform()._translation._y = 120.0f;
@@ -51,7 +50,6 @@ void RockUpdater::Open(ModelBase*Rock){
 
 		if (Rock->GetTransform()._translation._z < 200){
 			r_flag = OFF;
-			std::cout << r_flag << "\n";
 		}
 	}
 

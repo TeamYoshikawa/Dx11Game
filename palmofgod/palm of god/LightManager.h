@@ -23,9 +23,6 @@ class LightManager
 		void ChangeLight(int);
 		void Update();
 		std::shared_ptr<aetherClass::Light> GetLight();
-
-		void NextLightSet();
-		//void SetCamera(std::shared_ptr<aetherClass::ViewCamera>);
     private:
 
 		std::shared_ptr<aetherClass::Light> m_light;

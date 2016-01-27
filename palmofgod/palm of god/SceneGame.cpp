@@ -14,7 +14,7 @@ SceneGame::~SceneGame()
 }
 
 bool SceneGame::Initialize(){
-	std::cout << "Start game" << std::endl;
+	std::cout << "Initialize game scene" << std::endl;
 
 	// UIの作成
 	m_ui = std::make_shared<UiGame>();
@@ -84,39 +84,36 @@ bool SceneGame::Initialize(){
 	m_materialShader->SetLight(m_lightmanager->GetLight().get());
 	m_materialShader->SetCamera(m_camera->GetCamera().get());
 	m_lightmanager->GetLight()->Translation() = m_camera->GetCamera()->Translation();
+
+	// プレイヤーの最初の状態の設定
+	m_player->SetState(PlayerBase::ePlayerMoveState::eMove);
+
+	// ゲームの状態の設定
+	m_gameState = GetGameState();
+	std::cout << "Initialize compleate" << std::endl;
 	return true;
 }
 
 bool SceneGame::Updater(){
 	GameController::GetPointer()->Frame();
-	
-
+	m_gameState = GetGameState();
+	// デバッグ用
 	if (GameController::GetPointer()->IsRightButtonTrigger())
 	{
 		m_camera->NextCameraSet();
 	}
 
+	// プレイヤーが一定位置に進んだら
 	if (m_player->IsChangeCamera())
 	{
 		m_ui->Update();
 		m_camera->NextCameraSet();
-		m_lightmanager->NextLightSet();	
 	}
 
-	if (GameController::GetPointer()->IsKeyDown(DIK_F)){
-		
-	}
-
-	m_player->Update(0.01f);
+	FirstRockEvent();
+	m_player->Update();
 	m_lightmanager->Update();
 	
-
-	if (m_player->Status()._navigationID >= 3 && m_player->Status()._navigationID <= 6)
-	{
-		m_player->HitMesh(m_rock->Get());
-		m_rock->Update();
-		
-	}
 
 	m_ui->Set(m_player->LifeGet());
 
@@ -140,4 +137,56 @@ void SceneGame::Render(){
 void SceneGame::Finalize(){
 
 	return;
+}
+
+//
+void SceneGame::FirstRockEvent(){
+	if (m_gameState!=SceneGame::eGameState::eRockEvent)
+	{
+		return;
+	}
+	
+
+	m_rock->Update();
+	switch (m_rock->FlagGet())
+	{
+	case SAVE:
+		m_player->SetState(PlayerBase::ePlayerMoveState::eStatnd);
+		break;
+	case ON:
+		// 押されないでONなら進む初めてダメージをくらいに行く
+		if (!m_rock->GetIsPushButton())
+		{
+			if (!m_player->GetIsDamage())
+			{
+				m_player->SetState(PlayerBase::ePlayerMoveState::eMove);
+			}
+		
+			if (m_player->HitMesh(m_rock->Get()))
+			{
+				m_player->SetState(PlayerBase::ePlayerMoveState::eDamage);
+			}
+			
+		}
+		break;
+	case OFF:
+		m_player->SetState(PlayerBase::ePlayerMoveState::eMove);
+		m_gameState = eGameState::eNull;
+		break;
+
+	}
+	return;
+}
+
+SceneGame::eGameState SceneGame::GetGameState(){
+	switch (m_player->Status()._navigationID)
+	{
+	case 4:
+	case 5:
+	case 6:
+		return SceneGame::eGameState::eRockEvent;
+
+	default:
+		return SceneGame::eGameState::eNull;
+	}
 }

@@ -50,6 +50,8 @@ class CameraManager
 
 		void NextCameraSet();
 		
+		// ƒJƒƒ‰IDæ“¾—p
+		CameraID GetNowID();
 	private:
 		CameraID m_cameraID;
 		std::shared_ptr<aetherClass::ViewCamera> m_camera;

@@ -20,8 +20,8 @@ PlayerUpdater::~PlayerUpdater(){
 
 
 void PlayerUpdater::Initialize(){
-	
-	w_stopcnt = 0;
+	m_damageCounter = 0;
+	m_damageFlg = 0;
 	return;
 }
 
@@ -41,30 +41,13 @@ void PlayerUpdater::SendStatus(PlayerBase::PlayerStatus&){
 	return;
 }
 
-void PlayerUpdater::Updating(const std::shared_ptr<FbxModel>& playerObject, float frame){
+void PlayerUpdater::Updating(const std::shared_ptr<FbxModel>& playerObject){
 
 	// ˆÚ“®‚Ìˆ—
-
-	//‹^—“I‚É(Å‰‚Ìƒgƒ‰ƒbƒv‚ÌêŠ‚É)~‚Ü‚é“®‚­‚ğ‚µ‚Ä‚¢‚é‚¾‚¯
-
-	if (SendStatus()._navigationID != 4){
-		playerObject->GetTransform()._translation += SendStatus()._nextMoveDirection / 170;
-	}
-	else
-	{
-		if (w_stopcnt > 500)
-		{
-			playerObject->GetTransform()._translation += SendStatus()._nextMoveDirection / 170;
-		}
-		
-		w_stopcnt++;
-		std::cout << w_stopcnt<< "\n";
-	}
-
-	//©“®‚Å“®‚­(§ŒÀ‚©‚¯‚Ä‚¢‚È‚¢)
-
-	//playerObject->GetTransform()._translation += SendStatus()._nextMoveDirection / 170;
-
+	Move(playerObject);
+	Stand(playerObject);
+	Fall(playerObject);
+	Damage(playerObject);
 	return;
 }
 
@@ -88,9 +71,62 @@ bool PlayerUpdater::HittingProcessor(const std::shared_ptr<ModelBase>& player, c
 		return false;
 	}
 	if (SendStatus()._muteki == true)return false;
-		std::cout << "“–‚½‚Á‚½‚æ";
-		SendStatus()._life -= 1;
-		SendStatus()._muteki = true;
+	std::cout << "“–‚½‚Á‚½‚æ";
+	SendStatus()._life -= 1;
+	SendStatus()._muteki = true;
+	m_damageFlg = true;
+	SendStatus()._moveState = PlayerBase::ePlayerMoveState::eDamage;
 		return true;
 
+}
+
+// “®‚¢‚Ä‚é‚Æ‚«‚Ìˆ—
+void PlayerUpdater::Move(const std::shared_ptr<FbxModel>& playerObject){
+	// Œ»İ‚Ìó‘Ô‚ªMove‚¶‚á‚È‚¢‚È‚ç‰½‚à‚µ‚È‚¢
+	if (SendStatus()._moveState != PlayerBase::ePlayerMoveState::eMove)
+	{
+		return;
+	}
+
+	playerObject->GetTransform()._translation += SendStatus()._nextMoveDirection / 150;
+}
+
+// —§‚¿~‚Ü‚é‚Æ‚«‚Ìˆ—
+void PlayerUpdater::Stand(const std::shared_ptr<FbxModel>& playerObject){
+	if (SendStatus()._moveState != PlayerBase::ePlayerMoveState::eStatnd)
+	{
+		return;
+	}
+}
+
+// —‚¿‚é‚Ìˆ—
+void PlayerUpdater::Fall(const std::shared_ptr<FbxModel>& playerObject){
+	if (SendStatus()._moveState != PlayerBase::ePlayerMoveState::eMove)
+	{
+		return;
+	}
+}
+
+
+
+void PlayerUpdater::Damage(const std::shared_ptr<aetherClass::FbxModel>& playerObject){
+	if (SendStatus()._moveState != PlayerBase::ePlayerMoveState::eDamage)
+	{
+		return;
+	}
+	
+	m_damageCounter += 1;
+	// ‚ ‚éˆê’è”‚Ü‚Á‚½‚çŠˆ“®ÄŠJ
+	if (m_damageCounter > kDamageWaitTime)
+	{
+		m_damageCounter = 0;
+		SendStatus()._moveState = PlayerBase::ePlayerMoveState::eMove;
+		SendStatus()._muteki = false;
+		m_damageFlg = false;
+	}
+	return;
+}
+
+bool PlayerUpdater::IsDamage(){
+	return m_damageFlg;
 }

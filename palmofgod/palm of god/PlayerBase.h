@@ -18,9 +18,10 @@ class PlayerBase
 		// 状態を追加していく
 		enum class ePlayerMoveState{
 			eNull = 0,
-			eMove,
-			eStatnd,
-			eFall,
+			eMove,   // 動いてる状態
+			eStatnd, // 止まっている状態
+			eFall,   // 落ちている状態
+			eDamage, // ダメージくらった状態
 		};
 
 		// 基本ステータス

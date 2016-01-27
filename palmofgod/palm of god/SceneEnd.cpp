@@ -75,7 +75,6 @@ void SceneEnd::SceneChange()
 {
 	if (GameController::GetPointer()->IsRightButtonTrigger())
 	{
-		std::cout << "‚æ‚Î‚ê‚½‚æ" << std::endl;
 		ChangeScene("Title");
 	}
 }

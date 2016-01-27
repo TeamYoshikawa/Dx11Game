@@ -39,8 +39,9 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, LPSTR, INT){
 
 	// 最初のシーンの設定
 	GameSceneManager::SetCurrentScene(firstScene);
-	LoadScreen *loadobj = new LoadObj;
 
+	// 実行するロードオブジェクトの作成
+	LoadScreen *loadobj = new LoadObj;
 	GameSceneManager::SetLoadScreen(loadobj);
 	// メインループの開始
 	// この関数の内部で,GameFrameオブジェクトのFrameRunningが呼ばれる。

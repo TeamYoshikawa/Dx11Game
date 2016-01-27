@@ -17,7 +17,6 @@ LoadObj::~LoadObj()
 void LoadObj::Initialize()
 {
 
-	cout << "load" << endl;
 	InitCamera();
 	InitPixelShader();
 	
@@ -56,8 +55,6 @@ void LoadObj::InitPixelShader()
 	material._diffuse._color = Color(1, 0, 0, 1);
 	material._specular._color = Color(1, 0, 0, 1);
 	material._specularPower = 4;
-
-	cout << "Initialized PixelShader" << endl;
 }
 
 
@@ -66,8 +63,6 @@ void LoadObj::InitCamera()
 	m_camera = std::make_shared<ViewCamera>();
 	m_camera->Translation() = Vector3(-260, -380, 447);
 	m_camera->Rotation() = Vector3(-180.0f, 0.0f, 0.0f);
-
-	cout << "Initialized Camera" << endl;
 }
 
 

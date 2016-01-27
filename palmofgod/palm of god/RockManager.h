@@ -53,6 +53,8 @@ public:
 	void Update();
 	void Shutdown();
 
+	bool GetIsPushButton();
+
 	int FlagGet();
 
 	std::shared_ptr<aetherClass::ModelBase> Get();

@@ -23,28 +23,32 @@ class PlayerManager
 		bool Initialize(const std::shared_ptr<aetherClass::ViewCamera>);
 		
 		void Render(const std::shared_ptr<aetherClass::ShaderBase>);
-		void Update(float);
+		void Update();
 		PlayerBase::PlayerStatus& Status();
 		void Status(PlayerBase::PlayerStatus&);
 
 		// 外部オブジェクトとの当たり判定用
 		bool HitMesh(std::shared_ptr<aetherClass::ModelBase>&);
 
-		void NextSerch();
-
-		enum move_State{STOP,GO};	//プレイヤーの移動状態
+		void NextSerch();	
 
 		bool IsChangeCamera();	// カメラを切り替えるかの判別用
 		std::unique_ptr<PlayerNavigation> m_navigation; // プレイヤーのルート用オブジェクト
 		
 		int LifeGet();
 
+		void SetState(PlayerBase::ePlayerMoveState);
+
+		bool GetIsDamage();
 	private:
 		// 次に行く道をセット
 		void SetNextPoint(const std::shared_ptr<aetherClass::ModelBase>&);
 
-	private:
+		// コライドをプレイヤーについてくるようにする
+		void UpdateColliderBox();
 
+	private:
+	
 		std::unique_ptr<PlayerUpdater> m_updater;		// プレイヤーの更新オブジェクト
 		std::unique_ptr<PlayerRender> m_render;	        // プレイヤーの描画オブジェくト
 		std::shared_ptr<aetherClass::Texture> m_collideTexture;

@@ -27,8 +27,20 @@ class SceneGame :
 		void Render()override;
 		void Finalize()override;
 		static const std::string m_thisName;
+
+	private:
+		enum class eGameState{
+			eRockEvent,
+			eNull
+		};
+	private:
+		void FirstRockEvent();
+
+		eGameState GetGameState();
 	
 	private:
+
+		eGameState m_gameState;
 	
 		std::shared_ptr<PlayerManager> m_player;
 		std::shared_ptr<CameraManager> m_camera;

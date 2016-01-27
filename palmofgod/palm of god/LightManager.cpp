@@ -94,15 +94,6 @@ void LightManager::ChangeLight(int id)
 	m_light->Translation() = m_lightpropaty[m_lightID].m_changeLightTranslationArray;
 }
 
-void LightManager::NextLightSet()
-{
-	m_lightID += 1;
-	if (m_lightID > 15)
-	{
-		m_lightID = 15;
-	}
-}
-
 std::shared_ptr<Light> LightManager::GetLight(){
 	return m_light;
 }
