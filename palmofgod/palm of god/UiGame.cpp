@@ -54,12 +54,10 @@ bool UiGame::Initialize(){
 	goal->SetTexture(start_tex);
 	road->SetTexture(road_tex);
 	
-	
-	heart[0]->SetTexture(heart_tex);		//テクスチャーのセット
-	heart[1]->SetTexture(heart_tex);		//テクスチャーのセット
-	heart[2]->SetTexture(heart_tex);		//テクスチャーのセット
-	//location->GetColor() = Color(0.5f,0.7f,0.2f,1);
 
+	for (i = 0; i < h_max; i++){
+		heart[i]->SetTexture(heart_tex);		//テクスチャーのセット
+	}
 
 	m_shader = std::make_shared<PixelShader>();
 	m_shader->Initialize(shaderdesc, ShaderType::ePixel | ShaderType::eVertex);
@@ -85,25 +83,21 @@ bool UiGame::Initialize(){
 	road->GetTransform()._rotation = Vector3(0.0f, 0.0f, 0.0f);
 
 
-	heart[0]->GetTransform()._scale = Vector3(1.0f, 1.0f, 0.0f);
-	heart[0]->GetTransform()._translation = Vector3(-25.0f, 20.0f, 60.0f) + m_uicamera->Translation();
 
-	heart[1]->GetTransform()._scale = Vector3(1.0f, 1.0f, 0.0f);
-	heart[1]->GetTransform()._translation = Vector3(-22.5f, 20.0f, 60.0f) + m_uicamera->Translation();
-
-
-	heart[2]->GetTransform()._scale = Vector3(1.0f, 1.0f, 0.0f);
-	heart[2]->GetTransform()._translation = Vector3(-20.0f, 20.0f, 60.0f) + m_uicamera->Translation();
+	for (i = 0; i < h_max; i++){
+		heart[i]->GetTransform()._scale = Vector3(1.0f, 1.0f, 0.0f);
+		heart[i]->GetTransform()._translation = Vector3(-25.0f +i* 2.5 , 20.0f, 60.0f) + m_uicamera->Translation();
+	}
 
 	road->SetCamera(m_uicamera.get());
 	location->SetCamera(m_uicamera.get());
 	goal->SetCamera(m_uicamera.get());
 	start->SetCamera(m_uicamera.get());
 
-	heart[0]->SetCamera(m_uicamera.get());
-	heart[1]->SetCamera(m_uicamera.get());
-	heart[2]->SetCamera(m_uicamera.get());
 
+	for (i = 0; i < h_max; i++){
+		heart[i]->SetCamera(m_uicamera.get());
+	}
 
 	return true;
 
