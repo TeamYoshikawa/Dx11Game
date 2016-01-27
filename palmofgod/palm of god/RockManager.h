@@ -5,29 +5,41 @@
 
 #include <GameController.h>
 #include <Sphere.h>
+#include <Cube.h>
 #include <memory>
 #include <Texture.h>
 #include <ViewCamera.h>
-
+#include <stdio.h>
 
 class RockManager
 {
 private:
-	std::shared_ptr<aetherClass::Sphere>m_Rock;
-	std::shared_ptr<aetherClass::Sphere>m_switch;
+	enum class eEvent{
+		eCheckingInput,
+		eStart,
+		eNull
+	};
+private:
+	std::shared_ptr<aetherClass::ModelBase>m_Rock;
+	std::shared_ptr<aetherClass::ModelBase>m_switch;
 
 	std::shared_ptr<aetherClass::Texture> m_rockTexture;
+	std::shared_ptr<aetherClass::Texture> m_switchTexture;
+
 	std::shared_ptr<n_Rock::RockUpdater>m_updater;
 	std::shared_ptr<n_Rock::RockRender>m_render;
+	bool m_isButton;
+	eEvent m_rockEvent;
 
-	
-
+	int hoge;
 public:
 	RockManager() = default;
 	~RockManager() = default;
+
 
 	bool Initialize(aetherClass::ViewCamera* camera);
 	void Render(const std::shared_ptr<aetherClass::ShaderBase>);
 	void Update();
 	void Shutdown();
+	 Get();
 };
