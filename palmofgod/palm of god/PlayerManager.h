@@ -32,6 +32,8 @@ class PlayerManager
 
 		void NextSerch();
 
+		enum move_State{STOP,GO};	//プレイヤーの移動状態
+
 		bool IsChangeCamera();	// カメラを切り替えるかの判別用
 		std::unique_ptr<PlayerNavigation> m_navigation; // プレイヤーのルート用オブジェクト
 		

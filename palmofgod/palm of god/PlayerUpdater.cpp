@@ -5,6 +5,7 @@
 #include <MathUtility.h>
 #include <iostream>
 #include<Physics.h>
+
 using namespace aetherClass;
 using namespace aetherFunction;
 PlayerUpdater::PlayerUpdater(){}
@@ -19,7 +20,8 @@ PlayerUpdater::~PlayerUpdater(){
 
 
 void PlayerUpdater::Initialize(){
-
+	
+	w_stopcnt = 0;
 	return;
 }
 
@@ -42,9 +44,27 @@ void PlayerUpdater::SendStatus(PlayerBase::PlayerStatus&){
 void PlayerUpdater::Updating(const std::shared_ptr<FbxModel>& playerObject, float frame){
 
 	// ˆÚ“®‚Ìˆ—
-	//if (SendStatus()._navigationID != 4){
+
+	//‹^Ž—“I‚É(Å‰‚Ìƒgƒ‰ƒbƒv‚ÌêŠ‚É)Ž~‚Ü‚é“®‚­‚ð‚µ‚Ä‚¢‚é‚¾‚¯
+
+	if (SendStatus()._navigationID != 4){
 		playerObject->GetTransform()._translation += SendStatus()._nextMoveDirection / 170;
-	//}
+	}
+	else
+	{
+		if (w_stopcnt > 500)
+		{
+			playerObject->GetTransform()._translation += SendStatus()._nextMoveDirection / 170;
+		}
+		
+		w_stopcnt++;
+		std::cout << w_stopcnt<< "\n";
+	}
+
+	//Ž©“®‚Å“®‚­(§ŒÀ‚©‚¯‚Ä‚¢‚È‚¢)
+
+	//playerObject->GetTransform()._translation += SendStatus()._nextMoveDirection / 170;
+
 	return;
 }
 
