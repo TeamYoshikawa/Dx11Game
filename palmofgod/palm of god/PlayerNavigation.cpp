@@ -13,6 +13,7 @@ Vector3 PlayerNavigation::m_navigationBoxPosition[] = {
 	{ Vector3(2400.0f, 100.f, 650.0f) },
 	{ Vector3(2800.0f, 100.f, 700.0f) },
 	{ Vector3(2800.0f, 100.f, 2200.0f) },
+	{ Vector3(3400.0f, 100.f, 2200.0f) },
 	{ Vector3(4100.0f, 100.f, 2200.0f) },
 	{ Vector3(5500.0f, 100.f, 2200.0f) },
 	{ Vector3(5500.0f, 100.f, 650.0f) },

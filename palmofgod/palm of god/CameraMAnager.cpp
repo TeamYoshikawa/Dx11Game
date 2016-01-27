@@ -17,7 +17,7 @@ CameraManager::CameraPropaty CameraManager::m_propaty[] = {
 	{ Vector3(5300, -136, 314), Vector3(-182.0f, 206.0f, 1.0f) },
 	{ Vector3(9006, -142, 866), Vector3(-170.0f, 70.0f, 1.0f) },
 	{ Vector3(9004, -142, 328), Vector3(-170.0f, 117.0f, 1.0f) },
-	{ Vector3(8728, -192, 314), Vector3(-174.0f, 180.0f, 1.0f) },
+	{ Vector3(8728, -142, 314), Vector3(-174.0f, 180.0f, 1.0f) },
 	{ Vector3(8484, -12, 2130), Vector3(-174.0f, -88.0f, 1.0f) }
 };
 
