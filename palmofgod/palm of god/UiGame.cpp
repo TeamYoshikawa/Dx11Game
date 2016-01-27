@@ -9,7 +9,7 @@ bool UiGame::Initialize(){
 
 	h_max = 3;
 
-	location = std::make_shared<Sphere>(1.2,15,15);
+	location = std::make_shared<aetherClass::Rectangle>();
 	goal = std::make_shared<aetherClass::Rectangle>();
 	start = std::make_shared<aetherClass::Rectangle>();
 	road = std::make_shared<aetherClass::Rectangle>();
@@ -80,7 +80,7 @@ bool UiGame::Initialize(){
 	h_ui->GetTransform()._translation = Vector3(-19.0f, 16.0f, 45.0f) + m_uicamera->Translation();
 	h_ui->GetTransform()._rotation = Vector3(0.0f, 0.0f, 0.0f);
 
-	location->GetTransform()._scale = Vector3(0.8f, 0.8f, 0.0f);
+	location->GetTransform()._scale = Vector3(1.0f, 1.0f, 0.0f);
 	location->GetTransform()._translation = Vector3(22.5f, -8.2f, 45.0f) + m_uicamera->Translation();
 	location->GetTransform()._rotation = Vector3(0.0f, 0.0f, 0.0f);
 
@@ -119,14 +119,14 @@ bool UiGame::Initialize(){
 void UiGame::Update()
 {
 
-	if (location->GetTransform()._translation._y > 908.0f){
+	if (location->GetTransform()._translation._y > 908.5f){
 		
 		flag = ON;
 	}
 
 
 	if (flag == OFF){
-		location->GetTransform()._translation._y += 1.3f;
+		location->GetTransform()._translation._y += 1.43f;
 	}
 
 

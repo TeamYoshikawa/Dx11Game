@@ -22,8 +22,9 @@ namespace n_Rock{
 		RockUpdater();
 		~RockUpdater() = default;
 
+		int FlagGet();
 	
-		int r_flag = OFF;
+		int r_flag = ON;
 
 		void Update(aetherClass::ModelBase*model, bool m_isButton);
 		

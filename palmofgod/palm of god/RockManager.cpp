@@ -9,6 +9,8 @@ bool RockManager::Initialize(ViewCamera* camera){
 
 	m_cnt = 0;
 
+	
+
 	m_rockTexture = std::make_shared<Texture>();
 	m_rockTexture->Load("ModelData/textures/seafloor.dds");
 
