@@ -6,6 +6,7 @@
 
 #include <Cube.h>
 #include <Sphere.h>
+#include <Rectangle.h>
 #include <memory>
 #include<iostream>
 
@@ -23,6 +24,8 @@ private:
 
 	int i=0;
 
+
+	std::shared_ptr<aetherClass::ModelBase>h_ui;
 	std::shared_ptr<aetherClass::ModelBase>goal;
 	std::shared_ptr<aetherClass::ModelBase>start;
 	std::shared_ptr<aetherClass::ModelBase>road;
@@ -34,7 +37,7 @@ private:
 
 	std::shared_ptr<PlayerManager>m_player;
 
-	std::shared_ptr<aetherClass::PixelShader> m_shader;
+	std::shared_ptr<aetherClass::ShaderBase> m_shader;
 
 
 public:
