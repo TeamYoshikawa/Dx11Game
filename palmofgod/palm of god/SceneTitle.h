@@ -26,6 +26,8 @@ public:
 	void Render()override;
 	void Finalize()override;
 
+	bool TransitionIn()override;
+
 	static const std::string m_thisName;
 
 private:
@@ -39,6 +41,7 @@ private:
 
 
 	std::shared_ptr<aetherClass::ModelBase>title;
+	std::shared_ptr<aetherClass::ModelBase>feedin;	
 	std::shared_ptr<aetherClass::ViewCamera>m_uicamera;
 
 private:

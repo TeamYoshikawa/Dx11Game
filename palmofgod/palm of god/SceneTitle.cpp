@@ -1,5 +1,6 @@
 #include "SceneTitle.h"
 #include <Rectangle.h>
+#include "SceneGame.h"
 using namespace aetherClass;
 using namespace std;
 
@@ -24,13 +25,22 @@ bool SceneTitle::Initialize()
 	InitStage();
 
 
+	feedin = std::make_shared<aetherClass::Rectangle>();
+	feedin->Initialize();
+	feedin->SetCamera(m_camera.get());
+	feedin->GetTransform()._translation = m_camera->Translation();
+	feedin->GetTransform()._translation._z -= 10;
+	feedin->GetTransform()._translation._y += 1000;
+	feedin->GetColor()._alpha = 1;
+	feedin->GetTransform()._scale._x = 10000;
+	feedin->GetTransform()._scale._y = 10000;
 	
-	
+
+
 	title = std::make_shared<aetherClass::Rectangle>();
 	title->Initialize();
 
 	Texture *title_tex = new Texture();/*テクスチャ―用*/
-
 	title_tex->Load("Titlelogo.png");	/*画像の読み込み*/
 
 	title->SetTexture(title_tex);
@@ -39,8 +49,12 @@ bool SceneTitle::Initialize()
 	title->GetTransform()._translation._z -= 200;
 	title->GetTransform()._translation._y += 35;
 	title->GetTransform()._rotation._x = 180;
-	title->GetTransform()._scale._x = 88;
+	title->GetTransform()._scale._x = 100;
 	title->GetTransform()._scale._y = 53;
+	
+	GameScene *Scene = new SceneGame();
+	RegisterScene(Scene);
+
 
 	/*
 	title->GetTransform()._scale = Vector3(0.8f, 0.8f, 0.0f);
@@ -49,6 +63,30 @@ bool SceneTitle::Initialize()
 	*/
 	return true;
 }
+
+
+bool SceneTitle::TransitionIn()
+{
+	m_camera->Render();
+	
+	feedin->GetColor()._alpha -= 0.007;
+	feedin->Render(m_pixelShader.get());
+
+
+
+	if (feedin->GetColor()._alpha < 0){
+		return kTransitionEnd;
+	}
+	else if (feedin->GetColor()._alpha > 1){
+		return kTransitionning;
+	
+	}
+
+
+
+	return kTransitionning;
+}
+
 
 bool SceneTitle::Updater()
 {
@@ -95,8 +133,6 @@ bool SceneTitle::Updater()
 
 void SceneTitle::Render()
 {
-
-	
 	m_camera->Render();
 	m_lightmanager->Render();
 	m_stage->Render(m_materialShader.get());
@@ -112,7 +148,7 @@ void SceneTitle::Finalize()
 void SceneTitle::InitPixelShader()
 {
 	ShaderDesc textureDesc;
-	textureDesc._pixel._srcFile = L"Shader/texture.ps";
+	textureDesc._pixel._srcFile = L"Shader/ColorTexture.ps";
 	textureDesc._pixel._entryName = "ps_main";
 
 	textureDesc._vertex._srcFile = L"Shader/VertexShaderBase.hlsl";
