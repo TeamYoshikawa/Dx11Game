@@ -5,7 +5,9 @@
 #include <GameController.h>
 #include <ConsoleWindow.h>
 #include <GameSceneManager.h>
-#include "SceneGame.h"
+#include "SceneTitle.h"
+#include "LoadObj.h"
+
 
 using namespace aetherClass;
 // エントリーポイントを作成
@@ -32,11 +34,14 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, LPSTR, INT){
 	entry->SetGameFrame(frame);
 
 	// 最初のシーンのオブジェクトを作成
-	GameScene* firstScene = new SceneGame();
+	GameScene* firstScene = new SceneTitle();
+
 
 	// 最初のシーンの設定
 	GameSceneManager::SetCurrentScene(firstScene);
+	LoadScreen *loadobj = new LoadObj;
 
+	GameSceneManager::SetLoadScreen(loadobj);
 	// メインループの開始
 	// この関数の内部で,GameFrameオブジェクトのFrameRunningが呼ばれる。
 	entry->GameRun();

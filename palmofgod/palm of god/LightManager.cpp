@@ -59,7 +59,7 @@ void LightManager::Render()
 	m_camera->Render();
 //	m_light->Translation() = m_lightpropaty[m_lightID].m_changeLightTranslationArray;
 //	m_cubed->Render(m_materialShader.get());
-	std::cout << "‚«‚½" << std::endl;
+	
 }
 
 void LightManager::Update()
@@ -82,10 +82,11 @@ void LightManager::Update()
 			m_light->Translation()._z += 10;
 		}
 		m_cubed->GetTransform()._translation = m_light->Translation();
-
+		/*
 		std::cout << "X : " << m_cubed->GetTransform()._translation._x << 
 			" Y : " << m_cubed->GetTransform()._translation._y
 			<< " Z : " << m_cubed->GetTransform()._translation._z << std::endl;
+			*/
 }
 
 void LightManager::ChangeLight(int id)

@@ -31,7 +31,7 @@ void RockUpdater::Update(ModelBase *Rock, bool buttonState = false){
 
 void RockUpdater::Open(ModelBase*Rock){
 
-		//std::cout << "‚¨‚³‚ê‚½\n";
+		std::cout << "‚¨‚³‚ê‚½\n";
 
 		Rock->GetTransform()._translation._y += speed;
 
@@ -49,7 +49,7 @@ void RockUpdater::Open(ModelBase*Rock){
 
 		if (Rock->GetTransform()._translation._z < 200){
 			r_flag = ON;
-			/*std::cout << r_flag << "\n";*/
+			std::cout << r_flag << "\n";
 		}
 	}
 
@@ -57,7 +57,7 @@ void RockUpdater::Open(ModelBase*Rock){
 
 void RockUpdater::Close(ModelBase*Rock){
 
-		//std::cout << "‚¨‚³‚ê‚Ä‚È‚¢\n";
+		std::cout << "‚¨‚³‚ê‚Ä‚È‚¢\n";
 
 		Rock->GetTransform()._translation._y += speed;
 

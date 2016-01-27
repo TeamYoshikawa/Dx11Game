@@ -14,6 +14,7 @@ bool UiGame::Initialize(){
 	start = std::make_shared<aetherClass::Rectangle>();
 	road = std::make_shared<aetherClass::Rectangle>();
 
+
 	for (i = 0; i < h_max; i++){
 		heart[i] = std::make_shared<aetherClass::Rectangle>();
 	}
@@ -46,10 +47,13 @@ bool UiGame::Initialize(){
 	Texture *start_tex = new Texture();	//テクスチャー用
 	Texture *location_tex = new Texture();	//テクスチャー用
 	Texture *road_tex = new Texture();	//テクスチャー用
+	Texture *goal_tex = new Texture();	//テクスチャー用
 	
+
 
 	heart_tex->Load("Heart.png");	//画像の読み込み
 	start_tex->Load("goal.png");	//画像の読み込み
+	goal_tex->Load("start.png");	//画像の読み込み
 	location_tex->Load("location.png");	//画像の読み込み
 	road_tex->Load("road.png");	//画像の読み込み
 	h_ui_tex->Load("h_ui.png");
@@ -57,7 +61,7 @@ bool UiGame::Initialize(){
 	
 	location->SetTexture(location_tex);
 	start->SetTexture(start_tex);
-	goal->SetTexture(start_tex);
+	goal->SetTexture(goal_tex);
 	road->SetTexture(road_tex);
 	for (i = 0; i < h_max; i++){
 		heart[i]->SetTexture(heart_tex);		//テクスチャーのセット
@@ -80,11 +84,11 @@ bool UiGame::Initialize(){
 	location->GetTransform()._translation = Vector3(22.5f, -8.2f, 45.0f) + m_uicamera->Translation();
 	location->GetTransform()._rotation = Vector3(0.0f, 0.0f, 0.0f);
 
-	goal->GetTransform()._scale = Vector3(1.0f, 1.0f, 0.0f);
+	goal->GetTransform()._scale = Vector3(1.4f, 1.4f, 0.0f);
 	goal->GetTransform()._translation = Vector3(22.5f, 10.0f, 45.0f) + m_uicamera->Translation();
 	goal->GetTransform()._rotation = Vector3(0.0f, 0.0f, 0.0f);
 
-	start->GetTransform()._scale = Vector3(1.0f, 1.0f, 0.0f);
+	start->GetTransform()._scale = Vector3(1.4f, 1.4f, 0.0f);
 	start->GetTransform()._translation = Vector3(22.5f, -10.0f, 45.0f) + m_uicamera->Translation();
 	start->GetTransform()._rotation = Vector3(0.0f, 0.0f, 0.0f);
 

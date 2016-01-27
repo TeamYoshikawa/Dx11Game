@@ -11,15 +11,15 @@ CameraManager::CameraPropaty CameraManager::m_propaty[] = {
 	{ Vector3(3096, -188, 328), Vector3(-160.0f, 115.0f, 1.0f) },
 	{ Vector3(2374, 100, 316), Vector3(-180.0f, 200.0f, 1.0f) },
 	{ Vector3(2558, -180, 2494), Vector3(-166.0f, -16.0f, 1.0f) },
-	{ Vector3(2558, -180, 2494), Vector3(-166.0f, -16.0f, 1.0f) },
+	/*{ Vector3(2558, -180, 2494), Vector3(-166.0f, -16.0f, 1.0f) },
 	{ Vector3(2558, -12, 2206), Vector3(-172.0f, 271.0f, 1.0f) },
-	//{ Vector3(4394, 184, 2218), Vector3(-172.0f, 92.0f, 1.0f) },
+	{ Vector3(4394, 184, 2218), Vector3(-172.0f, 92.0f, 1.0f) },
 	{ Vector3(5294, -106, 1938), Vector3(-180.0f, 107.0f, 1.0f) },
 	{ Vector3(5300, -136, 314), Vector3(-182.0f, 206.0f, 1.0f) },
 	{ Vector3(9006, -142, 866), Vector3(-170.0f, 70.0f, 1.0f) },
 	{ Vector3(9004, -142, 328), Vector3(-170.0f, 117.0f, 1.0f) },
 	{ Vector3(8728, -192, 314), Vector3(-174.0f, 180.0f, 1.0f) },
-	{ Vector3(8484, -12, 2130), Vector3(-174.0f, -88.0f, 1.0f) }
+	{ Vector3(8484, -12, 2130), Vector3(-174.0f, -88.0f, 1.0f) }*/
 };
 
 CameraManager::CameraManager()

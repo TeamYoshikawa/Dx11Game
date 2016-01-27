@@ -56,7 +56,7 @@ void RockManager::Update(){
 		if (m_isButton){
 			m_rockEvent = eEvent::eStart;
 	}
-		if (m_cnt > 1000){
+		if (m_cnt > 100){
 			m_rockEvent = eEvent::eStart;
 		}
 	}

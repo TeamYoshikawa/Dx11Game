@@ -25,8 +25,7 @@ class PlayerUpdater :
 		void SendStatus(PlayerBase::PlayerStatus&)override;
 		void Updating(const std::shared_ptr<aetherClass::FbxModel>&, float);
 		void FaceTheObject(const std::shared_ptr<aetherClass::FbxModel>&, const std::shared_ptr<aetherClass::ModelBase>&);
-		bool HittingProcessor(const std::shared_ptr<aetherClass::FbxModel>&);
-		bool HittingProcessor(const std::shared_ptr<aetherClass::FbxModel>&, const std::shared_ptr<aetherClass::ModelBase>&);
+		bool HittingProcessor(const std::shared_ptr<aetherClass::ModelBase>&, const std::shared_ptr<aetherClass::ModelBase>&);
 	private:
 		void Destroy()override;
 
