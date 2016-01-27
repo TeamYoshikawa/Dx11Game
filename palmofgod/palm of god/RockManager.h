@@ -2,6 +2,7 @@
 
 #include"RockUpdater.h"
 #include"RockRender.h"
+#include "PlayerManager.h"
 
 #include <GameController.h>
 #include <Sphere.h>
@@ -28,18 +29,24 @@ private:
 
 	std::shared_ptr<n_Rock::RockUpdater>m_updater;
 	std::shared_ptr<n_Rock::RockRender>m_render;
+
+	std::shared_ptr<n_Rock::RockUpdater> m_player;
+	
 	bool m_isButton;
+	
+	int m_cnt;
+
 	eEvent m_rockEvent;
 
-	int hoge;
+	
+	
 public:
 	RockManager() = default;
 	~RockManager() = default;
-
 
 	bool Initialize(aetherClass::ViewCamera* camera);
 	void Render(const std::shared_ptr<aetherClass::ShaderBase>);
 	void Update();
 	void Shutdown();
-	 Get();
+	std::shared_ptr<aetherClass::ModelBase> Get();
 };

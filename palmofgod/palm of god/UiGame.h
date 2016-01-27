@@ -21,13 +21,14 @@ class UiGame
 {
 private:
 
+	int i=0;
+
 	std::shared_ptr<aetherClass::ModelBase>goal;
 	std::shared_ptr<aetherClass::ModelBase>start;
 	std::shared_ptr<aetherClass::ModelBase>road;
 	std::shared_ptr<aetherClass::ModelBase>location;
 	
-	std::shared_ptr<aetherClass::ModelBase>heart1;
-	std::shared_ptr<aetherClass::ModelBase>heart2;
+	std::shared_ptr<aetherClass::ModelBase>heart[3];
 
 	std::shared_ptr<aetherClass::ViewCamera>m_uicamera;
 
@@ -40,11 +41,15 @@ public:
 	UiGame() = default;
 	~UiGame() = default;
 
-	
-	std::shared_ptr<aetherClass::Cube>heart;
+	int h_max;
+	int h_player;
+
 	bool Initialize();
 	void Render();
 	void Update();
 	void Life();
+	int Set(int h_player);
+
+
 };
 #endif

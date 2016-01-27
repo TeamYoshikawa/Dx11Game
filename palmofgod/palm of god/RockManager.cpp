@@ -6,6 +6,9 @@ using namespace n_Rock;
 
 
 bool RockManager::Initialize(ViewCamera* camera){
+
+	m_cnt = 0;
+
 	m_rockTexture = std::make_shared<Texture>();
 	m_rockTexture->Load("ModelData/textures/seafloor.dds");
 
@@ -46,29 +49,35 @@ bool RockManager::Initialize(ViewCamera* camera){
 }
 
 void RockManager::Update(){
-	static bool button = false;
-	if (m_isButton){
-		m_rockEvent = eEvent::eStart;
-	}
-
+	
 	if (m_rockEvent == eEvent::eCheckingInput)
 	{
 		m_isButton = GameController::GetPointer()->IsKeyDown(DIK_X) ? true : false;
-		
+		if (m_isButton){
+			m_rockEvent = eEvent::eStart;
+	}
+		if (m_cnt > 1000){
+			m_rockEvent = eEvent::eStart;
+		}
 	}
 	else
 	{
-		m_updater->Update(m_Rock.get(), button);
+		m_updater->Update(m_Rock.get(), m_isButton);
 	}
+	m_cnt++;
 	
 }
 
 void RockManager::Shutdown(){
 	m_Rock->Finalize();
+	
 }
 
 void RockManager::Render(std::shared_ptr<ShaderBase>shader){
+
+
 	m_render->Render(m_Rock.get(), shader);
+	
 	m_render->Render(m_switch.get(), shader);
 }
 

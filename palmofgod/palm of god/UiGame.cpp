@@ -7,23 +7,28 @@ bool UiGame::Initialize(){
 	flag = OFF;
 	std::cout << "init" << std::endl;
 
+	h_max = 3;
+
+
 	location = std::make_shared<Sphere>(1.2,15,15);
 	goal = std::make_shared<Cube>();
 	start = std::make_shared<Cube>();
 	road = std::make_shared<Cube>();
-	heart = std::make_shared<Cube>();
-	heart1 = std::make_shared<Cube>();
-	heart2 = std::make_shared<Cube>();
+
+	for (i = 0; i < h_max; i++){
+		heart[i] = std::make_shared<Cube>();
+	}
+
 	m_uicamera = std::make_shared<ViewCamera>();
 
 	location->Initialize();
 	goal->Initialize();
 	start->Initialize();
 	road->Initialize();
-	heart->Initialize();
-	heart1->Initialize();
-	heart2->Initialize();
 
+	for (i = 0; i < h_max; i++){
+		heart[i]->Initialize();
+	}
 
 	ShaderDesc  shaderdesc;
 	shaderdesc._pixel._srcFile = L"Shader/texture.ps";
@@ -48,9 +53,11 @@ bool UiGame::Initialize(){
 	start->SetTexture(start_tex);
 	goal->SetTexture(start_tex);
 	road->SetTexture(road_tex);
-	heart->SetTexture(heart_tex);		//テクスチャーのセット
-	heart1->SetTexture(heart_tex);		//テクスチャーのセット
-	heart2->SetTexture(heart_tex);		//テクスチャーのセット
+	
+	
+	heart[0]->SetTexture(heart_tex);		//テクスチャーのセット
+	heart[1]->SetTexture(heart_tex);		//テクスチャーのセット
+	heart[2]->SetTexture(heart_tex);		//テクスチャーのセット
 	//location->GetColor() = Color(0.5f,0.7f,0.2f,1);
 
 
@@ -78,24 +85,24 @@ bool UiGame::Initialize(){
 	road->GetTransform()._rotation = Vector3(0.0f, 0.0f, 0.0f);
 
 
-	heart->GetTransform()._scale = Vector3(1.0f, 1.0f, 0.0f);
-	heart->GetTransform()._translation = Vector3(-25.0f, 20.0f, 60.0f) + m_uicamera->Translation();
+	heart[0]->GetTransform()._scale = Vector3(1.0f, 1.0f, 0.0f);
+	heart[0]->GetTransform()._translation = Vector3(-25.0f, 20.0f, 60.0f) + m_uicamera->Translation();
 
-	heart1->GetTransform()._scale = Vector3(1.0f, 1.0f, 0.0f);
-	heart1->GetTransform()._translation = Vector3(-22.5f, 20.0f, 60.0f) + m_uicamera->Translation();
+	heart[1]->GetTransform()._scale = Vector3(1.0f, 1.0f, 0.0f);
+	heart[1]->GetTransform()._translation = Vector3(-22.5f, 20.0f, 60.0f) + m_uicamera->Translation();
 
 
-	heart2->GetTransform()._scale = Vector3(1.0f, 1.0f, 0.0f);
-	heart2->GetTransform()._translation = Vector3(-20.0f, 20.0f, 60.0f) + m_uicamera->Translation();
+	heart[2]->GetTransform()._scale = Vector3(1.0f, 1.0f, 0.0f);
+	heart[2]->GetTransform()._translation = Vector3(-20.0f, 20.0f, 60.0f) + m_uicamera->Translation();
 
 	road->SetCamera(m_uicamera.get());
 	location->SetCamera(m_uicamera.get());
 	goal->SetCamera(m_uicamera.get());
 	start->SetCamera(m_uicamera.get());
 
-	heart->SetCamera(m_uicamera.get());
-	heart1->SetCamera(m_uicamera.get());
-	heart2->SetCamera(m_uicamera.get());
+	heart[0]->SetCamera(m_uicamera.get());
+	heart[1]->SetCamera(m_uicamera.get());
+	heart[2]->SetCamera(m_uicamera.get());
 
 
 	return true;
@@ -106,13 +113,6 @@ void UiGame::Update()
 {
 
 	if (location->GetTransform()._translation._y > 908.0f){
-		
-		/*
-		if (heart){
-			heart->Finalize();
-			heart.reset();
-		}
-		*/
 		
 		flag = ON;
 	}
@@ -128,11 +128,22 @@ void UiGame::Update()
 
 void UiGame::Life(){
 
-	if (heart){
-		heart->Finalize();
-		heart.reset();
+	for (int i=0; i < h_max; i++){
+		if (heart[i]){
+			heart[i]->Finalize();
+			heart[i].reset();
+		}
 	}
 }
+
+
+int UiGame::Set(int h_player){
+
+	h_max = h_player;
+
+	return 0;
+}
+
 
 void UiGame::Render(){
 
@@ -142,11 +153,12 @@ void UiGame::Render(){
 	start->Render(m_shader.get());
 	goal->Render(m_shader.get());
 	road->Render(m_shader.get());
-	if (heart){
-		heart->Render(m_shader.get());
+
+	for (int i = 0; i < h_max; i++){
+		if (heart[i]){
+			heart[i]->Render(m_shader.get());
+		}
 	}
-	heart1->Render(m_shader.get());
-	heart2->Render(m_shader.get());
 
 	return;
 }
