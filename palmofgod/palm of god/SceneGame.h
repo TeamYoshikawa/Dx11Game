@@ -9,6 +9,7 @@
 #include "CameraMAnager.h"
 #include "LightManager.h"
 #include "SpearManager.h"
+#include "PitFallManager.h"
 #include "RockManager.h"
 #include "LightShader.h"
 #include "Light.h"
@@ -31,11 +32,14 @@ class SceneGame :
 	private:
 		enum class eGameState{
 			eRockEvent,
+			eSpearEvent,
+			ePitFall,
 			eNull
 		};
 	private:
 		void FirstRockEvent();
-
+		void FirstSpearEvent();
+		void FirstPitFallEvent();
 		eGameState GetGameState();
 	
 	private:
@@ -45,6 +49,7 @@ class SceneGame :
 		std::shared_ptr<PlayerManager> m_player;
 		std::shared_ptr<CameraManager> m_camera;
 		std::shared_ptr<LightManager> m_lightmanager;
+		std::shared_ptr<PitFallManager> m_pitfall;
 
 		std::shared_ptr<SpearManager> m_spear;
 		std::shared_ptr<RockManager> m_rock;

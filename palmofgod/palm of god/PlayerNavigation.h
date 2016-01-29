@@ -24,10 +24,10 @@ class PlayerNavigation
 
 		int GetNavigationID()const;
 	private:
-		static std::shared_ptr<aetherClass::Cube> m_navigationBox;
+		std::shared_ptr<aetherClass::Cube> m_navigationBox;
 		static aetherClass::Vector3 m_navigationBoxPosition[];
-		static std::shared_ptr<aetherClass::Texture> m_texture;
-		static int m_navigationID;
+		std::shared_ptr<aetherClass::Texture> m_texture;
+		int m_navigationID;
 		int m_navigationArrayElement;
 };
 

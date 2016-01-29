@@ -21,6 +21,7 @@ PlayerUpdater::~PlayerUpdater(){
 
 void PlayerUpdater::Initialize(){
 	m_damageCounter = 0;
+	m_daedCounter = 0;
 	m_damageFlg = 0;
 	return;
 }
@@ -101,10 +102,16 @@ void PlayerUpdater::Stand(const std::shared_ptr<FbxModel>& playerObject){
 
 // —‚¿‚é‚Ìˆ—
 void PlayerUpdater::Fall(const std::shared_ptr<FbxModel>& playerObject){
-	if (SendStatus()._moveState != PlayerBase::ePlayerMoveState::eMove)
+	if (SendStatus()._moveState != PlayerBase::ePlayerMoveState::eFall)
 	{
 		return;
 	}
+	m_daedCounter += 1;
+	if (m_daedCounter > kDeadWaitTime){
+		
+	}
+	SendStatus()._isDead = true;
+	return;
 }
 
 

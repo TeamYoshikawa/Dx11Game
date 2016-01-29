@@ -2,9 +2,7 @@
 #include <assert.h>
 #include <iostream>
 using namespace aetherClass;
-std::shared_ptr<Cube> PlayerNavigation::m_navigationBox = nullptr;
-std::shared_ptr<aetherClass::Texture> PlayerNavigation::m_texture = nullptr;
-int PlayerNavigation::m_navigationID = 0;
+
 // ナビげーション用の位置
 Vector3 PlayerNavigation::m_navigationBoxPosition[] = {
 	{ Vector3(700.0f, 100.f, 750.0f) },
@@ -53,7 +51,10 @@ void PlayerNavigation::Initialize(std::shared_ptr<ViewCamera> camera){
 	m_navigationBox->GetTransform()._translation = initilaizePosition;
 	m_navigationBox->GetTransform()._rotation = Vector3(50, 50, 50);
 	
+	m_navigationID = 0;
 
+	m_navigationBox = nullptr;
+	m_texture = nullptr;
 	return;
 }
 

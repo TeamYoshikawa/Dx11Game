@@ -21,7 +21,7 @@ private:
 	
 	std::shared_ptr<Pitfall::PitFallUpdater>m_updater;
 	std::shared_ptr<Pitfall::PitFallRender>m_render;
-
+	std::shared_ptr<aetherClass::ModelBase> m_collideBox;
 public:
 	PitFallManager() = default;
 	~PitFallManager() = default;
@@ -31,5 +31,7 @@ public:
 	void Update();
 	void Shutdown();
 	void ChangeCamera(aetherClass::ViewCamera* camera);
+	int FlagGet();
+	std::shared_ptr<aetherClass::ModelBase> Get();
 };
 

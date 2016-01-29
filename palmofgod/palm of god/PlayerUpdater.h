@@ -12,7 +12,8 @@
 #include <FbxModel.h>
 #include <ModelBase.h>
 namespace{
-	const int kDamageWaitTime = 1000;
+	const int kDamageWaitTime = 10000;
+	const int kDeadWaitTime = 300;
 }
 class PlayerUpdater :
 	private PlayerBase
@@ -39,6 +40,7 @@ class PlayerUpdater :
 
 	private:
 		int m_damageCounter;
+		int m_daedCounter;
 		bool m_damageFlg;
 };
 

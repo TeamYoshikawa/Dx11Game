@@ -15,6 +15,7 @@ void PitFallUpdater::Update(ModelBase *pitfall , bool buttonState = false){
 
 	if (buttonState){
 		Open(pitfall);
+		s_flag = ON;
 	}
 	else
 		Close(pitfall);
@@ -32,6 +33,9 @@ void PitFallUpdater::Open(ModelBase*pitfall){
 	else{
 		pitfall->GetTransform()._rotation._z += m_speed;
 	}
+
+	//
+
 }
 
 void PitFallUpdater::Close(ModelBase*pitfall){
@@ -41,6 +45,11 @@ void PitFallUpdater::Close(ModelBase*pitfall){
 		pitfall->GetTransform()._rotation._z = 0;
 		m_speed = 20;
 	}
+	s_flag = OFF;
 
 }
 
+int PitFallUpdater::FlagGet()
+{
+	return s_flag;
+}
