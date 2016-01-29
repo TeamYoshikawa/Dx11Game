@@ -52,9 +52,6 @@ void PlayerNavigation::Initialize(std::shared_ptr<ViewCamera> camera){
 	m_navigationBox->GetTransform()._rotation = Vector3(50, 50, 50);
 	
 	m_navigationID = 0;
-
-	m_navigationBox = nullptr;
-	m_texture = nullptr;
 	return;
 }
 
