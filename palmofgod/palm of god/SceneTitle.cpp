@@ -92,6 +92,9 @@ bool SceneTitle::Updater()
 {
 	GameController::GetPointer()->Frame();
 	SceneChange();
+	if (GameController::GetPointer()->IsKeyDown(DIK_ESCAPE)){
+		return false;
+	}
 
 	if (GameController::GetPointer()->IsKeyDown(DIK_ESCAPE))
 	{
@@ -191,7 +194,7 @@ void SceneTitle::InitKeyObject()
 
 void SceneTitle::SceneChange()
 {
-	if (GameController::GetPointer()->IsRightButtonTrigger())
+	if (GameController::GetPointer()->IsLeftButtonTrigger())
 	{
 		cout << "Called NextScene!" << endl;
 		ChangeScene("Game");

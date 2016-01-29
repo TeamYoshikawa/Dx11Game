@@ -14,7 +14,7 @@ using namespace aetherClass;
 INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, LPSTR, INT){
 
 	// コンソールウィンドウが表示される
-	ConsoleWindow::Create();
+	//ConsoleWindow::Create();
 
 	// このクラスがメインループを持っているクラス
 	GameEntry* entry = new GameEntry();
@@ -56,6 +56,6 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, LPSTR, INT){
 	entry = nullptr;
 
 	// コンソールウィンドウを破棄したいときはこの関数を呼ぶ
-	ConsoleWindow::Close();
+	//ConsoleWindow::Close();
 	return 0;
 }
