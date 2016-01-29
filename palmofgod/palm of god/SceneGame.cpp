@@ -68,9 +68,8 @@ bool SceneGame::Initialize(){
 	m_rock = std::make_shared<RockManager>();
 	m_rock->Initialize(m_camera->GetCamera().get());
 
-	//槍の作成
-	m_spear = std::make_shared<SpearManager>();
-	m_spear->Initialize(m_camera->GetCamera().get());
+	/*m_spear = std::make_shared<SpearManager>();
+	m_spear->Initialize(m_camera->GetCamera().get());*/
 
 	// マテリアルシェーダー作成時の情報の設定
 	ShaderDesc materialDesc;
@@ -115,9 +114,6 @@ bool SceneGame::Updater(){
 	m_player->Update();
 	m_lightmanager->Update();
 	
-	if (m_camera->eID13){
-		m_spear->Update();
-	}
 
 	m_ui->Set(m_player->LifeGet());
 
@@ -135,7 +131,6 @@ void SceneGame::Render(){
 	m_player->Render(m_materialShader);
 
 	m_rock->Render(m_pixelShader);
-	m_spear->Render(m_pixelShader);
 	return;
 }
 
