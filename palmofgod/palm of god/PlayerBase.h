@@ -29,17 +29,28 @@ class PlayerBase
 			PlayerStatus(){
 				_vector = 0.0f;
 				_moveState = ePlayerMoveState::eNull;
-				_speed = 0.0f;
 				_nextMoveDirection = 0.0f;
 				_life = 3;
+				_isDead = false;
+				_muteki = false;
+				_navigationID = 0;
+			}
+			~PlayerStatus(){
+				_vector = 0.0f;
+				_moveState = ePlayerMoveState::eNull;
+				_nextMoveDirection = 0.0f;
+				_life = 3;
+				_isDead = false;
+				_muteki = false;
+				_navigationID = 0;
 			}
 			aetherClass::Vector3 _vector;
 			aetherClass::Vector3 _nextMoveDirection;
 			ePlayerMoveState _moveState;
-			float _speed;
 			int _navigationID;
 			int _life;
 			bool _muteki;
+			bool _isDead;
 		};
 
 

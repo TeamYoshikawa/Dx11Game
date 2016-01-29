@@ -93,6 +93,10 @@ bool SceneTitle::Updater()
 	GameController::GetPointer()->Frame();
 	SceneChange();
 
+	if (GameController::GetPointer()->IsKeyDown(DIK_ESCAPE))
+	{
+		return false;
+	}
 	return true;
 }
 

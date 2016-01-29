@@ -10,30 +10,31 @@
 #include "LightManager.h"
 #include "PixelShader.h"
 
-class SceneEnd 
+class SceneEnd
 	: public aetherClass::GameScene
 {
- public:
-	 SceneEnd();
-	 ~SceneEnd();
+public:
+	SceneEnd();
+	~SceneEnd();
 
-	 bool Initialize()override;
-	 bool Updater()override;
-	 void Render()override;
-	 void Finalize()override;
+	bool Initialize()override;
+	bool Updater()override;
+	void Render()override;
+	void Finalize()override;
+	bool TransitionIn()override;
+	static const std::string m_thisName;
 
-	 static const std::string m_thisName;
+private:
 
- private:
+	void SceneChange();
 
-	 void SceneChange();
-
-	 std::shared_ptr<aetherClass::Cube> m_gameover;
-	 std::shared_ptr<aetherClass::ViewCamera> m_camera;
-	 std::shared_ptr<aetherClass::Texture> m_texture;
-	 std::shared_ptr<aetherClass::PixelShader> m_shader;
-	 std::shared_ptr<aetherClass::MaterialShader> m_materialShader;
-	 std::shared_ptr<LightManager> m_lightmanager;
+	std::shared_ptr<aetherClass::ModelBase> m_gameover;
+	std::shared_ptr<aetherClass::ModelBase>feedin;
+	std::shared_ptr<aetherClass::ViewCamera> m_camera;
+	std::shared_ptr<aetherClass::Texture> m_texture;
+	std::shared_ptr<aetherClass::PixelShader> m_shader;
+	std::shared_ptr<aetherClass::MaterialShader> m_materialShader;
+	std::shared_ptr<LightManager> m_lightmanager;
 
 };
 

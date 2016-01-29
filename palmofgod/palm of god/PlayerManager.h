@@ -40,6 +40,8 @@ class PlayerManager
 		void SetState(PlayerBase::ePlayerMoveState);
 
 		bool GetIsDamage();
+
+		bool IsDead();
 	private:
 		// 次に行く道をセット
 		void SetNextPoint(const std::shared_ptr<aetherClass::ModelBase>&);

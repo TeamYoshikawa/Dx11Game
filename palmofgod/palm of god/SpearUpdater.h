@@ -7,6 +7,9 @@
 #include <ModelBase.h>
 //#include<Cube.h>
 
+#define ON 1
+#define OFF 0
+
 namespace n_Spear{
 	class SpearUpdater
 	{
@@ -23,7 +26,9 @@ namespace n_Spear{
 		~SpearUpdater();
 
 		void Updating(aetherClass::ModelBase*, bool buttonState);
+		int FlagGet();
 
+		int s_flag = OFF;
 
 	};
 

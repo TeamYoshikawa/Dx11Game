@@ -5,7 +5,7 @@
 //#include "Spear.h"
 #include <ShaderBase.h>
 #include <ModelBase.h>
-//#include <Cube.h>
+#include <Cube.h>
 
 /*
      

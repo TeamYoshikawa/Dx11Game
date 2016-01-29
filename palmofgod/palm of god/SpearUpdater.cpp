@@ -14,8 +14,8 @@ void SpearUpdater::Updating(ModelBase* spear, bool buttonState = true)
 		return;
 	}
 	if (buttonState){
-		//MessageBox(NULL, L"ON", ERROR, MB_OK);
 		ButtonOn(spear);
+		s_flag = ON;
 	}
 	else{
 		ButtonOff(spear);
@@ -27,16 +27,21 @@ void SpearUpdater::Updating(ModelBase* spear, bool buttonState = true)
 
 void SpearUpdater::ButtonOn(ModelBase* spear)
 {
-	spear->GetTransform()._translation._y += 1.0f;
+	spear->GetTransform()._translation._y -= 10.0f;
 
-	if (spear->GetTransform()._translation._y > 1.5f)spear->GetTransform()._translation._y = 1.5f;
+	if (spear->GetTransform()._translation._y > -200.5f)spear->GetTransform()._translation._y = -200.5f;
 		
-		
+	s_flag = OFF;
 }
 
 void SpearUpdater::ButtonOff(ModelBase* spear)
 {
-	spear->GetTransform()._translation._y -= 1.0f;
-	if (spear->GetTransform()._translation._y < -1.5f)spear->GetTransform()._translation._y = -1.5f;
+	spear->GetTransform()._translation._y += 10.0f;
+	if (spear->GetTransform()._translation._y > 350.5f)spear->GetTransform()._translation._y = 350.5f;
 	
+}
+
+int SpearUpdater::FlagGet()
+{
+	return s_flag;
 }

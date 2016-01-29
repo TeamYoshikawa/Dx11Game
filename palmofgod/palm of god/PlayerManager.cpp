@@ -76,6 +76,7 @@ void PlayerManager::Update(){
 		return;
 	}
 	m_updater->Updating(m_playerObject);
+
 	UpdateColliderBox();
 
 	// TODO : ナビゲーションにぶつかった時の処理
@@ -156,4 +157,8 @@ bool PlayerManager::IsChangeCamera(){
 
 bool PlayerManager::GetIsDamage(){
 	return m_updater->IsDamage();
+}
+
+bool PlayerManager::IsDead(){
+	return Status()._isDead;
 }
