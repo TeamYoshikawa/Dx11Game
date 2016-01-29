@@ -3,7 +3,6 @@
 #include <iostream>
 #include <PixelShader.h>
 #include "SceneTitle.h"
-#include "SceneEnd.h"
 #include"Cube.h"
 
 using namespace aetherClass;
@@ -20,11 +19,9 @@ SceneGame::~SceneGame()
 bool SceneGame::Initialize(){
 	std::cout << "Initialize game scene" << std::endl;
 
-	GameScene *title= new SceneTitle;
-	RegisterScene(title);
+	GameScene *Scene = new SceneTitle;
 
-	GameScene* end = new SceneEnd();
-	RegisterScene(end);
+	RegisterScene(Scene);
 
 	// UIの作成
 	m_ui = std::make_shared<UiGame>();
@@ -74,17 +71,12 @@ bool SceneGame::Initialize(){
 	m_stage->SetModelMaterialColor(Color(1, 1, 1, 1.0), eMatrerialType::eDiffuse);
 	m_stage->SetModelMaterialColor(Color(1, 0, 0, 1.0), eMatrerialType::eSpecular);
 
-	// 落とし穴の作成
-	m_pitfall = std::make_shared<PitFallManager>();
-	m_pitfall->Initialize(m_camera->GetCamera().get(), Vector3(7378, 215, 600));
-
 	// 岩の作成
 	m_rock = std::make_shared<RockManager>();
 	m_rock->Initialize(m_camera->GetCamera().get());
 
-	//槍の作成
-	m_spear = std::make_shared<SpearManager>();
-	m_spear->Initialize(m_camera->GetCamera().get());
+	/*m_spear = std::make_shared<SpearManager>();
+	m_spear->Initialize(m_camera->GetCamera().get());*/
 
 	// マテリアルシェーダー作成時の情報の設定
 	ShaderDesc materialDesc;
@@ -115,10 +107,10 @@ bool SceneGame::Updater(){
 
 
 	// デバッグ用
-	if (GameController::GetPointer()->IsRightButtonTrigger())
+	/*if (GameController::GetPointer()->IsRightButtonTrigger())
 	{
 		m_camera->NextCameraSet();
-	}
+	}*/
 
 	// プレイヤーが一定位置に進んだら
 	if (m_player->IsChangeCamera())
@@ -127,21 +119,12 @@ bool SceneGame::Updater(){
 		m_camera->NextCameraSet();
 	}
 
-
-
 	FirstRockEvent();
-	FirstSpearEvent();
-	FirstPitFallEvent();
 	m_player->Update();
 	m_lightmanager->Update();
 	
 
 	m_ui->Set(m_player->LifeGet());
-
-	if (m_player->IsDead())
-	{
-		ChangeScene("End");
-	}
 
 	if (GameController::GetPointer()->IsKeyDown(DIK_R)){
 		ChangeScene("Title");
@@ -160,9 +143,7 @@ void SceneGame::Render(){
 
 	m_player->Render(m_materialShader);
 
-	m_pitfall->Render(m_materialShader);
 	m_rock->Render(m_pixelShader);
-	m_spear->Render(m_pixelShader);
 	return;
 }
 
@@ -210,73 +191,6 @@ void SceneGame::FirstRockEvent(){
 	return;
 }
 
-void SceneGame::FirstPitFallEvent()
-{
-
-	if (m_gameState != SceneGame::eGameState::ePitFall)
-	{
-		return;
-	}
-
-	if (GameController::GetPointer()->IsLeftButtonDown())
-	{
-		m_pitfall->Update();
-		if (m_player->HitMesh(m_pitfall->Get())){
-			m_player->SetState(PlayerBase::ePlayerMoveState::eFall);
-
-		}
-	}
-
-	switch (m_pitfall->FlagGet())
-	{
-	case ON:
-		
-		break;
-
-	case OFF:
-		break;
-	}
-	
-
-	// 左クリックしたら落とし穴が開く
-	m_gameState = eGameState::eNull;
-	return;
-
-}
-
-void SceneGame::FirstSpearEvent(){
-
-	if (m_gameState != SceneGame::eGameState::eSpearEvent)
-	{
-		return;
-	}
-
-
-	m_spear->Update();
-	switch (m_spear->FlagGet())
-	{
-	case ON:
-		// 押されないでONなら進む初めてダメージをくらいに行く
-			if (!m_player->GetIsDamage())
-			{
-				m_player->SetState(PlayerBase::ePlayerMoveState::eMove);
-			}
-
-			if (m_player->HitMesh(m_spear->Get()))
-			{
-				m_player->SetState(PlayerBase::ePlayerMoveState::eDamage);
-			}
-		break;
-	case OFF:
-		m_player->SetState(PlayerBase::ePlayerMoveState::eMove);
-		m_gameState = eGameState::eNull;
-		break;
-
-	}
-	return;
-
-}
- 
 SceneGame::eGameState SceneGame::GetGameState(){
 	switch (m_player->Status()._navigationID)
 	{
@@ -284,12 +198,7 @@ SceneGame::eGameState SceneGame::GetGameState(){
 	case 5:
 	case 6:
 		return SceneGame::eGameState::eRockEvent;
-	case 10:
-	case 11:
-		return SceneGame::eGameState::ePitFall;
-	case 12:
-	case 13:
-		return SceneGame::eGameState::eSpearEvent;
+
 	default:
 		return SceneGame::eGameState::eNull;
 	}

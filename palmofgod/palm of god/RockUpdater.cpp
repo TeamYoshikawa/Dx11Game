@@ -43,8 +43,9 @@ void RockUpdater::Open(ModelBase*Rock){
 			Rock->GetTransform()._translation._y = 120.0f;
 
 			Rock->GetTransform()._translation._x -= 0.5f;
+
 			Rock->GetTransform()._rotation._x += 10.0f;
-			//Rock->GetTransform()._translation._y += 2.0f;
+	
 			Rock->GetTransform()._translation._z -= 15.0f;
 		}
 
@@ -63,7 +64,7 @@ void RockUpdater::Close(ModelBase*Rock){
 
 		speed *= 1.12;
 
-		//std::cout << Rock->GetTransform()._translation._z << "\n";
+		
 
 		if (Rock->GetTransform()._translation._y > 120.0f){
 
