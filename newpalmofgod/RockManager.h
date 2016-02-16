@@ -3,7 +3,7 @@
 #include"RockUpdater.h"
 #include"RockRender.h"
 #include "PlayerManager.h"
-
+#include "TrapNavigation.h"
 #include <GameController.h>
 #include <Sphere.h>
 #include <Cube.h>
@@ -23,17 +23,23 @@ private:
 		eNull
 	};
 private:
-	std::shared_ptr<aetherClass::ModelBase>m_Rock[2];
 
+
+
+	std::shared_ptr<aetherClass::ModelBase>m_Rock[2];
 	std::shared_ptr<aetherClass::ModelBase>m_switch;
+	std::shared_ptr<aetherClass::ModelBase>m_hplayer;
 
 	std::shared_ptr<aetherClass::Texture> m_rockTexture;
 	std::shared_ptr<aetherClass::Texture> m_switchTexture;
+	std::shared_ptr<aetherClass::Texture> m_hplayerTexture;
 
 	std::shared_ptr<n_Rock::RockUpdater>m_updater;
 	std::shared_ptr<n_Rock::RockRender>m_render;
 
 	std::shared_ptr<n_Rock::RockUpdater> m_player;
+
+	std::shared_ptr<TrapNavigation> m_navigation;
 	
 	int i;
 
