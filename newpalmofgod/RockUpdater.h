@@ -2,9 +2,11 @@
 #include <ModelBase.h>
 //#include"Sphere.h"
 
-#define ON 1
 #define OFF 0
-#define SAVE 2
+#define ON  1
+
+static int flag = OFF;
+
 namespace n_Rock{
 	class RockUpdater
 	{

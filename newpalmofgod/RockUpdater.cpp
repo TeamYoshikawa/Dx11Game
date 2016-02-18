@@ -9,6 +9,8 @@ RockUpdater::RockUpdater(){
 
 }
 
+
+
 //Update process
 void RockUpdater::Update(ModelBase *Rock){
 
@@ -16,9 +18,9 @@ void RockUpdater::Update(ModelBase *Rock){
 		MessageBox(NULL, L"missing Object", ERROR, MB_OK);
 		return;
 	}
-	
-
-	First(Rock);
+	if (flag == OFF){
+		First(Rock);
+	}
 }
 
 void RockUpdater::First(ModelBase*Rock){
@@ -29,6 +31,7 @@ void RockUpdater::First(ModelBase*Rock){
 
 		speed *= 1.12;
 		
+		std::cout << Rock->GetTransform()._translation._z << std::endl;
 	
 		if (Rock->GetTransform()._translation._y > 120.0f){
 
@@ -42,6 +45,7 @@ void RockUpdater::First(ModelBase*Rock){
 		}
 
 		if (Rock->GetTransform()._translation._z < 200){
-			
+			flag = ON;
 		}
 	}
+

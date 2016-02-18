@@ -7,8 +7,6 @@ using namespace n_Rock;
 
 bool RockManager::Initialize(ViewCamera* camera){
 
-	m_cnt = 0;
-
 	m_rockTexture = std::make_shared<Texture>();
 	m_rockTexture->Load("ModelData/textures/seafloor.dds");
 
@@ -63,13 +61,12 @@ bool RockManager::Initialize(ViewCamera* camera){
 	m_updater = std::make_shared<RockUpdater>();
 	m_render = std::make_shared<RockRender>();
 
-	m_isButton = false;
-	m_rockEvent = eEvent::eCheckingInput;
+	m_rockEvent = eEvent::eChecking;
 	return true;
 }
 
 void RockManager::Update(){
-	
+
 	if (GameController::GetKey().IsKeyDown(DIK_A)){
 
 		m_hplayer->GetTransform()._translation._x -= 1.0f;
@@ -80,7 +77,14 @@ void RockManager::Update(){
 		m_hplayer->GetTransform()._translation._x += 1.0f;
 	}
 
-	if (aetherFunction::CollideBoxOBB(*m_hplayer, *m_switch)){
+	if (m_rockEvent == eEvent::eChecking)
+	{
+		if (aetherFunction::CollideBoxOBB(*m_hplayer, *m_switch)){
+			m_rockEvent = eEvent::eStart;
+		}
+	}
+	else
+	{
 		m_updater->Update(m_Rock[0].get());
 	}
 }
@@ -95,12 +99,11 @@ void RockManager::Render(std::shared_ptr<ShaderBase>shader){
 	m_hplayer->Render(shader.get());
 }
 
+
 std::shared_ptr<aetherClass::ModelBase> RockManager::Get(){
 
 	return m_Rock[0];
 }
 
 
-bool RockManager::GetIsPushButton(){
-	return m_isButton;
-}
+

@@ -4,7 +4,7 @@ using namespace aetherClass;
 
 bool UiGame::Initialize(){
 
-	flag = OFF;
+	u_flag = OFF;
 	std::cout << "init" << std::endl;
 
 	h_max = 3;
@@ -120,12 +120,11 @@ void UiGame::Update()
 {
 
 	if (location->GetTransform()._translation._y > 908.5f){
-		
-		flag = ON;
+		u_flag = ON;
 	}
 
 
-	if (flag == OFF){
+	if (u_flag == OFF){
 		location->GetTransform()._translation._y += 1.43f;
 	}
 

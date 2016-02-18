@@ -16,7 +16,7 @@
 
 #define ON 1
 #define OFF 0
-static int flag;
+
 
 class UiGame
 {
@@ -24,6 +24,7 @@ private:
 
 	int i=0;
 
+	int u_flag;
 
 	std::shared_ptr<aetherClass::ModelBase>h_ui;
 	std::shared_ptr<aetherClass::ModelBase>goal;

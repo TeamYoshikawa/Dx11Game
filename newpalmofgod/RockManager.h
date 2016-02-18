@@ -18,14 +18,11 @@ class RockManager
 {
 private:
 	enum class eEvent{
-		eCheckingInput,
+		eChecking,
 		eStart,
 		eNull
 	};
 private:
-
-
-
 	std::shared_ptr<aetherClass::ModelBase>m_Rock[2];
 	std::shared_ptr<aetherClass::ModelBase>m_switch;
 	std::shared_ptr<aetherClass::ModelBase>m_hplayer;
@@ -43,10 +40,6 @@ private:
 	
 	int i;
 
-	bool m_isButton;
-	
-	int m_cnt;
-
 	eEvent m_rockEvent;
 	
 	
@@ -54,15 +47,9 @@ public:
 	RockManager() = default;
 	~RockManager() = default;
 
-
 	bool Initialize(aetherClass::ViewCamera* camera);
 	void Render(const std::shared_ptr<aetherClass::ShaderBase>);
 	void Update();
-
-
-	bool GetIsPushButton();
-
-	int FlagGet();
 
 	std::shared_ptr<aetherClass::ModelBase> Get();
 };
