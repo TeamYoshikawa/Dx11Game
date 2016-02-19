@@ -31,8 +31,7 @@ bool SceneGame::Initialize(){
 	m_camera = std::make_shared<CameraManager>();
 	m_camera->Initialize();
 
-	m_trapmanager = std::make_shared<TrapManager>();
-	m_trapmanager->Initialize(m_camera->GetCamera().get());
+	
 
 	// シェーダーの詳細情報の設定
 	ShaderDesc textureDesc;
@@ -108,7 +107,7 @@ bool SceneGame::Updater(){
 	
 	m_gameState = GetGameState();
 
-	m_trapmanager->Update();
+	m_rock->Update();
 
 	// デバッグ用
 	if (GameController::GetMouse().IsRightButtonTrigger())
@@ -123,12 +122,9 @@ bool SceneGame::Updater(){
 		m_camera->NextCameraSet();
 	}
 
-	
 	m_player->Update();
 	m_lightmanager->Update();
 	
-	
-
 	m_ui->Set(m_player->LifeGet());
 
 	if (GameController::GetKey().IsKeyDown(DIK_R)){
@@ -150,7 +146,6 @@ void SceneGame::Render(){
 
 	m_rock->Render(m_pixelShader);
 
-	m_trapmanager->Render(m_pixelShader);
 	return;
 }
 

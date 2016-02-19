@@ -5,8 +5,6 @@
 #define OFF 0
 #define ON  1
 
-static int flag = OFF;
-
 namespace n_Rock{
 	class RockUpdater
 	{
@@ -18,6 +16,8 @@ namespace n_Rock{
 		void Second(aetherClass::ModelBase*);
 
 		float speed= 1.0f;
+
+		int flag = OFF;
 		
 	public:
 		RockUpdater();

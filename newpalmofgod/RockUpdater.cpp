@@ -18,9 +18,11 @@ void RockUpdater::Update(ModelBase *Rock){
 		MessageBox(NULL, L"missing Object", ERROR, MB_OK);
 		return;
 	}
+
 	if (flag == OFF){
 		First(Rock);
 	}
+
 }
 
 void RockUpdater::First(ModelBase*Rock){
