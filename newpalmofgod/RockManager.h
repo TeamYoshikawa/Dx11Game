@@ -3,6 +3,7 @@
 #include"RockUpdater.h"
 #include"RockRender.h"
 #include "PlayerManager.h"
+#include <Physics.h>
 #include <GameController.h>
 #include <Sphere.h>
 #include <Cube.h>
@@ -34,7 +35,6 @@ private:
 	std::shared_ptr<n_Rock::RockRender>m_render;
 
 	std::shared_ptr<n_Rock::RockUpdater> m_player;
-
 	
 	int i;
 
