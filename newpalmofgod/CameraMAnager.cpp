@@ -53,19 +53,19 @@ void CameraManager::Update()
 
 	if (GameController::GetKey().IsKeyDown(DIK_RIGHT))
 	{
-		m_camera->Translation()._x += 2;
+		m_camera->Translation()._z += 2;
 	}
 	if (GameController::GetKey().IsKeyDown(DIK_LEFT))
 	{
-		m_camera->Translation()._x -= 2;
+		m_camera->Translation()._z -= 2;
 	}
 	if (GameController::GetKey().IsKeyDown(DIK_UP))
 	{
-		m_camera->Translation()._z -= 2;
+		m_camera->Translation()._x += 2;
 	}
 	if (GameController::GetKey().IsKeyDown(DIK_DOWN))
 	{
-		m_camera->Translation()._z += 2;
+		m_camera->Translation()._x -= 2;
 	}
 }
 
