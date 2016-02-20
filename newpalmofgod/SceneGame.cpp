@@ -155,6 +155,8 @@ void SceneGame::Render(){
 
 	m_rock->Render(m_pixelShader);
 
+	m_sound->PlayToLoop();
+
 	return;
 }
 
