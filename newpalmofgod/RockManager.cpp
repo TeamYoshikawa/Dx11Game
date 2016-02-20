@@ -67,6 +67,8 @@ bool RockManager::Initialize(ViewCamera* camera){
 
 void RockManager::Update(){
 
+	rock_flag = m_updater->FlagGet();
+
 	if (GameController::GetKey().IsKeyDown(DIK_A)){
 
 		m_hplayer->GetTransform()._translation._x -= 1.0f;
@@ -80,12 +82,18 @@ void RockManager::Update(){
 	if (m_rockEvent == eEvent::eChecking)
 	{
 		if (aetherFunction::CollideBoxOBB(*m_hplayer, *m_switch)){
+			m_updater->FlagON();
 			m_rockEvent = eEvent::eStart;
 		}
 	}
 	else
 	{
 		m_updater->Update(m_Rock[0].get());
+	}
+
+	if (rock_flag == SET){
+		m_rockEvent = eEvent::eChecking;
+		m_updater->FlagOFF();
 	}
 }
 

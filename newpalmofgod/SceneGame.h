@@ -17,6 +17,7 @@
 #include "GameSound.h"
 
 
+
 class SceneGame :
 	public aetherClass::GameScene
 {
@@ -62,6 +63,7 @@ class SceneGame :
 
 		std::shared_ptr<aetherClass::ShaderBase> m_shader;
 
+		std::shared_ptr<aetherClass::GameSound> m_sound;
 
 		std::shared_ptr<aetherClass::MaterialShader> m_materialShader;
 
@@ -70,8 +72,6 @@ class SceneGame :
 
 		std::shared_ptr<aetherClass::ModelBase> m_positionCheck;
 		std::shared_ptr<aetherClass::Texture> m_positionCheckBoxTexture;
-
-		std::shared_ptr<aetherClass::GameSound> m_sound;
 };
 
 #endif

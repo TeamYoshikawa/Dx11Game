@@ -1,19 +1,22 @@
 #pragma once
 #include <ModelBase.h>
 //#include"Sphere.h"
-#include<GameController.h>
 
 #define OFF 0
 #define ON  1
+#define SET 2
+
+static int rock_flag = OFF;
 
 namespace n_Rock{
 	class RockUpdater
 	{
-	private:
+
 		enum eEvent{
 			eNormal,
 			eThrow
 		};
+
 	private:
 		RockUpdater(const RockUpdater&) = default;
 		void operator =(const RockUpdater &);
@@ -23,13 +26,18 @@ namespace n_Rock{
 
 		float speed= 1.0f;
 
-		int flag = OFF;
-		
 		eEvent m_event;
 		int m_countDown;
+		
 	public:
 		RockUpdater();
 		~RockUpdater() = default;
+
+		
+		void FlagON();
+		void FlagOFF();
+		int FlagGet();
+
 
 		void Update(aetherClass::ModelBase*model);
 		

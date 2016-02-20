@@ -35,6 +35,9 @@ bool SceneGame::Initialize(){
 	m_sound->Load("Sound/BGM.wav");
 	m_sound->SetValume(-3000);
 
+
+
+
 	// シェーダーの詳細情報の設定
 	ShaderDesc textureDesc;
 	
@@ -79,8 +82,8 @@ bool SceneGame::Initialize(){
 	m_rock = std::make_shared<RockManager>();
 	m_rock->Initialize(m_camera->GetCamera().get());
 
-	/*m_spear = std::make_shared<SpearManager>();
-	m_spear->Initialize(m_camera->GetCamera().get());*/
+	m_spear = std::make_shared<SpearManager>();
+	m_spear->Initialize(m_camera->GetCamera().get());
 
 	// マテリアルシェーダー作成時の情報の設定
 	ShaderDesc materialDesc;
@@ -111,6 +114,8 @@ bool SceneGame::Updater(){
 
 	m_rock->Update();
 
+	m_spear->Update();
+
 	// デバッグ用
 	if (GameController::GetMouse().IsRightButtonTrigger())
 	{
@@ -125,7 +130,6 @@ bool SceneGame::Updater(){
 	}
 
 	m_player->Update();
-	m_camera->Update();
 	m_lightmanager->Update();
 	
 	m_ui->Set(m_player->LifeGet());
@@ -140,6 +144,8 @@ bool SceneGame::Updater(){
 void SceneGame::Render(){
 
 	m_ui->Render();
+
+	m_spear->Render(m_pixelShader);
 
 	m_camera->Render();
 	m_lightmanager->Render();
