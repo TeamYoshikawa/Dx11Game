@@ -14,6 +14,7 @@
 #include "LightShader.h"
 #include "Light.h"
 #include "UiGame.h"
+#include "GameSound.h"
 
 
 class SceneGame :
@@ -69,6 +70,8 @@ class SceneGame :
 
 		std::shared_ptr<aetherClass::ModelBase> m_positionCheck;
 		std::shared_ptr<aetherClass::Texture> m_positionCheckBoxTexture;
+
+		std::shared_ptr<aetherClass::GameSound> m_sound;
 };
 
 #endif

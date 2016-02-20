@@ -46,6 +46,7 @@ class CameraManager
 
 		void Initialize();
 		void Render();
+		void Update();
 		std::shared_ptr<aetherClass::ViewCamera>& GetCamera();
 
 		void NextCameraSet();

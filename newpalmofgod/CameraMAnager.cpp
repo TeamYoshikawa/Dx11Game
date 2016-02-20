@@ -42,9 +42,31 @@ void CameraManager::Initialize()
 
 void CameraManager::Render()
 {
-	m_camera->Translation() = m_propaty[m_cameraID].m_changeCameraTranslationArray;
-	m_camera->Rotation() = m_propaty[m_cameraID].m_changeCameraRotationArray;
+	/*m_camera->Translation() = m_propaty[m_cameraID].m_changeCameraTranslationArray;
+	m_camera->Rotation() = m_propaty[m_cameraID].m_changeCameraRotationArray;*/
 	m_camera->Render();
+}
+
+void CameraManager::Update()
+{
+	GameController::Frame();
+
+	if (GameController::GetKey().IsKeyDown(DIK_RIGHT))
+	{
+		m_camera->Translation()._x += 2;
+	}
+	if (GameController::GetKey().IsKeyDown(DIK_LEFT))
+	{
+		m_camera->Translation()._x -= 2;
+	}
+	if (GameController::GetKey().IsKeyDown(DIK_UP))
+	{
+		m_camera->Translation()._z -= 2;
+	}
+	if (GameController::GetKey().IsKeyDown(DIK_DOWN))
+	{
+		m_camera->Translation()._z += 2;
+	}
 }
 
 std::shared_ptr<ViewCamera>& CameraManager::GetCamera(){

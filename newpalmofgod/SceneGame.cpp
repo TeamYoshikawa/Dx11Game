@@ -31,7 +31,9 @@ bool SceneGame::Initialize(){
 	m_camera = std::make_shared<CameraManager>();
 	m_camera->Initialize();
 
-	
+	m_sound = std::make_shared<GameSound>();
+	m_sound->Load("Sound/BGM.wav");
+	m_sound->SetValume(-3000);
 
 	// シェーダーの詳細情報の設定
 	ShaderDesc textureDesc;
@@ -123,6 +125,7 @@ bool SceneGame::Updater(){
 	}
 
 	m_player->Update();
+	m_camera->Update();
 	m_lightmanager->Update();
 	
 	m_ui->Set(m_player->LifeGet());
