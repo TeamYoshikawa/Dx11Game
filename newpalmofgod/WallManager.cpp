@@ -12,10 +12,10 @@ bool WallManager::Initialize(ViewCamera* camera){
 	m_WallTexture->Load("ModelData/textures/seafloor.dds");
 
 	m_HitWallTexture = std::make_shared<Texture>();
-	m_HitWallTexture->Load("goal.png");
+	m_HitWallTexture->Load("heart.png");
 
 	m_hplayerTexture = std::make_shared<Texture>();
-	m_hplayerTexture->Load("goal.png");
+	m_hplayerTexture->Load("Title.png");
 
 
 	for (i = 0; i < r_max; i++){

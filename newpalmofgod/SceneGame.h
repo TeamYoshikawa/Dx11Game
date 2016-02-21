@@ -6,6 +6,7 @@
 #include <Cube.h>
 #include <GameScene.h>
 #include "PlayerManager.h"
+#include "WallManager.h"
 #include "CameraMAnager.h"
 #include "LightManager.h"
 #include "SpearManager.h"
@@ -56,6 +57,8 @@ class SceneGame :
 		
 		std::shared_ptr<SpearManager> m_spear;
 		std::shared_ptr<RockManager> m_rock;
+
+		std::shared_ptr<WallManager> m_wall;
 
 		std::shared_ptr<UiGame> m_ui;
 

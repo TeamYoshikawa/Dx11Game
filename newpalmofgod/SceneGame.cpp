@@ -35,6 +35,7 @@ bool SceneGame::Initialize(){
 	m_sound->Load("Sound/BGM.wav");
 	m_sound->SetValume(-3000);
 
+
 	// シェーダーの詳細情報の設定
 	ShaderDesc textureDesc;
 	
@@ -79,12 +80,14 @@ bool SceneGame::Initialize(){
 	m_rock = std::make_shared<RockManager>();
 	m_rock->Initialize(m_camera->GetCamera().get());
 
-	// 壁の作成
+	m_spear = std::make_shared<SpearManager>();
+	m_spear->Initialize(m_camera->GetCamera().get());
+
+
 	m_wall = std::make_shared<WallManager>();
 	m_wall->Initialize(m_camera->GetCamera().get());
 
-	/*m_spear = std::make_shared<SpearManager>();
-	m_spear->Initialize(m_camera->GetCamera().get());*/
+
 
 	// マテリアルシェーダー作成時の情報の設定
 	ShaderDesc materialDesc;
@@ -114,7 +117,11 @@ bool SceneGame::Updater(){
 	m_gameState = GetGameState();
 
 	m_rock->Update();
+
+	m_spear->Update();
+
 	m_wall->Update();
+
 
 	// デバッグ用
 	if (GameController::GetMouse().IsRightButtonTrigger())
@@ -122,15 +129,14 @@ bool SceneGame::Updater(){
 		m_camera->NextCameraSet();
 	}
 
-	// プレイヤーが一定位置に進んだら
-	if (m_player->IsChangeCamera())
-	{
-		m_ui->Update();
-		m_camera->NextCameraSet();
-	}
+	//// プレイヤーが一定位置に進んだら
+	//if (m_player->IsChangeCamera())
+	//{
+	//	m_ui->Update();
+	//	m_camera->NextCameraSet();
+	//}
 
 	m_player->Update();
-	m_camera->Update();
 	m_lightmanager->Update();
 	
 	m_ui->Set(m_player->LifeGet());
@@ -146,6 +152,8 @@ void SceneGame::Render(){
 
 	m_ui->Render();
 
+	m_spear->Render(m_pixelShader);
+
 	m_camera->Render();
 	m_lightmanager->Render();
 	m_stage->Render(m_materialShader.get());
@@ -153,7 +161,12 @@ void SceneGame::Render(){
 	m_player->Render(m_materialShader);
 
 	m_rock->Render(m_pixelShader);
+
+	m_sound->PlayToLoop();
+
 	m_wall->Render(m_pixelShader);
+
+
 
 	return;
 }
