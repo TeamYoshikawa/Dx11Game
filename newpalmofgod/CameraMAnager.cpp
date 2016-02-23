@@ -11,14 +11,14 @@ CameraManager::CameraPropaty CameraManager::m_propaty[] = {
 	{ Vector3(3096, -188, 328), Vector3(-160.0f, 115.0f, 1.0f) },
 	{ Vector3(2374, 100, 316), Vector3(-180.0f, 200.0f, 1.0f) },
 	{ Vector3(2558, -180, 2494), Vector3(-166.0f, -16.0f, 1.0f) },
-	//{ Vector3(2558, -12, 2206), Vector3(-172.0f, 271.0f, 1.0f) },
-	//{ Vector3(4394, 184, 2218), Vector3(-172.0f, 92.0f, 1.0f) },
-	//{ Vector3(5294, -106, 1938), Vector3(-180.0f, 107.0f, 1.0f) },
-	//{ Vector3(5300, -136, 314), Vector3(-182.0f, 206.0f, 1.0f) },
-	//{ Vector3(9006, -142, 866), Vector3(-170.0f, 70.0f, 1.0f) },
-	//{ Vector3(9004, -142, 328), Vector3(-170.0f, 117.0f, 1.0f) },
-	//{ Vector3(8728, -142, 314), Vector3(-174.0f, 180.0f, 1.0f) },
-	//{ Vector3(8484, -12, 2130), Vector3(-174.0f, -88.0f, 1.0f) }
+	{ Vector3(2558, -12, 2206), Vector3(-172.0f, 271.0f, 1.0f) },
+	{ Vector3(4394, 184, 2218), Vector3(-172.0f, 92.0f, 1.0f) },
+	{ Vector3(5294, -106, 1938), Vector3(-180.0f, 107.0f, 1.0f) },
+	{ Vector3(5300, -136, 314), Vector3(-182.0f, 206.0f, 1.0f) },
+	{ Vector3(9006, -142, 866), Vector3(-170.0f, 70.0f, 1.0f) },
+	{ Vector3(9004, -142, 328), Vector3(-170.0f, 117.0f, 1.0f) },
+	{ Vector3(8728, -142, 314), Vector3(-174.0f, 180.0f, 1.0f) },
+	{ Vector3(8484, -12, 2130), Vector3(-174.0f, -88.0f, 1.0f) }
 };
 
 CameraManager::CameraManager()
@@ -42,31 +42,9 @@ void CameraManager::Initialize()
 
 void CameraManager::Render()
 {
-	/*m_camera->Translation() = m_propaty[m_cameraID].m_changeCameraTranslationArray;
-	m_camera->Rotation() = m_propaty[m_cameraID].m_changeCameraRotationArray;*/
+	m_camera->Translation() = m_propaty[m_cameraID].m_changeCameraTranslationArray;
+	m_camera->Rotation() = m_propaty[m_cameraID].m_changeCameraRotationArray;
 	m_camera->Render();
-}
-
-void CameraManager::Update()
-{
-	GameController::Frame();
-
-	if (GameController::GetKey().IsKeyDown(DIK_RIGHT))
-	{
-		m_camera->Translation()._z += 2;
-	}
-	if (GameController::GetKey().IsKeyDown(DIK_LEFT))
-	{
-		m_camera->Translation()._z -= 2;
-	}
-	if (GameController::GetKey().IsKeyDown(DIK_UP))
-	{
-		m_camera->Translation()._x += 2;
-	}
-	if (GameController::GetKey().IsKeyDown(DIK_DOWN))
-	{
-		m_camera->Translation()._x -= 2;
-	}
 }
 
 std::shared_ptr<ViewCamera>& CameraManager::GetCamera(){

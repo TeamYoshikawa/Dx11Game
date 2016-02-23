@@ -9,7 +9,7 @@
 #include "PlayerBase.h"
 #include "PlayerUpdater.h"
 #include "PlayerRender.h"
-#include "PlayerNavigation.h"
+#include <Cube.h>
 #include <FbxModel.h>
 #include <Texture.h>
 #include <memory>
@@ -30,10 +30,8 @@ class PlayerManager
 		// 外部オブジェクトとの当たり判定用
 		bool HitMesh(std::shared_ptr<aetherClass::ModelBase>&);
 
-		void NextSerch();	
-
-		bool IsChangeCamera();	// カメラを切り替えるかの判別用
-		std::unique_ptr<PlayerNavigation> m_navigation; // プレイヤーのルート用オブジェクト
+		
+		
 		
 		int LifeGet();
 

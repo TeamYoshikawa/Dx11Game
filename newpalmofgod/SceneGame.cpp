@@ -122,6 +122,12 @@ bool SceneGame::Updater(){
 
 	m_wall->Update();
 
+	if (m_player->HitMesh(m_rock->Get()))
+	{
+		m_player->SetState(PlayerBase::ePlayerMoveState::eDamage);
+	}
+
+
 
 	// デバッグ用
 	if (GameController::GetMouse().IsRightButtonTrigger())

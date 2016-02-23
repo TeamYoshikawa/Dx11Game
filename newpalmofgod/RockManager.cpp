@@ -103,7 +103,7 @@ void RockManager::Render(std::shared_ptr<ShaderBase>shader){
 		m_render->Render(m_Rock[i].get(), shader);
 	}
 
-	m_switch->Render(shader.get());
+	//m_switch->Render(shader.get());
 	m_hplayer->Render(shader.get());
 }
 

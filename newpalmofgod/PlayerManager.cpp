@@ -27,9 +27,7 @@ bool PlayerManager::Initialize(const std::shared_ptr<ViewCamera> camera){
 	m_playerObject->GetTransform()._translation = Vector3(-100.0f, 105.0f, 670.0f);
 	m_playerObject->GetTransform()._scale = Vector3(1.3f, -1.3f, 1.3f);
 	
-	m_navigation = std::make_unique<PlayerNavigation>();
-	m_navigation->Initialize(camera);
-
+	
 	m_collideTexture = std::make_shared<Texture>();
 	m_collideTexture->Load("ModelData/textures/Chips_Cover.jpg");
 	m_collideBox = std::make_shared<Cube>();
@@ -49,16 +47,13 @@ bool PlayerManager::Initialize(const std::shared_ptr<ViewCamera> camera){
 	m_collideBoxShader = std::make_shared <aetherClass::PixelShader>();
 	m_collideBoxShader->Initialize(desc, ShaderType::eVertex | ShaderType::ePixel);
 
-
-	SetNextPoint(m_navigation->GetNavigationBox());
-
 	m_isCahngeCamera = false;
 	return true;
 }
 
 // 描画処理
 void PlayerManager::Render(const std::shared_ptr<ShaderBase> shader){
-	//m_render->Rendering(m_playerObject,shader);	
+	m_render->Rendering(m_playerObject,shader);	
 
 	// ナビゲーションの確認用描画
 	// 基本的には隠した状態にする
@@ -70,28 +65,10 @@ void PlayerManager::Render(const std::shared_ptr<ShaderBase> shader){
 // 更新処理
 void PlayerManager::Update(){
 	// 現在のナビゲーションの場所を取得
-	Status()._navigationID = m_navigation->GetNavigationID();
-	if (m_navigation->GetNavigationID() == 14)
-	{
-		return;
-	}
+	
 	m_updater->Updating(m_playerObject);
 
 	UpdateColliderBox();
-
-	// TODO : ナビゲーションにぶつかった時の処理
-	if (aetherFunction::CollideBoxOBB(*m_collideBox, *m_navigation->GetNavigationBox()))
-	{
-		m_navigation->NextSet();
-		SetNextPoint(m_navigation->GetNavigationBox());
-		if (m_navigation->GetNavigationID() != 4){
-			m_isCahngeCamera = true;
-		}
-	}
-	else
-	{
-		m_isCahngeCamera = false;
-	}
 
 	return;
 }
@@ -108,14 +85,7 @@ void PlayerManager::UpdateColliderBox(){
 	m_collideBox->GetTransform()._rotation = rotation;
 }
 
-// 引数で指定されたオブジェクトに対して向かう
-void PlayerManager::SetNextPoint(const std::shared_ptr<ModelBase>& nextPointObject){
-	
-	// アップデーターに役割を任せる
-	m_updater->FaceTheObject(m_playerObject, nextPointObject);
 
-	return;
-}
 
 // プレイヤーの情報を送る
 PlayerBase::PlayerStatus& PlayerManager::Status(){
@@ -141,19 +111,6 @@ bool PlayerManager::HitMesh(std::shared_ptr<ModelBase>& other){
 	return true;
 }
 
-void PlayerManager::NextSerch(){
-	SetNextPoint(m_navigation->GetNavigationBox());
-}
-
-bool PlayerManager::IsChangeCamera(){
-	if (!m_isCahngeCamera)
-	{
-		return false;
-	}
-
-	NextSerch();
-	return true;
-}
 
 bool PlayerManager::GetIsDamage(){
 	return m_updater->IsDamage();

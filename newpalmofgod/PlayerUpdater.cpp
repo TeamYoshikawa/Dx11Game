@@ -5,6 +5,7 @@
 #include <MathUtility.h>
 #include <iostream>
 #include<Physics.h>
+#include<GameController.h>
 
 using namespace aetherClass;
 using namespace aetherFunction;
@@ -17,7 +18,6 @@ PlayerUpdater::~PlayerUpdater(){
 	Destroy();
 
 }
-
 
 void PlayerUpdater::Initialize(){
 	m_damageCounter = 0;
@@ -46,26 +46,12 @@ void PlayerUpdater::Updating(const std::shared_ptr<FbxModel>& playerObject){
 
 	// 移動の処理
 	Move(playerObject);
-	Stand(playerObject);
-	Fall(playerObject);
-	Damage(playerObject);
 	return;
-}
-
-// 指定されたオブジェクトに向かって追いかける
-void PlayerUpdater::FaceTheObject(const std::shared_ptr<FbxModel>& player, const std::shared_ptr<ModelBase>& object){
-	SendStatus()._nextMoveDirection = object->GetTransform()._translation- player->GetTransform()._translation;
-
-	float rad = atan2(SendStatus()._nextMoveDirection._x, SendStatus()._nextMoveDirection._z);
-	float rotationY = rad / kAetherPI * 180;
-
-	player->GetTransform()._rotation._y = rotationY;
 }
 
 
 bool PlayerUpdater::HittingProcessor(const std::shared_ptr<ModelBase>& player, const std::shared_ptr<ModelBase>& other){
 	
-
 	// TODO: 当たったかを調べる条件式を記載
 	if (!CollideBoxOBB(*player, *other)){
 		
@@ -83,56 +69,21 @@ bool PlayerUpdater::HittingProcessor(const std::shared_ptr<ModelBase>& player, c
 
 // 動いてるときの処理
 void PlayerUpdater::Move(const std::shared_ptr<FbxModel>& playerObject){
-	// 現在の状態がMoveじゃないなら何もしない
-	if (SendStatus()._moveState != PlayerBase::ePlayerMoveState::eMove)
-	{
-		return;
+
+	if (GameController::GetKey().IsKeyDown(DIK_RIGHT)){
+		playerObject->GetTransform()._translation._x += 10.0f;
 	}
-
-	playerObject->GetTransform()._translation += SendStatus()._nextMoveDirection / 150;
-}
-
-// 立ち止まるときの処理
-void PlayerUpdater::Stand(const std::shared_ptr<FbxModel>& playerObject){
-	if (SendStatus()._moveState != PlayerBase::ePlayerMoveState::eStatnd)
-	{
-		return;
+	if (GameController::GetKey().IsKeyDown(DIK_LEFT)){
+		playerObject->GetTransform()._translation._x -= 10.0f;
+	}
+	if (GameController::GetKey().IsKeyDown(DIK_UP)){
+		playerObject->GetTransform()._translation._z -= 10.0f;
+	}
+	if (GameController::GetKey().IsKeyDown(DIK_DOWN)){
+		playerObject->GetTransform()._translation._z += 10.0f;
 	}
 }
 
-// 落ちる時の処理
-void PlayerUpdater::Fall(const std::shared_ptr<FbxModel>& playerObject){
-	if (SendStatus()._moveState != PlayerBase::ePlayerMoveState::eFall)
-	{
-		return;
-	}
-	m_daedCounter += 1;
-	if (m_daedCounter > kDeadWaitTime){
-		
-	}
-	SendStatus()._isDead = true;
-	return;
-}
-
-
-
-void PlayerUpdater::Damage(const std::shared_ptr<aetherClass::FbxModel>& playerObject){
-	if (SendStatus()._moveState != PlayerBase::ePlayerMoveState::eDamage)
-	{
-		return;
-	}
-	
-	m_damageCounter += 1;
-	// ある一定数まったら活動再開
-	if (m_damageCounter > kDamageWaitTime)
-	{
-		m_damageCounter = 0;
-		SendStatus()._moveState = PlayerBase::ePlayerMoveState::eMove;
-		SendStatus()._muteki = false;
-		m_damageFlg = false;
-	}
-	return;
-}
 
 bool PlayerUpdater::IsDamage(){
 	return m_damageFlg;
