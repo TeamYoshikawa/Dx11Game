@@ -28,8 +28,9 @@ bool SceneGame::Initialize(){
 	m_ui->Initialize();
 
 	// カメラオブジェクトの作成
-	m_camera = std::make_shared<CameraManager>();
-	m_camera->Initialize();
+	m_camera = std::make_shared<ViewCamera>();
+	m_camera->Translation() = Vector3(-100, -8, 692);
+	m_camera->Rotation() = Vector3(-170.0f, 178.0f, 1.0f);
 
 	m_sound = std::make_shared<GameSound>();
 	m_sound->Load("Sound/BGM.wav");
@@ -45,8 +46,6 @@ bool SceneGame::Initialize(){
 	textureDesc._pixel._entryName = "ps_main";
 	textureDesc._pixel._srcFile = L"Shader/ColorTextureAdd2.ps";
 
-
-	
 	// ピクセルシェーダーの作成
 	m_pixelShader = std::make_shared<PixelShader>();
 	m_pixelShader->Initialize(textureDesc, ShaderType::eVertex | ShaderType::ePixel);
@@ -63,13 +62,13 @@ bool SceneGame::Initialize(){
 
 	// プレイヤーの作成
 	m_player = std::make_shared<PlayerManager>();
-	m_player->Initialize(m_camera->GetCamera());
+	m_player->Initialize();
 
 
 	// ステージモデルの作成
 	m_stage = std::make_shared<FbxModel>();
 	m_stage->LoadFBX("ModelData/models/STAGEKANZENBAN.fbx", eAxisSystem::eAxisOpenGL);
-	m_stage->SetCamera(m_camera->GetCamera().get());
+	m_stage->SetCamera(m_camera.get());
 	m_stage->GetTransform()._scale = Vector3(1.0f, 1.0f, -1.0f);
 
 	m_stage->SetModelMaterialColor(Color(0.2, 0.0, 0.2, 1), eMatrerialType::eAmbient);
@@ -78,14 +77,14 @@ bool SceneGame::Initialize(){
 
 	// 岩の作成
 	m_rock = std::make_shared<RockManager>();
-	m_rock->Initialize(m_camera->GetCamera().get());
+	m_rock->Initialize(m_camera.get());
 
 	m_spear = std::make_shared<SpearManager>();
-	m_spear->Initialize(m_camera->GetCamera().get());
+	m_spear->Initialize(m_camera.get());
 
 
 	m_wall = std::make_shared<WallManager>();
-	m_wall->Initialize(m_camera->GetCamera().get());
+	m_wall->Initialize(m_camera.get());
 
 
 
@@ -100,8 +99,8 @@ bool SceneGame::Initialize(){
 	m_materialShader = std::make_shared<MaterialShader>();
 	m_materialShader->Initialize(materialDesc, ShaderType::eVertex | ShaderType::ePixel);
 	m_materialShader->SetLight(m_lightmanager->GetLight().get());
-	m_materialShader->SetCamera(m_camera->GetCamera().get());
-	m_lightmanager->GetLight()->Translation() = m_camera->GetCamera()->Translation();
+	m_materialShader->SetCamera(m_camera.get());
+	m_lightmanager->GetLight()->Translation() = m_camera->Translation();
 
 	// プレイヤーの最初の状態の設定
 	m_player->SetState(PlayerBase::ePlayerMoveState::eMove);
@@ -127,22 +126,8 @@ bool SceneGame::Updater(){
 		m_player->SetState(PlayerBase::ePlayerMoveState::eDamage);
 	}
 
-
-
-	// デバッグ用
-	if (GameController::GetMouse().IsRightButtonTrigger())
-	{
-		m_camera->NextCameraSet();
-	}
-
-	//// プレイヤーが一定位置に進んだら
-	//if (m_player->IsChangeCamera())
-	//{
-	//	m_ui->Update();
-	//	m_camera->NextCameraSet();
-	//}
-
-	m_player->Update();
+	m_player->Update(m_camera);
+	
 	m_lightmanager->Update();
 	
 	m_ui->Set(m_player->LifeGet());

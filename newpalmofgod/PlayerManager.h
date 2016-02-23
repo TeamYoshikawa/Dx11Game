@@ -20,18 +20,15 @@ class PlayerManager
 		PlayerManager();
 		~PlayerManager();
 
-		bool Initialize(const std::shared_ptr<aetherClass::ViewCamera>);
+		bool Initialize();
 		
 		void Render(const std::shared_ptr<aetherClass::ShaderBase>);
-		void Update();
+		void Update(const std::shared_ptr<aetherClass::ViewCamera>);
 		PlayerBase::PlayerStatus& Status();
 		void Status(PlayerBase::PlayerStatus&);
 
 		// 外部オブジェクトとの当たり判定用
 		bool HitMesh(std::shared_ptr<aetherClass::ModelBase>&);
-
-		
-		
 		
 		int LifeGet();
 
@@ -54,7 +51,7 @@ class PlayerManager
 		std::shared_ptr<aetherClass::Texture> m_collideTexture;
 		std::shared_ptr<aetherClass::FbxModel> m_playerObject; // プレイヤーのモデルオブジェクト
 		std::shared_ptr<aetherClass::ModelBase> m_collideBox;	// 実際に当たり判定を行うオブジェクト
-
+		std::shared_ptr<aetherClass::ViewCamera> m_camera;
 		std::shared_ptr<aetherClass::ShaderBase> m_collideBoxShader;
 		bool m_isCahngeCamera;		// カメラを切り替えるフラグ
 		

@@ -8,6 +8,7 @@
 
 */
 #include "PlayerBase.h"
+#include "ViewCamera.h"
 #include <memory>
 #include <FbxModel.h>
 #include <ModelBase.h>
@@ -26,13 +27,13 @@ class PlayerUpdater :
 		void Initialize()override;
 		PlayerBase::PlayerStatus& SendStatus()override;
 		void SendStatus(PlayerBase::PlayerStatus&)override;
-		void Updating(const std::shared_ptr<aetherClass::FbxModel>&);
+		void Updating(const std::shared_ptr<aetherClass::FbxModel>&, std::shared_ptr<aetherClass::ViewCamera>);
 		void FaceTheObject(const std::shared_ptr<aetherClass::FbxModel>&, const std::shared_ptr<aetherClass::ModelBase>&);
 		bool HittingProcessor(const std::shared_ptr<aetherClass::ModelBase>&, const std::shared_ptr<aetherClass::ModelBase>&);
 
 		bool IsDamage();
 	private:
-		void Move(const std::shared_ptr<aetherClass::FbxModel>& playerObject);  // “®‚¢‚Ä‚é‚Æ‚«‚Ìˆ—
+		void Move(const std::shared_ptr<aetherClass::FbxModel>& playerObject, std::shared_ptr<aetherClass::ViewCamera> camera);  // “®‚¢‚Ä‚é‚Æ‚«‚Ìˆ—
 		void Stand(const std::shared_ptr<aetherClass::FbxModel>& playerObject); // —§‚¿~‚Ü‚é‚Æ‚«‚Ìˆ—
 		void Fall(const std::shared_ptr<aetherClass::FbxModel>& playerObject);  // —‚¿‚é‚Ìˆ—
 		void Damage(const std::shared_ptr<aetherClass::FbxModel>& playerObject); // ƒ_ƒ[ƒWó‚¯‚½‚Ìˆ—

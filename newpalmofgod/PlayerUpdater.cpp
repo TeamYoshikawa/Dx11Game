@@ -42,10 +42,10 @@ void PlayerUpdater::SendStatus(PlayerBase::PlayerStatus&){
 	return;
 }
 
-void PlayerUpdater::Updating(const std::shared_ptr<FbxModel>& playerObject){
+void PlayerUpdater::Updating(const std::shared_ptr<FbxModel>& playerObject, std::shared_ptr<aetherClass::ViewCamera> camera){
 
 	// ˆÚ“®‚Ìˆ—
-	Move(playerObject);
+	Move(playerObject,camera);
 	return;
 }
 
@@ -68,20 +68,25 @@ bool PlayerUpdater::HittingProcessor(const std::shared_ptr<ModelBase>& player, c
 }
 
 // “®‚¢‚Ä‚é‚Æ‚«‚Ìˆ—
-void PlayerUpdater::Move(const std::shared_ptr<FbxModel>& playerObject){
+void PlayerUpdater::Move(const std::shared_ptr<FbxModel>& playerObject,std::shared_ptr<aetherClass::ViewCamera> camera){
 
 	if (GameController::GetKey().IsKeyDown(DIK_RIGHT)){
-		playerObject->GetTransform()._translation._x += 10.0f;
+		camera->Translation()._x += 10.0f;
 	}
 	if (GameController::GetKey().IsKeyDown(DIK_LEFT)){
-		playerObject->GetTransform()._translation._x -= 10.0f;
+		camera->Translation()._x -= 10.0f;
 	}
 	if (GameController::GetKey().IsKeyDown(DIK_UP)){
-		playerObject->GetTransform()._translation._z -= 10.0f;
+		camera->Translation()._z -= 10.0f;
 	}
 	if (GameController::GetKey().IsKeyDown(DIK_DOWN)){
-		playerObject->GetTransform()._translation._z += 10.0f;
+		camera->Translation()._z += 10.0f;
 	}
+
+	// ƒ‚ƒfƒ‹‚Æ˜A“®
+	playerObject->GetTransform()._translation._x = camera->Translation()._x - 10;
+	playerObject->GetTransform()._translation._z = camera->Translation()._z;
+
 }
 
 

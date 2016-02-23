@@ -5,9 +5,9 @@
 #include <Color.h>
 #include <Cube.h>
 #include <GameScene.h>
+#include <ViewCamera.h>
 #include "PlayerManager.h"
 #include "WallManager.h"
-#include "CameraMAnager.h"
 #include "LightManager.h"
 #include "SpearManager.h"
 #include "PitFallManager.h"
@@ -51,7 +51,6 @@ class SceneGame :
 		eGameState m_gameState;
 	
 		std::shared_ptr<PlayerManager> m_player;
-		std::shared_ptr<CameraManager> m_camera;
 		std::shared_ptr<LightManager> m_lightmanager;
 		std::shared_ptr<PitFallManager> m_pitfall;
 		
@@ -62,12 +61,10 @@ class SceneGame :
 
 		std::shared_ptr<UiGame> m_ui;
 
+		std::shared_ptr<aetherClass::ViewCamera> m_camera;
 		std::shared_ptr<aetherClass::ShaderBase> m_pixelShader;
-
 		std::shared_ptr<aetherClass::ShaderBase> m_shader;
-
 		std::shared_ptr<aetherClass::GameSound> m_sound;
-
 		std::shared_ptr<aetherClass::MaterialShader> m_materialShader;
 
 		std::shared_ptr<aetherClass::Light>m_light;
