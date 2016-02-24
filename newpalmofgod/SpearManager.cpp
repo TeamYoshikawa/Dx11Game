@@ -9,18 +9,6 @@ using namespace n_Spear;
 std::shared_ptr<PixelShader>m_shader;
 bool SpearManager::Initialize(ViewCamera *camera)
 {
-
-	m_shader = std::make_shared<PixelShader>();
-	ShaderDesc materialDesc;
-	materialDesc._vertex._entryName = "vs_main";
-	materialDesc._vertex._srcFile = L"Shader/VertexShaderBase.hlsl";
-
-	materialDesc._pixel._entryName = "ps_main";
-	materialDesc._pixel._srcFile = L"Shader/BasicColor.ps";
-	m_shader->Initialize(materialDesc, ShaderType::eVertex | ShaderType::ePixel);
-	
-
-
 	m_camera = camera;
 
 	m_spearTexture = std::make_shared<Texture>();
@@ -35,32 +23,42 @@ bool SpearManager::Initialize(ViewCamera *camera)
 		m_spear[i]->SetCamera(camera);
 		m_spear[i]->SetTexture(m_spearTexture.get());
 		
-		m_spear[i]->GetTransform()._scale = Vector3(15.0f, 105.5f, 20.0f);
+		m_spear[i]->GetTransform()._scale = Vector3(15.0f, 100.0f, 15.0f);
+		m_spear[i]->GetTransform()._rotation = Vector3(90.0f, 0.0f, 0.0f);
+
 	}
 	
-	m_spear[0]->GetTransform()._translation = Vector3(8622.0f, 1000.0f, 1352.0f);
-	m_spear[1]->GetTransform()._translation = Vector3(8722.0f, 1000.0f, 1352.0f);
-	m_spear[2]->GetTransform()._translation = Vector3(8822.0f, 1000.0f, 1352.0f);
+	m_spear[0]->GetTransform()._translation = Vector3(8622.0f, 100.0f, 2212.0f);
+	m_spear[1]->GetTransform()._translation = Vector3(8722.0f, 100.0f, 2212.0f);
+	m_spear[2]->GetTransform()._translation = Vector3(8822.0f, 100.0f, 2212.0f);
 
 	m_spearRender = std::make_shared<SpearRender>();
 
 	m_spearUpdater = std::make_shared<SpearUpdater>();
 	
 	m_switchTexture = std::make_shared<Texture>();
-	m_switchTexture->Load("ModelData/Textures/button.jpg");
-	m_switch = std::make_shared<Sphere>(10,10);
+	m_switchTexture->Load("ModelData/Textures/cocoa.jpg");
+	m_switch = std::make_shared<Cube>();
 	m_switch->Initialize();
 	if (!m_switch->Initialize()){
 		return false;
 	}
 	m_switch->SetCamera(camera);
 	m_switch->SetTexture(m_switchTexture.get());
-	m_switch->GetColor() = Color(1.0, 1.0, 0.0, 1.0);
-	m_switch->GetTransform()._translation = Vector3(8775.0f, -120.0f, 434.0f);
-	
+	m_switch->GetTransform()._translation = Vector3(8722.0f, -80.0f, 634.0f);
+	m_switch->GetTransform()._scale = Vector3(10.0f, 10.0f, 10.0f);
 
-	m_switchType = false;
+	m_a = std::make_shared<Texture>();
+	m_a->Load("ModelData/Textures/button.jpg");
 
+	m_aaa = std::make_shared<Cube>();
+	m_aaa->Initialize();
+	m_aaa->SetCamera(camera);
+	m_aaa->SetTexture(m_a.get());
+	m_aaa->GetTransform()._translation = Vector3(8722.0f, -80.0f, 434.0f);
+	m_aaa->GetTransform()._scale = Vector3(100.0f, 100.0f, 50.0f);
+
+	m_spearEvent = eSpearEvent::eChecking;
 	return true;
 }
 
@@ -71,27 +69,34 @@ void SpearManager::Render(const std::shared_ptr<aetherClass::ShaderBase>shader)
 		m_spearRender->Renderring(m_spear[i].get(), shader);
 	}
 	m_spearRender->Renderring(m_switch.get(), shader);
-	m_switch->Render(m_shader.get());
-	m_switchType = GameController::GetMouse().IsLeftButtonTrigger() ? true : false;
+	m_switch->Render(shader.get());
+	//m_aaa->Render(shader.get());
 }
 
 void SpearManager::Update()
 {
-	GameController::GetMouse().Frame();
-	rayDirection = GameController::GetMouse().GetDirection(); //GetMouseDirection(*m_camera, 800, 600);
+	/*GameController::GetMouse().Frame();
+	rayDirection = GameController::GetMouse().GetDirection(); *///GetMouseDirection(*m_camera, 800, 600);
 	
-	
-	m_switchType = GameController::GetMouse().IsLeftButtonTrigger() ? true : false;
-		if (m_switchType){
-			m_switchType != m_switchType;
-		}
-		else{
-			m_switchType = false;
-		}
-	
+	if (GameController::GetKey().IsKeyDown(DIK_DOWN)){
+		m_switch->GetTransform()._translation._z-= 1.0f;
+	}
 
-	for (int i = 0; i < 3; i++){
-		m_spearUpdater->Updating(m_spear[i].get(), m_switchType);
+	if (m_spearEvent == eSpearEvent::eChecking){
+		if (aetherFunction::CollideBoxOBB(*m_switch, *m_aaa)){
+			m_spearEvent = eSpearEvent::eStart;
+			m_spearUpdater->FlagOn();
+			std::cout << "hit" << std::endl;
+		}
+	}
+	else{
+		for (int i = 0; i < 3; i++){
+			m_spearUpdater->Updating(m_spear[i].get());
+		}
+	}
+	if (s_flag == SET){
+		m_spearEvent = eSpearEvent::eChecking;
+		m_spearUpdater->FlagOff();
 	}
 	
 }

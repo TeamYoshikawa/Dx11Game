@@ -7,28 +7,40 @@
 #include <ModelBase.h>
 //#include<Cube.h>
 
-#define ON 1
 #define OFF 0
+#define ON 1
+#define SET 2
+
+static int s_flag;
 
 namespace n_Spear{
 	class SpearUpdater
 	{
 	private:
+		enum eEvent{
+			eNormal,
+			eThrow
+		};
+	private:
 		//ëÑÇÃîÚÇ—èoÇµ
 		void ButtonOn(aetherClass::ModelBase*);
-		//ëÑÇÃé˚î[
-		void ButtonOff(aetherClass::ModelBase*);
 
 		void operator =(const SpearUpdater &);
 
+		eEvent m_event;
+
+		int m_countDown;
 	public:
 		SpearUpdater();
 		~SpearUpdater();
 
-		void Updating(aetherClass::ModelBase*, bool buttonState);
+		void Updating(aetherClass::ModelBase*);
+
+		void FlagOn();
+		void FlagOff();
 		int FlagGet();
 
-		int s_flag = OFF;
+		
 
 	};
 

@@ -33,6 +33,11 @@
 class SpearManager
 {
 private:
+	enum class eSpearEvent{
+		eChecking,
+		eStart
+	};
+private:
 	std::shared_ptr<aetherClass::ModelBase>m_spear[3];
     std::shared_ptr<aetherClass::Texture>m_spearTexture;
 
@@ -41,11 +46,13 @@ private:
 
     std::shared_ptr<aetherClass::ModelBase>m_switch;
 	std::shared_ptr<aetherClass::Texture>m_switchTexture;
-
-	bool m_switchType;
+	std::shared_ptr<aetherClass::ModelBase>m_aaa;
+	std::shared_ptr<aetherClass::Texture>m_a;
 	
 	aetherClass::Vector3 rayOrigin, rayDirection;
 	aetherClass::ViewCamera *m_camera;
+
+	eSpearEvent m_spearEvent;
 
 public:
 	SpearManager() = default;

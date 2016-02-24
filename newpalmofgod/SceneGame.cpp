@@ -125,6 +125,10 @@ bool SceneGame::Updater(){
 	{
 		m_player->SetState(PlayerBase::ePlayerMoveState::eDamage);
 	}
+	if (m_player->HitMesh(m_spear->Get()))
+	{
+		m_player->SetState(PlayerBase::ePlayerMoveState::eDamage);
+	}
 
 	m_player->Update(m_camera);
 	
