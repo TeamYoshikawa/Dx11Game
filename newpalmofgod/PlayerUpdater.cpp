@@ -38,23 +38,23 @@ PlayerBase::PlayerStatus& PlayerUpdater::SendStatus(){
 
 // セッター
 void PlayerUpdater::SendStatus(PlayerBase::PlayerStatus&){
-	
+
 	return;
 }
 
-void PlayerUpdater::Updating(const std::shared_ptr<FbxModel>& playerObject, std::shared_ptr<aetherClass::ViewCamera> camera){
+void PlayerUpdater::Updating(const std::shared_ptr<FbxModel>& playerObject){
 
 	// 移動の処理
-	Move(playerObject,camera);
+	Move(playerObject);
 	return;
 }
 
 
 bool PlayerUpdater::HittingProcessor(const std::shared_ptr<ModelBase>& player, const std::shared_ptr<ModelBase>& other){
-	
+
 	// TODO: 当たったかを調べる条件式を記載
 	if (!CollideBoxOBB(*player, *other)){
-		
+
 		return false;
 	}
 	if (SendStatus()._muteki == true)return false;
@@ -63,30 +63,25 @@ bool PlayerUpdater::HittingProcessor(const std::shared_ptr<ModelBase>& player, c
 	SendStatus()._muteki = true;
 	m_damageFlg = true;
 	SendStatus()._moveState = PlayerBase::ePlayerMoveState::eDamage;
-		return true;
+	return true;
 
 }
 
 // 動いてるときの処理
-void PlayerUpdater::Move(const std::shared_ptr<FbxModel>& playerObject,std::shared_ptr<aetherClass::ViewCamera> camera){
+void PlayerUpdater::Move(const std::shared_ptr<FbxModel>& playerObject){
 
 	if (GameController::GetKey().IsKeyDown(DIK_RIGHT)){
-		camera->Translation()._x += 10.0f;
+		playerObject->GetTransform()._translation._x += 10.0f;
 	}
 	if (GameController::GetKey().IsKeyDown(DIK_LEFT)){
-		camera->Translation()._x -= 10.0f;
+		playerObject->GetTransform()._translation._x -= 10.0f;
 	}
 	if (GameController::GetKey().IsKeyDown(DIK_UP)){
-		camera->Translation()._z -= 10.0f;
+		playerObject->GetTransform()._translation._z -= 10.0f;
 	}
 	if (GameController::GetKey().IsKeyDown(DIK_DOWN)){
-		camera->Translation()._z += 10.0f;
+		playerObject->GetTransform()._translation._z += 10.0f;
 	}
-
-	// モデルと連動
-	playerObject->GetTransform()._translation._x = camera->Translation()._x - 10;
-	playerObject->GetTransform()._translation._z = camera->Translation()._z;
-
 }
 
 

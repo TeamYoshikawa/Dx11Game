@@ -3,6 +3,7 @@
 #include <Sphere.h>
 #include<GameController.h>
 
+
 using namespace n_Rock;
 using namespace aetherClass;
 
@@ -11,8 +12,6 @@ RockUpdater::RockUpdater(){
 	m_event = eEvent::eNormal;
 	m_countDown = 150;
 }
-
-
 
 
 //Update process
@@ -84,3 +83,12 @@ void RockUpdater::First(ModelBase*Rock){
 		}
 	}
 
+bool RockUpdater::HittingProcessor(const std::shared_ptr<ModelBase>& player, const std::shared_ptr<ModelBase>& other){
+
+	// TODO: “–‚½‚Á‚½‚©‚ğ’²‚×‚éğŒ®‚ğ‹LÚ
+	if (!aetherFunction::CollideBoxOBB(*player, *other)){
+		return false;
+	}
+	return true;
+
+}

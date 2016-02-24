@@ -1,5 +1,6 @@
 #pragma once
 #include <ModelBase.h>
+#include <Physics.h>
 //#include"Sphere.h"
 
 #define OFF 0
@@ -33,6 +34,7 @@ namespace n_Rock{
 		RockUpdater();
 		~RockUpdater() = default;
 
+		bool HittingProcessor(const std::shared_ptr<aetherClass::ModelBase>&, const std::shared_ptr<aetherClass::ModelBase>&);
 		
 		void FlagON();
 		void FlagOFF();
