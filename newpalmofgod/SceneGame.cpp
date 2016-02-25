@@ -106,8 +106,8 @@ bool SceneGame::Initialize(){
     m_materialShader->Initialize(materialDesc, ShaderType::eVertex | ShaderType::ePixel);
     m_materialShader->SetLight(m_lightmanager->GetLight().get());
 	m_materialShader->SetCamera(m_camera.get());    //m_camera->GetCamera().get());
-    m_lightmanager->GetLight()->Translation() = m_camera->GetCamera()->Translation();
-
+    m_lightmanager->GetLight()->Translation() = m_camera->Translation();
+	
     // プレイヤーの最初の状態の設定
     m_player->SetState(PlayerBase::ePlayerMoveState::eMove);
 
@@ -147,13 +147,13 @@ bool SceneGame::Updater(){
 	}
 
 	// デバッグ用
-	if (GameController::GetMouse().IsRightButtonTrigger())
+	/*if (GameController::GetMouse().IsRightButtonTrigger())
 	{
 		m_camera->NextCameraSet();
-	}
+	}*/
 
 
-	m_player->Update();
+	m_player->Update(m_camera);
 	m_lightmanager->Update();
 
 	m_ui->Set(m_player->LifeGet());

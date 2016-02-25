@@ -35,7 +35,7 @@ public:
 
 	bool IsDamage();
 private:
-	void Move(const std::shared_ptr<aetherClass::FbxModel>& playerObject);  // “®‚¢‚Ä‚é‚Æ‚«‚Ìˆ—
+	void Move(const std::shared_ptr<aetherClass::FbxModel>& playerObject, std::shared_ptr<aetherClass::ViewCamera>);  // “®‚¢‚Ä‚é‚Æ‚«‚Ìˆ—
 	void Stand(const std::shared_ptr<aetherClass::FbxModel>& playerObject); // —§‚¿~‚Ü‚é‚Æ‚«‚Ìˆ—
 	void Fall(const std::shared_ptr<aetherClass::FbxModel>& playerObject);  // —‚¿‚é‚Ìˆ—
 	void Damage(const std::shared_ptr<aetherClass::FbxModel>& playerObject); // ƒ_ƒ[ƒWó‚¯‚½‚Ìˆ—

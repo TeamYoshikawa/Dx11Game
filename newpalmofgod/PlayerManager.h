@@ -10,6 +10,7 @@ playerの状態の管理などを請け負うとこ？
 #include "PlayerUpdater.h"
 #include "PlayerRender.h"
 #include <Cube.h>
+#include<ViewCamera.h>
 #include <FbxModel.h>
 #include <Texture.h>
 #include <memory>
@@ -54,7 +55,7 @@ private:
 	std::shared_ptr<aetherClass::Texture> m_collideTexture;
 	std::shared_ptr<aetherClass::FbxModel> m_playerObject; // プレイヤーのモデルオブジェクト
 	std::shared_ptr<aetherClass::ModelBase> m_collideBox;	// 実際に当たり判定を行うオブジェクト
-
+	std::shared_ptr<aetherClass::ViewCamera> m_camera;
 	std::shared_ptr<aetherClass::ShaderBase> m_collideBoxShader;
 	bool m_isCahngeCamera;		// カメラを切り替えるフラグ
 };

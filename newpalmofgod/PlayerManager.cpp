@@ -28,7 +28,7 @@ bool PlayerManager::Initialize(){//const std::shared_ptr<ViewCamera> camera){
 
 	m_playerObject = std::make_shared<FbxModel>();
 	m_playerObject->LoadFBX("ModelData/models/player5.fbx", eAxisSystem::eAxisOpenGL);
-	m_playerObject->SetCamera(camera.get());
+	m_playerObject->SetCamera(m_camera.get());
 	m_playerObject->GetTransform()._translation = Vector3(-100.0f, 105.0f, 670.0f);
 	m_playerObject->GetTransform()._scale = Vector3(1.3f, -1.3f, 1.3f);
 
@@ -38,7 +38,7 @@ bool PlayerManager::Initialize(){//const std::shared_ptr<ViewCamera> camera){
 	m_collideBox = std::make_shared<Cube>();
 	m_collideBox->Initialize();
 	m_collideBox->SetTexture(m_collideTexture.get());
-	m_collideBox->SetCamera(camera.get());
+	m_collideBox->SetCamera(m_camera.get());
 	const Vector3 translation = m_playerObject->GetTransform()._translation;
 	m_collideBox->GetTransform()._translation = translation;
 	m_collideBox->GetTransform()._scale = Vector3(70.0f, 100.0f, 20.0f);
