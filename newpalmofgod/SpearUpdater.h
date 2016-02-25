@@ -11,7 +11,7 @@
 #define ON 1
 #define SET 2
 
-static int s_flag;
+static int spear_flag;
 
 namespace n_Spear{
 	class SpearUpdater
@@ -35,6 +35,7 @@ namespace n_Spear{
 		~SpearUpdater();
 
 		void Updating(aetherClass::ModelBase*);
+		bool HittingProcessor(const std::shared_ptr<aetherClass::ModelBase>&, const std::shared_ptr<aetherClass::ModelBase>&);
 
 		void FlagOn();
 		void FlagOff();

@@ -112,8 +112,6 @@ return true;
 
 bool SceneGame::Updater(){
 
-	m_spear->Update();
-
 	m_wall->Update();
 
 	if (m_player->HitMesh(m_rock->Get()))
@@ -133,6 +131,13 @@ bool SceneGame::Updater(){
 
 	if (m_gameState == eGameState::eRockEvent){
 		m_rock->Update();
+	}
+
+	if (m_spear->HitMesh(m_player->Get(), m_spear->S_Get())){
+		m_gameState = eGameState::eSpearEvent;
+	}
+	if (m_gameState == eGameState::eSpearEvent){
+		m_spear->Update();
 	}
 
 	// デバッグ用

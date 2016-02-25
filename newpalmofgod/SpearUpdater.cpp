@@ -1,4 +1,5 @@
 #include "SpearUpdater.h"
+#include<Physics.h>
 #include<ModelBase.h>
 #include<GameController.h>
 #include<iostream>
@@ -9,7 +10,7 @@ SpearUpdater::SpearUpdater()
 {
 	m_event = eEvent::eNormal;
 	m_countDown = 150;
-	s_flag = OFF;
+	spear_flag = OFF;
 }
 
 SpearUpdater::~SpearUpdater(){}
@@ -20,21 +21,21 @@ void SpearUpdater::Updating(ModelBase* spear)
 		MessageBox(NULL, L"missing Object", ERROR, MB_OK);
 		return;
 	}
-	if (s_flag == ON){
+	if (spear_flag == ON){
 		ButtonOn(spear);
 	}
-	std::cout << s_flag << std::endl;
+	std::cout << spear_flag << std::endl;
 	return;
 }
 
 void SpearUpdater::FlagOn()
 {
-	s_flag = ON;
+	spear_flag = ON;
 }
 
 void SpearUpdater::FlagOff()
 {
-	s_flag = OFF;
+	spear_flag = OFF;
 }
 
 void SpearUpdater::ButtonOn(ModelBase* spear)
@@ -50,12 +51,22 @@ void SpearUpdater::ButtonOn(ModelBase* spear)
 	}
 	if (m_countDown <= 0)m_event = eEvent::eNormal;
 	if (spear->GetTransform()._translation._z < -3000){
-		s_flag = SET;
+		spear_flag = SET;
 	}
 	
 }
 
+bool SpearUpdater::HittingProcessor(const std::shared_ptr<ModelBase>& player, const std::shared_ptr<ModelBase>& other){
+
+	// TODO: “–‚½‚Á‚½‚©‚ğ’²‚×‚éğŒ®‚ğ‹LÚ
+	if (!aetherFunction::CollideBoxOBB(*player, *other)){
+		return false;
+	}
+	return true;
+
+}
+
 int SpearUpdater::FlagGet()
 {
-	return s_flag;
+	return spear_flag;
 }

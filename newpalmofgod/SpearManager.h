@@ -6,6 +6,7 @@
 //#include"Spear.h"
 #include"SpearRender.h"
 #include"SpearUpdater.h"
+#include"PlayerManager.h"
 #include<memory>
 #include<ViewCamera.h>
 #include<GameController.h>
@@ -65,6 +66,10 @@ public:
 	void Shutdown();
 
 	int FlagGet();
+
+	bool HitMesh(std::shared_ptr<aetherClass::ModelBase>&, std::shared_ptr<aetherClass::ModelBase>&);
+
+	std::shared_ptr<aetherClass::ModelBase> S_Get();
 
 	std::shared_ptr<aetherClass::ModelBase> Get();
 	
