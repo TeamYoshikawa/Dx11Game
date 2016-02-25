@@ -46,8 +46,8 @@ bool SpearManager::Initialize(ViewCamera *camera)
 	}
 	m_switch->SetCamera(camera);
 	m_switch->SetTexture(m_switchTexture.get());
-	m_switch->GetTransform()._translation = Vector3(8722.0f, -80.0f, 534.0f);
-	m_switch->GetTransform()._scale = Vector3(100.0f, 100.0f, 50.0f);
+	m_switch->GetTransform()._translation = Vector3(8722.0f, -80.0f, 954.0f);
+	m_switch->GetTransform()._scale = Vector3(250.0f, 200.0f, 50.0f);
 
 	m_spearEvent = eSpearEvent::eChecking;
 	return true;
