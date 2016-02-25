@@ -175,7 +175,7 @@ void SceneGame::Render(){
 	m_lightmanager->Render();
 	m_stage->Render(m_materialShader.get());
 
-	m_player->Render(m_materialShader);
+	//m_player->Render(m_materialShader);
 
 	m_rock->Render(m_pixelShader);
 

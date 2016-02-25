@@ -46,6 +46,7 @@ private:
 	int m_daedCounter;
 	bool m_damageFlg;
 	std::shared_ptr<aetherClass::GameSound> m_playerSound;
+	std::shared_ptr<aetherClass::GameSound> m_damegeSound;
 };
 
 #endif

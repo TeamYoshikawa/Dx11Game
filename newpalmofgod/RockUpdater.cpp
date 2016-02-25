@@ -11,6 +11,12 @@ using namespace aetherClass;
 RockUpdater::RockUpdater(){
 	m_event = eEvent::eNormal;
 	m_countDown = 150;
+	m_rockSound = std::make_shared<GameSound>();
+	bool hoge = m_rockSound->Load("Sound/Rock/Iwa_korogaru.wav");
+	if (!hoge){
+		assert(!"ƒGƒ‰[•Ž€‚É‚Ü‚µ‚½");
+	}
+	m_rockSound->SetValume(+2000);
 }
 
 
@@ -50,6 +56,8 @@ void RockUpdater::First(ModelBase*Rock){
 
 	speed *= 1.12;
 
+	m_rockSound->PlayToOneTime();
+
 	//std::cout << Rock->GetTransform()._translation._z << std::endl;
 	if (GameController::GetKey().IsKeyDown(DIK_SPACE))m_event = eEvent::eThrow;
 	if (Rock->GetTransform()._translation._y > 120.0f){
@@ -80,6 +88,7 @@ void RockUpdater::First(ModelBase*Rock){
 
 		if (Rock->GetTransform()._translation._z < 200){
 			rock_flag = SET;
+			m_rockSound->Stop();
 		}
 	}
 

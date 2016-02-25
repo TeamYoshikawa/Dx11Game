@@ -29,6 +29,8 @@ namespace n_Rock{
 
 		eEvent m_event;
 		int m_countDown;
+
+		std::shared_ptr<aetherClass::GameSound> m_rockSound;
 		
 	public:
 		RockUpdater();

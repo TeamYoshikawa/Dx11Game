@@ -26,6 +26,10 @@ void PlayerUpdater::Initialize(){
 	m_playerSound = std::make_shared<GameSound>();
 	m_playerSound->Load("Sound/Player/chain03.wav");
 	m_playerSound->SetValume(-4000);
+
+	m_damegeSound = std::make_shared<GameSound>();
+	m_damegeSound->Load("Sound/Player/damage03.wav");
+	m_damegeSound->SetValume(+3000);
 	return;
 }
 
@@ -62,6 +66,7 @@ bool PlayerUpdater::HittingProcessor(const std::shared_ptr<ModelBase>& player, c
 	}
 	if (SendStatus()._muteki == true)return false;
 	std::cout << "“–‚½‚Á‚½‚æ";
+	m_damegeSound->PlayToOneTime();
 	SendStatus()._life -= 1;
 	SendStatus()._muteki = true;
 	m_damageFlg = true;
@@ -74,22 +79,39 @@ bool PlayerUpdater::HittingProcessor(const std::shared_ptr<ModelBase>& player, c
 void PlayerUpdater::Move(const std::shared_ptr<FbxModel>& playerObject, std::shared_ptr<aetherClass::ViewCamera> camera){
 
 	if (GameController::GetKey().IsKeyDown(DIK_RIGHT)){
-		camera->Translation()._x -= 10.0f;
+		camera->Rotation()._y -= 2.0f;
 		m_playerSound->PlayToOneTime();
 	}
 	if (GameController::GetKey().IsKeyDown(DIK_LEFT)){
-		camera->Translation()._x += 10.0f;
+		camera->Rotation()._y += 2.0f;
 		m_playerSound->PlayToOneTime();
 	}
 	if (GameController::GetKey().IsKeyDown(DIK_UP)){
-		camera->Translation()._z += 10.0f;
+		camera->Rotation()._x -= 2.0f;
 		m_playerSound->PlayToOneTime();
 	}
 	if (GameController::GetKey().IsKeyDown(DIK_DOWN)){
+		camera->Rotation()._x += 2.0f;
+		m_playerSound->PlayToOneTime();
+	}
+	if (GameController::GetKey().IsKeyDown(DIK_W)){
+		camera->Translation()._x += 10.0f;
+		m_playerSound->PlayToOneTime();
+	}
+	if (GameController::GetKey().IsKeyDown(DIK_S)){
+		camera->Translation()._x -= 10.0f;
+		m_playerSound->PlayToOneTime();
+	}
+	if (GameController::GetKey().IsKeyDown(DIK_D)){
+		camera->Translation()._z += 10.0f;
+		m_playerSound->PlayToOneTime();
+	}
+	if (GameController::GetKey().IsKeyDown(DIK_A)){
 		camera->Translation()._z -= 10.0f;
 		m_playerSound->PlayToOneTime();
 	}
 
+	// ƒ‚ƒfƒ‹‚Æ˜A“®
 	playerObject->GetTransform()._translation._x = camera->Translation()._x - 10;
 	playerObject->GetTransform()._translation._z = camera->Translation()._z;
 
