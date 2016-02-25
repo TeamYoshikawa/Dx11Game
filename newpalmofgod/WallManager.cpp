@@ -130,12 +130,12 @@ void WallManager::Update(){
 
 void WallManager::Render(std::shared_ptr<ShaderBase>shader){
 
-	for (i = 0; i < r_max; i++){
+	/*for (i = 0; i < r_max; i++){
 		m_HitWall[i]->Render(shader.get());
-	}
+	}*/
 
 	
-	m_hplayer->Render(shader.get());
+	//m_hplayer->Render(shader.get());
 }
 
 
