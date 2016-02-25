@@ -37,7 +37,7 @@ bool SceneGame::Initialize(){
 	m_camera->Rotation() = Vector3(-170.0f, 178.0f, 1.0f);
 
     m_sound = std::make_shared<GameSound>();
-    m_sound->Load("Sound/BGM.wav");
+	m_sound->Load("Sound/BGM/BGM.wav");
     m_sound->SetValume(-3000);
 	m_sound->PlayToLoop();
 
