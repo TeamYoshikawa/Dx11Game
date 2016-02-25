@@ -1,6 +1,7 @@
 #pragma once
 #include <ModelBase.h>
 #include <Physics.h>
+#include "GameSound.h"
 //#include"Sphere.h"
 
 #define OFF 0
