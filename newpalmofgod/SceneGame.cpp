@@ -153,7 +153,7 @@ bool SceneGame::Updater(){
 	}*/
 
 
-	m_player->Update(m_camera);
+	m_player->Update(m_camera,m_wall);
 	m_lightmanager->Update();
 
 	m_ui->Set(m_player->LifeGet());

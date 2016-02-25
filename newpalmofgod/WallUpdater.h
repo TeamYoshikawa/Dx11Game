@@ -16,7 +16,7 @@ namespace n_Wall{
 	public:
 		WallUpdater();
 		~WallUpdater() = default;
-
+		bool HitProcessor(const std::shared_ptr<aetherClass::ModelBase>&, const std::shared_ptr<aetherClass::ModelBase>&);
 		void Update(aetherClass::ModelBase*model);
 
 	};

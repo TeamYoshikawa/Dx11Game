@@ -2,8 +2,10 @@
 #include <iostream>
 #include <Physics.h>
 #include <PixelShader.h>
+
 using namespace aetherClass;
 using namespace aetherFunction;
+
 PlayerManager::PlayerManager()
 {
 }
@@ -68,7 +70,7 @@ void PlayerManager::Render(const std::shared_ptr<ShaderBase> shader){
 }
 
 // 更新処理
-void PlayerManager::Update(const std::shared_ptr<aetherClass::ViewCamera> camera){
+void PlayerManager::Update(const std::shared_ptr<aetherClass::ViewCamera> camera, const std::shared_ptr<WallManager> wall){
 	// 現在のナビゲーションの場所を取得
 
 	m_updater->Updating(m_playerObject,camera);

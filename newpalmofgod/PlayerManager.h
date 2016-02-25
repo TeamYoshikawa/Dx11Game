@@ -14,17 +14,19 @@ player‚Ìó‘Ô‚ÌŠÇ—‚È‚Ç‚ğ¿‚¯•‰‚¤‚Æ‚±H
 #include <FbxModel.h>
 #include <Texture.h>
 #include <memory>
-class PlayerManager
-{
+#include "WallManager.h"
+
+
+class PlayerManager{
 
 public:
 	PlayerManager();
 	~PlayerManager();
 
-	bool Initialize();//const std::shared_ptr<aetherClass::ViewCamera>);
+	bool Initialize();
 
 	void Render(const std::shared_ptr<aetherClass::ShaderBase>);
-	void Update(const std::shared_ptr<aetherClass::ViewCamera>);
+	void Update(const std::shared_ptr<aetherClass::ViewCamera>, const std::shared_ptr<WallManager>);
 	PlayerBase::PlayerStatus& Status();
 	void Status(PlayerBase::PlayerStatus&);
 

@@ -12,7 +12,7 @@
 #include <ViewCamera.h>
 #include <stdio.h>
 
-#define r_max 13
+#define r_max 17
 
 class WallManager
 
@@ -26,7 +26,7 @@ private:
 private:
 	std::shared_ptr<aetherClass::ModelBase>m_Wall[2];
 	
-	std::shared_ptr<aetherClass::ModelBase>m_HitWall[13];
+	std::shared_ptr<aetherClass::ModelBase>m_HitWall[17];
 	
 
 	std::shared_ptr<aetherClass::ModelBase>m_hplayer;
@@ -38,9 +38,7 @@ private:
 	std::shared_ptr<n_Wall::WallUpdater>m_updater;
 	std::shared_ptr<n_Wall::WallRender>m_render;
 
-	std::shared_ptr<n_Wall::WallUpdater> m_player;
-
-	//std::shared_ptr<TrapNavigation> m_navigation;
+	std::shared_ptr<aetherClass::ViewCamera> m_camera;
 
 	int i;
 
@@ -52,6 +50,7 @@ public:
 	~WallManager() = default;
 
 	bool Initialize(aetherClass::ViewCamera* camera);
+	bool HitMesh(std::shared_ptr<aetherClass::ModelBase>&);
 	void Render(const std::shared_ptr<aetherClass::ShaderBase>);
 	void Update();
 

@@ -1,7 +1,9 @@
 #include "WallUpdater.h"
 #include <iostream>
 #include <Sphere.h>
+#include <Physics.h>
 using namespace n_Wall;
+using namespace aetherFunction;
 using namespace aetherClass;
 
 
@@ -21,26 +23,10 @@ void WallUpdater::Update(ModelBase *Wall){
 	
 }
 
-void WallUpdater::First(ModelBase*Wall){
-
-	std::cout << "First\n";
-
-	Wall->GetTransform()._translation._y += speed;
-
-	speed *= 1.12;
-
-	std::cout << Wall->GetTransform()._translation._z << std::endl;
-
-	if (Wall->GetTransform()._translation._y > 50.0f){
-
-		Wall->GetTransform()._translation._y = 120.0f;
-
-		Wall->GetTransform()._translation._x -= 0.5f;
-
-		Wall->GetTransform()._rotation._x += 10.0f;
-
-		Wall->GetTransform()._translation._z -= 15.0f;
+bool WallUpdater::HitProcessor(const std::shared_ptr<aetherClass::ModelBase>&wall, const std::shared_ptr<aetherClass::ModelBase>&player)
+{
+	if (!CollideBoxOBB(*wall, *player)){
+		return false;
 	}
-
-	
+	return true;
 }

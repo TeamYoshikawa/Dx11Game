@@ -49,52 +49,81 @@ bool WallManager::Initialize(ViewCamera* camera){
 
 	/*壁*/
 
-	m_HitWall[0]->GetTransform()._translation = Vector3(2000.0f, 100.0f, 310.0f);
-	m_HitWall[0]->GetTransform()._scale = Vector3(1000.0f, 300.0f, 10.0f);
+	//スタートすぐ右の壁
+	m_HitWall[0]->GetTransform()._translation = Vector3(-188.0f, 100.0f, 0.0f);
+	m_HitWall[0]->GetTransform()._scale = Vector3(1500.0f, 300.0f, 10.0f);
+	m_HitWall[0]->GetTransform()._rotation._y = 90;
 
+	//スタートすぐ目の前
 	m_HitWall[1]->GetTransform()._translation = Vector3(900.0f, 100.0f, 920.0f);
 	m_HitWall[1]->GetTransform()._scale = Vector3(1500.0f, 300.0f, 10.0f);
 
-	m_HitWall[2]->GetTransform()._translation = Vector3(3000.0f, 100.0f, 2525.0f);
-	m_HitWall[2]->GetTransform()._scale = Vector3(3000.0f, 300.0f, 10.0f);
+	//スタートすぐ後ろ
+	m_HitWall[14]->GetTransform()._translation = Vector3(400.0f, 100.0f, 0.0f);
+	m_HitWall[14]->GetTransform()._scale = Vector3(600.0f, 300.0f, 10.0f);
 
-	m_HitWall[3]->GetTransform()._translation = Vector3(7150.0f, 100.0f, 920.0f);
-	m_HitWall[3]->GetTransform()._scale = Vector3(1250.0f, 300.0f, 10.0f);
+	//スタート左の壁
+	m_HitWall[15]->GetTransform()._translation = Vector3(1010.0f, 100.0f, 70.0f);
+	m_HitWall[15]->GetTransform()._scale = Vector3(200.0f, 300.0f, 10.0f);
+	m_HitWall[15]->GetTransform()._rotation._y = 90;
 
-	m_HitWall[4]->GetTransform()._translation = Vector3(7150.0f, 100.0f, 300.0f);
-	m_HitWall[4]->GetTransform()._scale = Vector3(1950.0f, 300.0f, 10.0f);
+	//次の部屋後ろ
+	m_HitWall[2]->GetTransform()._translation = Vector3(2200.0f, 100.0f, 310.0f);
+	m_HitWall[2]->GetTransform()._scale = Vector3(1200.0f, 300.0f, 10.0f);
 
-	m_HitWall[5]->GetTransform()._translation = Vector3(9500.0f, 100.0f, 1910.0f);
-	m_HitWall[5]->GetTransform()._scale = Vector3(500.0f, 300.0f, 10.0f);
+	//岩の先の通路の壁
+	m_HitWall[3]->GetTransform()._translation = Vector3(3000.0f, 100.0f, 2525.0f);
+	m_HitWall[3]->GetTransform()._scale = Vector3(3000.0f, 300.0f, 10.0f);
 
-	m_HitWall[6]->GetTransform()._translation = Vector3(9000.0f, 100.0f, 2420.0f);
-	m_HitWall[6]->GetTransform()._scale = Vector3(1000.0f, 300.0f, 10.0f);
-	
+	//岩の先の通路の壁
+	m_HitWall[16]->GetTransform()._translation = Vector3(4200.0f, 100.0f, 1900.0f);
+	m_HitWall[16]->GetTransform()._scale = Vector3(1100.0f, 300.0f, 10.0f);
 
+	//岩左壁
+	m_HitWall[4]->GetTransform()._translation = Vector3(3145.0f, 100.0f, 910.0f);
+	m_HitWall[4]->GetTransform()._scale = Vector3(980.0f, 300.0f, 10.0f);
+	m_HitWall[4]->GetTransform()._rotation._y = 90;
 
-	m_HitWall[7]->GetTransform()._translation = Vector3(-188.0f, 100.0f, 0.0f);
-	m_HitWall[7]->GetTransform()._scale = Vector3(1500.0f, 300.0f, 10.0f);
-	m_HitWall[7]->GetTransform()._rotation._y = 90;
+	//岩右壁
+	m_HitWall[5]->GetTransform()._translation = Vector3(2490.0f, 100.0f, 1850.0f);
+	m_HitWall[5]->GetTransform()._scale = Vector3(980.0f, 300.0f, 10.0f);
+	m_HitWall[5]->GetTransform()._rotation._y = 90;
 
-	m_HitWall[8]->GetTransform()._translation = Vector3(3152.0f, 100.0f, 920.0f);
-	m_HitWall[8]->GetTransform()._scale = Vector3(980.0f, 300.0f, 10.0f);
-	m_HitWall[8]->GetTransform()._rotation._y = 90;
+	//落とし穴の前の左壁
+	m_HitWall[6]->GetTransform()._translation = Vector3(5930.0f, 100.0f, 1900.0f);
+	m_HitWall[6]->GetTransform()._scale = Vector3(980.0f, 300.0f, 10.0f);
+	m_HitWall[6]->GetTransform()._rotation._y = 90;
 
-	m_HitWall[9]->GetTransform()._translation = Vector3(2502.0f, 100.0f, 1850.0f);
+	//落とし穴の前の右壁
+	m_HitWall[13]->GetTransform()._translation = Vector3(5290.0f, 100.0f, 910.0f);
+	m_HitWall[13]->GetTransform()._scale = Vector3(980.0f, 300.0f, 10.0f);
+	m_HitWall[13]->GetTransform()._rotation._y = 90;
+
+	//落とし穴の場所の壁
+	m_HitWall[7]->GetTransform()._translation = Vector3(9500.0f, 100.0f, 1910.0f);
+	m_HitWall[7]->GetTransform()._scale = Vector3(500.0f, 300.0f, 10.0f);
+
+	//落とし穴の場所の壁
+	m_HitWall[8]->GetTransform()._translation = Vector3(7150.0f, 100.0f, 300.0f);
+	m_HitWall[8]->GetTransform()._scale = Vector3(1950.0f, 300.0f, 10.0f);
+
+	//槍の場所の右の壁
+	m_HitWall[9]->GetTransform()._translation = Vector3(8402.0f, 100.0f, 1900.0f);
 	m_HitWall[9]->GetTransform()._scale = Vector3(980.0f, 300.0f, 10.0f);
 	m_HitWall[9]->GetTransform()._rotation._y = 90;
 
-	m_HitWall[10]->GetTransform()._translation = Vector3(5930.0f, 100.0f, 1900.0f);
+	//槍の場所の左の壁
+	m_HitWall[10]->GetTransform()._translation = Vector3(9042.0f, 100.0f, 900.0f);
 	m_HitWall[10]->GetTransform()._scale = Vector3(980.0f, 300.0f, 10.0f);
 	m_HitWall[10]->GetTransform()._rotation._y = 90;
 
-	m_HitWall[11]->GetTransform()._translation = Vector3(8402.0f, 100.0f, 1900.0f);
-	m_HitWall[11]->GetTransform()._scale = Vector3(980.0f, 300.0f, 10.0f);
-	m_HitWall[11]->GetTransform()._rotation._y = 90;
+	//槍の奥の壁
+	m_HitWall[11]->GetTransform()._translation = Vector3(9000.0f, 100.0f, 2420.0f);
+	m_HitWall[11]->GetTransform()._scale = Vector3(1000.0f, 300.0f, 10.0f);
 
-	m_HitWall[12]->GetTransform()._translation = Vector3(9042.0f, 100.0f, 900.0f);
-	m_HitWall[12]->GetTransform()._scale = Vector3(980.0f, 300.0f, 10.0f);
-	m_HitWall[12]->GetTransform()._rotation._y = 90;
+	//ゴールの壁
+	m_HitWall[12]->GetTransform()._translation = Vector3(7150.0f, 100.0f, 920.0f);
+	m_HitWall[12]->GetTransform()._scale = Vector3(1250.0f, 300.0f, 10.0f);
 
 	
 	/*ここまで*/
@@ -108,24 +137,79 @@ bool WallManager::Initialize(ViewCamera* camera){
 
 void WallManager::Update(){
 
-	if (GameController::GetKey().IsKeyDown(DIK_A)){
+}
 
-		m_hplayer->GetTransform()._translation._x -= 1.0f;
-	}
+bool WallManager::HitMesh(std::shared_ptr<aetherClass::ModelBase>& player){
 
-	if (GameController::GetKey().IsKeyDown(DIK_D)){
-
-		m_hplayer->GetTransform()._translation._x += 1.0f;
+	if (m_updater->HitProcessor(m_HitWall[0], player)){
+		std::cout << "壁に当たったよ" << std::endl;
+		return true;
 	}
-
-	if (m_WallEvent == eEvent::eChecking)
-	{
-		
+	if (m_updater->HitProcessor(m_HitWall[1], player)){
+		std::cout << "壁に当たったよ" << std::endl;
+		return true;
 	}
-	else
-	{
-		m_updater->Update(m_Wall[0].get());
+	if (m_updater->HitProcessor(m_HitWall[2], player)){
+		std::cout << "壁に当たったよ" << std::endl;
+		return true;
 	}
+	if (m_updater->HitProcessor(m_HitWall[3], player)){
+		std::cout << "壁に当たったよ" << std::endl;
+		return true;
+	}
+	if (m_updater->HitProcessor(m_HitWall[4], player)){
+		std::cout << "壁に当たったよ" << std::endl;
+		return true;
+	}
+	if (m_updater->HitProcessor(m_HitWall[5], player)){
+		std::cout << "壁に当たったよ" << std::endl;
+		return true;
+	}
+	if (m_updater->HitProcessor(m_HitWall[6], player)){
+		std::cout << "壁に当たったよ" << std::endl;
+		return true;
+	}
+	if (m_updater->HitProcessor(m_HitWall[7], player)){
+		std::cout << "壁に当たったよ" << std::endl;
+		return true;
+	}
+	if (m_updater->HitProcessor(m_HitWall[8], player)){
+		std::cout << "壁に当たったよ" << std::endl;
+		return true;
+	}
+	if (m_updater->HitProcessor(m_HitWall[9], player)){
+		std::cout << "壁に当たったよ" << std::endl;
+		return true;
+	}
+	if (m_updater->HitProcessor(m_HitWall[10], player)){
+		std::cout << "壁に当たったよ" << std::endl;
+		return true;
+	}
+	if (m_updater->HitProcessor(m_HitWall[11], player)){
+		std::cout << "壁に当たったよ" << std::endl;
+		return true;
+	}
+	if (m_updater->HitProcessor(m_HitWall[12], player)){
+		std::cout << "壁に当たったよ" << std::endl;
+		return true;
+	}
+	if (m_updater->HitProcessor(m_HitWall[13], player)){
+		std::cout << "壁に当たったよ" << std::endl;
+		return true;
+	}
+	if (m_updater->HitProcessor(m_HitWall[14], player)){
+		std::cout << "壁に当たったよ" << std::endl;
+		return true;
+	}
+	if (m_updater->HitProcessor(m_HitWall[15], player)){
+		std::cout << "壁に当たったよ" << std::endl;
+		return true;
+	}
+	if (m_updater->HitProcessor(m_HitWall[16], player)){
+		std::cout << "壁に当たったよ" << std::endl;
+		return true;
+	}
+	return false;
 }
 
 void WallManager::Render(std::shared_ptr<ShaderBase>shader){
