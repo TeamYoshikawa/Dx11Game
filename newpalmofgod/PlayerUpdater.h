@@ -8,6 +8,7 @@ Player‚ÌUpdaterƒNƒ‰ƒX
 
 */
 #include "PlayerBase.h"
+#include "GameSound.h"
 #include <memory>
 #include <FbxModel.h>
 #include <ModelBase.h>
@@ -28,7 +29,7 @@ public:
 	void Initialize()override;
 	PlayerBase::PlayerStatus& SendStatus()override;
 	void SendStatus(PlayerBase::PlayerStatus&)override;
-	void Updating(const std::shared_ptr<aetherClass::FbxModel>&);
+	void Updating(const std::shared_ptr<aetherClass::FbxModel>&, std::shared_ptr<aetherClass::ViewCamera>);
 	void FaceTheObject(const std::shared_ptr<aetherClass::FbxModel>&, const std::shared_ptr<aetherClass::ModelBase>&);
 	bool HittingProcessor(const std::shared_ptr<aetherClass::ModelBase>&, const std::shared_ptr<aetherClass::ModelBase>&);
 
@@ -44,6 +45,7 @@ private:
 	int m_damageCounter;
 	int m_daedCounter;
 	bool m_damageFlg;
+	std::shared_ptr<aetherClass::GameSound> m_playerSound;
 };
 
 #endif

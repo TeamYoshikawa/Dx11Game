@@ -27,87 +27,93 @@ bool SceneGame::Initialize(){
 	m_ui = std::make_shared<UiGame>();
 	m_ui->Initialize();
 
-// カメラオブジェクトの作成
-m_camera = std::make_shared<CameraManager>();
-m_camera->Initialize();
+	// デバッグ用（近いうちに消す）
+    /*m_camera = std::make_shared<CameraManager>();
+    m_camera->Initialize();*/
 
-m_sound = std::make_shared<GameSound>();
-m_sound->Load("Sound/BGM.wav");
-m_sound->SetValume(-3000);
+	// カメラオブジェクトの作成
+	m_camera = std::make_shared<ViewCamera>();
+	m_camera->Translation() = Vector3(-100, -8, 692);
+	m_camera->Rotation() = Vector3(-170.0f, 178.0f, 1.0f);
 
+    m_sound = std::make_shared<GameSound>();
+    m_sound->Load("Sound/BGM.wav");
+    m_sound->SetValume(-3000);
+	m_sound->PlayToLoop();
 
-// シェーダーの詳細情報の設定
-ShaderDesc textureDesc;
+    // シェーダーの詳細情報の設定
+    ShaderDesc textureDesc;
 
-textureDesc._vertex._entryName = "vs_main";
-textureDesc._vertex._srcFile = L"Shader/VertexShaderBase.hlsl";
+    textureDesc._vertex._entryName = "vs_main";
+    textureDesc._vertex._srcFile = L"Shader/VertexShaderBase.hlsl";
 
-textureDesc._pixel._entryName = "ps_main";
-textureDesc._pixel._srcFile = L"Shader/ColorTextureAdd2.ps";
-
-
-
-// ピクセルシェーダーの作成
-m_pixelShader = std::make_shared<PixelShader>();
-m_pixelShader->Initialize(textureDesc, ShaderType::eVertex | ShaderType::ePixel);
-
-Material material;
-material._ambient._color = Color(1, 0, 0, 1);
-material._diffuse._color = Color(1, 0, 0, 1);
-material._specular._color = Color(1, 0, 0, 1);
-material._specularPower = 4;
-
-// ライトの作成
-m_lightmanager = std::make_shared<LightManager>();
-m_lightmanager->Initialize();
-
-// プレイヤーの作成
-m_player = std::make_shared<PlayerManager>();
-m_player->Initialize(m_camera->GetCamera());
-
-
-// ステージモデルの作成
-m_stage = std::make_shared<FbxModel>();
-m_stage->LoadFBX("ModelData/models/STAGEKANZENBAN.fbx", eAxisSystem::eAxisOpenGL);
-m_stage->SetCamera(m_camera->GetCamera().get());
-m_stage->GetTransform()._scale = Vector3(1.0f, 1.0f, -1.0f);
-
-m_stage->SetModelMaterialColor(Color(0.2, 0.0, 0.2, 1), eMatrerialType::eAmbient);
-m_stage->SetModelMaterialColor(Color(1, 1, 1, 1.0), eMatrerialType::eDiffuse);
-m_stage->SetModelMaterialColor(Color(1, 0, 0, 1.0), eMatrerialType::eSpecular);
-
-// 岩の作成
-m_rock = std::make_shared<RockManager>();
-m_rock->Initialize(m_camera->GetCamera().get());
-
-m_spear = std::make_shared<SpearManager>();
-m_spear->Initialize(m_camera->GetCamera().get());
-
-
-m_wall = std::make_shared<WallManager>();
-m_wall->Initialize(m_camera->GetCamera().get());
+    textureDesc._pixel._entryName = "ps_main";
+    textureDesc._pixel._srcFile = L"Shader/ColorTextureAdd2.ps";
 
 
 
-// マテリアルシェーダー作成時の情報の設定
-ShaderDesc materialDesc;
-materialDesc._vertex._entryName = "vs_main";
-materialDesc._vertex._srcFile = L"Shader/MaterialVS.hlsl";
-materialDesc._pixel._entryName = "ps_main";
-materialDesc._pixel._srcFile = L"Shader/MaterialPS.hlsl";
+    // ピクセルシェーダーの作成
+    m_pixelShader = std::make_shared<PixelShader>();
+    m_pixelShader->Initialize(textureDesc, ShaderType::eVertex | ShaderType::ePixel);
 
-// マテリアルシェーダーの作成
-m_materialShader = std::make_shared<MaterialShader>();
-m_materialShader->Initialize(materialDesc, ShaderType::eVertex | ShaderType::ePixel);
-m_materialShader->SetLight(m_lightmanager->GetLight().get());
-m_materialShader->SetCamera(m_camera->GetCamera().get());
-m_lightmanager->GetLight()->Translation() = m_camera->GetCamera()->Translation();
+    Material material;
+    material._ambient._color = Color(1, 0, 0, 1);
+    material._diffuse._color = Color(1, 0, 0, 1);
+    material._specular._color = Color(1, 0, 0, 1);
+    material._specularPower = 4;
 
-// プレイヤーの最初の状態の設定
-m_player->SetState(PlayerBase::ePlayerMoveState::eMove);
+    // ライトの作成
+    m_lightmanager = std::make_shared<LightManager>();
+    m_lightmanager->Initialize();
 
-m_gameState = eGameState::eNull;
-return true;
+    // プレイヤーの作成
+    m_player = std::make_shared<PlayerManager>();
+	m_player->Initialize();//m_camera->GetCamera());
+
+
+    // ステージモデルの作成
+    m_stage = std::make_shared<FbxModel>();
+    m_stage->LoadFBX("ModelData/models/STAGEKANZENBAN.fbx", eAxisSystem::eAxisOpenGL);
+	m_stage->SetCamera(m_camera.get());//m_camera->GetCamera().get());
+    m_stage->GetTransform()._scale = Vector3(1.0f, 1.0f, -1.0f);
+
+    m_stage->SetModelMaterialColor(Color(0.2, 0.0, 0.2, 1), eMatrerialType::eAmbient);
+    m_stage->SetModelMaterialColor(Color(1, 1, 1, 1.0), eMatrerialType::eDiffuse);
+    m_stage->SetModelMaterialColor(Color(1, 0, 0, 1.0), eMatrerialType::eSpecular);
+
+    // 岩の作成
+    m_rock = std::make_shared<RockManager>();
+	m_rock->Initialize(m_camera.get());   //m_camera->GetCamera().get());
+
+    m_spear = std::make_shared<SpearManager>();
+	m_spear->Initialize(m_camera.get());  //m_camera->GetCamera().get());
+
+
+    m_wall = std::make_shared<WallManager>();
+	m_wall->Initialize(m_camera.get());   //m_camera->GetCamera().get());
+
+
+
+    // マテリアルシェーダー作成時の情報の設定
+    ShaderDesc materialDesc;
+    materialDesc._vertex._entryName = "vs_main";
+    materialDesc._vertex._srcFile = L"Shader/MaterialVS.hlsl";
+    materialDesc._pixel._entryName = "ps_main";
+    materialDesc._pixel._srcFile = L"Shader/MaterialPS.hlsl";
+
+    // マテリアルシェーダーの作成
+    m_materialShader = std::make_shared<MaterialShader>();
+    m_materialShader->Initialize(materialDesc, ShaderType::eVertex | ShaderType::ePixel);
+    m_materialShader->SetLight(m_lightmanager->GetLight().get());
+	m_materialShader->SetCamera(m_camera.get());    //m_camera->GetCamera().get());
+    m_lightmanager->GetLight()->Translation() = m_camera->GetCamera()->Translation();
+
+    // プレイヤーの最初の状態の設定
+    m_player->SetState(PlayerBase::ePlayerMoveState::eMove);
+
+    m_gameState = eGameState::eNull;
+
+    return true;
 }
 
 bool SceneGame::Updater(){
@@ -172,8 +178,6 @@ void SceneGame::Render(){
 	m_player->Render(m_materialShader);
 
 	m_rock->Render(m_pixelShader);
-
-	m_sound->PlayToLoop();
 
 	m_wall->Render(m_pixelShader);
 

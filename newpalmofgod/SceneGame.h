@@ -51,7 +51,7 @@ private:
 	eGameState m_gameState;
 
 	std::shared_ptr<PlayerManager> m_player;
-	std::shared_ptr<CameraManager> m_camera;
+	//std::shared_ptr<CameraManager> m_camera;
 	std::shared_ptr<LightManager> m_lightmanager;
 	std::shared_ptr<PitFallManager> m_pitfall;
 
@@ -61,6 +61,8 @@ private:
 	std::shared_ptr<WallManager> m_wall;
 
 	std::shared_ptr<UiGame> m_ui;
+
+	std::shared_ptr<aetherClass::ViewCamera> m_camera;
 
 	std::shared_ptr<aetherClass::ShaderBase> m_pixelShader;
 

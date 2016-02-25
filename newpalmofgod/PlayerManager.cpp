@@ -14,12 +14,17 @@ PlayerManager::~PlayerManager()
 }
 
 
-bool PlayerManager::Initialize(const std::shared_ptr<ViewCamera> camera){
+bool PlayerManager::Initialize(){//const std::shared_ptr<ViewCamera> camera){
 	m_updater = std::make_unique<PlayerUpdater>();
 	m_updater->Initialize();
 
 	m_render = std::make_unique<PlayerRender>();
 	m_render->Initialize();
+
+	// プレイヤーが持つカメラの初期化
+	m_camera = std::make_shared<ViewCamera>();
+	m_camera->Translation() = Vector3(-100, -8, 692);
+	m_camera->Rotation() = Vector3(-170.0f, 178.0f, 1.0f);
 
 	m_playerObject = std::make_shared<FbxModel>();
 	m_playerObject->LoadFBX("ModelData/models/player5.fbx", eAxisSystem::eAxisOpenGL);
@@ -63,10 +68,10 @@ void PlayerManager::Render(const std::shared_ptr<ShaderBase> shader){
 }
 
 // 更新処理
-void PlayerManager::Update(){
+void PlayerManager::Update(const std::shared_ptr<aetherClass::ViewCamera> camera){
 	// 現在のナビゲーションの場所を取得
 
-	m_updater->Updating(m_playerObject);
+	m_updater->Updating(m_playerObject,camera);
 
 	UpdateColliderBox();
 

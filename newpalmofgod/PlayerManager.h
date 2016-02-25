@@ -20,10 +20,10 @@ public:
 	PlayerManager();
 	~PlayerManager();
 
-	bool Initialize(const std::shared_ptr<aetherClass::ViewCamera>);
+	bool Initialize();//const std::shared_ptr<aetherClass::ViewCamera>);
 
 	void Render(const std::shared_ptr<aetherClass::ShaderBase>);
-	void Update();
+	void Update(const std::shared_ptr<aetherClass::ViewCamera>);
 	PlayerBase::PlayerStatus& Status();
 	void Status(PlayerBase::PlayerStatus&);
 
