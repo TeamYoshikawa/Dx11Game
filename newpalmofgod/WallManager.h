@@ -52,8 +52,9 @@ public:
 	bool Initialize(aetherClass::ViewCamera* camera);
 	bool HitMesh(std::shared_ptr<aetherClass::ModelBase>&);
 	void Render(const std::shared_ptr<aetherClass::ShaderBase>);
-	void Update();
+	bool Update();
 
 	std::shared_ptr<aetherClass::ModelBase> Get();
+	std::shared_ptr<aetherClass::ModelBase> S_Get();
 };
 

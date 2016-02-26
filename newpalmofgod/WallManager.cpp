@@ -1,8 +1,10 @@
 #include "WallManager.h"
+#include "Physics.h"
+
 #include <iostream>
 
 using namespace aetherClass;
-
+using namespace aetherFunction;
 using namespace n_Wall;
 
 
@@ -135,88 +137,85 @@ bool WallManager::Initialize(ViewCamera* camera){
 	return true;
 }
 
-void WallManager::Update(){
+bool WallManager::Update(){
+	//GameController::Frame();
+	//if (GameController::GetKey().IsKeyDown(DIK_ESCAPE))return false;
 
-}
+	//for (i = 0; i < r_max; i++){
+	//	//	if (m_updater->HitProcessor(m_HitWall[i], player)){
+	//	if (CollideBoxOBB(*m_HitWall[i].get(), *player.get())){
+	//		player->GetTransform()._translation._x *= -1;
+	//		if (GameController::GetKey().IsKeyDown(DIK_A))
+	//		{
+	//			player->GetTransform()._translation._x -= 1;
+	//			std::cout << "•Ç‚É“–‚½‚Á‚½‚æ" << std::endl;
+	//		}
+	//		if (GameController::GetKey().IsKeyDown(DIK_D))
+	//		{
+	//			player->GetTransform()._translation._x += 0.5;
+	//			std::cout << "•Ç‚É“–‚½‚Á‚½‚æ" << std::endl;
+	//		}
+	//		if (GameController::GetKey().IsKeyDown(DIK_W))
+	//		{
+	//			player->GetTransform()._translation._y -= 0.5;
+	//			std::cout << "•Ç‚É“–‚½‚Á‚½‚æ" << std::endl;
+	//		}
+	//		if (GameController::GetKey().IsKeyDown(DIK_S))
+	//		{
+	//			player->GetTransform()._translation._y += 0.5;
+	//			std::cout << "•Ç‚É“–‚½‚Á‚½‚æ" << std::endl;
+	//		}
+	//		
+			return false;
+		}
+
+	//}
+	
+
 
 bool WallManager::HitMesh(std::shared_ptr<aetherClass::ModelBase>& player){
+	GameController::Frame();
+	if (GameController::GetKey().IsKeyDown(DIK_ESCAPE))return false;
 
-	if (m_updater->HitProcessor(m_HitWall[0], player)){
-		std::cout << "•Ç‚É“–‚½‚Á‚½‚æ" << std::endl;
-		return true;
+	for (i = 0; i < r_max; i++){
+	//	if (m_updater->HitProcessor(m_HitWall[i], player)){
+		if (CollideBoxOBB(*m_HitWall[i].get(), *player.get())){
+			player->GetTransform()._translation._x *= -1;
+			player->GetTransform()._translation._z *= -1;
+			if (GameController::GetKey().IsKeyDown(DIK_A))
+			{
+				player->GetTransform()._translation._x *= -1;
+				player->GetTransform()._translation._x -= 1;
+				std::cout << "•Ç‚É“–‚½‚Á‚½‚æ" << std::endl;
+			}
+			if (GameController::GetKey().IsKeyDown(DIK_D))
+			{
+				player->GetTransform()._translation._x += 0.5;
+				std::cout << "•Ç‚É“–‚½‚Á‚½‚æ" << std::endl;
+			}
+			if (GameController::GetKey().IsKeyDown(DIK_W))
+			{
+				player->GetTransform()._translation._z -= 0.5;
+				std::cout << "•Ç‚É“–‚½‚Á‚½‚æ" << std::endl;
+			}
+			if (GameController::GetKey().IsKeyDown(DIK_S))
+			{
+				player->GetTransform()._translation._z += 0.5;
+				std::cout << "•Ç‚É“–‚½‚Á‚½‚æ" << std::endl;
+			}
+		
+			return true;
+		}
+		
 	}
-	if (m_updater->HitProcessor(m_HitWall[1], player)){
-		std::cout << "•Ç‚É“–‚½‚Á‚½‚æ" << std::endl;
-		return true;
-	}
-	if (m_updater->HitProcessor(m_HitWall[2], player)){
-		std::cout << "•Ç‚É“–‚½‚Á‚½‚æ" << std::endl;
-		return true;
-	}
-	if (m_updater->HitProcessor(m_HitWall[3], player)){
-		std::cout << "•Ç‚É“–‚½‚Á‚½‚æ" << std::endl;
-		return true;
-	}
-	if (m_updater->HitProcessor(m_HitWall[4], player)){
-		std::cout << "•Ç‚É“–‚½‚Á‚½‚æ" << std::endl;
-		return true;
-	}
-	if (m_updater->HitProcessor(m_HitWall[5], player)){
-		std::cout << "•Ç‚É“–‚½‚Á‚½‚æ" << std::endl;
-		return true;
-	}
-	if (m_updater->HitProcessor(m_HitWall[6], player)){
-		std::cout << "•Ç‚É“–‚½‚Á‚½‚æ" << std::endl;
-		return true;
-	}
-	if (m_updater->HitProcessor(m_HitWall[7], player)){
-		std::cout << "•Ç‚É“–‚½‚Á‚½‚æ" << std::endl;
-		return true;
-	}
-	if (m_updater->HitProcessor(m_HitWall[8], player)){
-		std::cout << "•Ç‚É“–‚½‚Á‚½‚æ" << std::endl;
-		return true;
-	}
-	if (m_updater->HitProcessor(m_HitWall[9], player)){
-		std::cout << "•Ç‚É“–‚½‚Á‚½‚æ" << std::endl;
-		return true;
-	}
-	if (m_updater->HitProcessor(m_HitWall[10], player)){
-		std::cout << "•Ç‚É“–‚½‚Á‚½‚æ" << std::endl;
-		return true;
-	}
-	if (m_updater->HitProcessor(m_HitWall[11], player)){
-		std::cout << "•Ç‚É“–‚½‚Á‚½‚æ" << std::endl;
-		return true;
-	}
-	if (m_updater->HitProcessor(m_HitWall[12], player)){
-		std::cout << "•Ç‚É“–‚½‚Á‚½‚æ" << std::endl;
-		return true;
-	}
-	if (m_updater->HitProcessor(m_HitWall[13], player)){
-		std::cout << "•Ç‚É“–‚½‚Á‚½‚æ" << std::endl;
-		return true;
-	}
-	if (m_updater->HitProcessor(m_HitWall[14], player)){
-		std::cout << "•Ç‚É“–‚½‚Á‚½‚æ" << std::endl;
-		return true;
-	}
-	if (m_updater->HitProcessor(m_HitWall[15], player)){
-		std::cout << "•Ç‚É“–‚½‚Á‚½‚æ" << std::endl;
-		return true;
-	}
-	if (m_updater->HitProcessor(m_HitWall[16], player)){
-		std::cout << "•Ç‚É“–‚½‚Á‚½‚æ" << std::endl;
-		return true;
-	}
-	return false;
 }
+
 
 void WallManager::Render(std::shared_ptr<ShaderBase>shader){
 
-	/*for (i = 0; i < r_max; i++){
+	for (i = 0; i < r_max; i++){
 		m_HitWall[i]->Render(shader.get());
-	}*/
+	}
 
 	
 	//m_hplayer->Render(shader.get());
@@ -225,5 +224,10 @@ void WallManager::Render(std::shared_ptr<ShaderBase>shader){
 
 std::shared_ptr<aetherClass::ModelBase> WallManager::Get(){
 
-	return m_Wall[0];
+	return m_HitWall[i];
 }
+std::shared_ptr<aetherClass::ModelBase> WallManager::S_Get(){
+
+	return m_HitWall[0];
+}
+
