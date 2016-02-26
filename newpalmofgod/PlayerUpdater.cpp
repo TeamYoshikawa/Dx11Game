@@ -1,4 +1,5 @@
 #include "PlayerUpdater.h"
+#include "WallManager.h"
 #include <memory>
 #include <ModelBase.h>
 #include <FbxModel.h>
@@ -77,14 +78,13 @@ bool PlayerUpdater::HittingProcessor(const std::shared_ptr<ModelBase>& player, c
 
 // “®‚¢‚Ä‚é‚Æ‚«‚Ìˆ—
 void PlayerUpdater::Move(const std::shared_ptr<FbxModel>& playerObject, std::shared_ptr<aetherClass::ViewCamera> camera){
-	static float cmx = -100.0f, cmy = -8.0f, cmz = 692.0f, cmrx = -170, cmry = -90;
+	static float cmx = -50.0f, cmy = -8.0f, cmz = 692.0f, cmrx = -170, cmry = -90;
 	static float cm_move = 5.0f;
 	static float rad = 0;
 
 	float move_x = 0, move_z = 0;
 	rad += 1;
 	if (rad > 360)rad -= 360;
-
 
 	if (GameController::GetKey().IsKeyDown(DIK_LEFT)){
 		cmry += cm_move * 1;
@@ -98,51 +98,55 @@ void PlayerUpdater::Move(const std::shared_ptr<FbxModel>& playerObject, std::sha
 	else if (GameController::GetKey().IsKeyDown(DIK_UP)){
 		cmrx -= cm_move * 1;
 	}
+	else{
+		if (GameController::GetKey().IsKeyDown(DIK_LCONTROL))
+		{
+			if (GameController::GetKey().IsKeyDown(DIK_A)){
+				cmx -= (cm_move*2.0f) * cos(kAetherPI * cmry / 180);
+				cmz += (cm_move*2.0f) * sin(kAetherPI * cmry / 180);
+			}
+			else if (GameController::GetKey().IsKeyDown(DIK_D)){
+				cmx += (cm_move*2.0f) * cos(kAetherPI * cmry / 180);
+				cmz -= (cm_move*2.0f) * sin(kAetherPI * cmry / 180);
+			}
+			if (GameController::GetKey().IsKeyDown(DIK_S)){
+				cmx += (cm_move*2.0f) * sin(kAetherPI * cmry / 180);
+				cmz += (cm_move*2.0f) * cos(kAetherPI * cmry / 180);
+			}
+			else if (GameController::GetKey().IsKeyDown(DIK_W)){
+				cmx -= (cm_move*2.0f) * sin(kAetherPI * cmry / 180);
+				cmz -= (cm_move*2.0f) * cos(kAetherPI * cmry / 180);
+			}
+		}
+		else
+		{
+			if (GameController::GetKey().IsKeyDown(DIK_A)){
+				cmx -= cm_move * cos(kAetherPI * cmry / 180);
+				cmz += cm_move * sin(kAetherPI * cmry / 180);
+			}
+			else if (GameController::GetKey().IsKeyDown(DIK_D)){
+				cmx += cm_move * cos(kAetherPI * cmry / 180);
+				cmz -= cm_move * sin(kAetherPI * cmry / 180);
+			}
+			if (GameController::GetKey().IsKeyDown(DIK_S)){
+				cmx += cm_move * sin(kAetherPI * cmry / 180);
+				cmz += cm_move * cos(kAetherPI * cmry / 180);
+			}
+			else if (GameController::GetKey().IsKeyDown(DIK_W)){
+				cmx -= cm_move * sin(kAetherPI * cmry / 180);
+				cmz -= cm_move * cos(kAetherPI * cmry / 180);
+			}
+		}
 
 
-	if (GameController::GetKey().IsKeyDown(DIK_LCONTROL))
-	{
-		if (GameController::GetKey().IsKeyDown(DIK_A)){
-			cmx -= (cm_move*2.0f) * cos(kAetherPI * cmry / 180);
-			cmz += (cm_move*2.0f) * sin(kAetherPI * cmry / 180);
-		}
-		else if (GameController::GetKey().IsKeyDown(DIK_D)){
-			cmx += (cm_move*2.0f) * cos(kAetherPI * cmry / 180);
-			cmz -= (cm_move*2.0f) * sin(kAetherPI * cmry / 180);
-		}
-		if (GameController::GetKey().IsKeyDown(DIK_S)){
-			cmx += (cm_move*2.0f) * sin(kAetherPI * cmry / 180);
-			cmz += (cm_move*2.0f) * cos(kAetherPI * cmry / 180);
-		}
-		else if (GameController::GetKey().IsKeyDown(DIK_W)){
-			cmx -= (cm_move*2.0f) * sin(kAetherPI * cmry / 180);
-			cmz -= (cm_move*2.0f) * cos(kAetherPI * cmry / 180);
-		}
-	}
-	else
-	{
-		if (GameController::GetKey().IsKeyDown(DIK_A)){
-			cmx -= cm_move * cos(kAetherPI * cmry / 180);
-			cmz += cm_move * sin(kAetherPI * cmry / 180);
-		}
-		else if (GameController::GetKey().IsKeyDown(DIK_D)){
-			cmx += cm_move * cos(kAetherPI * cmry / 180);
-			cmz -= cm_move * sin(kAetherPI * cmry / 180);
-		}
-		if (GameController::GetKey().IsKeyDown(DIK_S)){
-			cmx += cm_move * sin(kAetherPI * cmry / 180);
-			cmz += cm_move * cos(kAetherPI * cmry / 180);
-		}
-		else if (GameController::GetKey().IsKeyDown(DIK_W)){
-			cmx -= cm_move * sin(kAetherPI * cmry / 180);
-			cmz -= cm_move * cos(kAetherPI * cmry / 180);
-		}
 	}
 
 	// ‚¢‚Ç[
 	camera->Translation() = Vector3(cmx, cmy, cmz);
 	camera->Rotation() = Vector3(cmrx, cmry, 1);
 
+	std::cout << camera->Translation()._x << std::endl;
+	std::cout << camera->Translation()._z << std::endl;
 	// ƒ‚ƒfƒ‹‚Æ˜A“®
 	playerObject->GetTransform()._translation._x = camera->Translation()._x - 10;
 	playerObject->GetTransform()._translation._z = camera->Translation()._z;

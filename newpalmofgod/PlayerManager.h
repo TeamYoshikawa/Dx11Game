@@ -14,19 +14,17 @@ playerの状態の管理などを請け負うとこ？
 #include <FbxModel.h>
 #include <Texture.h>
 #include <memory>
-#include "WallManager.h"
-
-
-class PlayerManager{
+class PlayerManager
+{
 
 public:
 	PlayerManager();
 	~PlayerManager();
 
-	bool Initialize();
+	bool Initialize();//const std::shared_ptr<aetherClass::ViewCamera>);
 
 	void Render(const std::shared_ptr<aetherClass::ShaderBase>);
-	void Update(const std::shared_ptr<aetherClass::ViewCamera>, const std::shared_ptr<WallManager>);
+	void Update(const std::shared_ptr<aetherClass::ViewCamera>);
 	PlayerBase::PlayerStatus& Status();
 	void Status(PlayerBase::PlayerStatus&);
 
@@ -43,6 +41,7 @@ public:
 	bool GetIsDamage();
 
 	bool IsDead();
+
 private:
 	// 次に行く道をセット
 	void SetNextPoint(const std::shared_ptr<aetherClass::ModelBase>&);

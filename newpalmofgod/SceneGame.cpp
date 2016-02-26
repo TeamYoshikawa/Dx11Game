@@ -145,6 +145,9 @@ bool SceneGame::Updater(){
 	if (m_gameState == eGameState::eSpearEvent){
 		m_spear->Update();
 	}
+	if (m_wall->HitMesh(m_player->Get())){
+		
+	}
 
 	// デバッグ用
 	/*if (GameController::GetMouse().IsRightButtonTrigger())
@@ -153,7 +156,7 @@ bool SceneGame::Updater(){
 	}*/
 
 
-	m_player->Update(m_camera,m_wall);
+	m_player->Update(m_camera);
 	m_lightmanager->Update();
 
 	m_ui->Set(m_player->LifeGet());

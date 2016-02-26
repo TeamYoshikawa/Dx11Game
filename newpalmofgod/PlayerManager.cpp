@@ -2,10 +2,8 @@
 #include <iostream>
 #include <Physics.h>
 #include <PixelShader.h>
-
 using namespace aetherClass;
 using namespace aetherFunction;
-
 PlayerManager::PlayerManager()
 {
 }
@@ -31,7 +29,7 @@ bool PlayerManager::Initialize(){//const std::shared_ptr<ViewCamera> camera){
 	m_playerObject = std::make_shared<FbxModel>();
 	m_playerObject->LoadFBX("ModelData/models/player5.fbx", eAxisSystem::eAxisOpenGL);
 	m_playerObject->SetCamera(m_camera.get());
-	m_playerObject->GetTransform()._translation = Vector3(-100.0f, 105.0f, 670.0f);
+	m_playerObject->GetTransform()._translation = Vector3(-50.0f, 105.0f, 670.0f);
 	m_playerObject->GetTransform()._scale = Vector3(1.3f, -1.3f, 1.3f);
 
 
@@ -70,7 +68,7 @@ void PlayerManager::Render(const std::shared_ptr<ShaderBase> shader){
 }
 
 // 更新処理
-void PlayerManager::Update(const std::shared_ptr<aetherClass::ViewCamera> camera, const std::shared_ptr<WallManager> wall){
+void PlayerManager::Update(const std::shared_ptr<aetherClass::ViewCamera> camera){
 	// 現在のナビゲーションの場所を取得
 
 	m_updater->Updating(m_playerObject,camera);
