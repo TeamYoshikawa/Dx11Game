@@ -7,7 +7,7 @@
 #include <GameScene.h>
 #include "PlayerManager.h"
 #include "WallManager.h"
-#include "CameraMAnager.h"
+
 #include "LightManager.h"
 #include "SpearManager.h"
 #include "PitFallManager.h"
