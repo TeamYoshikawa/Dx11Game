@@ -1,10 +1,8 @@
 #include "WallManager.h"
-#include "Physics.h"
-
 #include <iostream>
 
 using namespace aetherClass;
-using namespace aetherFunction;
+
 using namespace n_Wall;
 
 
@@ -24,29 +22,15 @@ bool WallManager::Initialize(ViewCamera* camera){
 		m_HitWall[i] = std::make_shared<Cube>();
 		if (!m_HitWall[i]->Initialize()){
 			return false;
-		
-	}
-}
 
-
-
-	m_hplayer = std::make_shared<Cube>();
-	if (!m_hplayer->Initialize()){
-		return false;
+		}
 	}
 
 	for (i = 0; i < r_max; i++){
 
 		m_HitWall[i]->SetCamera(camera);
 		m_HitWall[i]->SetTexture(m_HitWallTexture.get());
-	}
-
-
-	m_hplayer->SetCamera(camera);
-	m_hplayer->SetTexture(m_hplayerTexture.get());
-
-
-	
+	}	
 
 
 	/*•Ç*/
@@ -137,97 +121,37 @@ bool WallManager::Initialize(ViewCamera* camera){
 	return true;
 }
 
-bool WallManager::Update(){
-	//GameController::Frame();
-	//if (GameController::GetKey().IsKeyDown(DIK_ESCAPE))return false;
+void WallManager::Update(){
 
-	//for (i = 0; i < r_max; i++){
-	//	//	if (m_updater->HitProcessor(m_HitWall[i], player)){
-	//	if (CollideBoxOBB(*m_HitWall[i].get(), *player.get())){
-	//		player->GetTransform()._translation._x *= -1;
-	//		if (GameController::GetKey().IsKeyDown(DIK_A))
-	//		{
-	//			player->GetTransform()._translation._x -= 1;
-	//			std::cout << "•Ç‚É“–‚½‚Á‚½‚æ" << std::endl;
-	//		}
-	//		if (GameController::GetKey().IsKeyDown(DIK_D))
-	//		{
-	//			player->GetTransform()._translation._x += 0.5;
-	//			std::cout << "•Ç‚É“–‚½‚Á‚½‚æ" << std::endl;
-	//		}
-	//		if (GameController::GetKey().IsKeyDown(DIK_W))
-	//		{
-	//			player->GetTransform()._translation._y -= 0.5;
-	//			std::cout << "•Ç‚É“–‚½‚Á‚½‚æ" << std::endl;
-	//		}
-	//		if (GameController::GetKey().IsKeyDown(DIK_S))
-	//		{
-	//			player->GetTransform()._translation._y += 0.5;
-	//			std::cout << "•Ç‚É“–‚½‚Á‚½‚æ" << std::endl;
-	//		}
-	//		
-			return false;
-		}
-
-	//}
-	
-
-
-bool WallManager::HitMesh(std::shared_ptr<aetherClass::ModelBase>& player){
-	GameController::Frame();
-	if (GameController::GetKey().IsKeyDown(DIK_ESCAPE))return false;
-
-	for (i = 0; i < r_max; i++){
-	//	if (m_updater->HitProcessor(m_HitWall[i], player)){
-		if (CollideBoxOBB(*m_HitWall[i].get(), *player.get())){
-			player->GetTransform()._translation._x *= -1;
-			player->GetTransform()._translation._z *= -1;
-			if (GameController::GetKey().IsKeyDown(DIK_A))
-			{
-				player->GetTransform()._translation._x *= -1;
-				player->GetTransform()._translation._x -= 1;
-				std::cout << "•Ç‚É“–‚½‚Á‚½‚æ" << std::endl;
-			}
-			if (GameController::GetKey().IsKeyDown(DIK_D))
-			{
-				player->GetTransform()._translation._x += 0.5;
-				std::cout << "•Ç‚É“–‚½‚Á‚½‚æ" << std::endl;
-			}
-			if (GameController::GetKey().IsKeyDown(DIK_W))
-			{
-				player->GetTransform()._translation._z -= 0.5;
-				std::cout << "•Ç‚É“–‚½‚Á‚½‚æ" << std::endl;
-			}
-			if (GameController::GetKey().IsKeyDown(DIK_S))
-			{
-				player->GetTransform()._translation._z += 0.5;
-				std::cout << "•Ç‚É“–‚½‚Á‚½‚æ" << std::endl;
-			}
-		
-			return true;
-		}
-		
-	}
 }
 
+bool WallManager::HitMesh(std::shared_ptr<aetherClass::ModelBase>& player , std::shared_ptr<aetherClass::ViewCamera> camera){
+
+	for (i = 0; i < r_max; i++){
+		if (m_updater->HitProcessor(m_HitWall[i], player)){
+			std::cout << "•Ç‚É“–‚½‚Á‚½‚æ" << std::endl;
+			return true;
+		}
+	}
+	return false;
+}
 
 void WallManager::Render(std::shared_ptr<ShaderBase>shader){
 
-	for (i = 0; i < r_max; i++){
-		m_HitWall[i]->Render(shader.get());
-	}
+	//for (i = 0; i < r_max; i++){
+	//	m_HitWall[i]->Render(shader.get());
+	//}
 
 	
 	//m_hplayer->Render(shader.get());
 }
 
 
-std::shared_ptr<aetherClass::ModelBase> WallManager::Get(){
-
-	return m_HitWall[i];
-}
-std::shared_ptr<aetherClass::ModelBase> WallManager::S_Get(){
-
+std::shared_ptr<aetherClass::ModelBase> WallManager::Get(){	
 	return m_HitWall[0];
 }
 
+int WallManager::WallCnt()
+{
+	return r_max;
+}

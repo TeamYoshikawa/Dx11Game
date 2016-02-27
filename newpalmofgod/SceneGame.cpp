@@ -120,12 +120,12 @@ bool SceneGame::Updater(){
 
 	m_wall->Update();
 
-	if (m_player->HitMesh(m_rock->Get()))
+	if (m_player->HitMesh(m_rock->Get().get()))
 	{
 		m_player->SetState(PlayerBase::ePlayerMoveState::eDamage);
 	}
 
-	if (m_player->HitMesh(m_spear->Get()))
+	if (m_player->HitMesh(m_spear->Get().get()))
 	{
 		m_player->SetState(PlayerBase::ePlayerMoveState::eDamage);
 	}
@@ -145,18 +145,10 @@ bool SceneGame::Updater(){
 	if (m_gameState == eGameState::eSpearEvent){
 		m_spear->Update();
 	}
-	if (m_wall->HitMesh(m_player->Get())){
-		
-	}
 
-	// デバッグ用
-	/*if (GameController::GetMouse().IsRightButtonTrigger())
-	{
-		m_camera->NextCameraSet();
-	}*/
-
-
-	m_player->Update(m_camera);
+	bool IsHitWall = m_player->HitWallMesh(m_wall->Get().get(), m_wall->WallCnt());
+	
+	m_player->Update(m_camera,IsHitWall);
 	m_lightmanager->Update();
 
 	m_ui->Set(m_player->LifeGet());
@@ -164,6 +156,16 @@ bool SceneGame::Updater(){
 	if (GameController::GetKey().IsKeyDown(DIK_R)){
 		ChangeScene("Title");
 	}
+
+	//if (m_wall->HitMesh(m_player->Get(),m_player->GetCamera())){
+
+	//}
+
+	// デバッグ用
+	/*if (GameController::GetMouse().IsRightButtonTrigger())
+	{
+	m_camera->NextCameraSet();
+	}*/
 
 	return true;
 }

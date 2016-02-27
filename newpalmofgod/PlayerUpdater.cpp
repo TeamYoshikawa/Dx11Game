@@ -1,5 +1,5 @@
 #include "PlayerUpdater.h"
-#include "WallManager.h"
+
 #include <memory>
 #include <ModelBase.h>
 #include <FbxModel.h>
@@ -10,6 +10,8 @@
 
 using namespace aetherClass;
 using namespace aetherFunction;
+
+
 PlayerUpdater::PlayerUpdater(){}
 PlayerUpdater::PlayerUpdater(PlayerUpdater& other){}
 
@@ -21,6 +23,7 @@ PlayerUpdater::~PlayerUpdater(){
 }
 
 void PlayerUpdater::Initialize(){
+	
 	m_damageCounter = 0;
 	m_daedCounter = 0;
 	m_damageFlg = 0;
@@ -50,15 +53,17 @@ void PlayerUpdater::SendStatus(PlayerBase::PlayerStatus&){
 	return;
 }
 
-void PlayerUpdater::Updating(const std::shared_ptr<FbxModel>& playerObject, std::shared_ptr<aetherClass::ViewCamera> camera){
+void PlayerUpdater::Updating(const std::shared_ptr<FbxModel>& playerObject, std::shared_ptr<aetherClass::ViewCamera> camera,bool IsHitWall){
 
 	// 移動の処理
-	Move(playerObject,camera);
+	Move(playerObject,camera,IsHitWall);
+	//GetKey();
+	
 	return;
 }
 
 
-bool PlayerUpdater::HittingProcessor(const std::shared_ptr<ModelBase>& player, const std::shared_ptr<ModelBase>& other){
+bool PlayerUpdater::HittingProcessor(ModelBase* player, ModelBase* other){
 
 	// TODO: 当たったかを調べる条件式を記載
 	if (!CollideBoxOBB(*player, *other)){
@@ -76,15 +81,25 @@ bool PlayerUpdater::HittingProcessor(const std::shared_ptr<ModelBase>& player, c
 
 }
 
-// 動いてるときの処理
-void PlayerUpdater::Move(const std::shared_ptr<FbxModel>& playerObject, std::shared_ptr<aetherClass::ViewCamera> camera){
-	static float cmx = -50.0f, cmy = -8.0f, cmz = 692.0f, cmrx = -170, cmry = -90;
-	static float cm_move = 5.0f;
-	static float rad = 0;
+bool PlayerUpdater::HittingWall(ModelBase* player, ModelBase* wall)
+{
+	if (!CollideBoxOBB(*player, *wall))
+	{
+		return false;
+	}
+	return true;
+}
 
-	float move_x = 0, move_z = 0;
-	rad += 1;
-	if (rad > 360)rad -= 360;
+
+// 動いてるときの処理
+void PlayerUpdater::Move(const std::shared_ptr<FbxModel>& playerObject, std::shared_ptr<aetherClass::ViewCamera> camera,bool IsHitWall){
+	static float cmx = -50.0f, cmy = -8.0f, cmz = 692.0f, cmrx = -170, cmry = -90;
+	float cm_move = 5.0f;
+	
+	if (IsHitWall == true)
+	{
+		std::cout << "壁に当たったよ" << std::endl;
+	}
 
 	if (GameController::GetKey().IsKeyDown(DIK_LEFT)){
 		cmry += cm_move * 1;
@@ -141,17 +156,58 @@ void PlayerUpdater::Move(const std::shared_ptr<FbxModel>& playerObject, std::sha
 
 	}
 
+	//Vector3 moveDirection;
+
+	//moveDirection = Vector3(cmx, cmy, cmz);
+	//moveDirection._x /= moveDirection._x;
+	//moveDirection._y /= moveDirection._y;
+	//moveDirection._z /= moveDirection._z;
+
+	//if (IsHitWall == true)
+	//{
+	//	//cm_move *= -1;
+	//	std::cout << "壁に当たったよ" << std::endl;
+	//	if (m_prevMoveDirection == moveDirection){
+	//		return;
+	//	}
+	//	else
+	//	{
+	//		m_prevMoveDirection = moveDirection;
+	//	}
+	//
+	//}
+
 	// いどー
-	camera->Translation() = Vector3(cmx, cmy, cmz);
+	camera->Translation() = Vector3(cmx, cmy, cmz);;
 	camera->Rotation() = Vector3(cmrx, cmry, 1);
 
-	std::cout << camera->Translation()._x << std::endl;
-	std::cout << camera->Translation()._z << std::endl;
 	// モデルと連動
 	playerObject->GetTransform()._translation._x = camera->Translation()._x - 10;
 	playerObject->GetTransform()._translation._z = camera->Translation()._z;
 
+
 }
+
+// PlayerUpdater::eKey PlayerUpdater::GetKey()
+//{
+//	if (GameController::GetKey().IsKeyDown(DIK_W))
+//	{
+//		return eKey::eUp;
+//	}
+//	if (GameController::GetKey().IsKeyDown(DIK_S))
+//	{
+//		return eKey::eDown;
+//	}
+//	if (GameController::GetKey().IsKeyDown(DIK_D))
+//	{
+//		return eKey::eRight;
+//	}
+//	if (GameController::GetKey().IsKeyDown(DIK_A))
+//	{
+//		return eKey::eLeft;
+//	}
+//	return eKey::eNull;
+//}
 
 
 bool PlayerUpdater::IsDamage(){

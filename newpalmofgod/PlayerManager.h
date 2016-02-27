@@ -21,20 +21,24 @@ public:
 	PlayerManager();
 	~PlayerManager();
 
-	bool Initialize();//const std::shared_ptr<aetherClass::ViewCamera>);
+	int m_wallCnt;
 
+	bool Initialize();//const std::shared_ptr<aetherClass::ViewCamera>);
 	void Render(const std::shared_ptr<aetherClass::ShaderBase>);
-	void Update(const std::shared_ptr<aetherClass::ViewCamera>);
+	void Update(const std::shared_ptr<aetherClass::ViewCamera>,bool);
 	PlayerBase::PlayerStatus& Status();
 	void Status(PlayerBase::PlayerStatus&);
 
 	// 外部オブジェクトとの当たり判定用
-	bool HitMesh(std::shared_ptr<aetherClass::ModelBase>&);
-
+	bool HitMesh(aetherClass::ModelBase*);
+	bool HitWallMesh(aetherClass::ModelBase*, int wallCnt = 1);
 
 	std::shared_ptr<aetherClass::ModelBase> Get();
-
+	std::shared_ptr<aetherClass::ViewCamera> GetCamera();
 	int LifeGet();
+
+	void Set(std::shared_ptr<aetherClass::ModelBase>&);
+
 
 	void SetState(PlayerBase::ePlayerMoveState);
 

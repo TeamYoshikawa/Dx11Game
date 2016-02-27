@@ -24,12 +24,7 @@ private:
 		eNull
 	};
 private:
-	std::shared_ptr<aetherClass::ModelBase>m_Wall[2];
-	
 	std::shared_ptr<aetherClass::ModelBase>m_HitWall[17];
-	
-
-	std::shared_ptr<aetherClass::ModelBase>m_hplayer;
 
 	std::shared_ptr<aetherClass::Texture> m_WallTexture;
 	std::shared_ptr<aetherClass::Texture> m_HitWallTexture;
@@ -38,23 +33,21 @@ private:
 	std::shared_ptr<n_Wall::WallUpdater>m_updater;
 	std::shared_ptr<n_Wall::WallRender>m_render;
 
-	std::shared_ptr<aetherClass::ViewCamera> m_camera;
-
 	int i;
 
 	eEvent m_WallEvent;
-
 
 public:
 	WallManager() = default;
 	~WallManager() = default;
 
 	bool Initialize(aetherClass::ViewCamera* camera);
-	bool HitMesh(std::shared_ptr<aetherClass::ModelBase>&);
+	bool HitMesh(std::shared_ptr<aetherClass::ModelBase>&,std::shared_ptr<aetherClass::ViewCamera>);
 	void Render(const std::shared_ptr<aetherClass::ShaderBase>);
-	bool Update();
+	void Update();
 
 	std::shared_ptr<aetherClass::ModelBase> Get();
-	std::shared_ptr<aetherClass::ModelBase> S_Get();
+	int WallCnt();
+
 };
 

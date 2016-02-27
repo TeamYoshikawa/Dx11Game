@@ -68,10 +68,10 @@ void PlayerManager::Render(const std::shared_ptr<ShaderBase> shader){
 }
 
 // 更新処理
-void PlayerManager::Update(const std::shared_ptr<aetherClass::ViewCamera> camera){
+void PlayerManager::Update(const std::shared_ptr<aetherClass::ViewCamera> camera,bool IsHitWall){
 	// 現在のナビゲーションの場所を取得
 
-	m_updater->Updating(m_playerObject,camera);
+	m_updater->Updating(m_playerObject,camera,IsHitWall);
 
 	UpdateColliderBox();
 
@@ -106,14 +106,25 @@ int PlayerManager::LifeGet(){
 }
 
 // ModelBaseの派生オブジェクトとの当たり判定用
-bool PlayerManager::HitMesh(std::shared_ptr<ModelBase>& other){
+bool PlayerManager::HitMesh(ModelBase *other){
 
-	if (!m_updater->HittingProcessor(m_collideBox, other))
-	{
-		return false;
+		if (!m_updater->HittingProcessor(m_collideBox.get(), other))
+		{
+			return false;
+		}
+	
+		return true;
+	
+}
+
+bool PlayerManager::HitWallMesh(ModelBase *wall, int count)
+{
+	for (int i = 0; i < count; ++i){
+		if (m_updater->HittingWall(m_collideBox.get(), &wall[i])){
+			return true;
+		}
 	}
-
-	return true;
+	return false;
 }
 
 
@@ -128,4 +139,9 @@ bool PlayerManager::IsDead(){
 std::shared_ptr<aetherClass::ModelBase> PlayerManager::Get(){
 
 	return m_collideBox;
+}
+
+std::shared_ptr<aetherClass::ViewCamera> PlayerManager::GetCamera()
+{
+	return m_camera;
 }
