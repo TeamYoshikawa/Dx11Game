@@ -46,7 +46,8 @@ public:
 	void Render(const std::shared_ptr<aetherClass::ShaderBase>);
 	void Update();
 
-	std::shared_ptr<aetherClass::ModelBase> Get();
+	std::shared_ptr<aetherClass::ModelBase> Get(int);
+
 	int WallCnt();
 
 };

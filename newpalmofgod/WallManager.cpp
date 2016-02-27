@@ -147,8 +147,8 @@ void WallManager::Render(std::shared_ptr<ShaderBase>shader){
 }
 
 
-std::shared_ptr<aetherClass::ModelBase> WallManager::Get(){	
-	return m_HitWall[0];
+std::shared_ptr<aetherClass::ModelBase> WallManager::Get(int i){	
+	return m_HitWall[i];
 }
 
 int WallManager::WallCnt()

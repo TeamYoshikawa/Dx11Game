@@ -96,7 +96,7 @@ void SceneEnd::SceneChange()
 {
 	if (GameController::GetMouse().IsLeftButtonTrigger())
 	{
-		ChangeScene("Title");
+		ChangeScene("Title",false);
 	}
 }
 

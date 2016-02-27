@@ -96,10 +96,10 @@ void PlayerUpdater::Move(const std::shared_ptr<FbxModel>& playerObject, std::sha
 	static float cmx = -50.0f, cmy = -8.0f, cmz = 692.0f, cmrx = -170, cmry = -90;
 	float cm_move = 5.0f;
 	
-	if (IsHitWall == true)
+	/*if (IsHitWall == true)
 	{
 		std::cout << "壁に当たったよ" << std::endl;
-	}
+	}*/
 
 	if (GameController::GetKey().IsKeyDown(DIK_LEFT)){
 		cmry += cm_move * 1;
@@ -177,11 +177,11 @@ void PlayerUpdater::Move(const std::shared_ptr<FbxModel>& playerObject, std::sha
 	//
 	//}
 
-	// いどー
+	/* いどー*/
 	camera->Translation() = Vector3(cmx, cmy, cmz);;
 	camera->Rotation() = Vector3(cmrx, cmry, 1);
 
-	// モデルと連動
+	//// モデルと連動
 	playerObject->GetTransform()._translation._x = camera->Translation()._x - 10;
 	playerObject->GetTransform()._translation._z = camera->Translation()._z;
 

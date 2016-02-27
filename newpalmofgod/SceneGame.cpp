@@ -27,10 +27,6 @@ bool SceneGame::Initialize(){
 	m_ui = std::make_shared<UiGame>();
 	m_ui->Initialize();
 
-	// デバッグ用（近いうちに消す）
-    /*m_camera = std::make_shared<CameraManager>();
-    m_camera->Initialize();*/
-
 	// カメラオブジェクトの作成
 	m_camera = std::make_shared<ViewCamera>();
 	m_camera->Translation() = Vector3(-100, -8, 692);
@@ -41,7 +37,7 @@ bool SceneGame::Initialize(){
     m_sound->SetValume(-3000);
 	m_sound->PlayToLoop();
 
-    // シェーダーの詳細情報の設定
+	// シェーダーの詳細情報の設定
     ShaderDesc textureDesc;
 
     textureDesc._vertex._entryName = "vs_main";
@@ -49,7 +45,6 @@ bool SceneGame::Initialize(){
 
     textureDesc._pixel._entryName = "ps_main";
     textureDesc._pixel._srcFile = L"Shader/ColorTextureAdd2.ps";
-
 
 
     // ピクセルシェーダーの作成
@@ -61,6 +56,7 @@ bool SceneGame::Initialize(){
     material._diffuse._color = Color(1, 0, 0, 1);
     material._specular._color = Color(1, 0, 0, 1);
     material._specularPower = 4;
+
 
     // ライトの作成
     m_lightmanager = std::make_shared<LightManager>();
@@ -77,9 +73,10 @@ bool SceneGame::Initialize(){
 	m_stage->SetCamera(m_camera.get());//m_camera->GetCamera().get());
     m_stage->GetTransform()._scale = Vector3(1.0f, 1.0f, -1.0f);
 
-    m_stage->SetModelMaterialColor(Color(0.2, 0.0, 0.2, 1), eMatrerialType::eAmbient);
-    m_stage->SetModelMaterialColor(Color(1, 1, 1, 1.0), eMatrerialType::eDiffuse);
-    m_stage->SetModelMaterialColor(Color(1, 0, 0, 1.0), eMatrerialType::eSpecular);
+    m_stage->SetModelMaterialColor(Color(0.0, 0.1, 0.1, 1), eMatrerialType::eAmbient);
+    m_stage->SetModelMaterialColor(Color(0.7, 0.6, 0.6, 0.0), eMatrerialType::eDiffuse);
+    m_stage->SetModelMaterialColor(Color(1.0, 1.0, 1.0, 1.0), eMatrerialType::eSpecular);
+	//m_stage->SetModelMaterialColor(Color(1.0, 1.0, 1.0, 0.0), eMatrerialType::eEmissive);
 
     // 岩の作成
     m_rock = std::make_shared<RockManager>();
@@ -91,7 +88,6 @@ bool SceneGame::Initialize(){
 
     m_wall = std::make_shared<WallManager>();
 	m_wall->Initialize(m_camera.get());   //m_camera->GetCamera().get());
-
 
 
     // マテリアルシェーダー作成時の情報の設定
@@ -120,6 +116,7 @@ bool SceneGame::Updater(){
 
 	m_wall->Update();
 
+
 	if (m_player->HitMesh(m_rock->Get().get()))
 	{
 		m_player->SetState(PlayerBase::ePlayerMoveState::eDamage);
@@ -146,45 +143,50 @@ bool SceneGame::Updater(){
 		m_spear->Update();
 	}
 
-	bool IsHitWall = m_player->HitWallMesh(m_wall->Get().get(), m_wall->WallCnt());
-	
-	m_player->Update(m_camera,IsHitWall);
+
+	//壁との当たり判定
+	bool IsHitWall = false;
+
+	for (int i = 0; i < m_wall->WallCnt(); i++){
+		
+		IsHitWall = m_player->HitWallMesh(m_wall->Get(i));
+		if (IsHitWall){
+			break;
+		}
+	}
+
+	m_player->Update(m_camera, IsHitWall);
+
 	m_lightmanager->Update();
 
 	m_ui->Set(m_player->LifeGet());
 
 	if (GameController::GetKey().IsKeyDown(DIK_R)){
-		ChangeScene("Title");
+		ChangeScene("Title",false);
 	}
 
-	//if (m_wall->HitMesh(m_player->Get(),m_player->GetCamera())){
-
-	//}
-
-	// デバッグ用
-	/*if (GameController::GetMouse().IsRightButtonTrigger())
-	{
-	m_camera->NextCameraSet();
-	}*/
-
+	m_ui->Update();
 	return true;
 }
 
 void SceneGame::Render(){
 
+	m_camera->Render();
 	m_ui->Render();
 
 	m_spear->Render(m_pixelShader);
 
-	m_camera->Render();
 	m_lightmanager->Render();
+	
 	m_stage->Render(m_materialShader.get());
 
-	//m_player->Render(m_materialShader);
+
+	m_player->Render(m_materialShader);
 
 	m_rock->Render(m_pixelShader);
 
 	m_wall->Render(m_pixelShader);
+
 
 	return;
 }

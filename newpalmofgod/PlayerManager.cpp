@@ -73,7 +73,7 @@ void PlayerManager::Update(const std::shared_ptr<aetherClass::ViewCamera> camera
 
 	m_updater->Updating(m_playerObject,camera,IsHitWall);
 
-	UpdateColliderBox();
+	//UpdateColliderBox();
 
 	return;
 }
@@ -117,13 +117,12 @@ bool PlayerManager::HitMesh(ModelBase *other){
 	
 }
 
-bool PlayerManager::HitWallMesh(ModelBase *wall, int count)
+bool PlayerManager::HitWallMesh(std::shared_ptr<ModelBase> wall)
 {
-	for (int i = 0; i < count; ++i){
-		if (m_updater->HittingWall(m_collideBox.get(), &wall[i])){
+	
+	if (m_updater->HittingWall(m_collideBox.get(), wall.get())){
 			return true;
 		}
-	}
 	return false;
 }
 

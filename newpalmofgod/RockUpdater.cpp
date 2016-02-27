@@ -70,7 +70,7 @@ void RockUpdater::First(ModelBase*Rock){
 
 		Rock->GetTransform()._rotation._x += 10.0f;
 
-		Rock->GetTransform()._translation._z -= 15.0f;
+		Rock->GetTransform()._translation._z -= 13.0f;
 	}
 	else if (m_event == eEvent::eThrow){
 		Rock->GetTransform()._translation._y = 120.0f;

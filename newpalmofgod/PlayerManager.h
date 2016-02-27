@@ -31,7 +31,7 @@ public:
 
 	// 外部オブジェクトとの当たり判定用
 	bool HitMesh(aetherClass::ModelBase*);
-	bool HitWallMesh(aetherClass::ModelBase*, int wallCnt = 1);
+	bool HitWallMesh(std::shared_ptr<aetherClass::ModelBase>);
 
 	std::shared_ptr<aetherClass::ModelBase> Get();
 	std::shared_ptr<aetherClass::ViewCamera> GetCamera();

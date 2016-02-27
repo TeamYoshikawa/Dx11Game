@@ -7,7 +7,6 @@
 #include <GameScene.h>
 #include "PlayerManager.h"
 #include "WallManager.h"
-
 #include "LightManager.h"
 #include "SpearManager.h"
 #include "PitFallManager.h"
@@ -16,6 +15,7 @@
 #include "Light.h"
 #include "UiGame.h"
 #include "GameSound.h"
+
 
 
 
@@ -51,11 +51,13 @@ private:
 	eGameState m_gameState;
 
 	std::shared_ptr<PlayerManager> m_player;
-	//std::shared_ptr<CameraManager> m_camera;
+	
 	std::shared_ptr<LightManager> m_lightmanager;
+
 	std::shared_ptr<PitFallManager> m_pitfall;
 
 	std::shared_ptr<SpearManager> m_spear;
+
 	std::shared_ptr<RockManager> m_rock;
 
 	std::shared_ptr<WallManager> m_wall;
@@ -77,6 +79,7 @@ private:
 
 	std::shared_ptr<aetherClass::ModelBase> m_positionCheck;
 	std::shared_ptr<aetherClass::Texture> m_positionCheckBoxTexture;
+
 };
 
 #endif
