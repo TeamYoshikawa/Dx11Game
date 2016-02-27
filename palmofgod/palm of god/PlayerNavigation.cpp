@@ -49,7 +49,7 @@ void PlayerNavigation::Initialize(std::shared_ptr<ViewCamera> camera){
 	// ‰ŠúˆÊ’u‚Í”z—ñ‚Ì0”Ô–Ú
 
 	m_navigationBox->GetTransform()._translation = initilaizePosition;
-	m_navigationBox->GetTransform()._rotation = Vector3(50, 50, 50);
+	m_navigationBox->GetTransform()._rotation = Vector3(80, 80, 80);
 	
 	m_navigationID = 0;
 	return;
