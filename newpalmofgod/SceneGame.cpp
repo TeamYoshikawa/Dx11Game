@@ -90,6 +90,11 @@ bool SceneGame::Initialize(){
 	m_wall->Initialize(m_camera.get());   //m_camera->GetCamera().get());
 
 
+	//ナビゲーション
+	m_navigation = std::make_shared<NavigationManager>();
+	m_navigation->Initialize(m_camera.get());
+
+
     // マテリアルシェーダー作成時の情報の設定
     ShaderDesc materialDesc;
     materialDesc._vertex._entryName = "vs_main";
@@ -115,6 +120,8 @@ bool SceneGame::Initialize(){
 bool SceneGame::Updater(){
 
 	m_wall->Update();
+
+	m_navigation->Update();
 
 
 	if (m_player->HitMesh(m_rock->Get().get()))
@@ -172,6 +179,7 @@ bool SceneGame::Updater(){
 void SceneGame::Render(){
 
 	m_camera->Render();
+
 	m_ui->Render();
 
 	m_spear->Render(m_pixelShader);
@@ -180,13 +188,13 @@ void SceneGame::Render(){
 	
 	m_stage->Render(m_materialShader.get());
 
-
 	m_player->Render(m_materialShader);
 
 	m_rock->Render(m_pixelShader);
 
 	m_wall->Render(m_pixelShader);
 
+	m_navigation->Render(m_pixelShader);
 
 	return;
 }

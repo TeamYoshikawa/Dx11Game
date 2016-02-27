@@ -6,6 +6,7 @@
 #include <Cube.h>
 #include <GameScene.h>
 #include "PlayerManager.h"
+#include "NavigationManager.h"
 #include "WallManager.h"
 #include "LightManager.h"
 #include "SpearManager.h"
@@ -61,6 +62,8 @@ private:
 	std::shared_ptr<RockManager> m_rock;
 
 	std::shared_ptr<WallManager> m_wall;
+
+	std::shared_ptr<NavigationManager> m_navigation;
 
 	std::shared_ptr<UiGame> m_ui;
 

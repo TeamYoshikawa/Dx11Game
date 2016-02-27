@@ -6,6 +6,7 @@ struct PixelInputType
 	float4 col2 : COL2;
 
 };
+
 cbuffer Color : register(b0){
 	float4 Color;
 };

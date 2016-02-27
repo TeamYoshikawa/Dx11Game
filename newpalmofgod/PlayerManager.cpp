@@ -73,7 +73,7 @@ void PlayerManager::Update(const std::shared_ptr<aetherClass::ViewCamera> camera
 
 	m_updater->Updating(m_playerObject,camera,IsHitWall);
 
-	//UpdateColliderBox();
+	UpdateColliderBox();
 
 	return;
 }

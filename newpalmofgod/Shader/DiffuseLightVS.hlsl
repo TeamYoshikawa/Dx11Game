@@ -10,7 +10,8 @@ cbuffer MatrixBuffer : register(b0)
 
 cbuffer LightBuffer : register(b1)
 {
-	float4 Light;
+	float3 Light;
+	float Padding;
 };
 
 

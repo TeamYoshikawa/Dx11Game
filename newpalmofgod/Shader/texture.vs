@@ -1,6 +1,7 @@
 
-// Global
-cbuffer MatrixBuffer
+
+// Global //
+cbuffer MatrixBuffer : register(b0)
 {
 	matrix worldMatrix;
 	matrix viewMatrix;
@@ -8,26 +9,29 @@ cbuffer MatrixBuffer
 };
 
 
-// Typedef
+
+// Typedef //
 struct VertexInputType
 {
     float4 position : POSITION;
-	float4 color : COLOR;
-    float2 tex : TEXCOORD0;
+	float2 tex : TEXCOORD0;
+	float3 normal : NORMAL;
 };
 
 struct PixelInputType
 {
     float4 position : SV_POSITION;
-	float4 color : COLOR;
-    float2 tex : TEXCOORD0;
+	float2 tex : TEXCOORD0;
+	float3 normal : NORMAL;
 };
 
 
-PixelInputType main(VertexInputType input)
+////////////////////////////////////////////////////////////////////////////////
+// Vertex Shader
+////////////////////////////////////////////////////////////////////////////////
+PixelInputType vs_main(VertexInputType input)
 {
     PixelInputType output;
-    
 
 	// Change the position vector to be 4 units for proper matrix calculations.
     input.position.w = 1.0f;
@@ -37,7 +41,6 @@ PixelInputType main(VertexInputType input)
     output.position = mul(output.position, viewMatrix);
     output.position = mul(output.position, projectionMatrix);
     
-	// Store the texture coordinates for the pixel shader.
 	output.tex = input.tex;
     
     return output;

@@ -25,7 +25,7 @@ float4 ps_main(PixelInputType input) : SV_TARGET
 	col2 = (col2 - (1-Color.a));
 	output.rgb = col2.rgb + output.rgb;
 	}
-
+	
 	return output;
     
 }

@@ -54,9 +54,9 @@ float4 ps_main(PixelInputType input) : SV_Target
 			specularColor = lightintensity * _specular * pow(saturate(dot(reflection, input.viewDirection)), _specularPower);
 	}
 	output = ambient_col;
-	//		output = output * texcolor;
+	output = output * texcolor;
 	output = diffuse_col + output;
-	//	output = saturate(output + specularColor);
+	output = saturate(output + specularColor);
 	output.a = 1;
 	return output;
 }

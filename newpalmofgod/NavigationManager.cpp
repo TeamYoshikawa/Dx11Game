@@ -20,11 +20,11 @@ bool NavigationManager::Initialize(ViewCamera* camera){
 	//font
 	FontDesc fontDesc;
 	fontDesc._fontSize = 50;
-	fontDesc._outputPrecision = OUT_DEFAULT_PRECIS;
+	//fontDesc._outputPrecision = OUT_DEFAULT_PRECIS;
 	fontDesc._clipPrecision = CLIP_DEFAULT_PRECIS;
 	fontDesc._charSet = SHIFTJIS_CHARSET;
-	fontDesc._fileName = L"font/apj.ttf";
-	fontDesc._fontName = L"あんずもじ";
+	//fontDesc._fileName = L"font/apj.ttf";
+	fontDesc._fontName = L"メイリオ";
 
 	m_font = new Font();
 	_ASSERT_EXPR(m_font->Load(fontDesc), "フォント作れなかったぞ");
@@ -32,8 +32,11 @@ bool NavigationManager::Initialize(ViewCamera* camera){
 	m_text = new Text();
 	m_text->Initialize();
 	m_text->SetFont(m_font);
-	m_text->GetColor() = Color(1, 1, 1, 1);
-	m_text->UpdateText(L"Score:");
+	m_text->GetColor() = Color(1, 0, 1, 1);
+
+
+
+	_ASSERT_EXPR(m_text->UpdateText(L"Score:"),"できなかった");
 
 
 	m_navigationTexture = std::make_shared<Texture>();
@@ -57,6 +60,8 @@ bool NavigationManager::Initialize(ViewCamera* camera){
 
 	m_text->GetTransform()._translation = Vector3(30.0f, 150.0f, 0.0f);
 
+	
+
 	return true;
 }
 
@@ -69,9 +74,9 @@ void NavigationManager::Render(std::shared_ptr<ShaderBase>shader){
 
 void NavigationManager::Update()
 {
-
+	
 	if (GameController::GetKey().IsKeyDown(DIK_UP)){
-		m_score += 100;
+		m_score += 1;
 		std::wstring str = L"Score:" + std::to_wstring(m_score);
 		m_text->UpdateText(str);
 		m_text->UpdateText(L"Score:");
