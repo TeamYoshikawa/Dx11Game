@@ -23,7 +23,7 @@ bool NavigationManager::Initialize(ViewCamera* camera){
 
 	for (int i = 0; i < navi_max; i++){
 		m_naviObj[i].m_isRunEnd = false;
-		m_naviObj[i].naviid = 0;
+		m_naviObj[i].naviid = i;
 	}
 
 	m_naviObj[0].m_navigation->GetTransform()._translation = Vector3(1300.0f, 140.0f, 580.0f);

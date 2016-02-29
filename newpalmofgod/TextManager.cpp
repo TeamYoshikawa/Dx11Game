@@ -46,12 +46,10 @@ void TextManager::SetID(int id){
 	m_isRender = true;
 
 	if (m_id == 0){
-		std::cout << "hiromu"<<std::endl;
 		_ASSERT_EXPR(m_text->UpdateText(L"hiromu:"), "‚Å‚«‚È‚©‚Á‚½");
 	}
 
 	if (m_id == 1){
-		std::cout << "hiromu1"<<std::endl;
 		_ASSERT_EXPR(m_text->UpdateText(L"hiromu1:"), "‚Å‚«‚È‚©‚Á‚½");
 	}
 

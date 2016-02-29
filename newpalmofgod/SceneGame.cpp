@@ -6,7 +6,7 @@
 #include"Cube.h"
 
 using namespace aetherClass;
-const std::string SceneGame::m_thisName = "Game";	
+const std::string SceneGame::m_thisName = "Game";
 
 SceneGame::SceneGame() :
 GameScene(m_thisName, GetManager()){}
@@ -37,30 +37,30 @@ bool SceneGame::Initialize()
 
 
 	//サウンドの作成
-    m_sound = std::make_shared<GameSound>();
+	m_sound = std::make_shared<GameSound>();
 	m_sound->Load("Sound/BGM/BGM.wav");
-    m_sound->SetValume(-3000);
+	m_sound->SetValume(-3000);
 	m_sound->PlayToLoop();
 
 	// シェーダーの詳細情報の設定
-    ShaderDesc textureDesc;
+	ShaderDesc textureDesc;
 
-    textureDesc._vertex._entryName = "vs_main";
-    textureDesc._vertex._srcFile = L"Shader/VertexShaderBase.hlsl";
+	textureDesc._vertex._entryName = "vs_main";
+	textureDesc._vertex._srcFile = L"Shader/VertexShaderBase.hlsl";
 
-    textureDesc._pixel._entryName = "ps_main";
-    textureDesc._pixel._srcFile = L"Shader/ColorTextureAdd2.ps";
+	textureDesc._pixel._entryName = "ps_main";
+	textureDesc._pixel._srcFile = L"Shader/ColorTextureAdd2.ps";
 
 
-    // ピクセルシェーダーの作成
-    m_pixelShader = std::make_shared<PixelShader>();
-    m_pixelShader->Initialize(textureDesc, ShaderType::eVertex | ShaderType::ePixel);
+	// ピクセルシェーダーの作成
+	m_pixelShader = std::make_shared<PixelShader>();
+	m_pixelShader->Initialize(textureDesc, ShaderType::eVertex | ShaderType::ePixel);
 
-    Material material;
-    material._ambient._color = Color(1, 0, 0, 1);
-    material._diffuse._color = Color(1, 0, 0, 1);
-    material._specular._color = Color(1, 0, 0, 1);
-    material._specularPower = 4;
+	Material material;
+	material._ambient._color = Color(1, 0, 0, 1);
+	material._diffuse._color = Color(1, 0, 0, 1);
+	material._specular._color = Color(1, 0, 0, 1);
+	material._specularPower = 4;
 
 
 	// ライトの作成
@@ -141,9 +141,9 @@ bool SceneGame::Updater(){
 	//ナビゲーションとの当たり判定
 	bool IsHitNavi = false;
 	int hitNaviNumber = 0;
+
 	for (int i = 0; i < m_navigation->NaviCnt(); i++){
 		IsHitNavi = m_navigation->HitMesh(m_player->Get(), m_navigation->Navi_Get(i));
-
 		if (IsHitNavi){
 			hitNaviNumber = i;
 			//ナビゲーションのIDの設定
@@ -155,8 +155,9 @@ bool SceneGame::Updater(){
 
 	if (m_naviState == eNaviState::eNaviEvent){
 		m_text->SetID(m_navigation->Navi_IDGet());
+		m_naviState=eNaviState::eNull;
 	}
-	
+
 	//壁との当たり判定
 	bool IsHitWall = false;
 	for (int i = 0; i < m_wall->WallCnt(); i++){
@@ -185,12 +186,12 @@ bool SceneGame::Updater(){
 	{
 		m_player->SetState(PlayerBase::ePlayerMoveState::eDamage);
 	}
-	
+
 	if (m_player->HitMesh(m_spear->Get().get()))
 	{
 		m_player->SetState(PlayerBase::ePlayerMoveState::eDamage);
 	}
-	
+
 	if (m_player->HitMesh(m_fallwall->GetFallingWall().get()))
 	{
 		m_player->SetState(PlayerBase::ePlayerMoveState::eDamage);
@@ -199,7 +200,7 @@ bool SceneGame::Updater(){
 	//各トラップのイベントの呼び出し
 	if (m_rock->HitMesh(m_player->Get(), m_rock->S_Get()))
 	{
-		m_trapState = eTrapState::eRockEvent;	
+		m_trapState = eTrapState::eRockEvent;
 	}
 
 	if (m_spear->HitMesh(m_player->Get(), m_spear->S_Get()))
@@ -220,13 +221,13 @@ bool SceneGame::Updater(){
 		m_spear->Update();
 	}
 	//if (m_trapState == eTrapState::efallwall){
-		m_fallwall->Update();
+	m_fallwall->Update();
 	//}
-	
-	
+
+
 	//タイトルに戻る
 	if (GameController::GetKey().IsKeyDown(DIK_R)){
-		ChangeScene("Title",false);
+		ChangeScene("Title", false);
 	}
 
 	return true;
@@ -257,7 +258,7 @@ void SceneGame::Render(){
 
 	//ライト
 	m_lightmanager->Render();
-	
+
 	//ナビゲーション
 	m_navigation->Render(m_pixelShader);
 
