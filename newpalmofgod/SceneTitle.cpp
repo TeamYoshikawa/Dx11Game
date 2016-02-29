@@ -1,6 +1,7 @@
 #include "SceneTitle.h"
 #include <Rectangle.h>
 #include "SceneGame.h"
+#include "Rectangle2D.h"
 using namespace aetherClass;
 using namespace std;
 
@@ -25,33 +26,44 @@ bool SceneTitle::Initialize()
 	InitStage();
 
 
-	feedin = std::make_shared<aetherClass::Rectangle>();
+	feedin = std::make_shared<aetherClass::Rectangle2D>();
 	feedin->Initialize();
-	feedin->SetCamera(m_camera.get());
-	feedin->GetTransform()._translation = m_camera->Translation();
-	feedin->GetTransform()._translation._z -= 10;
-	feedin->GetTransform()._translation._y += 1000;
-	feedin->GetColor()._alpha = 1;
-	feedin->GetTransform()._scale._x = 10000;
-	feedin->GetTransform()._scale._y = 10000;
+	feedin->property._transform._translation._z = 0;
+	feedin->property._color._alpha = 0;
+	feedin->property._transform._scale._x = 1000;
+	feedin->property._transform._scale._y = 1000;
 	
-
-
-	title = std::make_shared<aetherClass::Rectangle>();
-	title->Initialize();
-
 	Texture *title_tex = new Texture();/*テクスチャ―用*/
-	title_tex->Load("Titlelogo.png");	/*画像の読み込み*/
+	title_tex->Load("TitleTest.png");	/*画像の読み込み*/
 
+	Texture *press_tex = new Texture();/*press any hogehoge*/
+	press_tex->Load("Title02.png");
+
+	title = std::make_shared<aetherClass::Rectangle2D>();
+	title->Initialize();
 	title->SetTexture(title_tex);
-	title->SetCamera(m_camera.get());
-	title->GetTransform()._translation = m_camera->Translation();
-	title->GetTransform()._translation._z -= 200;
-	title->GetTransform()._translation._y += 35;
-	title->GetTransform()._rotation._x = 180;
-	title->GetTransform()._scale._x = 100;
-	title->GetTransform()._scale._y = 53;
+	title->property._transform._translation._y= 35;
+	title->property._transform._translation._x = 25;
+	title->property._transform._translation._z = 0.1;
+
+	title->property._transform._scale._x= 750;
+	title->property._transform._scale._y= 250;
 	
+
+	press = std::make_shared<aetherClass::Rectangle2D>();
+	press->Initialize();
+	press->SetTexture(press_tex);
+	press->property._transform._translation._y = 350;
+	press->property._transform._translation._x = 250;
+	press->property._transform._translation._z = 0.1;
+
+	press->property._transform._scale._x = 300;
+	press->property._transform._scale._y = 200;
+	press->property._color._alpha = 1;
+
+
+	m_pressFlag = true;
+
 	GameScene *Scene = new SceneGame();
 	RegisterScene(Scene);
 
@@ -69,20 +81,17 @@ bool SceneTitle::TransitionIn()
 {
 	m_camera->Render();
 	
-	feedin->GetColor()._alpha -= 0.007;
-	feedin->Render(m_pixelShader.get());
-
-
-
-	if (feedin->GetColor()._alpha < 0){
-		return kTransitionEnd;
-	}
-	else if (feedin->GetColor()._alpha > 1){
+	feedin->property._color._alpha += 0.007;
+	feedin->Render(m_colorShader.get());
+	if (feedin->property._color._alpha < 0){
 		return kTransitionning;
+	}
+	else if (feedin->property._color._alpha > 1){
+		
+		return kTransitionEnd;
+
 	
 	}
-
-
 
 	return kTransitionning;
 }
@@ -99,6 +108,10 @@ bool SceneTitle::Updater()
 	{
 		return false;
 	}
+
+	
+	
+		
 	return true;
 }
 
@@ -108,6 +121,27 @@ void SceneTitle::Render()
 	m_lightmanager->Render();
 	m_stage->Render(m_materialShader.get());
 	title->Render(m_pixelShader.get());
+	
+	press->Render(m_pixelShader.get());
+
+
+
+	if (press->property._color._alpha == 1.0){
+		m_pressFlag = true;
+	}
+	else if (press->property._color._alpha < 0){
+		m_pressFlag = false;
+	}
+	
+	if (m_pressFlag){
+		press->property._color._alpha -= 0.01;
+		
+	}
+	else{
+		press->property._color._alpha += 0.01;
+	
+	}
+
 	return;
 }
 
@@ -119,7 +153,7 @@ void SceneTitle::Finalize()
 void SceneTitle::InitPixelShader()
 {
 	ShaderDesc textureDesc;
-	textureDesc._pixel._srcFile = L"Shader/ColorTexture.ps";
+	textureDesc._pixel._srcFile = L"Transparent.ps";
 	textureDesc._pixel._entryName = "ps_main";
 
 	textureDesc._vertex._srcFile = L"Shader/VertexShaderBase.hlsl";
@@ -128,11 +162,9 @@ void SceneTitle::InitPixelShader()
 	m_pixelShader = std::make_shared<PixelShader>();
 	m_pixelShader->Initialize(textureDesc, ShaderType::eVertex | ShaderType::ePixel);
 
-	Material material;
-	material._ambient._color = Color(1, 0, 0, 1);
-	material._diffuse._color = Color(1, 0, 0, 1);
-	material._specular._color = Color(1, 0, 0, 1);
-	material._specularPower = 4;
+	textureDesc._pixel._srcFile = L"Shader/BasicColor.ps";
+	m_colorShader = std::make_shared<PixelShader>();
+	m_colorShader->Initialize(textureDesc, ShaderType::eVertex | ShaderType::ePixel);
 
 	cout << "Initialized PixelShader" << endl;
 }
@@ -197,7 +229,8 @@ void SceneTitle::SceneChange()
 	if (GameController::GetMouse().IsLeftButtonTrigger())
 	{
 		cout << "Called NextScene!" << endl;
-		ChangeScene("Game",false);
+		ChangeScene("Game",true);
 		
 	}
+	
 }

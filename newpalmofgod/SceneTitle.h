@@ -9,7 +9,7 @@
 #include "LightManager.h"
 #include "LightShader.h"
 #include "Light.h"
-
+#include "SpriteBase.h"
 #include "PixelShader.h"
 
 #include "GameController.h"
@@ -28,6 +28,8 @@ public:
 
 	bool TransitionIn()override;
 
+
+
 	static const std::string m_thisName;
 
 private:
@@ -36,12 +38,17 @@ private:
 	std::shared_ptr<LightManager> m_lightmanager;
 	std::shared_ptr<aetherClass::Light>m_light;
 	std::shared_ptr<aetherClass::ShaderBase> m_pixelShader;
+	std::shared_ptr<aetherClass::ShaderBase> m_colorShader;
 	std::shared_ptr<aetherClass::MaterialShader> m_materialShader;
 	std::shared_ptr<aetherClass::FbxModel> m_keyObject;
 
 
-	std::shared_ptr<aetherClass::ModelBase>title;
-	std::shared_ptr<aetherClass::ModelBase>feedin;	
+	std::shared_ptr<aetherClass::SpriteBase>title;
+	std::shared_ptr<aetherClass::SpriteBase>feedin;	
+	std::shared_ptr<aetherClass::SpriteBase>press;
+	bool m_pressFlag;
+
+
 	std::shared_ptr<aetherClass::ViewCamera>m_uicamera;
 
 private:
