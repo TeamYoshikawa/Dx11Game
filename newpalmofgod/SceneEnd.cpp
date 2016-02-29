@@ -42,7 +42,7 @@ bool SceneEnd::Initialize()
 
 	// テクスチャの初期化
 	m_texture = std::make_shared<aetherClass::Texture>();
-	m_texture->Load("ModelData/textures/GameOver.png");
+	m_texture->Load("ModelData/image/gameover.png");
 
 	// ゲームオーバーの初期化
 	m_gameover = std::make_shared<aetherClass::Rectangle>();

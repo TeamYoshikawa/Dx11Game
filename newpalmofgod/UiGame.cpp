@@ -52,12 +52,12 @@ bool UiGame::Initialize(){
 	Texture *goal_tex = new Texture();	//テクスチャー用
 	
 
-	heart_tex->Load("Heart.png");	//画像の読み込み
-	start_tex->Load("goal.png");	//画像の読み込み
-	goal_tex->Load("start.png");	//画像の読み込み
-	location_tex->Load("location.png");	//画像の読み込み
-	road_tex->Load("road.png");	//画像の読み込み
-	h_ui_tex->Load("h_ui.png");
+	heart_tex->Load("Texture/Heart.png");	//画像の読み込み
+	start_tex->Load("Texture/goal.png");	//画像の読み込み
+	goal_tex->Load("Texture/start.png");	//画像の読み込み
+	location_tex->Load("Texture/location.png");	//画像の読み込み
+	road_tex->Load("Texture/road.png");	//画像の読み込み
+	h_ui_tex->Load("Texture/h_ui.png");
 
 	
 	location->SetTexture(location_tex);

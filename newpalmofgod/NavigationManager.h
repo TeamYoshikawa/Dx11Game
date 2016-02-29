@@ -13,7 +13,7 @@
 #include "Font.h"
 #include "Physics.h"
 
-#define navi_max 2
+#define navi_max 5
 
 class NavigationManager
 {
@@ -48,7 +48,7 @@ private:
 		int naviid;
 	};
 
-	NaviObject m_naviObj[10];
+	NaviObject m_naviObj[5];
 	int m_nowNaviID;
 
 };

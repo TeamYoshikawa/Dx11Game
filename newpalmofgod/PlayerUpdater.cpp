@@ -114,7 +114,7 @@ void PlayerUpdater::Move(const std::shared_ptr<FbxModel>& playerObject, std::sha
 		cmrx -= cm_move * 0.5;
 	}
 
-	std::cout << cmrx << std::endl;
+	//std::cout << cmrx << std::endl;
 
 	if (cmrx < -225){ cmrx = -225; }
 	if (cmrx > -125){ cmrx = -125; }

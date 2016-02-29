@@ -25,8 +25,8 @@ void FallingWallUpdater::Update(ModelBase* fallingWall)
 
 	if (isFallflg)
 	{
-		cout << fallingWall->GetTransform()._translation._y << endl;
-		cout << isFallflg << endl;
+		//cout << fallingWall->GetTransform()._translation._y << endl;
+		//cout << isFallflg << endl;
 		fallingWall->GetTransform()._translation._y += 1;
 	}
 	else

@@ -25,7 +25,7 @@ void LoadObj::Initialize()
 	load->Initialize();
 
 	Texture *load_tex = new Texture();
-	load_tex->Load("Load.jpg");
+	load_tex->Load("image/Load.jpg");
 
 	load->SetTexture(load_tex);
 	load->SetCamera(m_camera.get());

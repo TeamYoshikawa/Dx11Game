@@ -34,10 +34,10 @@ bool SceneTitle::Initialize()
 	feedin->property._transform._scale._y = 1000;
 	
 	Texture *title_tex = new Texture();/*テクスチャ―用*/
-	title_tex->Load("TitleTest.png");	/*画像の読み込み*/
+	title_tex->Load("image/TitleTest.png");	/*画像の読み込み*/
 
 	Texture *press_tex = new Texture();/*press any hogehoge*/
-	press_tex->Load("Title02.png");
+	press_tex->Load("image/Title02.png");
 
 	title = std::make_shared<aetherClass::Rectangle2D>();
 	title->Initialize();

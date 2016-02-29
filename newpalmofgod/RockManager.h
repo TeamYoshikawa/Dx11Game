@@ -50,5 +50,5 @@ public:
 	bool HitMesh(std::shared_ptr<aetherClass::ModelBase>&,std::shared_ptr<aetherClass::ModelBase>&);
 
 	std::shared_ptr<aetherClass::ModelBase> Get();
-	std::shared_ptr<aetherClass::ModelBase> S_Get();
+	std::shared_ptr<aetherClass::ModelBase> Switch_Get();
 };

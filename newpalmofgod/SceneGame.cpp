@@ -198,7 +198,7 @@ bool SceneGame::Updater(){
 	}
 
 	//各トラップのイベントの呼び出し
-	if (m_rock->HitMesh(m_player->Get(), m_rock->S_Get()))
+	if (m_rock->HitMesh(m_player->Get(), m_rock->Switch_Get()))
 	{
 		m_trapState = eTrapState::eRockEvent;
 	}

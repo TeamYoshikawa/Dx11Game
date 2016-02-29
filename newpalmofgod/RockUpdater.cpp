@@ -31,9 +31,7 @@ void RockUpdater::Update(ModelBase *Rock){
 	if (rock_flag == ON){
 		First(Rock);
 	}
-	
 
-	std::cout << rock_flag << std::endl;
 }
 
 void RockUpdater::FlagON(){

@@ -88,7 +88,7 @@ std::shared_ptr<aetherClass::ModelBase> RockManager::Get(){
 	return m_Rock[0];
 }
 
-std::shared_ptr<aetherClass::ModelBase> RockManager::S_Get(){
+std::shared_ptr<aetherClass::ModelBase> RockManager::Switch_Get(){
 
 	return m_switch;
 }
