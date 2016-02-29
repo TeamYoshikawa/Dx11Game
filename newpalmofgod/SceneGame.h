@@ -8,6 +8,7 @@
 #include "PlayerManager.h"
 #include "NavigationManager.h"
 #include "FallingWallManager.h"
+#include "Skybox.h"
 #include "TextManager.h"
 #include "WallManager.h"
 #include "LightManager.h"
@@ -53,6 +54,8 @@ private:
 	eNaviState m_naviState;
 
 	
+	std::shared_ptr<aetherClass::Skybox> m_skybox;
+
 	//ƒ‰ƒCƒg
 	std::shared_ptr<LightManager> m_lightmanager;
 	std::shared_ptr<aetherClass::Light>m_light;

@@ -1,4 +1,5 @@
 #include "SceneGame.h"
+#include "Texture.h"
 #include <GameController.h>
 #include <iostream>
 #include <PixelShader.h>
@@ -63,9 +64,24 @@ bool SceneGame::Initialize()
 	material._specularPower = 4;
 
 
+	
+
 	// ライトの作成
 	m_lightmanager = std::make_shared<LightManager>();
 	m_lightmanager->Initialize();
+
+
+
+	Texture *skytexture;
+
+	skytexture = new Texture;
+	skytexture->Load("skybox/night.png");
+
+	m_skybox = std::make_shared<Skybox>();
+	m_skybox->Initialize();
+	m_skybox->SetCamera(m_camera.get());
+	m_skybox->SetTexture(skytexture);
+
 
 	// プレイヤーの作成
 	m_player = std::make_shared<PlayerManager>();
@@ -224,6 +240,8 @@ bool SceneGame::Updater(){
 	m_fallwall->Update();
 	//}
 
+	m_skybox->GetTransform()._rotation._y +=0.05;
+
 
 	//タイトルに戻る
 	if (GameController::GetKey().IsKeyDown(DIK_R)){
@@ -264,6 +282,8 @@ void SceneGame::Render(){
 
 	//テキスト
 	m_text->Render();
+
+	m_skybox->Render(m_pixelShader.get());
 
 	return;
 }

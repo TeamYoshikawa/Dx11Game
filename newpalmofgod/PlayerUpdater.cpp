@@ -23,7 +23,7 @@ PlayerUpdater::~PlayerUpdater(){
 }
 
 void PlayerUpdater::Initialize(){
-	
+
 	m_damageCounter = 0;
 	m_daedCounter = 0;
 	m_damageFlg = 0;
@@ -34,6 +34,9 @@ void PlayerUpdater::Initialize(){
 	m_damegeSound = std::make_shared<GameSound>();
 	m_damegeSound->Load("Sound/Player/damage03.wav");
 	m_damegeSound->SetValume(+3000);
+
+	m_isHitting = false;
+	m_prevKey = NULL;
 	return;
 }
 
@@ -53,12 +56,14 @@ void PlayerUpdater::SendStatus(PlayerBase::PlayerStatus&){
 	return;
 }
 
-void PlayerUpdater::Updating(const std::shared_ptr<FbxModel>& playerObject, std::shared_ptr<aetherClass::ViewCamera> camera,bool IsHitWall){
+void PlayerUpdater::Updating(const std::shared_ptr<FbxModel>& playerObject, std::shared_ptr<aetherClass::ViewCamera> camera, bool IsHitWall){
 
 	// à⁄ìÆÇÃèàóù
-	Move(playerObject,camera,IsHitWall);
+	Move(playerObject, camera, IsHitWall);
 	//GetKey();
 	TimeSpiral();
+
+
 	return;
 }
 
@@ -92,30 +97,34 @@ bool PlayerUpdater::HittingWall(ModelBase* player, ModelBase* wall)
 
 
 // ìÆÇ¢ÇƒÇÈÇ∆Ç´ÇÃèàóù
-void PlayerUpdater::Move(const std::shared_ptr<FbxModel>& playerObject, std::shared_ptr<aetherClass::ViewCamera> camera,bool IsHitWall){
+void PlayerUpdater::Move(const std::shared_ptr<FbxModel>& playerObject, std::shared_ptr<aetherClass::ViewCamera> camera, bool IsHitWall){
 	static float cmx = -50.0f, cmy = -8.0f, cmz = 692.0f, cmrx = -170, cmry = -90;
-	float cm_move = 5.0f;
-	
-	/*if (IsHitWall == true)
+	float cm_move = 3.0f;
+	int pushKey = NULL;;
+	if (IsHitWall)
 	{
-		std::cout << "ï«Ç…ìñÇΩÇ¡ÇΩÇÊ" << std::endl;
-	}*/
 
+		m_isHitting = true;
+		cm_move *= -1;
+		std::cout << "ï«Ç…ìñÇΩÇ¡ÇΩÇÊ" << std::endl;
+	}
+	else
+	{
+		m_isHitting = false;
+	}
 	if (GameController::GetKey().IsKeyDown(DIK_LEFT)){
-		cmry += cm_move * 0.5;
+		cmry += cm_move * 0.43;
 	}
 	else if (GameController::GetKey().IsKeyDown(DIK_RIGHT)){
-		cmry -= cm_move * 0.5;
+		cmry -= cm_move * 0.43;
 	}
 	if (GameController::GetKey().IsKeyDown(DIK_DOWN)){
-		cmrx += cm_move * 0.5;
+		cmrx += cm_move * 0.35;
+
 	}
 	else if (GameController::GetKey().IsKeyDown(DIK_UP)){
-		cmrx -= cm_move * 0.5;
+		cmrx -= cm_move * 0.35;
 	}
-
-	//std::cout << cmrx << std::endl;
-
 	if (cmrx < -225){ cmrx = -225; }
 	if (cmrx > -125){ cmrx = -125; }
 
@@ -158,36 +167,24 @@ void PlayerUpdater::Move(const std::shared_ptr<FbxModel>& playerObject, std::sha
 		}
 	}
 
-	//Vector3 moveDirection;
+	Vector3 move = Vector3(cmx, cmy, cmz);
 
-	//moveDirection = Vector3(cmx, cmy, cmz);
-	//moveDirection._x /= moveDirection._x;
-	//moveDirection._y /= moveDirection._y;
-	//moveDirection._z /= moveDirection._z;
+	if (IsHitWall&&m_prevKey != pushKey)
+	{
+		move *= -1;
 
-	//if (IsHitWall == true)
-	//{
-	//	//cm_move *= -1;
-	//	std::cout << "ï«Ç…ìñÇΩÇ¡ÇΩÇÊ" << std::endl;
-	//	if (m_prevMoveDirection == moveDirection){
-	//		return;
-	//	}
-	//	else
-	//	{
-	//		m_prevMoveDirection = moveDirection;
-	//	}
-	//
-	//}
+		m_prevKey = pushKey;
+	}
 
 	/* Ç¢Ç«Å[*/
-	camera->Translation() = Vector3(cmx, cmy, cmz);;
+	camera->Translation() = move;
 	camera->Rotation() = Vector3(cmrx, cmry, 1);
 
 	//// ÉÇÉfÉãÇ∆òAìÆ
 	playerObject->GetTransform()._translation._x = camera->Translation()._x - 10;
 	playerObject->GetTransform()._translation._z = camera->Translation()._z;
 
-
+	return;
 }
 
 // PlayerUpdater::eKey PlayerUpdater::GetKey()
@@ -219,14 +216,14 @@ bool PlayerUpdater::IsDamage(){
 void PlayerUpdater::TimeSpiral()
 {
 	if (SendStatus()._muteki == false)return;
-	
+
 	static int time = 180;
 	if (time <= 0)
 	{
 		SendStatus()._muteki = false;
 		time = 180;
 	}
-	
+
 	time--;
 
 	std::cout << time << std::endl;
