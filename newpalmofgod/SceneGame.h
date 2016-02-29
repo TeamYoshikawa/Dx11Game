@@ -7,6 +7,8 @@
 #include <GameScene.h>
 #include "PlayerManager.h"
 #include "NavigationManager.h"
+#include "FallingWallManager.h"
+#include "TextManager.h"
 #include "WallManager.h"
 #include "LightManager.h"
 #include "SpearManager.h"
@@ -16,9 +18,6 @@
 #include "Light.h"
 #include "UiGame.h"
 #include "GameSound.h"
-
-
-
 
 class SceneGame :
 	public aetherClass::GameScene
@@ -34,54 +33,57 @@ public:
 	static const std::string m_thisName;
 
 private:
-	enum class eGameState{
+	//トラップイベント
+	enum class eTrapState{
 		eRockEvent,
-		eRockEvent2,
 		eSpearEvent,
+		efallwall,
 		ePitFall,
 		eNull
 	};
+	//ナビイベント
+	enum class eNaviState{
+		eNaviEvent,
+		eNull
+	};
+
 private:
+	//イベント
+	eTrapState m_trapState;
+	eNaviState m_naviState;
 
-	void FirstSpearEvent();
-	void FirstPitFallEvent();
-	eGameState GetGameState();
-
-private:
-
-	eGameState m_gameState;
-
-	std::shared_ptr<PlayerManager> m_player;
 	
+	//ライト
 	std::shared_ptr<LightManager> m_lightmanager;
-
-	std::shared_ptr<PitFallManager> m_pitfall;
-
-	std::shared_ptr<SpearManager> m_spear;
-
-	std::shared_ptr<RockManager> m_rock;
-
-	std::shared_ptr<WallManager> m_wall;
-
-	std::shared_ptr<NavigationManager> m_navigation;
-
-	std::shared_ptr<UiGame> m_ui;
-
-	std::shared_ptr<aetherClass::ViewCamera> m_camera;
-
-	std::shared_ptr<aetherClass::ShaderBase> m_pixelShader;
-
-	std::shared_ptr<aetherClass::ShaderBase> m_shader;
-
-	std::shared_ptr<aetherClass::GameSound> m_sound;
-
-	std::shared_ptr<aetherClass::MaterialShader> m_materialShader;
-
 	std::shared_ptr<aetherClass::Light>m_light;
+
+	//壁
+	std::shared_ptr<WallManager> m_wall;
+	//ステージ
 	std::shared_ptr<aetherClass::FbxModel> m_stage;
 
-	std::shared_ptr<aetherClass::ModelBase> m_positionCheck;
-	std::shared_ptr<aetherClass::Texture> m_positionCheckBoxTexture;
+	//プレイヤー
+	std::shared_ptr<PlayerManager> m_player;
+
+	//トラップ
+	std::shared_ptr<PitFallManager> m_pitfall;
+	std::shared_ptr<SpearManager> m_spear;
+	std::shared_ptr<RockManager> m_rock;
+	std::shared_ptr<FallingWallManager> m_fallwall;
+
+	//UI
+	std::shared_ptr<TextManager> m_text;
+	std::shared_ptr<NavigationManager> m_navigation;
+	std::shared_ptr<UiGame> m_ui;
+
+	//シェーダー
+	std::shared_ptr<aetherClass::ShaderBase> m_pixelShader;
+	std::shared_ptr<aetherClass::ShaderBase> m_shader;
+	std::shared_ptr<aetherClass::MaterialShader> m_materialShader;
+
+	//サウンド
+	std::shared_ptr<aetherClass::GameSound> m_sound;
+	std::shared_ptr<aetherClass::ViewCamera> m_camera;
 
 };
 

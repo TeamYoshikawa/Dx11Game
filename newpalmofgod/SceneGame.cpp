@@ -6,7 +6,7 @@
 #include"Cube.h"
 
 using namespace aetherClass;
-const std::string SceneGame::m_thisName = "Game";
+const std::string SceneGame::m_thisName = "Game";	
 
 SceneGame::SceneGame() :
 GameScene(m_thisName, GetManager()){}
@@ -16,11 +16,14 @@ SceneGame::~SceneGame()
 {
 }
 
-bool SceneGame::Initialize(){
+bool SceneGame::Initialize()
+{
 	std::cout << "Initialize game scene" << std::endl;
 
+	//シーン作成
 	GameScene *Scene = new SceneTitle;
 
+	//シーン登録
 	RegisterScene(Scene);
 
 	// UIの作成
@@ -32,6 +35,8 @@ bool SceneGame::Initialize(){
 	m_camera->Translation() = Vector3(-100, -8, 692);
 	m_camera->Rotation() = Vector3(-170.0f, 178.0f, 1.0f);
 
+
+	//サウンドの作成
     m_sound = std::make_shared<GameSound>();
 	m_sound->Load("Sound/BGM/BGM.wav");
     m_sound->SetValume(-3000);
@@ -58,143 +63,206 @@ bool SceneGame::Initialize(){
     material._specularPower = 4;
 
 
-    // ライトの作成
-    m_lightmanager = std::make_shared<LightManager>();
-    m_lightmanager->Initialize();
+	// ライトの作成
+	m_lightmanager = std::make_shared<LightManager>();
+	m_lightmanager->Initialize();
 
-    // プレイヤーの作成
-    m_player = std::make_shared<PlayerManager>();
+	// プレイヤーの作成
+	m_player = std::make_shared<PlayerManager>();
 	m_player->Initialize();//m_camera->GetCamera());
 
 
-    // ステージモデルの作成
-    m_stage = std::make_shared<FbxModel>();
-    m_stage->LoadFBX("ModelData/models/STAGEKANZENBAN.fbx", eAxisSystem::eAxisOpenGL);
+	// ステージモデルの作成
+	m_stage = std::make_shared<FbxModel>();
+	m_stage->LoadFBX("ModelData/models/STAGEKANZENBAN.fbx", eAxisSystem::eAxisOpenGL);
 	m_stage->SetCamera(m_camera.get());//m_camera->GetCamera().get());
-    m_stage->GetTransform()._scale = Vector3(1.0f, 1.0f, -1.0f);
+	m_stage->GetTransform()._scale = Vector3(1.0f, 1.0f, -1.0f);
 
-    m_stage->SetModelMaterialColor(Color(0.0, 0.1, 0.1, 1), eMatrerialType::eAmbient);
-    m_stage->SetModelMaterialColor(Color(0.7, 0.6, 0.6, 0.0), eMatrerialType::eDiffuse);
-    m_stage->SetModelMaterialColor(Color(1.0, 1.0, 1.0, 1.0), eMatrerialType::eSpecular);
+	m_stage->SetModelMaterialColor(Color(0.0, 0.1, 0.1, 1), eMatrerialType::eAmbient);
+	m_stage->SetModelMaterialColor(Color(0.7, 0.6, 0.6, 0.0), eMatrerialType::eDiffuse);
+	m_stage->SetModelMaterialColor(Color(1.0, 1.0, 1.0, 1.0), eMatrerialType::eSpecular);
 	//m_stage->SetModelMaterialColor(Color(1.0, 1.0, 1.0, 0.0), eMatrerialType::eEmissive);
 
-    // 岩の作成
-    m_rock = std::make_shared<RockManager>();
+	// 岩の作成
+	m_rock = std::make_shared<RockManager>();
 	m_rock->Initialize(m_camera.get());   //m_camera->GetCamera().get());
 
-    m_spear = std::make_shared<SpearManager>();
+	//槍の作成
+	m_spear = std::make_shared<SpearManager>();
 	m_spear->Initialize(m_camera.get());  //m_camera->GetCamera().get());
 
-
-    m_wall = std::make_shared<WallManager>();
+	//壁の作成
+	m_wall = std::make_shared<WallManager>();
 	m_wall->Initialize(m_camera.get());   //m_camera->GetCamera().get());
+
+	//落ちる壁の作成
+	m_fallwall = std::make_shared<FallingWallManager>();
+	m_fallwall->Initialize(m_camera.get());
 
 
 	//ナビゲーション
 	m_navigation = std::make_shared<NavigationManager>();
 	m_navigation->Initialize(m_camera.get());
 
+	//テキストの作成
+	m_text = std::make_shared<TextManager>();
+	m_text->Initialize(m_camera.get());
 
-    // マテリアルシェーダー作成時の情報の設定
-    ShaderDesc materialDesc;
-    materialDesc._vertex._entryName = "vs_main";
-    materialDesc._vertex._srcFile = L"Shader/MaterialVS.hlsl";
-    materialDesc._pixel._entryName = "ps_main";
-    materialDesc._pixel._srcFile = L"Shader/MaterialPS.hlsl";
 
-    // マテリアルシェーダーの作成
-    m_materialShader = std::make_shared<MaterialShader>();
-    m_materialShader->Initialize(materialDesc, ShaderType::eVertex | ShaderType::ePixel);
-    m_materialShader->SetLight(m_lightmanager->GetLight().get());
+	// マテリアルシェーダー作成時の情報の設定
+	ShaderDesc materialDesc;
+	materialDesc._vertex._entryName = "vs_main";
+	materialDesc._vertex._srcFile = L"Shader/MaterialVS.hlsl";
+	materialDesc._pixel._entryName = "ps_main";
+	materialDesc._pixel._srcFile = L"Shader/MaterialPS.hlsl";
+
+	// マテリアルシェーダーの作成
+	m_materialShader = std::make_shared<MaterialShader>();
+	m_materialShader->Initialize(materialDesc, ShaderType::eVertex | ShaderType::ePixel);
+	m_materialShader->SetLight(m_lightmanager->GetLight().get());
 	m_materialShader->SetCamera(m_camera.get());    //m_camera->GetCamera().get());
-    m_lightmanager->GetLight()->Translation() = m_camera->Translation();
-	
-    // プレイヤーの最初の状態の設定
-    m_player->SetState(PlayerBase::ePlayerMoveState::eMove);
+	m_lightmanager->GetLight()->Translation() = m_camera->Translation();
 
-    m_gameState = eGameState::eNull;
+	// プレイヤーの最初の状態の設定
+	m_player->SetState(PlayerBase::ePlayerMoveState::eMove);
 
-    return true;
+
+	//各イベントの初期化
+	m_trapState = eTrapState::eNull;
+	m_naviState = eNaviState::eNull;
+
+	return true;
 }
 
+
+//各Updaterを呼び出す
 bool SceneGame::Updater(){
 
-	m_wall->Update();
+	//ナビゲーションとの当たり判定
+	bool IsHitNavi = false;
+	int hitNaviNumber = 0;
+	for (int i = 0; i < m_navigation->NaviCnt(); i++){
+		IsHitNavi = m_navigation->HitMesh(m_player->Get(), m_navigation->Navi_Get(i));
 
-	m_navigation->Update();
-
-
-	if (m_player->HitMesh(m_rock->Get().get()))
-	{
-		m_player->SetState(PlayerBase::ePlayerMoveState::eDamage);
+		if (IsHitNavi){
+			hitNaviNumber = i;
+			//ナビゲーションのIDの設定
+			m_navigation->Update(hitNaviNumber);
+			m_naviState = eNaviState::eNaviEvent;
+			break;
+		}
 	}
 
-	if (m_player->HitMesh(m_spear->Get().get()))
-	{
-		m_player->SetState(PlayerBase::ePlayerMoveState::eDamage);
+	if (m_naviState == eNaviState::eNaviEvent){
+		m_text->SetID(m_navigation->Navi_IDGet());
 	}
-
-	if (m_rock->HitMesh(m_player->Get(),m_rock->S_Get()))
-	{
-		m_gameState = eGameState::eRockEvent;
-	}
-
-	if (m_gameState == eGameState::eRockEvent){
-		m_rock->Update();
-	}
-
-	if (m_spear->HitMesh(m_player->Get(), m_spear->S_Get())){
-		m_gameState = eGameState::eSpearEvent;
-	}
-	if (m_gameState == eGameState::eSpearEvent){
-		m_spear->Update();
-	}
-
-
+	
 	//壁との当たり判定
 	bool IsHitWall = false;
-
 	for (int i = 0; i < m_wall->WallCnt(); i++){
-		
 		IsHitWall = m_player->HitWallMesh(m_wall->Get(i));
 		if (IsHitWall){
 			break;
 		}
 	}
 
+	//壁
+	m_wall->Update();
+
+	//プレイヤー
 	m_player->Update(m_camera, IsHitWall);
 
+	//ライト
 	m_lightmanager->Update();
 
+	//UI
 	m_ui->Set(m_player->LifeGet());
+	m_ui->Update();
 
+
+	//各トラップとプレイヤーの当たり判定
+	if (m_player->HitMesh(m_rock->Get().get()))
+	{
+		m_player->SetState(PlayerBase::ePlayerMoveState::eDamage);
+	}
+	
+	if (m_player->HitMesh(m_spear->Get().get()))
+	{
+		m_player->SetState(PlayerBase::ePlayerMoveState::eDamage);
+	}
+	
+	if (m_player->HitMesh(m_fallwall->GetFallingWall().get()))
+	{
+		m_player->SetState(PlayerBase::ePlayerMoveState::eDamage);
+	}
+
+	//各トラップのイベントの呼び出し
+	if (m_rock->HitMesh(m_player->Get(), m_rock->S_Get()))
+	{
+		m_trapState = eTrapState::eRockEvent;	
+	}
+
+	if (m_spear->HitMesh(m_player->Get(), m_spear->S_Get()))
+	{
+		m_trapState = eTrapState::eSpearEvent;
+	}
+
+	if (m_fallwall->HitMesh(m_player->Get(), m_fallwall->GetFallingWall()))
+	{
+		m_trapState = eTrapState::efallwall;
+	}
+
+	//イベントが発生していたらUpdateを呼ぶ
+	if (m_trapState == eTrapState::eRockEvent){
+		m_rock->Update();
+	}
+	if (m_trapState == eTrapState::eSpearEvent){
+		m_spear->Update();
+	}
+	//if (m_trapState == eTrapState::efallwall){
+		m_fallwall->Update();
+	//}
+	
+	
+	//タイトルに戻る
 	if (GameController::GetKey().IsKeyDown(DIK_R)){
 		ChangeScene("Title",false);
 	}
 
-	m_ui->Update();
 	return true;
 }
 
+//描画
 void SceneGame::Render(){
 
+	//カメラ
 	m_camera->Render();
 
+	//UI
 	m_ui->Render();
 
-	m_spear->Render(m_pixelShader);
-
-	m_lightmanager->Render();
-	
+	//ステージ
 	m_stage->Render(m_materialShader.get());
 
-	m_player->Render(m_materialShader);
-
-	m_rock->Render(m_pixelShader);
-
+	//壁
 	m_wall->Render(m_pixelShader);
 
+	//プレイヤー
+	m_player->Render(m_materialShader);
+
+	//各トラップ
+	m_rock->Render(m_pixelShader);
+	m_spear->Render(m_pixelShader);
+	m_fallwall->Render(m_pixelShader);
+
+	//ライト
+	m_lightmanager->Render();
+	
+	//ナビゲーション
 	m_navigation->Render(m_pixelShader);
+
+	//テキスト
+	m_text->Render();
 
 	return;
 }
