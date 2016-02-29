@@ -12,3 +12,13 @@ void NavigationUpdater::Update(ModelBase *navigation){
 	}
 
 }
+
+bool NavigationUpdater::HittingProcessor(const std::shared_ptr<ModelBase>& player, const std::shared_ptr<ModelBase>& other){
+
+	// TODO: “–‚½‚Á‚½‚©‚ğ’²‚×‚éğŒ®‚ğ‹LÚ
+	if (!aetherFunction::CollideBoxOBB(*player, *other)){
+		return false;
+	}
+	return true;
+
+}

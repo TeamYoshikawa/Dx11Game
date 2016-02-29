@@ -13,7 +13,7 @@
 #include "Font.h"
 #include "Physics.h"
 
-#define navi_max 10
+#define navi_max 2
 
 class NavigationManager
 {
@@ -23,23 +23,33 @@ public:
 
 	bool Initialize(aetherClass::ViewCamera* camera);
 	void Render(const std::shared_ptr<aetherClass::ShaderBase>);
-	void Update();
+	void Update(int);
 	void Finalize();
 
-private:
+	int Navi_IDGet();
 
-	std::shared_ptr<aetherClass::ModelBase> m_navigation[10];
+	std::shared_ptr<aetherClass::ModelBase> Navi_Get(int);
+
+
+	int NaviCnt();
+
+	bool HitMesh(std::shared_ptr<aetherClass::ModelBase>&, std::shared_ptr<aetherClass::ModelBase>&);
+
+private:
+	
 	std::shared_ptr<aetherClass::Texture> m_navigationTexture;
 
 	std::shared_ptr<NavigationUpdater> m_updater;
 	std::shared_ptr<NavigationRender> m_render;
 
+	struct NaviObject{
+		std::shared_ptr<aetherClass::ModelBase> m_navigation;
+		bool m_isRunEnd;
+		int naviid;
+	};
 
-	aetherClass::Text *m_text;
-	aetherClass::Font *m_font;
-	aetherClass::ShaderBase  *m_color;
-
-	int m_score;
+	NaviObject m_naviObj[10];
+	int m_nowNaviID;
 
 };
 
