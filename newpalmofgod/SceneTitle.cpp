@@ -153,7 +153,7 @@ void SceneTitle::Finalize()
 void SceneTitle::InitPixelShader()
 {
 	ShaderDesc textureDesc;
-	textureDesc._pixel._srcFile = L"Transparent.ps";
+	textureDesc._pixel._srcFile = L"Shader/Transparent.ps";
 	textureDesc._pixel._entryName = "ps_main";
 
 	textureDesc._vertex._srcFile = L"Shader/VertexShaderBase.hlsl";
