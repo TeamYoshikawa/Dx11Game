@@ -66,6 +66,27 @@ void LoadObj::InitCamera()
 }
 
 
+bool LoadObj::WaitRun(){
+
+	std::cout << "”CˆÓ‚Ìˆ—‚Ü‚¿" << std::endl;
+	GameController::GetKey().Read();
+
+
+
+
+
+
+
+
+	if (GameController::GetKey().IsKeyDown(DIK_SPACE))
+	{
+		std::cout << "”CˆÓ‚Ìˆ—ŽÀs" << std::endl;
+		return kWaitEnd;
+	}
+
+	return kWaitting;
+}
+
 void LoadObj::Run()
 {
 	m_camera->Render();

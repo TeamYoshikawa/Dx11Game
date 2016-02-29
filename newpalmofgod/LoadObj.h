@@ -17,7 +17,7 @@ public:
 	void Initialize()override;
 	void Finalize()override;
 	void Run()override;
-
+	bool WaitRun()override;
 private:
 	std::shared_ptr<aetherClass::ViewCamera> m_camera;
 	std::shared_ptr<aetherClass::ModelBase>load;
