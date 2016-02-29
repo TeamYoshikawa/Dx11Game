@@ -52,6 +52,8 @@ private:
 	void Damage(const std::shared_ptr<aetherClass::FbxModel>& playerObject); // ƒ_ƒ[ƒWó‚¯‚½‚Ìˆ—
 	void Destroy()override;
 	aetherClass::Vector3 m_prevMoveDirection;
+
+	void TimeSpiral();
 	/*eKey m_KeyEvent;*/
 private:
 	int m_damageCounter;
@@ -59,6 +61,8 @@ private:
 	bool m_damageFlg;
 	std::shared_ptr<aetherClass::GameSound> m_playerSound;
 	std::shared_ptr<aetherClass::GameSound> m_damegeSound;
+
+	int m_mutekiTime;
 };
 
 #endif

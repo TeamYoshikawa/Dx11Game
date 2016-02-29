@@ -58,7 +58,7 @@ void PlayerUpdater::Updating(const std::shared_ptr<FbxModel>& playerObject, std:
 	// ˆÚ“®‚Ìˆ—
 	Move(playerObject,camera,IsHitWall);
 	//GetKey();
-	
+	TimeSpiral();
 	return;
 }
 
@@ -212,4 +212,20 @@ void PlayerUpdater::Move(const std::shared_ptr<FbxModel>& playerObject, std::sha
 
 bool PlayerUpdater::IsDamage(){
 	return m_damageFlg;
+}
+
+void PlayerUpdater::TimeSpiral()
+{
+	if (SendStatus()._muteki == false)return;
+	
+	static int time = 180;
+	if (time <= 0)
+	{
+		SendStatus()._muteki = false;
+		time = 180;
+	}
+	
+	time--;
+
+	std::cout << time << std::endl;
 }
