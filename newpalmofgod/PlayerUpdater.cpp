@@ -102,58 +102,60 @@ void PlayerUpdater::Move(const std::shared_ptr<FbxModel>& playerObject, std::sha
 	}*/
 
 	if (GameController::GetKey().IsKeyDown(DIK_LEFT)){
-		cmry += cm_move * 1;
+		cmry += cm_move * 0.5;
 	}
 	else if (GameController::GetKey().IsKeyDown(DIK_RIGHT)){
-		cmry -= cm_move * 1;
+		cmry -= cm_move * 0.5;
 	}
 	if (GameController::GetKey().IsKeyDown(DIK_DOWN)){
-		cmrx += cm_move * 1;
+		cmrx += cm_move * 0.5;
 	}
 	else if (GameController::GetKey().IsKeyDown(DIK_UP)){
-		cmrx -= cm_move * 1;
+		cmrx -= cm_move * 0.5;
 	}
-	else{
-		if (GameController::GetKey().IsKeyDown(DIK_LCONTROL))
-		{
-			if (GameController::GetKey().IsKeyDown(DIK_A)){
-				cmx -= (cm_move*2.0f) * cos(kAetherPI * cmry / 180);
-				cmz += (cm_move*2.0f) * sin(kAetherPI * cmry / 180);
-			}
-			else if (GameController::GetKey().IsKeyDown(DIK_D)){
-				cmx += (cm_move*2.0f) * cos(kAetherPI * cmry / 180);
-				cmz -= (cm_move*2.0f) * sin(kAetherPI * cmry / 180);
-			}
-			if (GameController::GetKey().IsKeyDown(DIK_S)){
-				cmx += (cm_move*2.0f) * sin(kAetherPI * cmry / 180);
-				cmz += (cm_move*2.0f) * cos(kAetherPI * cmry / 180);
-			}
-			else if (GameController::GetKey().IsKeyDown(DIK_W)){
-				cmx -= (cm_move*2.0f) * sin(kAetherPI * cmry / 180);
-				cmz -= (cm_move*2.0f) * cos(kAetherPI * cmry / 180);
-			}
-		}
-		else
-		{
-			if (GameController::GetKey().IsKeyDown(DIK_A)){
-				cmx -= cm_move * cos(kAetherPI * cmry / 180);
-				cmz += cm_move * sin(kAetherPI * cmry / 180);
-			}
-			else if (GameController::GetKey().IsKeyDown(DIK_D)){
-				cmx += cm_move * cos(kAetherPI * cmry / 180);
-				cmz -= cm_move * sin(kAetherPI * cmry / 180);
-			}
-			if (GameController::GetKey().IsKeyDown(DIK_S)){
-				cmx += cm_move * sin(kAetherPI * cmry / 180);
-				cmz += cm_move * cos(kAetherPI * cmry / 180);
-			}
-			else if (GameController::GetKey().IsKeyDown(DIK_W)){
-				cmx -= cm_move * sin(kAetherPI * cmry / 180);
-				cmz -= cm_move * cos(kAetherPI * cmry / 180);
-			}
-		}
 
+	std::cout << cmrx << std::endl;
 
+	if (cmrx < -225){ cmrx = -225; }
+	if (cmrx > -125){ cmrx = -125; }
+
+	if (GameController::GetKey().IsKeyDown(DIK_LCONTROL))
+	{
+		if (GameController::GetKey().IsKeyDown(DIK_A)){
+			cmx -= (cm_move*2.0f) * cos(kAetherPI * cmry / 180);
+			cmz += (cm_move*2.0f) * sin(kAetherPI * cmry / 180);
+		}
+		else if (GameController::GetKey().IsKeyDown(DIK_D)){
+			cmx += (cm_move*2.0f) * cos(kAetherPI * cmry / 180);
+			cmz -= (cm_move*2.0f) * sin(kAetherPI * cmry / 180);
+		}
+		if (GameController::GetKey().IsKeyDown(DIK_S)){
+			cmx += (cm_move*2.0f) * sin(kAetherPI * cmry / 180);
+			cmz += (cm_move*2.0f) * cos(kAetherPI * cmry / 180);
+		}
+		else if (GameController::GetKey().IsKeyDown(DIK_W)){
+			cmx -= (cm_move*2.0f) * sin(kAetherPI * cmry / 180);
+			cmz -= (cm_move*2.0f) * cos(kAetherPI * cmry / 180);
+		}
+	}
+	else
+	{
+		if (GameController::GetKey().IsKeyDown(DIK_A)){
+			cmx -= cm_move * cos(kAetherPI * cmry / 180);
+			cmz += cm_move * sin(kAetherPI * cmry / 180);
+		}
+		else if (GameController::GetKey().IsKeyDown(DIK_D)){
+			cmx += cm_move * cos(kAetherPI * cmry / 180);
+			cmz -= cm_move * sin(kAetherPI * cmry / 180);
+		}
+		if (GameController::GetKey().IsKeyDown(DIK_S)){
+			cmx += cm_move * sin(kAetherPI * cmry / 180);
+			cmz += cm_move * cos(kAetherPI * cmry / 180);
+		}
+		else if (GameController::GetKey().IsKeyDown(DIK_W)){
+			cmx -= cm_move * sin(kAetherPI * cmry / 180);
+			cmz -= cm_move * cos(kAetherPI * cmry / 180);
+		}
 	}
 
 	//Vector3 moveDirection;
