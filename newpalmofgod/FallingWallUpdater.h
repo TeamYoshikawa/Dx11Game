@@ -7,6 +7,16 @@
 class FallingWallUpdater
 {
 private:
+	enum class eState
+	{
+		eMoveDown,
+		eMoveUp,
+		eInterval,
+		eStop,
+	};
+
+	eState m_eState;
+private:
 	FallingWallUpdater(const FallingWallUpdater&) = default;
 	void operator = (const FallingWallUpdater &);
 
@@ -19,6 +29,5 @@ public:
 
 private:
 	bool isFallflg;
-
 };
 
