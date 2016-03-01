@@ -105,7 +105,7 @@ void PlayerUpdater::Move(const std::shared_ptr<FbxModel>& playerObject, std::sha
 	{
 
 		m_isHitting = true;
-		cm_move *= -1;
+		cm_move *= -1.33;
 		std::cout << "•Ç‚É“–‚½‚Á‚½‚æ" << std::endl;
 	}
 	else

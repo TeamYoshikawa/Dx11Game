@@ -16,6 +16,7 @@ public:
 	void Update();
 	bool HitMesh(std::shared_ptr<aetherClass::ModelBase>& player, std::shared_ptr<aetherClass::ModelBase>& other);
 	std::shared_ptr<aetherClass::ModelBase> GetFallingWall();
+	std::shared_ptr<aetherClass::ModelBase> GetCollider();
 
 private:
 	float m_size;

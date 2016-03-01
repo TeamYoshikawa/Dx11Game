@@ -19,7 +19,7 @@ bool FallingWallManager::Initialize(ViewCamera* camera)
 	m_render = make_shared<FallingWallRender>();
 
 	m_texture = make_shared<Texture>();
-	m_texture->Load("ModelData/textures/cocoa.jpg");
+	m_texture->Load("image/kabe2.png");
 
 	m_fallingWall = make_shared<Cube>();
 	if (!m_fallingWall->Initialize()){ return false; }
@@ -39,6 +39,8 @@ bool FallingWallManager::Initialize(ViewCamera* camera)
 	m_collider->GetTransform()._scale = Vector3(m_size-10, 1, m_size-10);
 	m_collider->GetTransform()._translation = m_fallingWall->GetTransform()._translation;
 
+
+	
 }
 
 void FallingWallManager::Update()
@@ -67,7 +69,12 @@ bool FallingWallManager::HitMesh(shared_ptr<ModelBase>& player, shared_ptr<Model
 	return true;
 }
 
-shared_ptr<ModelBase> FallingWallManager::GetFallingWall()
+shared_ptr<ModelBase> FallingWallManager::GetCollider()
 {
 	return m_collider;
+}
+
+shared_ptr<ModelBase> FallingWallManager::GetFallingWall()
+{
+	return m_fallingWall;
 }

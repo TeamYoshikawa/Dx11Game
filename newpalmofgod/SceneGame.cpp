@@ -208,7 +208,7 @@ bool SceneGame::Updater(){
 		m_player->SetState(PlayerBase::ePlayerMoveState::eDamage);
 	}
 
-	if (m_player->HitMesh(m_fallwall->GetFallingWall().get()))
+	if (m_player->HitMesh(m_fallwall->GetCollider().get()))
 	{
 		m_player->SetState(PlayerBase::ePlayerMoveState::eDamage);
 	}
