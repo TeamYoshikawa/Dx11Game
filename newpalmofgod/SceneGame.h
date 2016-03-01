@@ -56,6 +56,8 @@ private:
 	
 	std::shared_ptr<aetherClass::Skybox> m_skybox;
 
+	std::shared_ptr<aetherClass::Texture> m_texture;
+
 	//ƒ‰ƒCƒg
 	std::shared_ptr<LightManager> m_lightmanager;
 	std::shared_ptr<aetherClass::Light>m_light;

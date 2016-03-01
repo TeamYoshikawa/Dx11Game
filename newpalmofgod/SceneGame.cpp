@@ -42,14 +42,15 @@ bool SceneGame::Initialize()
 	m_sound->SetValume(-3000);
 	m_sound->PlayToLoop();
 
-	m_texture = std::make_shared<Texture>();
-	m_texture->Load("SkyBoxTexture/night.png");
+	Texture *skytexture;
 
-	// スカイボックスの作成
-	m_skybox = std::make_shared<aetherClass::Skybox>();
+	skytexture = new Texture;
+	skytexture->Load("skybox/night.png");
+
+	m_skybox = std::make_shared<Skybox>();
 	m_skybox->Initialize();
 	m_skybox->SetCamera(m_camera.get());
-	m_skybox->SetTexture(m_texture.get());
+	m_skybox->SetTexture(skytexture);
 
 	// シェーダーの詳細情報の設定
 	ShaderDesc textureDesc;
@@ -185,6 +186,11 @@ bool SceneGame::Updater(){
 
 	//ライト
 	m_lightmanager->Update();
+
+
+	//skybox
+	m_skybox->GetTransform()._rotation._y += 0.05;
+
 
 	//UI
 	m_ui->Set(m_player->LifeGet());
