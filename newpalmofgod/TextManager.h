@@ -7,6 +7,7 @@
 #include <Text.h>
 #include <Rectangle2D.h>
 #include <Texture.h>
+#include "GameSound.h"
 
 class TextManager
 {
@@ -26,6 +27,8 @@ private:
 	aetherClass::ShaderBase  *m_color;
 	aetherClass::Rectangle2D *m_background;
 	aetherClass::Texture *m_texture;
+	aetherClass::GameSound *m_rock;
+	aetherClass::GameSound *m_spear;
 
 	bool m_isRender;	//レンダーするかどうか
 	int m_id;	//ナビゲーションのID
