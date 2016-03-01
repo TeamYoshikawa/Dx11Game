@@ -45,8 +45,18 @@ bool WallManager::Initialize(ViewCamera* camera){
 	m_HitWall[1]->GetTransform()._scale = Vector3(1610.0f, 300.0f, 10.0f);
 
 	//スタートすぐ後ろ
-	m_HitWall[14]->GetTransform()._translation = Vector3(400.0f, 100.0f, 10.0f);
-	m_HitWall[14]->GetTransform()._scale = Vector3(600.0f, 300.0f, 10.0f);
+	m_HitWall[14]->GetTransform()._translation = Vector3(14.0f, 100.0f, 10.0f);
+	m_HitWall[14]->GetTransform()._scale = Vector3(180.0f, 300.0f, 10.0f);
+
+	m_HitWall[18]->GetTransform()._translation = Vector3(800.0f, 100.0f, 10.0f);
+	m_HitWall[18]->GetTransform()._scale = Vector3(300.0f, 300.0f, 10.0f);
+
+	m_HitWall[19]->GetTransform()._translation = Vector3(400.0f, 275.0f, 10.0f);
+	m_HitWall[19]->GetTransform()._scale = Vector3(600.0f, 300.0f, 10.0f);
+
+
+	m_HitWall[20]->GetTransform()._translation = Vector3(400.0f, -200.0f, 10.0f);
+	m_HitWall[20]->GetTransform()._scale = Vector3(600.0f, 40.0f, 10.0f);
 
 	//スタート左の壁
 	m_HitWall[15]->GetTransform()._translation = Vector3(1000.0f, 100.0f, 70.0f);
