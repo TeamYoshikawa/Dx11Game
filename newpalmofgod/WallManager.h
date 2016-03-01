@@ -12,7 +12,7 @@
 #include <ViewCamera.h>
 #include <stdio.h>
 
-#define r_max 17
+#define r_max 18
 
 class WallManager
 

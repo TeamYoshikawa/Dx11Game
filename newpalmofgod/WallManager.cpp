@@ -53,6 +53,11 @@ bool WallManager::Initialize(ViewCamera* camera){
 	m_HitWall[15]->GetTransform()._scale = Vector3(520.0f, 300.0f, 30.0f);
 	m_HitWall[15]->GetTransform()._rotation._y = 90;
 
+	//ª‚Ì•Ç‚Ì‘Î‹ÇˆÊ’u‚É‚¢‚é•Ç
+	m_HitWall[17]->GetTransform()._translation = Vector3(1000.0f, 100.0f, 870.0f);
+	m_HitWall[17]->GetTransform()._scale = Vector3(80.0f, 300.0f, 30.0f);
+	m_HitWall[17]->GetTransform()._rotation._y = 90;
+
 	//ŽŸ‚Ì•”‰®Œã‚ë
 	m_HitWall[2]->GetTransform()._translation = Vector3(2200.0f, 100.0f, 310.0f);
 	m_HitWall[2]->GetTransform()._scale = Vector3(1200.0f, 300.0f, 10.0f);
@@ -108,7 +113,7 @@ bool WallManager::Initialize(ViewCamera* camera){
 	m_HitWall[11]->GetTransform()._scale = Vector3(1000.0f, 300.0f, 10.0f);
 
 	//ƒS[ƒ‹‚Ì•Ç
-	m_HitWall[12]->GetTransform()._translation = Vector3(7150.0f, 100.0f, 920.0f);
+	m_HitWall[12]->GetTransform()._translation = Vector3(7150.0f, 100.0f, 910.0f);
 	m_HitWall[12]->GetTransform()._scale = Vector3(1250.0f, 300.0f, 10.0f);
 
 	

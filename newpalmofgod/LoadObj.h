@@ -7,6 +7,7 @@
 #include "Light.h"
 #include <iostream>
 #include "PixelShader.h"
+#include "SpriteBase.h"
 class LoadObj:public aetherClass::LoadScreen
 {
 	
@@ -21,8 +22,12 @@ public:
 private:
 	std::shared_ptr<aetherClass::ViewCamera> m_camera;
 	std::shared_ptr<aetherClass::ModelBase>load;
+	std::shared_ptr<aetherClass::SpriteBase>load02;
 	std::shared_ptr<aetherClass::ShaderBase> m_pixelShader;
+	std::shared_ptr<aetherClass::SpriteBase> feed_out;
+	std::shared_ptr<aetherClass::SpriteBase> feed_in;
 	std::shared_ptr<LightManager> m_lightmanager;
+	bool m_pressFlag;
 private:
 	void SceneChange();
 	void InitPixelShader();
