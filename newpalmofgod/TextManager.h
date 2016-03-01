@@ -5,6 +5,8 @@
 #include <memory>
 #include <Font.h>
 #include <Text.h>
+#include <Rectangle2D.h>
+#include <Texture.h>
 
 class TextManager
 {
@@ -15,13 +17,15 @@ public:
 
 	bool Initialize(aetherClass::ViewCamera* camera);
 	void SetID(int);
-	void Render();
+	void Render(aetherClass::ShaderBase *);
+	void SetTime();
 
 private:
 	aetherClass::Text *m_text;
 	aetherClass::Font *m_font;
 	aetherClass::ShaderBase  *m_color;
-
+	aetherClass::Rectangle2D *m_background;
+	aetherClass::Texture *m_texture;
 
 	bool m_isRender;	//レンダーするかどうか
 	int m_id;	//ナビゲーションのID

@@ -1,5 +1,4 @@
 #include "SceneGame.h"
-#include "Texture.h"
 #include <GameController.h>
 #include <iostream>
 #include <PixelShader.h>
@@ -43,6 +42,15 @@ bool SceneGame::Initialize()
 	m_sound->SetValume(-3000);
 	m_sound->PlayToLoop();
 
+	m_texture = std::make_shared<Texture>();
+	m_texture->Load("SkyBoxTexture/night.png");
+
+	// スカイボックスの作成
+	m_skybox = std::make_shared<aetherClass::Skybox>();
+	m_skybox->Initialize();
+	m_skybox->SetCamera(m_camera.get());
+	m_skybox->SetTexture(m_texture.get());
+
 	// シェーダーの詳細情報の設定
 	ShaderDesc textureDesc;
 
@@ -64,24 +72,9 @@ bool SceneGame::Initialize()
 	material._specularPower = 4;
 
 
-	
-
 	// ライトの作成
 	m_lightmanager = std::make_shared<LightManager>();
 	m_lightmanager->Initialize();
-
-
-
-	Texture *skytexture;
-
-	skytexture = new Texture;
-	skytexture->Load("skybox/night.png");
-
-	m_skybox = std::make_shared<Skybox>();
-	m_skybox->Initialize();
-	m_skybox->SetCamera(m_camera.get());
-	m_skybox->SetTexture(skytexture);
-
 
 	// プレイヤーの作成
 	m_player = std::make_shared<PlayerManager>();
@@ -174,6 +167,7 @@ bool SceneGame::Updater(){
 		m_naviState=eNaviState::eNull;
 	}
 
+
 	//壁との当たり判定
 	bool IsHitWall = false;
 	for (int i = 0; i < m_wall->WallCnt(); i++){
@@ -240,8 +234,6 @@ bool SceneGame::Updater(){
 	m_fallwall->Update();
 	//}
 
-	m_skybox->GetTransform()._rotation._y +=0.05;
-
 
 	//タイトルに戻る
 	if (GameController::GetKey().IsKeyDown(DIK_R)){
@@ -281,8 +273,9 @@ void SceneGame::Render(){
 	m_navigation->Render(m_pixelShader);
 
 	//テキスト
-	m_text->Render();
+	m_text->Render(m_pixelShader.get());
 
+	//スカイボックス
 	m_skybox->Render(m_pixelShader.get());
 
 	return;
