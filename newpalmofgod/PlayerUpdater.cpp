@@ -118,9 +118,9 @@ void PlayerUpdater::Move(const std::shared_ptr<FbxModel>& playerObject, std::sha
 		cmx = m_currentPos._x;
 		cmy = m_currentPos._y;
 		cmz = m_currentPos._z;
-		camera->Translation() = m_currentPos;
-		playerObject->GetTransform()._translation._x = camera->Translation()._x - 10;
-		playerObject->GetTransform()._translation._z = camera->Translation()._z;
+		camera->property._translation = m_currentPos;
+		playerObject->property._transform._translation._x = camera->property._translation._x - 10;
+		playerObject->property._transform._translation._z = camera->property._translation._z;
 		std::cout << "•Ç‚É“–‚½‚Á‚½‚æ" << std::endl;
 	}
 	else
@@ -214,12 +214,13 @@ void PlayerUpdater::Move(const std::shared_ptr<FbxModel>& playerObject, std::sha
 	//}
 
 	/* ‚¢‚Ç[*/
-	camera->Translation() = m_nextPos;
-	camera->Rotation() = Vector3(cmrx, cmry, 1);
+	camera->property._translation = m_nextPos;
+	camera->property._rotation= Vector3(cmrx, cmry, 1);
 
 	//// ƒ‚ƒfƒ‹‚Æ˜A“®
-	playerObject->GetTransform()._translation._x = camera->Translation()._x - 10;
-	playerObject->GetTransform()._translation._z = camera->Translation()._z;
+
+	playerObject->property._transform._translation._x =camera->property._translation._x - 10;
+	playerObject->property._transform._translation._z = camera->property._translation._z;
 
 
 

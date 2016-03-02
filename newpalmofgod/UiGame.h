@@ -6,7 +6,7 @@
 
 #include <Cube.h>
 #include <Sphere.h>
-#include <Rectangle.h>
+#include <SpriteBase.h>
 #include <memory>
 #include<iostream>
 
@@ -26,15 +26,8 @@ private:
 
 	int u_flag;
 
-	std::shared_ptr<aetherClass::ModelBase>h_ui;
-	std::shared_ptr<aetherClass::ModelBase>goal;
-	std::shared_ptr<aetherClass::ModelBase>start;
-	std::shared_ptr<aetherClass::ModelBase>road;
-	std::shared_ptr<aetherClass::ModelBase>location;
-	
-	std::shared_ptr<aetherClass::ModelBase>heart[3];
-
-	std::shared_ptr<aetherClass::ViewCamera>m_uicamera;
+	std::shared_ptr<aetherClass::SpriteBase>h_ui;
+	std::shared_ptr<aetherClass::SpriteBase>heart[3];
 
 	std::shared_ptr<PlayerManager>m_player;
 

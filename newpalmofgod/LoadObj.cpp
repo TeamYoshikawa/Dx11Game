@@ -1,5 +1,5 @@
 #include "LoadObj.h"
-#include <Rectangle.h>
+#include <Rectangle3D.h>
 #include<Rectangle2D.h>
 #include "GameScene.h"
 using namespace aetherClass;
@@ -23,18 +23,18 @@ void LoadObj::Initialize()
 	InitPixelShader();
 	
 
-	load = std::make_shared<aetherClass::Rectangle>();
+	load = std::make_shared<aetherClass::Rectangle3D>();
 	load->Initialize();
 
 	Texture *load_tex = new Texture();
 	load_tex->Load("image/Load.jpg");
 	load->SetTexture(load_tex);
 	load->SetCamera(m_camera.get());
-	load->GetTransform()._translation = m_camera->Translation();
-	load->GetTransform()._translation._z = 270;
-	load->GetTransform()._rotation._x = 180;
-	load->GetTransform()._scale._x = 100;
-	load->GetTransform()._scale._y = 73;
+	load->property._transform._translation = m_camera->property._translation;
+	load->property._transform._translation._z = 270;
+	load->property._transform._rotation._x = 180;
+	load->property._transform._scale._x = 100;
+	load->property._transform._scale._y = 73;
 
 
 
@@ -84,8 +84,8 @@ void LoadObj::InitPixelShader()
 void LoadObj::InitCamera()
 {
 	m_camera = std::make_shared<ViewCamera>();
-	m_camera->Translation() = Vector3(-260, -380, 447);
-	m_camera->Rotation() = Vector3(-180.0f, 0.0f, 0.0f);
+	m_camera->property._translation = Vector3(-260, -380, 447);
+	m_camera->property._rotation = Vector3(-180.0f, 0.0f, 0.0f);
 }
 
 

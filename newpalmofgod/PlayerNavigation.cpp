@@ -39,7 +39,7 @@ void PlayerNavigation::Initialize(std::shared_ptr<ViewCamera> camera){
 	m_navigationBox->Initialize();
 	m_navigationBox->SetTexture(m_texture.get());
 	m_navigationBox->SetCamera(camera.get());
-	m_navigationBox->GetTransform()._scale *= 3;
+	m_navigationBox->property._transform._scale *= 3;
 	
 	// 配列の要素数を求める
 	m_navigationArrayElement = sizeof(m_navigationBoxPosition) / sizeof(m_navigationBoxPosition[0]);
@@ -48,8 +48,8 @@ void PlayerNavigation::Initialize(std::shared_ptr<ViewCamera> camera){
 
 	// 初期位置は配列の0番目
 
-	m_navigationBox->GetTransform()._translation = initilaizePosition;
-	m_navigationBox->GetTransform()._rotation = Vector3(80, 80, 80);
+	m_navigationBox->property._transform._translation = initilaizePosition;
+	m_navigationBox->property._transform._rotation = Vector3(80, 80, 80);
 	
 	m_navigationID = 0;
 	return;
@@ -68,7 +68,7 @@ void PlayerNavigation::NextSet(){
 
 std::shared_ptr<Cube> PlayerNavigation::GetNavigationBox(){
 
-	m_navigationBox->GetTransform()._translation = m_navigationBoxPosition[m_navigationID];
+	m_navigationBox->property._transform._translation = m_navigationBoxPosition[m_navigationID];
 	return m_navigationBox;
 }
 

@@ -34,13 +34,13 @@ bool SceneEnd::Initialize()
 
 	// カメラの初期化
 	m_camera = std::make_shared<ViewCamera>();
-	m_camera->Translation() = Vector3(-260, -350, 447);
-	m_camera->Rotation() = Vector3(-160.0f, 0.0f, 1.0f);
+	m_camera->property._translation = Vector3(-260, -350, 447);
+	m_camera->property._rotation = Vector3(-160.0f, 0.0f, 1.0f);
 
 	// ライトの作成
 	m_lightmanager = std::make_shared<LightManager>();
 	m_lightmanager->Initialize();
-	m_lightmanager->GetLight()->Translation() = m_camera->Translation();
+	m_lightmanager->GetLight()->property._translation= m_camera->property._translation;
 
 	// テクスチャの初期化
 	Texture *gameover_tex = new Texture();/*press any hogehoge*/
@@ -58,7 +58,7 @@ bool SceneEnd::Initialize()
 	// フェードインの初期化
 	feedin = std::make_shared<aetherClass::Rectangle2D>();
 	feedin->Initialize();
-	feedin->property._transform._translation = m_camera->Translation();
+	feedin->property._transform._translation = m_camera->property._translation;
 	feedin->property._transform._translation._z -= 10;
 	feedin->property._transform._translation._y += 1000;
 	feedin->property._color._alpha = 1;
@@ -92,9 +92,8 @@ void SceneEnd::Finalize()
 
 void SceneEnd::SceneChange()
 {
-	if (GameController::GetKey().IsKeyDown(DIK_R)){
-		std::cout<<"yobareta";
-		ChangeScene("Title", false);
+	if (GameController::GetKey().IsKeyDown(DIK_SPACE)){
+		ChangeScene("Title", LoadState::eUnuse,LoadWaitState::eUnuse);
 	}
 }
 
@@ -102,7 +101,7 @@ bool SceneEnd::TransitionIn()
 {
 	m_camera->Render();
 
-	feedin->property._color._alpha -= 0.0007;
+	feedin->property._color._alpha -= 0.007;
 	feedin->Render(m_shader.get());
 
 	if (feedin->property._color._alpha < 0)

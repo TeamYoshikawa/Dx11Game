@@ -23,15 +23,14 @@ bool PlayerManager::Initialize(){//const std::shared_ptr<ViewCamera> camera){
 
 	// プレイヤーが持つカメラの初期化
 	m_camera = std::make_shared<ViewCamera>();
-	m_camera->Translation() = Vector3(-100, -8, 692);
-	m_camera->Rotation() = Vector3(-170.0f, 178.0f, 1.0f);
+	m_camera->property._translation = Vector3(-100, -8, 692);
+	m_camera->property._rotation = Vector3(-170.0f, 178.0f, 1.0f);
 
 	m_playerObject = std::make_shared<FbxModel>();
 	m_playerObject->LoadFBX("ModelData/models/player5.fbx", eAxisSystem::eAxisOpenGL);
 	m_playerObject->SetCamera(m_camera.get());
-	m_playerObject->GetTransform()._translation = Vector3(-50.0f, 105.0f, 670.0f);
-	m_playerObject->GetTransform()._scale = Vector3(1.3f, -1.3f, 1.3f);
-
+	m_playerObject->property._transform._translation = Vector3(-50.0f, 105.0f, 670.0f);
+	m_playerObject->property._transform._scale = Vector3(1.3f, -1.3f, 1.3f);
 
 	m_collideTexture = std::make_shared<Texture>();
 	m_collideTexture->Load("ModelData/textures/Chips_Cover.jpg");
@@ -39,9 +38,9 @@ bool PlayerManager::Initialize(){//const std::shared_ptr<ViewCamera> camera){
 	m_collideBox->Initialize();
 	m_collideBox->SetTexture(m_collideTexture.get());
 	m_collideBox->SetCamera(m_camera.get());
-	const Vector3 translation = m_playerObject->GetTransform()._translation;
-	m_collideBox->GetTransform()._translation = translation;
-	m_collideBox->GetTransform()._scale = Vector3(70.0f, 100.0f, 20.0f);
+	const Vector3 translation = m_playerObject->property._transform._translation;
+	m_collideBox->property._transform._translation = translation;
+	m_collideBox->property._transform._scale = Vector3(70.0f, 100.0f, 20.0f);
 
 	ShaderDesc desc;
 	desc._vertex._srcFile = L"Shader/VertexShaderBase.hlsl";
@@ -84,10 +83,10 @@ void PlayerManager::SetState(PlayerBase::ePlayerMoveState state){
 
 void PlayerManager::UpdateColliderBox(){
 	// コリジョンボックスがプレイヤーを囲むようにする
-	const Vector3 translation = m_playerObject->GetTransform()._translation;
-	m_collideBox->GetTransform()._translation = translation;
-	const Vector3 rotation = m_playerObject->GetTransform()._rotation;
-	m_collideBox->GetTransform()._rotation = rotation;
+	const Vector3 translation = m_playerObject->property._transform._translation;
+	m_collideBox->property._transform._translation = translation;
+	const Vector3 rotation = m_playerObject->property._transform._rotation;
+	m_collideBox->property._transform._rotation = rotation;
 }
 
 

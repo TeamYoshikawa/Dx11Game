@@ -24,14 +24,14 @@ bool SpearManager::Initialize(ViewCamera *camera)
 		m_spear[i]->SetCamera(camera);
 		m_spear[i]->SetTexture(m_spearTexture.get());
 		
-		m_spear[i]->GetTransform()._scale = Vector3(15.0f, 100.0f, 15.0f);
-		m_spear[i]->GetTransform()._rotation = Vector3(90.0f, 0.0f, 0.0f);
+		m_spear[i]->property._transform._scale = Vector3(15.0f, 100.0f, 15.0f);
+		m_spear[i]->property._transform._rotation = Vector3(90.0f, 0.0f, 0.0f);
 
 	}
 	
-	m_spear[0]->GetTransform()._translation = Vector3(8622.0f, 100.0f, 3212.0f);
-	m_spear[1]->GetTransform()._translation = Vector3(8692.0f, 100.0f, 3212.0f);
-	m_spear[2]->GetTransform()._translation = Vector3(8762.0f, 100.0f, 3212.0f);
+	m_spear[0]->property._transform._translation = Vector3(8622.0f, 100.0f, 3212.0f);
+	m_spear[1]->property._transform._translation = Vector3(8692.0f, 100.0f, 3212.0f);
+	m_spear[2]->property._transform._translation = Vector3(8762.0f, 100.0f, 3212.0f);
 
 	m_spearRender = std::make_shared<SpearRender>();
 
@@ -46,8 +46,8 @@ bool SpearManager::Initialize(ViewCamera *camera)
 	}
 	m_switch->SetCamera(camera);
 	m_switch->SetTexture(m_switchTexture.get());
-	m_switch->GetTransform()._translation = Vector3(8722.0f, -80.0f, 954.0f);
-	m_switch->GetTransform()._scale = Vector3(250.0f, 200.0f, 50.0f);
+	m_switch->property._transform._translation = Vector3(8722.0f, -80.0f, 954.0f);
+	m_switch->property._transform._scale = Vector3(250.0f, 200.0f, 50.0f);
 
 	m_spearEvent = eSpearEvent::eChecking;
 	return true;

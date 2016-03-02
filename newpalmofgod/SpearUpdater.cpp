@@ -42,15 +42,15 @@ void SpearUpdater::ButtonOn(ModelBase* spear)
 {
 	if (GameController::GetKey().IsKeyDown(DIK_SPACE))m_event = eEvent::eThrow;
 	if (m_event == eEvent::eNormal){
-		std::cout << spear->GetTransform()._translation._z << std::endl;
-		spear->GetTransform()._translation._z -= 30.0f;
+		std::cout << spear->property._transform._translation._z << std::endl;
+		spear->property._transform._translation._z -= 30.0f;
 	}
 	else if(m_event==eEvent::eThrow){
-		spear->GetTransform()._translation._z -= 5.0f;
+		spear->property._transform._translation._z -= 5.0f;
 		m_countDown--;
 	}
 	if (m_countDown <= 0)m_event = eEvent::eNormal;
-	if (spear->GetTransform()._translation._z < -3000){
+	if (spear->property._transform._translation._z < -3000){
 		spear_flag = SET;
 	}
 	

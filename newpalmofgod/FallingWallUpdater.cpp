@@ -18,11 +18,11 @@ void FallingWallUpdater::Update(ModelBase* fallingWall)
 	static float cnt = 1;
 	static float interval = 120;
 
-	if (fallingWall->GetTransform()._translation._y >= -30)
+	if (fallingWall->property._transform._translation._y >= -30)
 	{
 		m_eState = eState::eMoveUp;
 	}
-	if (fallingWall->GetTransform()._translation._y <= -470)
+	if (fallingWall->property._transform._translation._y <= -470)
 	{
 		m_eState = eState::eInterval;
 	}
@@ -39,10 +39,10 @@ void FallingWallUpdater::Update(ModelBase* fallingWall)
 		interval--;
 		break;
 	case eState::eMoveDown:
-		fallingWall->GetTransform()._translation._y += gravity * cnt;
+		fallingWall->property._transform._translation._y += gravity * cnt;
 		break;
 	case eState::eMoveUp:
-		fallingWall->GetTransform()._translation._y -= 3;
+		fallingWall->property._transform._translation._y -= 3;
 		break;
 	}
 }

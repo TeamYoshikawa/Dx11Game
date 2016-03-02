@@ -24,11 +24,11 @@ void LightManager::Initialize()
 	m_camera = std::make_shared<ViewCamera>();
 	// Light‚Ì‰Šú‰»
 	m_light = std::make_shared<Light>();
-	m_light->Translation() = m_lightpropaty[0].m_changeLightTranslationArray;
+	m_light->property._translation = m_lightpropaty[0].m_changeLightTranslationArray;
 	m_lightID = 0;
-	m_light->Translation() = m_camera->Translation();
-	m_camera->Translation() = Vector3(575, -442, 447);
-	m_light->Translation()._y -= 100;
+	m_light->property._translation = m_camera->property._translation;
+	m_camera->property._translation = Vector3(575, -442, 447);
+	m_light->property._translation._y -= 100;
 
 	// MaterialShader‚Ì‰Šú‰»
 	ShaderDesc desc;
@@ -44,14 +44,14 @@ void LightManager::Initialize()
 	m_cubed = std::make_shared<Cube>();
 	m_cubed->Initialize();
 	m_cubed->SetCamera(m_camera.get());
-	m_cubed->GetTransform()._scale = 10;
-	m_cubed->GetTransform()._translation = m_camera->Translation();
+	m_cubed->property._transform._scale = 10;
+	m_cubed->property._transform._translation = m_camera->property._translation;
 	Material material;
-	material._ambient._color = Color(1, 0, 0,1);
-	material._diffuse._color = Color(1, 0, 0, 1);
+	material._ambient._color = Color(1, 0, 1,1);
+	material._diffuse._color = Color(1, 0, 1, 1);
 	material._specular._color = Color(1, 0, 0, 1);
 	material._specularPower = 4;// _color = Color(1, 0, 0, 1);
-	m_cubed->GetMaterial() = material;
+	m_cubed->property._material = material;
 }
 
 void LightManager::Render()
@@ -67,31 +67,31 @@ void LightManager::Update()
 
 		if (GameController::GetKey().IsKeyDown(DIK_RIGHT))
 		{
-			m_light->Translation()._x += 10;
+			m_light->property._translation._x += 10;
 		}
 		if (GameController::GetKey().IsKeyDown(DIK_LEFT))
 		{
-			m_light->Translation()._x -= 10;
+			m_light->property._translation._x -= 10;
 		}
 		if (GameController::GetKey().IsKeyDown(DIK_UP))
 		{
-			m_light->Translation()._z -= 10;
+			m_light->property._translation._z -= 10;
 		}
 		if (GameController::GetKey().IsKeyDown(DIK_DOWN))
 		{
-			m_light->Translation()._z += 10;
+			m_light->property._translation._z += 10;
 		}
-		m_cubed->GetTransform()._translation = m_light->Translation();
+		m_cubed->property._transform._translation = m_light->property._translation;
 		/*
-		std::cout << "X : " << m_cubed->GetTransform()._translation._x << 
-			" Y : " << m_cubed->GetTransform()._translation._y
-			<< " Z : " << m_cubed->GetTransform()._translation._z << std::endl;
+		std::cout << "X : " << m_cubed->property._transform._translation._x << 
+			" Y : " << m_cubed->property._transform._translation._y
+			<< " Z : " << m_cubed->property._transform._translation._z << std::endl;
 			*/
 }
 
 void LightManager::ChangeLight(int id)
 {
-	m_light->Translation() = m_lightpropaty[m_lightID].m_changeLightTranslationArray;
+	m_light->property._translation = m_lightpropaty[m_lightID].m_changeLightTranslationArray;
 }
 
 std::shared_ptr<Light> LightManager::GetLight(){

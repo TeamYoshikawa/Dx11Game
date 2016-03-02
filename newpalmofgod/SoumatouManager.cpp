@@ -41,7 +41,7 @@ bool SoumatouManager::Initialize(){
 	m_soumatou = std::make_shared<Rectangle2D>();
 	m_soumatou->Initialize();
 	m_soumatou->property._transform._translation = Vector3(0.0f, 0.0f, 0.0f);
-	m_soumatou->property._color = Color(0.0f, 0.0f, 1.0f, 1.0f);
+	m_soumatou->property._color = Color(0.7f, 0.7f, 0.7f,0.7f);
 	m_soumatou->property._transform._scale._x = 800;
 	m_soumatou->property._transform._scale._y = 600;
 	m_soumatou->SetTexture(m_soumaTexture.get());

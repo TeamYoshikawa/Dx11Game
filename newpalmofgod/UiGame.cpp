@@ -1,4 +1,5 @@
  #include "UiGame.h"
+#include "Rectangle2D.h"
 
 using namespace aetherClass;
 
@@ -10,23 +11,13 @@ bool UiGame::Initialize(){
 	
 	h_max = 3;
 
-	location = std::make_shared<aetherClass::Rectangle>();
-	goal = std::make_shared<aetherClass::Rectangle>();
-	start = std::make_shared<aetherClass::Rectangle>();
-	road = std::make_shared<aetherClass::Rectangle>();
-	m_uicamera = std::make_shared<ViewCamera>();
-	h_ui = std::make_shared<Cube>();
+	
+	h_ui = std::make_shared<aetherClass::Rectangle2D>();
 
 	for (i = 0; i < h_max; i++){
-		heart[i] = std::make_shared<aetherClass::Rectangle>();
+		heart[i] = std::make_shared<aetherClass::Rectangle2D>();
 	}
 	
-
-	location->Initialize();
-	goal->Initialize();
-	start->Initialize();
-	road->Initialize();
-
 	for (i = 0; i < h_max; i++){
 		heart[i]->Initialize();
 	}
@@ -53,58 +44,26 @@ bool UiGame::Initialize(){
 	
 
 	heart_tex->Load("Texture/Heart.png");	//画像の読み込み
-	start_tex->Load("Texture/goal.png");	//画像の読み込み
-	goal_tex->Load("Texture/start.png");	//画像の読み込み
-	location_tex->Load("Texture/location.png");	//画像の読み込み
-	road_tex->Load("Texture/road.png");	//画像の読み込み
-	h_ui_tex->Load("Texture/h_ui.png");
+	h_ui_tex->Load("Texture/UI_ba-3.png");
 
 	
-	location->SetTexture(location_tex);
-	start->SetTexture(start_tex);
-	goal->SetTexture(goal_tex);
-	road->SetTexture(road_tex);
+	
 	for (i = 0; i < h_max; i++){
 		heart[i]->SetTexture(heart_tex);		//テクスチャーのセット
 	}
 	h_ui->SetTexture(h_ui_tex);
 
-	m_uicamera->Translation() = Vector3(900.0f, 900.0f, -900.0f);
-
-	h_ui->GetTransform()._scale = Vector3(4.0f, 1.0f, 0.0f);
-	h_ui->GetTransform()._translation = Vector3(-19.0f, 16.0f, 45.0f) + m_uicamera->Translation();
-	h_ui->GetTransform()._rotation = Vector3(0.0f, 0.0f, 0.0f);
-
-	location->GetTransform()._scale = Vector3(1.0f, 1.0f, 0.0f);
-	location->GetTransform()._translation = Vector3(22.5f, -8.2f, 45.0f) + m_uicamera->Translation();
-	location->GetTransform()._rotation = Vector3(0.0f, 0.0f, 0.0f);
-
-	goal->GetTransform()._scale = Vector3(1.4f, 1.4f, 0.0f);
-	goal->GetTransform()._translation = Vector3(22.5f, 10.0f, 45.0f) + m_uicamera->Translation();
-	goal->GetTransform()._rotation = Vector3(0.0f, 0.0f, 0.0f);
-
-	start->GetTransform()._scale = Vector3(1.4f, 1.4f, 0.0f);
-	start->GetTransform()._translation = Vector3(22.5f, -10.0f, 45.0f) + m_uicamera->Translation();
-	start->GetTransform()._rotation = Vector3(0.0f, 0.0f, 0.0f);
-
-	road->GetTransform()._scale = Vector3(1.3f, 9.0f, 0.0f);
-	road->GetTransform()._translation = Vector3(22.5f, -0.0f, 45.0f) + m_uicamera->Translation();
-	road->GetTransform()._rotation = Vector3(0.0f, 0.0f, 0.0f);
-
-	for (i = 0; i < h_max; i++){
-		heart[i]->GetTransform()._scale = Vector3(0.6f, 0.6f, 0.0f);
-		heart[i]->GetTransform()._translation = Vector3(-21.5f +i* 2.5 , 16.0f, 45.0f) + m_uicamera->Translation();
-	}
 
 	
-	road->SetCamera(m_uicamera.get());
-	location->SetCamera(m_uicamera.get());
-	goal->SetCamera(m_uicamera.get());
-	start->SetCamera(m_uicamera.get());
+	h_ui->property._transform._translation = Vector3(10.0f, 10.0f, 0.1f);
+	h_ui->property._transform._scale = Vector3(250.0f, 70.0f, 0.0f);
+	h_ui->property._transform._rotation = Vector3(0.0f, 0.0f, 0.0f);
+
+	
 	for (i = 0; i < h_max; i++){
-		heart[i]->SetCamera(m_uicamera.get());
+		heart[i]->property._transform._scale = Vector3(40.0f, 40.0f, 0.0f);
+		heart[i]->property._transform._translation = Vector3(24.0f + i* 90.0, 22.0f, 0.0f);
 	}
-	h_ui->SetCamera(m_uicamera.get());
 
 	return true;
 
@@ -113,16 +72,6 @@ bool UiGame::Initialize(){
 void UiGame::Update()
 {
 	
-	if (location->GetTransform()._translation._y > 908.5f){
-		u_flag = ON;
-	}
-
-
-	if (u_flag == OFF){
-		location->GetTransform()._translation._y += 1.43f;
-	}
-
-
 	return;
 }
 
@@ -147,7 +96,7 @@ int UiGame::Set(int h_player){
 
 void UiGame::Render(){
 
-	m_uicamera->Render();
+	h_ui->Render(m_shader.get());
 
 	for (int i = 0; i < h_max; i++){
 		if (heart[i]){
@@ -155,13 +104,7 @@ void UiGame::Render(){
 		}
 	}
 
-	h_ui->Render(m_shader.get());
-
-	/*location->Render(m_shader.get());
-	start->Render(m_shader.get());
-	goal->Render(m_shader.get());
-	road->Render(m_shader.get());*/
-
+	
 
 	return;
 }

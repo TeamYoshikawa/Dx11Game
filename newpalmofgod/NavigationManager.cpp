@@ -26,20 +26,20 @@ bool NavigationManager::Initialize(ViewCamera* camera){
 		m_naviObj[i].naviid = i;
 	}
 
-	m_naviObj[0].m_navigation->GetTransform()._translation = Vector3(1300.0f, 140.0f, 580.0f);
-	m_naviObj[0].m_navigation->GetTransform()._scale = Vector3(260.0f, 40.0f, 350.0f);
+	m_naviObj[0].m_navigation->property._transform._translation = Vector3(1300.0f, 140.0f, 580.0f);
+	m_naviObj[0].m_navigation->property._transform._scale = Vector3(260.0f, 40.0f, 350.0f);
 
-	m_naviObj[1].m_navigation->GetTransform()._translation = Vector3(2758.0f, 140.0f, 1546.0f);
-	m_naviObj[1].m_navigation->GetTransform()._scale = Vector3(260.0f, 20.0f, 180.0f);
+	m_naviObj[1].m_navigation->property._transform._translation = Vector3(2758.0f, 140.0f, 1546.0f);
+	m_naviObj[1].m_navigation->property._transform._scale = Vector3(260.0f, 20.0f, 180.0f);
 
-	m_naviObj[2].m_navigation->GetTransform()._translation = Vector3(5244.0f, 140.0f, 2225.0f);
-	m_naviObj[2].m_navigation->GetTransform()._scale = Vector3(350.0f, 20.0f, 310.0f);
+	m_naviObj[2].m_navigation->property._transform._translation = Vector3(5244.0f, 140.0f, 2225.0f);
+	m_naviObj[2].m_navigation->property._transform._scale = Vector3(350.0f, 20.0f, 310.0f);
 
-	m_naviObj[3].m_navigation->GetTransform()._translation = Vector3(5630.0f, 140.0f, 667.0f);
-	m_naviObj[3].m_navigation->GetTransform()._scale = Vector3(260.0f, 20.0f, 410.0f);
+	m_naviObj[3].m_navigation->property._transform._translation = Vector3(5630.0f, 140.0f, 667.0f);
+	m_naviObj[3].m_navigation->property._transform._scale = Vector3(260.0f, 20.0f, 410.0f);
 
-	m_naviObj[4].m_navigation->GetTransform()._translation = Vector3(8645.0f, 140.0f, 697.0f);
-	m_naviObj[4].m_navigation->GetTransform()._scale = Vector3(260.0f, 20.0f, 380.0f); 
+	m_naviObj[4].m_navigation->property._transform._translation = Vector3(8645.0f, 140.0f, 697.0f);
+	m_naviObj[4].m_navigation->property._transform._scale = Vector3(260.0f, 20.0f, 380.0f); 
 
 	return true;
 }

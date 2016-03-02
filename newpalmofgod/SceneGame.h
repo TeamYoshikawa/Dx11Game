@@ -57,9 +57,12 @@ private:
 	eNaviState m_naviState;
 
 	
+	//skybox
 	std::shared_ptr<aetherClass::Skybox> m_skybox;
-
 	std::shared_ptr<aetherClass::Texture> m_texture;
+
+	//fadein
+	std::shared_ptr<aetherClass::SpriteBase>fadein;
 
 	//ライト
 	std::shared_ptr<LightManager> m_lightmanager;
@@ -91,7 +94,9 @@ private:
 	//シェーダー
 	std::shared_ptr<aetherClass::ShaderBase> m_pixelShader;
 	std::shared_ptr<aetherClass::ShaderBase> m_shader;
+	std::shared_ptr<aetherClass::ShaderBase> m_alphashader;
 	std::shared_ptr<aetherClass::MaterialShader> m_materialShader;
+
 
 	//サウンド
 	std::shared_ptr<aetherClass::GameSound> m_sound;

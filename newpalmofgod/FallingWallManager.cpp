@@ -27,8 +27,8 @@ bool FallingWallManager::Initialize(ViewCamera* camera)
 	m_fallingWall->SetCamera(camera);
 	m_fallingWall->SetTexture(m_texture.get());
 
-	m_fallingWall->GetTransform()._scale = Vector3(m_size,m_size,m_size);
-	m_fallingWall->GetTransform()._translation = Vector3(8700,-8,1200);
+	m_fallingWall->property._transform._scale = Vector3(m_size,m_size,m_size);
+	m_fallingWall->property._transform._translation = Vector3(8700,-8,1200);
 
 
 	m_collider = make_shared<Cube>();
@@ -36,8 +36,8 @@ bool FallingWallManager::Initialize(ViewCamera* camera)
 
 	m_collider->SetCamera(camera);
 	m_collider->SetTexture(m_texture.get());
-	m_collider->GetTransform()._scale = Vector3(m_size-10, 1, m_size-10);
-	m_collider->GetTransform()._translation = m_fallingWall->GetTransform()._translation;
+	m_collider->property._transform._scale = Vector3(m_size-10, 1, m_size-10);
+	m_collider->property._transform._translation = m_fallingWall->property._transform._translation;
 
 
 	
@@ -46,11 +46,11 @@ bool FallingWallManager::Initialize(ViewCamera* camera)
 void FallingWallManager::Update()
 {
 	m_updater->Update(m_fallingWall.get());
-	float x = m_fallingWall->GetTransform()._translation._x;
-	float z = m_fallingWall->GetTransform()._translation._z;
-	float y = m_fallingWall->GetTransform()._translation._y + (m_fallingWall->GetTransform()._scale._y);
+	float x = m_fallingWall->property._transform._translation._x;
+	float z = m_fallingWall->property._transform._translation._z;
+	float y = m_fallingWall->property._transform._translation._y + (m_fallingWall->property._transform._scale._y);
 
-	m_collider->GetTransform()._translation = Vector3(x, y, z);
+	m_collider->property._transform._translation = Vector3(x, y, z);
 }
 
 void FallingWallManager::Render(shared_ptr<ShaderBase> shader)

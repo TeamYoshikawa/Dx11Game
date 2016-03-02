@@ -33,10 +33,20 @@ bool SceneGame::Initialize()
 	m_ui = std::make_shared<UiGame>();
 	m_ui->Initialize();
 
+
+	//fadeIn
+	fadein = std::make_shared<aetherClass::Rectangle2D>();
+	fadein->Initialize();
+	fadein->property._transform._translation._z = 0;
+	fadein->property._color._alpha = 0;
+	fadein->property._transform._scale._x = 1000;
+	fadein->property._transform._scale._y = 1000;
+
+
 	// カメラオブジェクトの作成
 	m_camera = std::make_shared<ViewCamera>();
-	m_camera->Translation() = Vector3(-100, -8, 692);
-	m_camera->Rotation() = Vector3(-170.0f, 178.0f, 1.0f);
+	m_camera->property._translation = Vector3(-100, -8, 692);
+	m_camera->property._rotation = Vector3(-170.0f, 178.0f, 1.0f);
 
 
 	//サウンドの作成
@@ -69,6 +79,14 @@ bool SceneGame::Initialize()
 	m_pixelShader = std::make_shared<PixelShader>();
 	m_pixelShader->Initialize(textureDesc, ShaderType::eVertex | ShaderType::ePixel);
 
+
+	//toumei
+	textureDesc._pixel._srcFile = L"Shader/Transparent.ps";
+	textureDesc._pixel._entryName = "ps_main";
+
+	m_alphashader = std::make_shared<PixelShader>();
+	m_alphashader->Initialize(textureDesc, ShaderType::eVertex | ShaderType::ePixel);
+
 	Material material;
 	material._ambient._color = Color(1, 0, 0, 1);
 	material._diffuse._color = Color(1, 0, 0, 1);
@@ -89,7 +107,7 @@ bool SceneGame::Initialize()
 	m_stage = std::make_shared<FbxModel>();
 	m_stage->LoadFBX("ModelData/models/STAGEKANZENBAN.fbx", eAxisSystem::eAxisOpenGL);
 	m_stage->SetCamera(m_camera.get());//m_camera->GetCamera().get());
-	m_stage->GetTransform()._scale = Vector3(1.0f, 1.0f, -1.0f);
+	m_stage->property._transform._scale = Vector3(1.0f, 1.0f, -1.0f);
 
 	m_stage->SetModelMaterialColor(Color(0.0, 0.1, 0.1, 1), eMatrerialType::eAmbient);
 	m_stage->SetModelMaterialColor(Color(0.7, 0.6, 0.6, 0.0), eMatrerialType::eDiffuse);
@@ -134,7 +152,7 @@ bool SceneGame::Initialize()
 	m_materialShader->Initialize(materialDesc, ShaderType::eVertex | ShaderType::ePixel);
 	m_materialShader->SetLight(m_lightmanager->GetLight().get());
 	m_materialShader->SetCamera(m_camera.get());    //m_camera->GetCamera().get());
-	m_lightmanager->GetLight()->Translation() = m_camera->Translation();
+	m_lightmanager->GetLight()->property._translation = m_camera->property._translation;
 
 	// プレイヤーの最初の状態の設定
 	m_player->SetState(PlayerBase::ePlayerMoveState::eMove);
@@ -192,7 +210,7 @@ bool SceneGame::Updater(){
 
 
 	//skybox
-	m_skybox->GetTransform()._rotation._y += 0.05;
+	m_skybox->property._transform._rotation._y += 0.05;
 
 
 	//UI
@@ -245,12 +263,12 @@ bool SceneGame::Updater(){
 
 
 	if (m_player->LifeGet() == 0){
-		ChangeScene("End", false);
+		ChangeScene("End", LoadState::eUnuse,LoadWaitState::eUnuse);
 	}
 
 	//タイトルに戻る
 	if (GameController::GetKey().IsKeyDown(DIK_R)){
-		ChangeScene("Title", false);
+		ChangeScene("Title",LoadState::eUnuse,LoadWaitState::eUnuse);
 	}
 
 	return true;
@@ -261,9 +279,6 @@ void SceneGame::Render(){
 
 	//カメラ
 	m_camera->Render();
-
-	//UI
-	m_ui->Render();
 
 	//ステージ
 	m_stage->Render(m_materialShader.get());
@@ -284,6 +299,9 @@ void SceneGame::Render(){
 
 	//ナビゲーション
 	m_navigation->Render(m_pixelShader);
+
+	//UI
+	m_ui->Render();
 
 	//テキスト
 	m_text->Render(m_pixelShader.get());

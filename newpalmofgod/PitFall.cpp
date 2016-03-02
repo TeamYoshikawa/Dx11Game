@@ -194,20 +194,20 @@
 
 		float rayVector = -1;
 
-		float rayEnd = rayVector + other.GetTransform()._translation._y;
+		float rayEnd = rayVector + other.property._transform._translation._y;
 
 		//		printf("Cube = %f\n", Translation().y);
 		//		printf("Other = %f\nrayEnd = %f\n\n", other.Translation().y, rayEnd);
 
-		Vector2 origin(GetTransform()._translation._x - (GetTransform()._scale._x), GetTransform()._translation._z + (GetTransform()._scale._z));
-		Vector2 uv(GetTransform()._translation._x + (GetTransform()._scale._x), GetTransform()._translation._z - (GetTransform()._scale._z));
+		Vector2 origin(property._transform._translation._x - (property._transform._scale._x), property._transform._translation._z + (property._transform._scale._z));
+		Vector2 uv(property._transform._translation._x + (property._transform._scale._x), property._transform._translation._z - (property._transform._scale._z));
 
-		Vector2 other_origin(other.GetTransform()._translation._x, other.GetTransform()._translation._z);
+		Vector2 other_origin(other.property._transform._translation._x, other.property._transform._translation._z);
 
 		std::cout << origin._y << other_origin._y << std::endl;
 
 		if (origin._x < other_origin._x && other_origin._x < uv._x && uv._y < other_origin._y && other_origin._y < origin._y){
-			if (GetTransform()._translation._y > other.GetTransform()._translation._y){
+			if (property._transform._translation._y > other.property._transform._translation._y){
 				//				std::cout << "\n///Falling?///\n";
 				return true;
 			}
