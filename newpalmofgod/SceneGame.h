@@ -41,6 +41,7 @@ private:
 	enum class eTrapState{
 		eRockEvent,
 		eSpearEvent,
+		eSpearEvent2,
 		efallwall,
 		ePitFall,
 		eNull
