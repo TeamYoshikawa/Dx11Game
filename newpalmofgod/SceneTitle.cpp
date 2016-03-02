@@ -1,5 +1,5 @@
 #include "SceneTitle.h"
-#include <Rectangle3D.h>
+#include <Rectangle.h>
 #include "SceneGame.h"
 #include "Rectangle2D.h"
 using namespace aetherClass;
@@ -37,7 +37,7 @@ bool SceneTitle::Initialize()
 	title_tex->Load("image/TitleTest.png");	/*‰æ‘œ‚Ì“Ç‚Ýž‚Ý*/
 
 	Texture *press_tex = new Texture();/*press any hogehoge*/
-	press_tex->Load("image/Title02.png");
+	press_tex->Load("image/pushspacekey2.png");
 
 	title = std::make_shared<aetherClass::Rectangle2D>();
 	title->Initialize();
@@ -61,6 +61,7 @@ bool SceneTitle::Initialize()
 	press->property._transform._scale._y = 200;
 	press->property._color._alpha = 1;
 
+
 	m_pressFlag = true;
 
 	GameScene *Scene = new SceneGame();
@@ -68,9 +69,9 @@ bool SceneTitle::Initialize()
 
 
 	/*
-	title->property._transform._scale = Vector3(0.8f, 0.8f, 0.0f);
-	title->property._transform._translation = Vector3(20.0f, -8.2f, 45.0f) + m_uicamera->Translation();
-	title->property._transform._rotation = Vector3(0.0f, 0.0f, 0.0f);
+	title->GetTransform()._scale = Vector3(0.8f, 0.8f, 0.0f);
+	title->GetTransform()._translation = Vector3(20.0f, -8.2f, 45.0f) + m_uicamera->Translation();
+	title->GetTransform()._rotation = Vector3(0.0f, 0.0f, 0.0f);
 	*/
 	return true;
 }
@@ -189,7 +190,7 @@ void SceneTitle::InitStage()
 	m_stage = std::make_shared<FbxModel>();
 	m_stage->LoadFBX("ModelData/models/STAGEMODEL.fbx", eAxisSystem::eAxisOpenGL);
 	m_stage->SetCamera(m_camera.get());
-	m_stage->property._transform._scale = Vector3(1.0f, 1.0f, -1.0f);
+	m_stage->GetTransform()._scale = Vector3(1.0f, 1.0f, -1.0f);
 
 	m_stage->SetModelMaterialColor(Color(0.0, 0.1, 0.1, 1), eMatrerialType::eAmbient);
 	m_stage->SetModelMaterialColor(Color(0.7, 0.6, 0.6, 0.0), eMatrerialType::eDiffuse);
@@ -203,7 +204,7 @@ void SceneTitle::InitLight()
 {
 	m_lightmanager = std::make_shared<LightManager>();
 	m_lightmanager->Initialize();
-	m_lightmanager->GetLight()->property._translation = m_camera->property._translation;
+	m_lightmanager->GetLight()->Translation() = m_camera->Translation();
 	
 	cout << "Initialized Light" << endl;
 }
@@ -211,8 +212,8 @@ void SceneTitle::InitLight()
 void SceneTitle::InitCamera()
 {
 	m_camera = std::make_shared<ViewCamera>();
-	m_camera->property._translation = Vector3(-260, -350, 447);
-	m_camera->property._rotation = Vector3(-160.0f, 0.0f, 1.0f);
+	m_camera->Translation() = Vector3(-260, -350, 447);
+	m_camera->Rotation() = Vector3(-160.0f, 0.0f, 1.0f);
 	
 	cout << "Initialized Camera" << endl;
 }
@@ -228,7 +229,7 @@ void SceneTitle::SceneChange()
 	if (GameController::GetMouse().IsLeftButtonTrigger())
 	{
 		cout << "Called NextScene!" << endl;
-		ChangeScene("Game",LoadState::eUse,LoadWaitState::eUse);
+		ChangeScene("Game",true);
 		
 	}
 	
