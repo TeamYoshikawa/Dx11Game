@@ -22,9 +22,11 @@ bool SceneGame::Initialize()
 
 	//シーン作成
 	GameScene *Scene = new SceneTitle;
+	GameScene *Scene2 = new SceneEnd;
 
 	//シーン登録
 	RegisterScene(Scene);
+	RegisterScene(Scene2);
 
 	// UIの作成
 	m_ui = std::make_shared<UiGame>();
@@ -180,10 +182,6 @@ bool SceneGame::Updater(){
 			break;
 		}
 	}
-	if (m_player->HitWallMesh(m_fallwall->GetFallingWall()))
-	{
-		IsHitWall = true;
-	}
 
 	//壁
 	m_wall->Update();
@@ -266,6 +264,9 @@ bool SceneGame::Updater(){
 	//タイトルに戻る
 	if (GameController::GetKey().IsKeyDown(DIK_R)){
 		ChangeScene("Title", LoadState::eUnuse, LoadWaitState::eUnuse);
+	}
+	if (m_player->LifeGet() == 0){
+		ChangeScene("End", LoadState::eUnuse, LoadWaitState::eUnuse);
 	}
 	m_soumatou->Update();
 	return true;
