@@ -15,16 +15,25 @@ SpearUpdater::SpearUpdater()
 
 SpearUpdater::~SpearUpdater(){}
 
-void SpearUpdater::Updating(ModelBase* spear)
+void SpearUpdater::Updating(std::shared_ptr<FbxModel>& spear)
 {
 	if (!spear){
 		MessageBox(NULL, L"missing Object", ERROR, MB_OK);
 		return;
 	}
+	
 	if (spear_flag == ON){
-		ButtonOn(spear);
+		if (m_event == eEvent::eNormal){
+			SpearNormal(spear);
+		}
+		if (m_event == eEvent::eThrow){
+			SpearThrow(spear);
+			//m_countDown--;
+		}
 	}
-	std::cout << spear_flag << std::endl;
+	
+	Soumatou();
+	std::cout << m_countDown << std::endl;
 	return;
 }
 
@@ -33,27 +42,55 @@ void SpearUpdater::FlagOn()
 	spear_flag = ON;
 }
 
-void SpearUpdater::FlagOff()
+void SpearUpdater::Soumatou()
 {
-	spear_flag = OFF;
-}
-
-void SpearUpdater::ButtonOn(ModelBase* spear)
-{
-	if (GameController::GetKey().IsKeyDown(DIK_SPACE))m_event = eEvent::eThrow;
-	if (m_event == eEvent::eNormal){
-		std::cout << spear->property._transform._translation._z << std::endl;
-		spear->property._transform._translation._z -= 30.0f;
-	}
-	else if(m_event==eEvent::eThrow){
-		spear->property._transform._translation._z -= 5.0f;
+	if (GameController::GetKey().IsKeyDown(DIK_SPACE)){
+		m_event = eEvent::eThrow;
 		m_countDown--;
 	}
-	if (m_countDown <= 0)m_event = eEvent::eNormal;
-	if (spear->property._transform._translation._z < -3000){
-		spear_flag = SET;
+	if (m_countDown < 0){
+		m_event == eEvent::eNormal;
+		m_countDown = 150;
 	}
-	
+}
+
+void SpearUpdater::SpearNormal(std::shared_ptr<FbxModel>& spear)
+{
+		std::cout << spear->property._transform._translation._y << std::endl;
+		m_speed = 25.0f;
+		if (flag == true){
+			spear->property._transform._translation._y -= m_speed;
+				if (spear->property._transform._translation._y < 300.0f){
+					spear->property._transform._translation._y = 300.0f;
+					flag = false;
+				}
+		}
+		else if(flag==false){
+				spear->property._transform._translation._y += 4.0f;
+				if (spear->property._transform._translation._y > 640.0f){
+					spear->property._transform._translation._y = 640.0f;
+					flag = true;
+				}
+		}
+}
+
+void SpearUpdater::SpearThrow(std::shared_ptr<FbxModel>& spear)
+{
+	m_speed = 12.5f;
+	if (flag == true){
+		spear->property._transform._translation._y -= m_speed;
+		if (spear->property._transform._translation._y < 300.0f){
+			spear->property._transform._translation._y = 300.0f;
+			flag = false;
+		}
+	}
+	else if (flag == false){
+		spear->property._transform._translation._y += 2.0f;
+		if (spear->property._transform._translation._y > 640.0f){
+			spear->property._transform._translation._y = 640.0f;
+			flag = true;
+		}
+	}
 }
 
 bool SpearUpdater::HittingProcessor(const std::shared_ptr<ModelBase>& player, const std::shared_ptr<ModelBase>& other){

@@ -1,6 +1,6 @@
 #pragma once
-#ifndef _SPEARUPDATER_H_
-#define _SPEARUPDATER_H_
+#ifndef _SPEARUPDATERSCOND_H_
+#define _SPEARUPDATERSCOND_H_
 
 //#include"Spear.h"
 #include <memory>
@@ -12,12 +12,12 @@
 #define ON 1
 #define SET 2
 
-static bool flag = true;
-static int spear_flag;
+static bool flag2 = true;
+static int spear_flag2;
 
 
 namespace n_Spear{
-	class SpearUpdater
+	class SpearUpdaterScond
 	{
 	private:
 		enum eEvent{
@@ -29,9 +29,7 @@ namespace n_Spear{
 		void SpearNormal(std::shared_ptr<aetherClass::FbxModel>&);
 		void SpearThrow(std::shared_ptr<aetherClass::FbxModel>&);
 
-		void Soumatou();
-
-		void operator =(const SpearUpdater &);
+		void operator =(const SpearUpdaterScond &);
 
 		eEvent m_event;
 
@@ -39,17 +37,14 @@ namespace n_Spear{
 
 		int m_countDown;
 	public:
-		SpearUpdater();
-		~SpearUpdater();
+		SpearUpdaterScond();
+		~SpearUpdaterScond();
 
 		void Updating(std::shared_ptr<aetherClass::FbxModel>&);
 		bool HittingProcessor(const std::shared_ptr<aetherClass::ModelBase>&, const std::shared_ptr<aetherClass::ModelBase>&);
 
 		void FlagOn();
 		int FlagGet();
-	
-		
-
 	};
 
 }

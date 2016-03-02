@@ -17,6 +17,13 @@ private:
 
 	eState m_eState;
 private:
+	enum class eEvent
+	{
+		eNomal,
+		eThrow
+	};
+	eEvent m_eEvent;
+private:
 	FallingWallUpdater(const FallingWallUpdater&) = default;
 	void operator = (const FallingWallUpdater &);
 
@@ -29,5 +36,6 @@ public:
 
 private:
 	bool isFallflg;
+	int m_countDown;
 };
 

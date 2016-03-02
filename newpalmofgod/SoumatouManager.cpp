@@ -2,6 +2,7 @@
 #include "Texture.h"
 #include "PixelShader.h"
 #include <iostream>
+#include <GameController.h>
 
 using namespace aetherClass;
 SoumatouManager::SoumatouManager()
@@ -35,23 +36,44 @@ bool SoumatouManager::Initialize(){
 	bool hoge;
 
 
-	hoge=m_soumaTexture->Load("Texture/soumatou.png");	/*‰æ‘œ‚Ì“Ç‚İ‚İ*/
+	m_soumaTexture->Load("Texture/soumatou.png");/*‰æ‘œ‚Ì“Ç‚İ‚İ*/
 
-	
 	m_soumatou = std::make_shared<Rectangle2D>();
 	m_soumatou->Initialize();
 	m_soumatou->property._transform._translation = Vector3(0.0f, 0.0f, 0.0f);
-	m_soumatou->property._color = Color(0.7f, 0.7f, 0.7f,0.7f);
+	m_soumatou->property._color = Color(0.8f, 0.6f, 0.4f, 0.6f);
 	m_soumatou->property._transform._scale._x = 800;
 	m_soumatou->property._transform._scale._y = 600;
 	m_soumatou->SetTexture(m_soumaTexture.get());
 	
+	m_countDown = 150;
+	m_eEvent == eEvent::eNomal;
+	
 	return true;
+}
+
+void SoumatouManager::Update(){
+
+	if (GameController::GetKey().IsKeyDown(DIK_SPACE)){
+		flag = true;
+	}
+	
+	if (flag==true){
+		m_countDown--;
+	}
+	if (m_countDown < 0){
+		m_countDown = 150;
+		flag = false;
+	}
 }
 
 void SoumatouManager::Render(){
 	std::cout << "hiroki";
-	m_soumatou->Render(m_pixelShader.get());
+	
+	if (flag==true){
+		m_soumatou->Render(m_pixelShader.get());
+	}
+	
 	//m_soumatou->Render(m_colorShader.get());
 
 }

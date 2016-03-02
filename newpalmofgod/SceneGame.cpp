@@ -22,26 +22,16 @@ bool SceneGame::Initialize()
 
 	//シーン作成
 	GameScene *Scene = new SceneTitle;
-	GameScene *Scene2 = new SceneEnd;
-
 
 	//シーン登録
 	RegisterScene(Scene);
-	RegisterScene(Scene2);
 
 	// UIの作成
 	m_ui = std::make_shared<UiGame>();
 	m_ui->Initialize();
 
-
-	//fadeIn
-	fadein = std::make_shared<aetherClass::Rectangle2D>();
-	fadein->Initialize();
-	fadein->property._transform._translation._z = 0;
-	fadein->property._color._alpha = 0;
-	fadein->property._transform._scale._x = 1000;
-	fadein->property._transform._scale._y = 1000;
-
+	m_soumatou = std::make_shared<SoumatouManager>();
+	m_soumatou->Initialize();
 
 	// カメラオブジェクトの作成
 	m_camera = std::make_shared<ViewCamera>();
@@ -78,14 +68,6 @@ bool SceneGame::Initialize()
 	// ピクセルシェーダーの作成
 	m_pixelShader = std::make_shared<PixelShader>();
 	m_pixelShader->Initialize(textureDesc, ShaderType::eVertex | ShaderType::ePixel);
-
-
-	//toumei
-	textureDesc._pixel._srcFile = L"Shader/Transparent.ps";
-	textureDesc._pixel._entryName = "ps_main";
-
-	m_alphashader = std::make_shared<PixelShader>();
-	m_alphashader->Initialize(textureDesc, ShaderType::eVertex | ShaderType::ePixel);
 
 	Material material;
 	material._ambient._color = Color(1, 0, 0, 1);
@@ -198,11 +180,6 @@ bool SceneGame::Updater(){
 			break;
 		}
 	}
-	if (m_player->HitWallMesh(m_fallwall->GetFallingWall()))
-	{
-		IsHitWall = true;
-	}
-
 
 	//壁
 	m_wall->Update();
@@ -229,9 +206,19 @@ bool SceneGame::Updater(){
 		m_player->SetState(PlayerBase::ePlayerMoveState::eDamage);
 	}
 
-	if (m_player->HitMesh(m_spear->Get().get()))
-	{
-		m_player->SetState(PlayerBase::ePlayerMoveState::eDamage);
+	for (int i = 0; i < m_spear->SpearCnt(); i++){
+		if (m_player->HitMesh(m_spear->Get(i).get()))
+		{
+			m_player->SetState(PlayerBase::ePlayerMoveState::eDamage);
+		}
+	}
+	
+
+	for (int i = 0; i < m_spear->SpearCnt2(); i++){
+		if (m_player->HitMesh(m_spear->Get2(i).get()))
+		{
+			m_player->SetState(PlayerBase::ePlayerMoveState::eDamage);
+		}
 	}
 
 	if (m_player->HitMesh(m_fallwall->GetCollider().get()))
@@ -245,10 +232,13 @@ bool SceneGame::Updater(){
 		m_trapState = eTrapState::eRockEvent;
 	}
 
-	if (m_spear->HitMesh(m_player->Get(), m_spear->S_Get()))
-	{
+	if (m_spear->HitMesh(m_player->Get(), m_spear->Switch_Get())){
 		m_trapState = eTrapState::eSpearEvent;
 	}
+	if (m_spear->HitMesh2(m_player->Get(), m_spear->Switch_Get2())){
+		m_trapState = eTrapState::eSpearEvent2;
+	}
+	
 
 	if (m_fallwall->HitMesh(m_player->Get(), m_fallwall->GetFallingWall()))
 	{
@@ -262,20 +252,18 @@ bool SceneGame::Updater(){
 	if (m_trapState == eTrapState::eSpearEvent){
 		m_spear->Update();
 	}
+	if (m_trapState == eTrapState::eSpearEvent2){
+		m_spear->Update2();
+	}
 	//if (m_trapState == eTrapState::efallwall){
 	m_fallwall->Update();
 	//}
 
-
-	if (m_player->LifeGet() == 0){
-		ChangeScene("End", LoadState::eUnuse,LoadWaitState::eUnuse);
-	}
-
 	//タイトルに戻る
 	if (GameController::GetKey().IsKeyDown(DIK_R)){
-		ChangeScene("Title",LoadState::eUnuse,LoadWaitState::eUnuse);
+		ChangeScene("Title", LoadState::eUnuse, LoadWaitState::eUnuse);
 	}
-
+	m_soumatou->Update();
 	return true;
 }
 
@@ -285,18 +273,22 @@ void SceneGame::Render(){
 	//カメラ
 	m_camera->Render();
 
+	//UI
+	m_ui->Render();
+	
+
 	//ステージ
 	m_stage->Render(m_materialShader.get());
 
 	//壁
 	m_wall->Render(m_pixelShader);
-
+	
 	//プレイヤー
 	m_player->Render(m_materialShader);
 
 	//各トラップ
 	m_rock->Render(m_pixelShader);
-	m_spear->Render(m_pixelShader);
+	m_spear->Render(m_materialShader);
 	m_fallwall->Render(m_pixelShader);
 
 	//ライト
@@ -305,14 +297,14 @@ void SceneGame::Render(){
 	//ナビゲーション
 	m_navigation->Render(m_pixelShader);
 
-	//UI
-	m_ui->Render();
-
 	//テキスト
 	m_text->Render(m_pixelShader.get());
 
 	//スカイボックス
 	m_skybox->Render(m_pixelShader.get());
+
+	m_soumatou->Render();
+	
 
 	return;
 }

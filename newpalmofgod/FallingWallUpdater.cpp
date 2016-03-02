@@ -1,4 +1,5 @@
 #include "FallingWallUpdater.h"
+#include <GameController.h>
 
 using namespace std;
 using namespace aetherClass;
@@ -7,6 +8,8 @@ FallingWallUpdater::FallingWallUpdater()
 {
 	isFallflg = true;
 	m_eState = eState::eInterval;
+	m_eEvent = eEvent::eNomal;
+	m_countDown = 150;
 }
 
 void FallingWallUpdater::Update(ModelBase* fallingWall)
@@ -32,18 +35,43 @@ void FallingWallUpdater::Update(ModelBase* fallingWall)
 		m_eState = eState::eMoveDown;
 	}
 
+	if (GameController::GetKey().IsKeyDown(DIK_SPACE)){
+		m_eEvent = eEvent::eThrow;
+	}
 
-	switch (m_eState)
-	{
-	case eState::eInterval:
-		interval--;
-		break;
-	case eState::eMoveDown:
-		fallingWall->property._transform._translation._y += gravity * cnt;
-		break;
-	case eState::eMoveUp:
-		fallingWall->property._transform._translation._y -= 3;
-		break;
+	if (m_eEvent == eEvent::eNomal){
+		switch (m_eState)
+		{
+		case eState::eInterval:
+			interval--;
+			break;
+		case eState::eMoveDown:
+			fallingWall->property._transform._translation._y += gravity * cnt;
+			break;
+		case eState::eMoveUp:
+			fallingWall->property._transform._translation._y -= 3;
+			break;
+		}
+	}
+	if (m_eEvent == eEvent::eThrow){
+		gravity = 19.6f;
+		switch (m_eState)
+		{
+		case eState::eInterval:
+			interval--;
+			break;
+		case eState::eMoveDown:
+			fallingWall->property._transform._translation._y += gravity * cnt;
+			break;
+		case eState::eMoveUp:
+			fallingWall->property._transform._translation._y -= 1.5f;
+			break;
+		}
+		m_countDown--;
+	}
+	if (m_countDown < 0){
+		m_eEvent = eEvent::eNomal;
+		m_countDown = 150;
 	}
 }
 

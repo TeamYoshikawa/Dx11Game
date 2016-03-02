@@ -5,6 +5,13 @@
 
 class SoumatouManager
 {
+private:
+	enum class eEvent
+	{
+		eNomal,
+		eThrow
+	};
+	eEvent m_eEvent;
 public:
 
 	bool Initialize();
@@ -21,7 +28,7 @@ private:
 	std::shared_ptr<aetherClass::ShaderBase> m_pixelShader;
 	std::shared_ptr<aetherClass::ShaderBase> m_colorShader;
 	
-
-
+	int m_countDown;
+	bool flag = false;
 };
 
