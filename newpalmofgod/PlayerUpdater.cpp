@@ -37,6 +37,11 @@ void PlayerUpdater::Initialize(){
 
 	m_isHitting = false;
 	m_prevKey = NULL;
+
+	m_currentPos = Vector3(-50, -8, 692);
+	m_nextPos = m_currentPos;
+
+	//std::cout << "Init!!!!!!!!!!!!!!!!!!!!!" << std::endl;
 	return;
 }
 
@@ -99,19 +104,48 @@ bool PlayerUpdater::HittingWall(ModelBase* player, ModelBase* wall)
 // “®‚¢‚Ä‚é‚Æ‚«‚Ìˆ—
 void PlayerUpdater::Move(const std::shared_ptr<FbxModel>& playerObject, std::shared_ptr<aetherClass::ViewCamera> camera, bool IsHitWall){
 	static float cmx = -50.0f, cmy = -8.0f, cmz = 692.0f, cmrx = -170, cmry = -90;
-	float cm_move = 3.0f;
-	int pushKey = NULL;;
+	//std::cout << "CurrentPosition:" << std::endl;
+	//std::cout << "X:" << m_currentPos._x << std::endl;
+	//std::cout << "Y:" << m_currentPos._y << std::endl;
+	//std::cout << "z:" << m_currentPos._z << std::endl;
+
+
 	if (IsHitWall)
 	{
 
 		m_isHitting = true;
-		cm_move *= -1.33;
+		//cm_move *= -1.33;
+		cmx = m_currentPos._x;
+		cmy = m_currentPos._y;
+		cmz = m_currentPos._z;
+		camera->Translation() = m_currentPos;
+		playerObject->GetTransform()._translation._x = camera->Translation()._x - 10;
+		playerObject->GetTransform()._translation._z = camera->Translation()._z;
 		std::cout << "•Ç‚É“–‚½‚Á‚½‚æ" << std::endl;
 	}
 	else
 	{
 		m_isHitting = false;
+		cmx = m_nextPos._x;
+		cmy = m_nextPos._y;
+		cmz = m_nextPos._z;
 	}
+
+	m_currentPos = Vector3(cmx, cmy, cmz);
+
+	float cm_move = 3.0f;
+	int pushKey = NULL;;
+	//if (IsHitWall)
+	//{
+
+	//	m_isHitting = true;
+	//	cm_move *= -1.33;
+	//	std::cout << "•Ç‚É“–‚½‚Á‚½‚æ" << std::endl;
+	//}
+	//else
+	//{
+	//	m_isHitting = false;
+	//}
 	if (GameController::GetKey().IsKeyDown(DIK_LEFT)){
 		cmry += cm_move * 0.43;
 	}
@@ -167,22 +201,27 @@ void PlayerUpdater::Move(const std::shared_ptr<FbxModel>& playerObject, std::sha
 		}
 	}
 
-	Vector3 move = Vector3(cmx, cmy, cmz);
+	//Vector3 move = Vector3(cmx, cmy, cmz);
+	m_nextPos = Vector3(cmx, cmy, cmz);
 
-	if (IsHitWall&&m_prevKey != pushKey)
-	{
-		move *= -1;
+	//std::cout << "CMX = " << cmx << std::endl;
 
-		m_prevKey = pushKey;
-	}
+	//if (IsHitWall&&m_prevKey != pushKey)
+	//{
+	//	move *= -1;
+
+	//	m_prevKey = pushKey;
+	//}
 
 	/* ‚¢‚Ç[*/
-	camera->Translation() = move;
+	camera->Translation() = m_nextPos;
 	camera->Rotation() = Vector3(cmrx, cmry, 1);
 
 	//// ƒ‚ƒfƒ‹‚Æ˜A“®
 	playerObject->GetTransform()._translation._x = camera->Translation()._x - 10;
 	playerObject->GetTransform()._translation._z = camera->Translation()._z;
+
+
 
 	return;
 }

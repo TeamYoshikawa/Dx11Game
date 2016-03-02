@@ -64,6 +64,9 @@ private:
 	int m_mutekiTime;
 	std::shared_ptr<aetherClass::GameSound> m_playerSound;
 	std::shared_ptr<aetherClass::GameSound> m_damegeSound;
+
+	aetherClass::Vector3 m_currentPos;
+	aetherClass::Vector3 m_nextPos;
 };
 
 #endif
