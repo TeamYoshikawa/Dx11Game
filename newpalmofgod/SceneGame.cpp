@@ -180,6 +180,10 @@ bool SceneGame::Updater(){
 			break;
 		}
 	}
+	if (m_player->HitWallMesh(m_fallwall->GetFallingWall()))
+	{
+		IsHitWall = true;
+	}
 
 	//•Ç
 	m_wall->Update();
