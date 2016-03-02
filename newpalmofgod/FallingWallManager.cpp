@@ -5,7 +5,7 @@ using namespace aetherClass;
 
 FallingWallManager::FallingWallManager()
 {
-	m_size = 250;
+	m_size = 280;
 }
 
 
@@ -27,8 +27,8 @@ bool FallingWallManager::Initialize(ViewCamera* camera)
 	m_fallingWall->SetCamera(camera);
 	m_fallingWall->SetTexture(m_texture.get());
 
-	m_fallingWall->property._transform._scale = Vector3(m_size,m_size,m_size);
-	m_fallingWall->property._transform._translation = Vector3(8700,-8,1200);
+	m_fallingWall->property._transform._scale = Vector3(m_size,250,m_size*1.75);
+	m_fallingWall->property._transform._translation = Vector3(8730,-8,1450);
 
 
 	m_collider = make_shared<Cube>();
@@ -36,7 +36,7 @@ bool FallingWallManager::Initialize(ViewCamera* camera)
 
 	m_collider->SetCamera(camera);
 	m_collider->SetTexture(m_texture.get());
-	m_collider->property._transform._scale = Vector3(m_size-10, 1, m_size-10);
+	m_collider->property._transform._scale = Vector3(m_size-10, 1, m_size*1.75-10);
 	m_collider->property._transform._translation = m_fallingWall->property._transform._translation;
 
 
