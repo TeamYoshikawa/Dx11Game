@@ -190,7 +190,7 @@ void SceneTitle::InitStage()
 	m_stage = std::make_shared<FbxModel>();
 	m_stage->LoadFBX("ModelData/models/STAGEMODEL.fbx", eAxisSystem::eAxisOpenGL);
 	m_stage->SetCamera(m_camera.get());
-	m_stage->GetTransform()._scale = Vector3(1.0f, 1.0f, -1.0f);
+	m_stage->property._transform._translation = Vector3(1.0f, 1.0f, -1.0f);
 
 	m_stage->SetModelMaterialColor(Color(0.0, 0.1, 0.1, 1), eMatrerialType::eAmbient);
 	m_stage->SetModelMaterialColor(Color(0.7, 0.6, 0.6, 0.0), eMatrerialType::eDiffuse);
@@ -204,7 +204,7 @@ void SceneTitle::InitLight()
 {
 	m_lightmanager = std::make_shared<LightManager>();
 	m_lightmanager->Initialize();
-	m_lightmanager->GetLight()->Translation() = m_camera->Translation();
+	m_lightmanager->GetLight()->property._translation = m_camera->property._translation;
 	
 	cout << "Initialized Light" << endl;
 }
@@ -212,8 +212,8 @@ void SceneTitle::InitLight()
 void SceneTitle::InitCamera()
 {
 	m_camera = std::make_shared<ViewCamera>();
-	m_camera->Translation() = Vector3(-260, -350, 447);
-	m_camera->Rotation() = Vector3(-160.0f, 0.0f, 1.0f);
+	m_camera->property._translation = Vector3(-260, -350, 447);
+	m_camera->property._rotation = Vector3(-160.0f, 0.0f, 1.0f);
 	
 	cout << "Initialized Camera" << endl;
 }
@@ -229,7 +229,7 @@ void SceneTitle::SceneChange()
 	if (GameController::GetMouse().IsLeftButtonTrigger())
 	{
 		cout << "Called NextScene!" << endl;
-		ChangeScene("Game",true);
+		ChangeScene("Game", LoadState::eUnuse, LoadWaitState::eUnuse);
 		
 	}
 	

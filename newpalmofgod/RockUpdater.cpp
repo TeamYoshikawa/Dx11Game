@@ -54,8 +54,6 @@ void RockUpdater::First(ModelBase*Rock){
 
 	speed *= 1.12;
 
-	m_rockSound->PlayToOneTime();
-
 	//std::cout << Rock->property._transform._translation._z << std::endl;
 	if (GameController::GetKey().IsKeyDown(DIK_SPACE))m_event = eEvent::eThrow;
 	if (Rock->property._transform._translation._y > 120.0f){
@@ -69,6 +67,8 @@ void RockUpdater::First(ModelBase*Rock){
 		Rock->property._transform._rotation._x += 10.0f;
 
 		Rock->property._transform._translation._z -= 13.0f;
+		m_rockSound->SetSpeed(eSoundSpeed::eHighSpeed);
+		m_rockSound->PlayToOneTime();
 	}
 	else if (m_event == eEvent::eThrow){
 		Rock->property._transform._translation._y = 120.0f;
@@ -78,6 +78,8 @@ void RockUpdater::First(ModelBase*Rock){
 		Rock->property._transform._rotation._x += 3.0f;
 
 		Rock->property._transform._translation._z -= 5.0f;
+		m_rockSound->SetSpeed(eSoundSpeed::eSecondSpeed);
+		m_rockSound->PlayToOneTime();
 		m_countDown--;
 	}
 }

@@ -15,7 +15,7 @@ bool TextManager::Initialize(ViewCamera* camera){
 	desc._vertex._entryName = "vs_main";
 	desc._vertex._srcFile = L"Shader/VertexShaderBase.hlsl";
 	desc._pixel._entryName = "ps_main";
-	desc._pixel._srcFile = L"Shader/ColorTexture.ps";
+	desc._pixel._srcFile = L"Shader/Transparent.ps";
 
 	m_color->Initialize(desc, ShaderType::eVertex | ShaderType::ePixel);
 
@@ -39,7 +39,7 @@ bool TextManager::Initialize(ViewCamera* camera){
 
 	// テキスチャの作成
 	m_texture = new Texture;
-	m_texture->Load("Texture/h_ui.png");
+	m_texture->Load("Texture/UI_ba-3.png");
 
 	// メッセージボックスの作成
 	m_background = new Rectangle2D;
@@ -78,16 +78,17 @@ void TextManager::SetID(int id){
 			m_background->property._transform._translation._y -= 4;
 		}
 		m_text->UpdateText(L"SPACEを押してください");
+		m_spear->PlayToOneTime();
 	}
 
 	if (m_id == 1){
 		m_rock->PlayToOneTime();
-		m_text->UpdateText(L"何か音がするよ？");
+		m_text->UpdateText(L"何か音がする");
 	}
 
 	if (m_id == 2){
 		m_spear->PlayToOneTime();
-		m_text->UpdateText(L"何か音がするよ？");
+		m_text->UpdateText(L"何か音がする");
 	}
 
 	if (m_id == 3){
@@ -115,9 +116,9 @@ void TextManager::Render(ShaderBase *m_shader){
 
 	m_waitTime++;
 	std::cout << m_waitTime << std::endl;
-	m_background->Render(m_shader);
 	DirectXEntity entity;
 	entity.GetDirect3DManager()->Change2DMode();
+	m_background->Render(m_shader);
 	m_text->Render(m_color);
 	entity.GetDirect3DManager()->Change3DMode();
 }

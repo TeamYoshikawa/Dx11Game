@@ -11,6 +11,9 @@ SpearUpdater::SpearUpdater()
 	m_event = eEvent::eNormal;
 	m_countDown = 150;
 	spear_flag = OFF;
+	m_spearSound = std::make_shared<GameSound>();
+	m_spearSound->Load("Sound/Spear/tobidasu.wav");
+	m_spearSound->SetValume(-2000);
 }
 
 SpearUpdater::~SpearUpdater(){}
@@ -63,6 +66,7 @@ void SpearUpdater::SpearNormal(std::shared_ptr<FbxModel>& spear)
 				if (spear->property._transform._translation._y < 300.0f){
 					spear->property._transform._translation._y = 300.0f;
 					flag = false;
+					m_spearSound->PlayToOneTime();
 				}
 		}
 		else if(flag==false){
@@ -70,6 +74,8 @@ void SpearUpdater::SpearNormal(std::shared_ptr<FbxModel>& spear)
 				if (spear->property._transform._translation._y > 640.0f){
 					spear->property._transform._translation._y = 640.0f;
 					flag = true;
+					m_spearSound->PlayToOneTime();
+					m_spearSound->SetSpeed(eSoundSpeed::eSecondSpeed);
 				}
 		}
 }
@@ -82,6 +88,7 @@ void SpearUpdater::SpearThrow(std::shared_ptr<FbxModel>& spear)
 		if (spear->property._transform._translation._y < 300.0f){
 			spear->property._transform._translation._y = 300.0f;
 			flag = false;
+			m_spearSound->Stop();
 		}
 	}
 	else if (flag == false){
