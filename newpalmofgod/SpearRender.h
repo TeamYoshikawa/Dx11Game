@@ -6,6 +6,7 @@
 #include <ShaderBase.h>
 #include <ModelBase.h>
 #include <Cube.h>
+#include <FbxModel.h>
 
 /*
      
@@ -19,7 +20,7 @@ namespace n_Spear{
 		SpearRender(SpearRender& other);
 		~SpearRender();
 
-		void Renderring(aetherClass::ModelBase*, std::shared_ptr<aetherClass::ShaderBase>);
+		void Renderring(std::shared_ptr<aetherClass::FbxModel>&, std::shared_ptr<aetherClass::ShaderBase>);
 	};
 
 }

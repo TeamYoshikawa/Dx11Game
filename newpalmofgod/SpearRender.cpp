@@ -12,7 +12,7 @@ SpearRender::~SpearRender()
 }
 
 
-void SpearRender::Renderring(ModelBase* model, std::shared_ptr<ShaderBase>shaderBase)
+void SpearRender::Renderring(std::shared_ptr<aetherClass::FbxModel>& model, std::shared_ptr<ShaderBase>shaderBase)
 {
 	model->Render(shaderBase.get());
 	
