@@ -64,9 +64,9 @@ void RockUpdater::First(ModelBase*Rock){
 
 		Rock->property._transform._translation._x -= 0.5f;
 
-		Rock->property._transform._rotation._x += 10.0f;
+		Rock->property._transform._rotation._z -= 10.0f;
 
-		Rock->property._transform._translation._z -= 13.0f;
+		Rock->property._transform._translation._x -= 13.0f;
 		m_rockSound->SetSpeed(eSoundSpeed::eHighSpeed);
 		m_rockSound->PlayToOneTime();
 	}
@@ -75,9 +75,9 @@ void RockUpdater::First(ModelBase*Rock){
 
 		Rock->property._transform._translation._x -= 0.5f;
 
-		Rock->property._transform._rotation._x += 3.0f;
+		Rock->property._transform._rotation._z -= 3.0f;
 
-		Rock->property._transform._translation._z -= 5.0f;
+		Rock->property._transform._translation._x -= 5.0f;
 		m_rockSound->SetSpeed(eSoundSpeed::eSecondSpeed);
 		m_rockSound->PlayToOneTime();
 		m_countDown--;
