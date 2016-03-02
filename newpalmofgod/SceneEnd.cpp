@@ -1,5 +1,6 @@
 #include "SceneEnd.h"
 #include "SceneTitle.h"
+#include "SceneGame.h"
 #include "Rectangle2D.h"
 #include <iostream>
 
@@ -92,6 +93,7 @@ void SceneEnd::Finalize()
 void SceneEnd::SceneChange()
 {
 	if (GameController::GetKey().IsKeyDown(DIK_R)){
+		std::cout<<"yobareta";
 		ChangeScene("Title", false);
 	}
 }

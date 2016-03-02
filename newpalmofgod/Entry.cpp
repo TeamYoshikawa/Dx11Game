@@ -25,7 +25,7 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, LPSTR, INT){
 
 	// 初期化
 	entry->Initialize(false, L"Palm of God");
-	frame->Initialize(*entry->GetWindowHandle(), POINT{800,600},false,20000000);
+	frame->Initialize(*entry->GetWindowHandle(), POINT{800,600},false,1000000);
 
 	// この関数を呼び出すことによって、画面の背景色の変更ができる
 	// デフォルトの設定では黒が設定されている
@@ -35,7 +35,7 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, LPSTR, INT){
 	entry->SetGameFrame(frame);
 
 	// 最初のシーンのオブジェクトを作成
-	GameScene* firstScene = new SceneTitle();
+	GameScene* firstScene = new SceneGame();
 
 
 	// 最初のシーンの設定
