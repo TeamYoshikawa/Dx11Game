@@ -47,7 +47,7 @@ bool NavigationManager::Initialize(ViewCamera* camera){
 void NavigationManager::Render(std::shared_ptr<ShaderBase>shader){
 
 	for (int i = 0; i < navi_max; i++){
-		m_naviObj[i].m_navigation->Render(shader.get());
+		//m_naviObj[i].m_navigation->Render(shader.get());
 	}
 }
 
