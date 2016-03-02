@@ -8,7 +8,9 @@
 #include "PlayerManager.h"
 #include "NavigationManager.h"
 #include "FallingWallManager.h"
+#include "SoumatouManager.h"
 #include "Skybox.h"
+#include "SceneEnd.h"
 #include "TextManager.h"
 #include "WallManager.h"
 #include "LightManager.h"
@@ -19,6 +21,7 @@
 #include "Light.h"
 #include "UiGame.h"
 #include "GameSound.h"
+
 
 class SceneGame :
 	public aetherClass::GameScene
@@ -61,6 +64,10 @@ private:
 	//ƒ‰ƒCƒg
 	std::shared_ptr<LightManager> m_lightmanager;
 	std::shared_ptr<aetherClass::Light>m_light;
+
+	//‘–”n“”
+	std::shared_ptr<SoumatouManager> m_soumatou;
+
 
 	//•Ç
 	std::shared_ptr<WallManager> m_wall;

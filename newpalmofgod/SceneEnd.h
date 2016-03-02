@@ -4,6 +4,7 @@
 #include <Cube.h>
 #include <iostream>
 #include <GameScene.h>
+#include "SpriteBase.h"
 #include "ViewCamera.h"
 #include "Texture.h"
 #include "MaterialShader.h"
@@ -28,10 +29,9 @@ private:
 
 	void SceneChange();
 
-	std::shared_ptr<aetherClass::ModelBase> m_gameover;
-	std::shared_ptr<aetherClass::ModelBase>feedin;
+	std::shared_ptr<aetherClass::SpriteBase> m_gameover;
+	std::shared_ptr<aetherClass::SpriteBase>feedin;
 	std::shared_ptr<aetherClass::ViewCamera> m_camera;
-	std::shared_ptr<aetherClass::Texture> m_texture;
 	std::shared_ptr<aetherClass::PixelShader> m_shader;
 	std::shared_ptr<aetherClass::MaterialShader> m_materialShader;
 	std::shared_ptr<LightManager> m_lightmanager;

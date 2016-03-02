@@ -1,6 +1,6 @@
 #include "SceneEnd.h"
 #include "SceneTitle.h"
-#include "Rectangle.h"
+#include "Rectangle2D.h"
 #include <iostream>
 
 using namespace aetherClass;
@@ -31,41 +31,38 @@ bool SceneEnd::Initialize()
 	textureDesc._pixel._srcFile = L"Shader/ColorTexture.ps";
 	m_shader->Initialize(textureDesc, ShaderType::eVertex | ShaderType::ePixel);
 
-	// ライトの作成
-	m_lightmanager = std::make_shared<LightManager>();
-	m_lightmanager->Initialize();
-
 	// カメラの初期化
-	m_camera = std::make_shared<aetherClass::ViewCamera>();
+	m_camera = std::make_shared<ViewCamera>();
 	m_camera->Translation() = Vector3(-260, -350, 447);
 	m_camera->Rotation() = Vector3(-160.0f, 0.0f, 1.0f);
 
+	// ライトの作成
+	m_lightmanager = std::make_shared<LightManager>();
+	m_lightmanager->Initialize();
+	m_lightmanager->GetLight()->Translation() = m_camera->Translation();
+
 	// テクスチャの初期化
-	m_texture = std::make_shared<aetherClass::Texture>();
-	m_texture->Load("ModelData/image/gameover.png");
+	Texture *gameover_tex = new Texture();/*press any hogehoge*/
+	gameover_tex->Load("image/gameover.png");
 
 	// ゲームオーバーの初期化
-	m_gameover = std::make_shared<aetherClass::Rectangle>();
+	m_gameover = std::make_shared<aetherClass::Rectangle2D>();
 	m_gameover->Initialize();
-	m_gameover->SetCamera(m_camera.get());
-	m_gameover->SetTexture(m_texture.get());
-	m_gameover->GetTransform()._translation = m_camera->Translation();
-	m_gameover->GetTransform()._translation._z -= 200;
-	m_gameover->GetTransform()._translation._y += 75;
-	m_gameover->GetTransform()._scale._x = 100;
-	m_gameover->GetTransform()._scale._y = 100;
-	m_gameover->GetTransform()._rotation._x = 180;
+	m_gameover->SetTexture(gameover_tex);
+	m_gameover->property._transform._translation = Vector3(0, 0, 0.1);
+	m_gameover->property._transform._scale._x = 800;
+	m_gameover->property._transform._scale._y = 600;
+	m_gameover->property._color._alpha = 1;
 
 	// フェードインの初期化
-	feedin = std::make_shared<aetherClass::Rectangle>();
+	feedin = std::make_shared<aetherClass::Rectangle2D>();
 	feedin->Initialize();
-	feedin->SetCamera(m_camera.get());
-	feedin->GetTransform()._translation = m_camera->Translation();
-	feedin->GetTransform()._translation._z -= 10;
-	feedin->GetTransform()._translation._y += 1000;
-	feedin->GetColor()._alpha = 1;
-	feedin->GetTransform()._scale._x = 10000;
-	feedin->GetTransform()._scale._y = 10000;
+	feedin->property._transform._translation = m_camera->Translation();
+	feedin->property._transform._translation._z -= 10;
+	feedin->property._transform._translation._y += 1000;
+	feedin->property._color._alpha = 1;
+	feedin->property._transform._scale._x = 800;
+	feedin->property._transform._scale._y = 600;
 
 	// シーンの初期化
 	GameScene *Scene = new SceneTitle();
@@ -94,9 +91,8 @@ void SceneEnd::Finalize()
 
 void SceneEnd::SceneChange()
 {
-	if (GameController::GetMouse().IsLeftButtonTrigger())
-	{
-		ChangeScene("Title",false);
+	if (GameController::GetKey().IsKeyDown(DIK_R)){
+		ChangeScene("Title", false);
 	}
 }
 
@@ -104,14 +100,14 @@ bool SceneEnd::TransitionIn()
 {
 	m_camera->Render();
 
-	feedin->GetColor()._alpha -= 0.007;
+	feedin->property._color._alpha -= 0.0007;
 	feedin->Render(m_shader.get());
 
-	if (feedin->GetColor()._alpha < 0)
+	if (feedin->property._color._alpha < 0)
 	{
 		return kTransitionEnd;
 	}
-	else if (feedin->GetColor()._alpha > 1)
+	else if (feedin->property._color._alpha > 1)
 	{
 		return kTransitionning;
 	}

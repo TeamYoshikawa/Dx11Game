@@ -22,9 +22,12 @@ bool SceneGame::Initialize()
 
 	//シーン作成
 	GameScene *Scene = new SceneTitle;
+	GameScene *Scene2 = new SceneEnd;
+
 
 	//シーン登録
 	RegisterScene(Scene);
+	RegisterScene(Scene2);
 
 	// UIの作成
 	m_ui = std::make_shared<UiGame>();
@@ -240,6 +243,10 @@ bool SceneGame::Updater(){
 	m_fallwall->Update();
 	//}
 
+
+	if (m_player->LifeGet() == 0){
+		ChangeScene("End", false);
+	}
 
 	//タイトルに戻る
 	if (GameController::GetKey().IsKeyDown(DIK_R)){
