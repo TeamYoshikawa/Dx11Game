@@ -28,6 +28,7 @@ private:
 	std::shared_ptr<aetherClass::SpriteBase> feed_in;
 	std::shared_ptr<LightManager> m_lightmanager;
 	bool m_pressFlag;
+	int m_flag;
 private:
 	void SceneChange();
 	void InitPixelShader();

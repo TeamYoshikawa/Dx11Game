@@ -35,7 +35,7 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, LPSTR, INT){
 	entry->SetGameFrame(frame);
 
 	// 最初のシーンのオブジェクトを作成
-	GameScene* firstScene = new SceneGame();
+	GameScene* firstScene = new SceneTitle();
 
 
 	// 最初のシーンの設定

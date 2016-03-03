@@ -18,7 +18,7 @@ LoadObj::~LoadObj()
 
 void LoadObj::Initialize()
 {
-
+	m_flag = 0;
 	InitCamera();
 	InitPixelShader();
 	
@@ -94,8 +94,6 @@ bool LoadObj::WaitRun(){
 	feed_in->Render(m_pixelShader.get());
 	load02->Render(m_pixelShader.get());
 
-	
-
 	std::cout << "”CˆÓ‚Ìˆ—‚Ü‚¿" << std::endl;
 	GameController::GetKey().Read();
 
@@ -109,8 +107,12 @@ bool LoadObj::WaitRun(){
 	
 	if (GameController::GetKey().IsKeyDown(DIK_SPACE))
 	{
-		
+		m_flag = 1;
+	}
+
+	if (m_flag == 1){
 		feed_in->property._color._alpha -= 0.01;
+	}
 		if (m_pressFlag){
 			
 			std::cout << "”CˆÓ‚Ìˆ—ŽÀs" << std::endl;
@@ -119,7 +121,6 @@ bool LoadObj::WaitRun(){
 		else{	
 			return kWaitting;
 		}
-	}
 }
 
 void LoadObj::Run()

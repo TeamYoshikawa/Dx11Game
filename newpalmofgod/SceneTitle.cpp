@@ -226,7 +226,7 @@ void SceneTitle::InitKeyObject()
 
 void SceneTitle::SceneChange()
 {
-	if (GameController::GetMouse().IsLeftButtonTrigger())
+	if (GameController::GetKey().IsKeyDown(DIK_SPACE))
 	{
 		cout << "Called NextScene!" << endl;
 		ChangeScene("Game",LoadState::eUse,LoadWaitState::eUse);
