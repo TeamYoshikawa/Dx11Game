@@ -236,7 +236,7 @@ void SceneClear::SceneChange()
 	if (GameController::GetMouse().IsLeftButtonTrigger())
 	{
 		cout << "Called NextScene!" << endl;
-		ChangeScene("Game", LoadState::eUnuse, LoadWaitState::eUnuse);
+		ChangeScene("Title", LoadState::eUnuse, LoadWaitState::eUnuse);
 
 	}
 
