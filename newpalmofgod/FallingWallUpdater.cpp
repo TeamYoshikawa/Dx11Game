@@ -62,7 +62,7 @@ void FallingWallUpdater::Update(ModelBase* fallingWall)
 		}
 	}
 	if (m_eEvent == eEvent::eThrow){
-		gravity = 19.6f;
+		gravity = 2.0f;
 		switch (m_eState)
 		{
 		case eState::eInterval:
@@ -76,7 +76,7 @@ void FallingWallUpdater::Update(ModelBase* fallingWall)
 			isFalled = true;
 			break;
 		case eState::eMoveUp:
-			fallingWall->property._transform._translation._y -= 3;
+			fallingWall->property._transform._translation._y -= 1.5;
 
 			break;
 		}

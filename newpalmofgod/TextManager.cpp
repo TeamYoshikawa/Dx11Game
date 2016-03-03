@@ -35,7 +35,7 @@ bool TextManager::Initialize(ViewCamera* camera){
 	m_text = new Text();
 	m_text->Initialize();
 	m_text->SetFont(m_font);
-	m_text->property._color = Color(0.8, 0.0, 0.1, 1);
+	m_text->property._color = Color(1.0, 1.0, 1.0, 1);
 
 	// テキスチャの作成
 	m_texture = new Texture;

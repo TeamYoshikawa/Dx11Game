@@ -36,13 +36,13 @@ bool RockManager::Initialize(ViewCamera* camera){
 	m_switch->SetTexture(m_switchTexture.get());
 
 	
-	m_Rock[0]->property._transform._translation = Vector3(5900.0f, -340.0f, 2180.0f);
-	m_Rock[0]->property._transform._scale = Vector3(140.0f, 140.0f, 140.0f);
+	m_Rock[0]->property._transform._translation = Vector3(2900.0f, -380.0f, 2180.0f);
+	m_Rock[0]->property._transform._scale = Vector3(160.0f, 160.0f, 160.0f);
 
 	m_Rock[1]->property._transform._translation = Vector3(2530.0f, -320.0f, 2200.0f);
 	m_Rock[1]->property._transform._scale = Vector3(10.0f, 10.0f, 10.0f);
 
-	m_switch->property._transform._translation = Vector3(2800.0f, 140.0f, 2200.0f);
+	m_switch->property._transform._translation = Vector3(4500.0f, 140.0f, 2200.0f);
 	m_switch->property._transform._scale = Vector3(260.0f, 20.0f, 180.0f);
 
 	m_updater = std::make_shared<RockUpdater>();
@@ -79,7 +79,7 @@ void RockManager::Render(std::shared_ptr<ShaderBase>shader){
 		m_render->Render(m_Rock[i].get(), shader);
 	}
 
-	//m_switch->Render(shader.get());
+	m_switch->Render(shader.get());
 	
 }
 

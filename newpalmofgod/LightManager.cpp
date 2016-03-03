@@ -65,7 +65,7 @@ void LightManager::Render()
 void LightManager::Update()
 {
 
-		if (GameController::GetKey().IsKeyDown(DIK_RIGHT))
+		/*if (GameController::GetKey().IsKeyDown(DIK_RIGHT))
 		{
 			m_light->property._translation._x += 10;
 		}
@@ -80,7 +80,7 @@ void LightManager::Update()
 		if (GameController::GetKey().IsKeyDown(DIK_DOWN))
 		{
 			m_light->property._translation._z += 10;
-		}
+		}*/
 		m_cubed->property._transform._translation = m_light->property._translation;
 		/*
 		std::cout << "X : " << m_cubed->property._transform._translation._x << 
