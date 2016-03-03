@@ -7,7 +7,7 @@ bool NavigationManager::Initialize(ViewCamera* camera){
 
 
 	m_navigationTexture = std::make_shared<Texture>();
-	m_navigationTexture->Load("texture/location.png");
+	m_navigationTexture->Load("texture/Door.png");
 
 
 	m_clearbox = std::make_shared<Cube>();
@@ -36,7 +36,7 @@ bool NavigationManager::Initialize(ViewCamera* camera){
 	m_naviObj[0].m_navigation->property._transform._translation = Vector3(1900.0f, 140.0f, 580.0f);
 	m_naviObj[0].m_navigation->property._transform._scale = Vector3(260.0f, 40.0f, 350.0f);
 
-	m_naviObj[1].m_navigation->property._transform._translation = Vector3(4050.0f, 140.0f, 2200.0f);
+	m_naviObj[1].m_navigation->property._transform._translation = Vector3(3900.0f, 140.0f, 2200.0f);
 	m_naviObj[1].m_navigation->property._transform._scale = Vector3(260.0f, 20.0f, 180.0f);
 
 	m_naviObj[2].m_navigation->property._transform._translation = Vector3(5244.0f, 140.0f, 2225.0f);
@@ -48,16 +48,17 @@ bool NavigationManager::Initialize(ViewCamera* camera){
 	m_naviObj[4].m_navigation->property._transform._translation = Vector3(8645.0f, 140.0f, 697.0f);
 	m_naviObj[4].m_navigation->property._transform._scale = Vector3(260.0f, 20.0f, 380.0f); 
 
-	m_clearbox->property._transform._translation = Vector3(9600.0f, 140.0f, 2200.0f);
-	m_clearbox->property._transform._scale = Vector3(300, 300, 300);
+	m_clearbox->property._transform._translation = Vector3(9530.0f, -10.0f, 2160.0f);
+	m_clearbox->property._transform._scale = Vector3(240, 200, 240);
+	m_clearbox->property._transform._rotation = Vector3(180, 0, 0);
 	return true;
 }
 
 void NavigationManager::Render(std::shared_ptr<ShaderBase>shader){
 
-	for (int i = 0; i < navi_max; i++){
+	/*for (int i = 0; i < navi_max; i++){
 		m_naviObj[i].m_navigation->Render(shader.get());
-	}
+	}*/
 	m_clearbox->Render(shader.get());
 }
 
