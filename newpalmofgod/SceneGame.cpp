@@ -292,10 +292,6 @@ bool SceneGame::Updater(){
 		m_fallwall->Update();
 	}
 
-	//ƒ^ƒCƒgƒ‹‚É–ß‚é
-	if (GameController::GetKey().IsKeyDown(DIK_R)){
-		ChangeScene("Title", LoadState::eUnuse, LoadWaitState::eUnuse);
-	}
 	if (m_player->LifeGet() == 0){
 		ChangeScene("End", LoadState::eUnuse, LoadWaitState::eUnuse);
 	}
