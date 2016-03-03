@@ -1,5 +1,5 @@
 #include "SceneClear.h"
-#include <Rectangle.h>
+#include <Rectangle3D.h>
 #include "SceneGame.h"
 #include "Singleton.h"
 #include "ResultData.h"
@@ -8,7 +8,7 @@ using namespace std;
 
 const std::string SceneClear::m_thisName = "Clear";
 
-SceneClear::SceneClear() :
+SceneClear::SceneClear():
 GameScene(m_thisName, GetManager())
 {
 }
@@ -51,8 +51,10 @@ bool SceneClear::Initialize()
 
 	m_rankB = std::make_shared<aetherClass::Rectangle2D>();
 	m_rankB->Initialize();
+
 	m_rankC = std::make_shared<aetherClass::Rectangle2D>();
 	m_rankC->Initialize();
+
 	m_rankD = std::make_shared<aetherClass::Rectangle2D>();
 	m_rankD->Initialize();
 
@@ -104,14 +106,6 @@ bool SceneClear::Initialize()
 	return true;
 }
 
-
-void SceneClear::Judge(){
-	if (SCORE - Singleton<ResultData>::GetInstance().LifePointGet()==27){
-		m_rankB->Render(m_pixelShader.get());
-	}
-}
-
-
 bool SceneClear::Updater()
 {
 	SceneChange();
@@ -130,9 +124,29 @@ void SceneClear::Render()
 {
 	m_camera->Render();
 	m_lightmanager->Render();
-	m_rankB->Render(m_pixelShader.get());
-	clear->Render(m_pixelShader.get());
 	
+	
+
+
+	if ((SCORE + Singleton<ResultData>::GetInstance().LifePointGet())- Singleton<ResultData>::GetInstance().SoumatouCountGet() >= 8){ //S
+		m_rankS->Render(m_pixelShader.get());
+	}
+
+	if ((SCORE + Singleton<ResultData>::GetInstance().LifePointGet()) - Singleton<ResultData>::GetInstance().SoumatouCountGet() >= 6){ //A
+		m_rankA->Render(m_pixelShader.get());
+	}
+
+	if ((SCORE + Singleton<ResultData>::GetInstance().LifePointGet()) - Singleton<ResultData>::GetInstance().SoumatouCountGet() >= 5){ //B
+		m_rankB->Render(m_pixelShader.get());
+	}
+
+	if ((SCORE + Singleton<ResultData>::GetInstance().LifePointGet()) - Singleton<ResultData>::GetInstance().SoumatouCountGet() >= 3){ //C
+		m_rankC->Render(m_pixelShader.get());
+	}
+	if ((SCORE + Singleton<ResultData>::GetInstance().LifePointGet()) - Singleton<ResultData>::GetInstance().SoumatouCountGet() <= 2){ //D
+		m_rankD->Render(m_pixelShader.get());
+	}
+	clear->Render(m_pixelShader.get());
 	return;
 }
 
@@ -183,7 +197,7 @@ void SceneClear::InitStage()
 	m_stage = std::make_shared<FbxModel>();
 	m_stage->LoadFBX("ModelData/models/STAGEMODEL.fbx", eAxisSystem::eAxisOpenGL);
 	m_stage->SetCamera(m_camera.get());
-	m_stage->GetTransform()._scale = Vector3(1.0f, 1.0f, -1.0f);
+	//m_stage->GetTransform()._scale = Vector3(1.0f, 1.0f, -1.0f);
 
 	m_stage->SetModelMaterialColor(Color(0.0, 0.1, 0.1, 1), eMatrerialType::eAmbient);
 	m_stage->SetModelMaterialColor(Color(0.7, 0.6, 0.6, 0.0), eMatrerialType::eDiffuse);
@@ -197,7 +211,7 @@ void SceneClear::InitLight()
 {
 	m_lightmanager = std::make_shared<LightManager>();
 	m_lightmanager->Initialize();
-	m_lightmanager->GetLight()->Translation() = m_camera->Translation();
+	m_lightmanager->GetLight()->property._translation = m_camera->property._translation;
 
 	cout << "Initialized Light" << endl;
 }
@@ -205,8 +219,8 @@ void SceneClear::InitLight()
 void SceneClear::InitCamera()
 {
 	m_camera = std::make_shared<ViewCamera>();
-	m_camera->Translation() = Vector3(-260, -350, 447);
-	m_camera->Rotation() = Vector3(-160.0f, 0.0f, 1.0f);
+	//m_camera->Translation() = Vector3(-260, -350, 447);
+	//m_camera->Rotation() = Vector3(-160.0f, 0.0f, 1.0f);
 
 	cout << "Initialized Camera" << endl;
 }
@@ -222,7 +236,7 @@ void SceneClear::SceneChange()
 	if (GameController::GetMouse().IsLeftButtonTrigger())
 	{
 		cout << "Called NextScene!" << endl;
-		ChangeScene("Title", true);
+		ChangeScene("Game", LoadState::eUnuse, LoadWaitState::eUnuse);
 
 	}
 

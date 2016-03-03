@@ -39,7 +39,7 @@ void SpearUpdaterScond::Updating(std::shared_ptr<FbxModel>& spear)
 		m_event == eEvent::eNormal;
 		m_countDown = 150;
 	}
-	std::cout << m_countDown << std::endl;
+	//std::cout << m_countDown << std::endl;
 	return;
 }
 

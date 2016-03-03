@@ -154,7 +154,7 @@ void TextManager::Render(ShaderBase *m_shader){
 	}
 
 	m_waitTime++;
-	std::cout << m_waitTime << std::endl;
+	//std::cout << m_waitTime << std::endl;
 	DirectXEntity entity;
 	entity.GetDirect3DManager()->Change2DMode();
 	m_background->Render(m_shader);

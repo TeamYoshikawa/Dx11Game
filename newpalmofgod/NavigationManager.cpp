@@ -9,6 +9,10 @@ bool NavigationManager::Initialize(ViewCamera* camera){
 	m_navigationTexture = std::make_shared<Texture>();
 	m_navigationTexture->Load("texture/location.png");
 
+
+	m_clearbox = std::make_shared<Cube>();
+	m_clearbox->Initialize();
+
 	for (int i = 0; i < navi_max; i++){
 		m_naviObj[i].m_navigation = std::make_shared<Cube>();
 		if (!m_naviObj[i].m_navigation->Initialize()){
@@ -16,6 +20,9 @@ bool NavigationManager::Initialize(ViewCamera* camera){
 		}
 	}
 
+
+	m_clearbox->SetCamera(camera);
+	m_clearbox->SetTexture(m_navigationTexture.get());
 	for (int i = 0; i < navi_max; i++){
 		m_naviObj[i].m_navigation->SetCamera(camera);
 		m_naviObj[i].m_navigation->SetTexture(m_navigationTexture.get());
@@ -41,14 +48,17 @@ bool NavigationManager::Initialize(ViewCamera* camera){
 	m_naviObj[4].m_navigation->property._transform._translation = Vector3(8645.0f, 140.0f, 697.0f);
 	m_naviObj[4].m_navigation->property._transform._scale = Vector3(260.0f, 20.0f, 380.0f); 
 
+	m_clearbox->property._transform._translation = Vector3(9600.0f, 140.0f, 2200.0f);
+	m_clearbox->property._transform._scale = Vector3(300, 300, 300);
 	return true;
 }
 
 void NavigationManager::Render(std::shared_ptr<ShaderBase>shader){
 
-	for (int i = 0; i < navi_max; i++){
-		//m_naviObj[i].m_navigation->Render(shader.get());
-	}
+	/*for (int i = 0; i < navi_max; i++){
+		m_naviObj[i].m_navigation->Render(shader.get());
+	}*/
+	m_clearbox->Render(shader.get());
 }
 
 void NavigationManager::Update(int id)
@@ -84,6 +94,9 @@ std::shared_ptr<aetherClass::ModelBase> NavigationManager::Navi_Get(int i){
 	return m_naviObj[i].m_navigation;
 }
 
+std::shared_ptr<aetherClass::ModelBase> NavigationManager::Clear_Get(){
+	return m_clearbox;
+}
 
 int NavigationManager::NaviCnt(){
 	return navi_max;

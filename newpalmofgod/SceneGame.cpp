@@ -3,6 +3,11 @@
 #include <iostream>
 #include <PixelShader.h>
 #include "SceneTitle.h"
+#include "SceneClear.h"
+#include"Singleton.h"
+#include"ResultData.h"
+
+
 #include"Cube.h"
 
 using namespace aetherClass;
@@ -23,10 +28,14 @@ bool SceneGame::Initialize()
 	//シーン作成
 	GameScene *Scene = new SceneTitle;
 	GameScene *Scene2 = new SceneEnd;
+	GameScene *Scene3 = new SceneClear;
+
 
 	//シーン登録
 	RegisterScene(Scene);
 	RegisterScene(Scene2);
+	RegisterScene(Scene3);
+
 	
 	// カメラオブジェクトの作成
 	m_camera = std::make_shared<ViewCamera>();
@@ -191,6 +200,7 @@ bool SceneGame::Updater(){
 		IsHitWall = true;
 	}
 
+	m_soumatou->Update();
 
 	//壁
 	m_wall->Update();
@@ -287,7 +297,14 @@ bool SceneGame::Updater(){
 	if (m_player->LifeGet() == 0){
 		ChangeScene("End", LoadState::eUnuse, LoadWaitState::eUnuse);
 	}
-	m_soumatou->Update();
+	if (m_navigation->HitMesh(m_player->Get(), m_navigation->Clear_Get())){
+		ChangeScene("Clear", LoadState::eUnuse, LoadWaitState::eUnuse);
+	}
+
+	Singleton<ResultData>::GetInstance().LifePointSet(m_player->LifeGet());
+	Singleton<ResultData>::GetInstance().SoumatouCountSet(m_soumatou->SoumatouGet());
+
+	
 	return true;
 }
 

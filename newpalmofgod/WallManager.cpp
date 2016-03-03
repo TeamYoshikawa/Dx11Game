@@ -144,7 +144,7 @@ bool WallManager::HitMesh(std::shared_ptr<aetherClass::ModelBase>& player , std:
 	
 	for (i = 0; i < r_max; i++){
 		if (m_updater->HitProcessor(m_HitWall[i], player)){
-			std::cout << "•Ç‚É“–‚½‚Á‚½‚æ" << std::endl;
+			//std::cout << "•Ç‚É“–‚½‚Á‚½‚æ" << std::endl;
 			return true;
 		}
 	}

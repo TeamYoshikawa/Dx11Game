@@ -29,7 +29,7 @@ public:
 	int Navi_IDGet();
 
 	std::shared_ptr<aetherClass::ModelBase> Navi_Get(int);
-
+	std::shared_ptr<aetherClass::ModelBase> Clear_Get();
 
 	int NaviCnt();
 
@@ -38,6 +38,8 @@ public:
 private:
 	
 	std::shared_ptr<aetherClass::Texture> m_navigationTexture;
+	std::shared_ptr<aetherClass::ModelBase> m_clearbox;
+
 
 	std::shared_ptr<NavigationUpdater> m_updater;
 	std::shared_ptr<NavigationRender> m_render;

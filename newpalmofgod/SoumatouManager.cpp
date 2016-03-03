@@ -47,6 +47,7 @@ bool SoumatouManager::Initialize(){
 	m_soumatou->SetTexture(m_soumaTexture.get());
 	
 	m_countDown = 150;
+	m_pressCount = 0;
 	m_eEvent == eEvent::eNomal;
 	
 	return true;
@@ -60,15 +61,23 @@ void SoumatouManager::Update(){
 	
 	if (flag==true){
 		m_countDown--;
+		
 	}
 	if (m_countDown < 0){
+		m_pressCount += 1;
 		m_countDown = 150;
 		flag = false;
 	}
 }
 
+int SoumatouManager::SoumatouGet(){
+	return m_pressCount;
+}
+void SoumatouManager::SoumatouSet(int Set){
+	m_pressCount=Set;
+}
+
 void SoumatouManager::Render(){
-	//std::cout << "hiroki";
 	
 	if (flag==true){
 		m_soumatou->Render(m_pixelShader.get());

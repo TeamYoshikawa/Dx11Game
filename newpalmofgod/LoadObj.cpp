@@ -13,9 +13,6 @@ LoadObj::~LoadObj()
 {
 }
 
-
-
-
 void LoadObj::Initialize()
 {
 	m_flag = 0;

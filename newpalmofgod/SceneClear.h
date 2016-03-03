@@ -9,7 +9,7 @@
 #include "PixelShader.h"
 #include "SpriteBase.h"
 
-#define SCORE 30
+#define SCORE 7
 class SceneClear:
 	public aetherClass::GameScene
 {
@@ -46,7 +46,11 @@ private:
 	std::shared_ptr<aetherClass::SpriteBase>m_rankC;
 	std::shared_ptr<aetherClass::SpriteBase>m_rankD;
 
-	std::shared_ptr<aetherClass::ModelBase>feedin;
+
+	
+
+
+	//std::shared_ptr<aetherClass::ModelBase>feedin;
 	std::shared_ptr<aetherClass::ViewCamera>m_uicamera;
 private:
 	void SceneChange();
@@ -56,5 +60,5 @@ private:
 	void InitCamera();
 	void InitLight();
 	void InitKeyObject();
-	void Judge();
+	
 };

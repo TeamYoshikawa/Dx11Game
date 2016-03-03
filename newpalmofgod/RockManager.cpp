@@ -37,7 +37,7 @@ bool RockManager::Initialize(ViewCamera* camera){
 
 	
 	m_Rock[0]->property._transform._translation = Vector3(5900.0f, -340.0f, 2180.0f);
-	m_Rock[0]->property._transform._scale = Vector3(120.0f, 120.0f, 120.0f);
+	m_Rock[0]->property._transform._scale = Vector3(140.0f, 140.0f, 140.0f);
 
 	m_Rock[1]->property._transform._translation = Vector3(2530.0f, -320.0f, 2200.0f);
 	m_Rock[1]->property._transform._scale = Vector3(10.0f, 10.0f, 10.0f);
