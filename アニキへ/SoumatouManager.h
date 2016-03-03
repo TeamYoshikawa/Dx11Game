@@ -18,6 +18,9 @@ public:
 	void Render();
 	void Update();
 
+	int SoumatouGet();
+	void SoumatouSet(int);
+
 	SoumatouManager();
 	~SoumatouManager();
 
@@ -28,6 +31,7 @@ private:
 	std::shared_ptr<aetherClass::ShaderBase> m_pixelShader;
 	std::shared_ptr<aetherClass::ShaderBase> m_colorShader;
 	
+	int m_pressCount;
 	int m_countDown;
 	bool flag = false;
 };

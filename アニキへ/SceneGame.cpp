@@ -4,7 +4,9 @@
 #include <PixelShader.h>
 #include "SceneTitle.h"
 #include"Cube.h"
-
+#include"Singleton.h"
+#include"ResultData.h"
+#include "SceneClear.h"
 using namespace aetherClass;
 const std::string SceneGame::m_thisName = "Game";
 
@@ -23,11 +25,12 @@ bool SceneGame::Initialize()
 	//シーン作成
 	GameScene *Scene = new SceneTitle;
 	GameScene *Scene2 = new SceneEnd;
+	GameScene *Scene3 = new SceneClear;
 
 	//シーン登録
 	RegisterScene(Scene);
 	RegisterScene(Scene2);
-
+	RegisterScene(Scene3);
 	// UIの作成
 	m_ui = std::make_shared<UiGame>();
 	m_ui->Initialize();
@@ -146,6 +149,9 @@ bool SceneGame::Initialize()
 	m_trapState = eTrapState::eNull;
 	m_naviState = eNaviState::eNull;
 
+	
+	//Singleton<ResultData>::GetInstance().SoumatouCountSet(3);
+	//Singleton<ResultData>::GetInstance().SoumatouCountSet(3);
 	return true;
 }
 
@@ -270,10 +276,17 @@ bool SceneGame::Updater(){
 	if (GameController::GetKey().IsKeyDown(DIK_R)){
 		ChangeScene("Title", LoadState::eUnuse, LoadWaitState::eUnuse);
 	}
+	if (GameController::GetKey().IsKeyDown(DIK_C)){
+		ChangeScene("Clear", LoadState::eUnuse, LoadWaitState::eUnuse);
+	}
 	if (m_player->LifeGet() == 0){
 		ChangeScene("End", LoadState::eUnuse, LoadWaitState::eUnuse);
 	}
 	m_soumatou->Update();
+
+	Singleton<ResultData>::GetInstance().LifePointSet(m_player->LifeGet());
+	Singleton<ResultData>::GetInstance().SoumatouCountSet(m_soumatou->SoumatouGet());
+
 	return true;
 }
 
