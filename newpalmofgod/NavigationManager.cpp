@@ -37,7 +37,7 @@ bool NavigationManager::Initialize(ViewCamera* camera){
 	m_naviObj[0].m_navigation->property._transform._scale = Vector3(260.0f, 40.0f, 350.0f);
 
 	m_naviObj[1].m_navigation->property._transform._translation = Vector3(3900.0f, 140.0f, 2200.0f);
-	m_naviObj[1].m_navigation->property._transform._scale = Vector3(260.0f, 20.0f, 180.0f);
+	m_naviObj[1].m_navigation->property._transform._scale = Vector3(260.0f, 20.0f, 300.0f);
 
 	m_naviObj[2].m_navigation->property._transform._translation = Vector3(5244.0f, 140.0f, 2225.0f);
 	m_naviObj[2].m_navigation->property._transform._scale = Vector3(350.0f, 20.0f, 310.0f);
