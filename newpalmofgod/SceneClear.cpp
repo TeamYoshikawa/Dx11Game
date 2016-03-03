@@ -65,6 +65,7 @@ bool SceneClear::Initialize()
 	m_rankS->property._transform._scale._y = 216;
 	m_rankS->property._transform._translation._x = 225;
 	m_rankS->property._transform._translation._y = 200;
+	m_rankS->property._color._alpha = 1;
 	Texture *rankA_tex = new Texture();/*テクスチャ―用*/
 	rankA_tex->Load("image/clear_A.png");	/*画像の読み込み*/
 	m_rankA->SetTexture(rankA_tex);
@@ -72,6 +73,7 @@ bool SceneClear::Initialize()
 	m_rankA->property._transform._scale._y = 216;
 	m_rankA->property._transform._translation._x = 225;
 	m_rankA->property._transform._translation._y = 200;
+	m_rankA->property._color._alpha = 1;
 	Texture *rankB_tex = new Texture();/*テクスチャ―用*/
 	rankB_tex->Load("image/clear_B.png");	/*画像の読み込み*/
 	m_rankB->SetTexture(rankB_tex);
@@ -79,7 +81,7 @@ bool SceneClear::Initialize()
 	m_rankB->property._transform._scale._y = 216;
 	m_rankB->property._transform._translation._x = 225;
 	m_rankB->property._transform._translation._y = 200;
-	
+	m_rankB->property._color._alpha = 1;
 	Texture *rankC_tex = new Texture();/*テクスチャ―用*/
 	rankC_tex->Load("image/clear_C.png");	/*画像の読み込み*/
 	m_rankC->SetTexture(rankB_tex);
@@ -87,7 +89,7 @@ bool SceneClear::Initialize()
 	m_rankC->property._transform._scale._y = 216;
 	m_rankC->property._transform._translation._x = 225;
 	m_rankC->property._transform._translation._y = 200;
-
+	m_rankC->property._color._alpha = 1;
 	Texture *rankD_tex = new Texture();/*テクスチャ―用*/
 	rankD_tex->Load("image/clear_D.png");	/*画像の読み込み*/
 	m_rankD->SetTexture(rankC_tex);
@@ -95,7 +97,7 @@ bool SceneClear::Initialize()
 	m_rankD->property._transform._scale._y = 216;
 	m_rankD->property._transform._translation._x = 225;
 	m_rankD->property._transform._translation._y = 200;
-
+	m_rankD->property._color._alpha = 1;
 	GameScene *Scene = new SceneGame();
 	RegisterScene(Scene);
 	/*
@@ -105,7 +107,29 @@ bool SceneClear::Initialize()
 	*/
 	return true;
 }
+void SceneClear::UIRender(){
 
+	clear->Render(m_pixelShader.get());
+	if ((SCORE + Singleton<ResultData>::GetInstance().LifePointGet()) - Singleton<ResultData>::GetInstance().SoumatouCountGet() >= 8){ //S
+		m_rankS->Render(m_pixelShader.get());
+	}
+
+	if ((SCORE + Singleton<ResultData>::GetInstance().LifePointGet()) - Singleton<ResultData>::GetInstance().SoumatouCountGet() >= 6){ //A
+		m_rankA->Render(m_pixelShader.get());
+	}
+
+	if ((SCORE + Singleton<ResultData>::GetInstance().LifePointGet()) - Singleton<ResultData>::GetInstance().SoumatouCountGet() >= 5){ //B
+		m_rankB->Render(m_colorShader.get());
+	}
+
+	if ((SCORE + Singleton<ResultData>::GetInstance().LifePointGet()) - Singleton<ResultData>::GetInstance().SoumatouCountGet() >= 3){ //C
+		m_rankC->Render(m_pixelShader.get());
+	}
+	if ((SCORE + Singleton<ResultData>::GetInstance().LifePointGet()) - Singleton<ResultData>::GetInstance().SoumatouCountGet() <= 2){ //D
+		m_rankD->Render(m_pixelShader.get());
+	}
+	
+}
 bool SceneClear::Updater()
 {
 	SceneChange();
@@ -128,25 +152,6 @@ void SceneClear::Render()
 	
 
 
-	if ((SCORE + Singleton<ResultData>::GetInstance().LifePointGet())- Singleton<ResultData>::GetInstance().SoumatouCountGet() >= 8){ //S
-		m_rankS->Render(m_pixelShader.get());
-	}
-
-	if ((SCORE + Singleton<ResultData>::GetInstance().LifePointGet()) - Singleton<ResultData>::GetInstance().SoumatouCountGet() >= 6){ //A
-		m_rankA->Render(m_pixelShader.get());
-	}
-
-	if ((SCORE + Singleton<ResultData>::GetInstance().LifePointGet()) - Singleton<ResultData>::GetInstance().SoumatouCountGet() >= 5){ //B
-		m_rankB->Render(m_pixelShader.get());
-	}
-
-	if ((SCORE + Singleton<ResultData>::GetInstance().LifePointGet()) - Singleton<ResultData>::GetInstance().SoumatouCountGet() >= 3){ //C
-		m_rankC->Render(m_pixelShader.get());
-	}
-	if ((SCORE + Singleton<ResultData>::GetInstance().LifePointGet()) - Singleton<ResultData>::GetInstance().SoumatouCountGet() <= 2){ //D
-		m_rankD->Render(m_pixelShader.get());
-	}
-	clear->Render(m_pixelShader.get());
 	return;
 }
 
@@ -158,7 +163,7 @@ void SceneClear::Finalize()
 void SceneClear::InitPixelShader()
 {
 	ShaderDesc textureDesc;
-	textureDesc._pixel._srcFile = L"Shader/Transparent.ps";
+	textureDesc._pixel._srcFile = L"Shader/ColorTexture.ps";
 	textureDesc._pixel._entryName = "ps_main";
 
 	textureDesc._vertex._srcFile = L"Shader/VertexShaderBase.hlsl";
@@ -167,6 +172,9 @@ void SceneClear::InitPixelShader()
 	m_pixelShader = std::make_shared<PixelShader>();
 	m_pixelShader->Initialize(textureDesc, ShaderType::eVertex | ShaderType::ePixel);
 
+	textureDesc._pixel._srcFile = L"Shader/BasicColor.ps";
+	m_colorShader = std::make_shared<PixelShader>();
+	m_colorShader->Initialize(textureDesc, ShaderType::eVertex | ShaderType::ePixel);
 	Material material;
 	material._ambient._color = Color(1, 0, 0, 1);
 	material._diffuse._color = Color(1, 0, 0, 1);
@@ -236,7 +244,7 @@ void SceneClear::SceneChange()
 	if (GameController::GetMouse().IsLeftButtonTrigger())
 	{
 		cout << "Called NextScene!" << endl;
-		ChangeScene("Title", LoadState::eUnuse, LoadWaitState::eUnuse);
+		ChangeScene("Game", LoadState::eUnuse, LoadWaitState::eUnuse);
 
 	}
 

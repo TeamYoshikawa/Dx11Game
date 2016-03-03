@@ -9,7 +9,7 @@
 #include "PixelShader.h"
 #include "SpriteBase.h"
 
-#define SCORE 7
+#define SCORE 8
 class SceneClear:
 	public aetherClass::GameScene
 {
@@ -23,7 +23,7 @@ public:
 	bool Updater()override;
 	void Render()override;
 	void Finalize()override;
-
+	void UIRender()override;
 	
 
 
@@ -36,7 +36,7 @@ private:
 	std::shared_ptr<aetherClass::ShaderBase> m_pixelShader;
 	std::shared_ptr<aetherClass::MaterialShader> m_materialShader;
 	std::shared_ptr<aetherClass::FbxModel> m_keyObject;
-
+	std::shared_ptr<aetherClass::ShaderBase> m_colorShader;
 
 	std::shared_ptr<aetherClass::SpriteBase>clear;
 
