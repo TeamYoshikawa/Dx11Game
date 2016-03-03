@@ -25,6 +25,7 @@ public:
 	bool Updater()override;
 	void Render()override;
 	void Finalize()override;
+	//void UIRender()override;
 
 	bool TransitionIn()override;
 
@@ -43,7 +44,7 @@ private:
 	std::shared_ptr<aetherClass::FbxModel> m_keyObject;
 
 
-	std::shared_ptr<aetherClass::SpriteBase>title;
+	std::shared_ptr<aetherClass::ModelBase>title;
 	std::shared_ptr<aetherClass::SpriteBase>feedin;	
 	std::shared_ptr<aetherClass::SpriteBase>press;
 	bool m_pressFlag;
@@ -51,6 +52,13 @@ private:
 
 	std::shared_ptr<aetherClass::ViewCamera>m_uicamera;
 
+	std::shared_ptr<aetherClass::ModelBase> m_wall[6];
+	std::shared_ptr<aetherClass::Texture> m_texture;
+
+	std::shared_ptr<aetherClass::PixelShader> m_texShader;
+
+	bool m_flag;
+	//std::shared_ptr<aetherClass::ModelBase>
 private:
 	void SceneChange();
 	void InitPixelShader();
@@ -59,4 +67,5 @@ private:
 	void InitCamera();
 	void InitLight();
 	void InitKeyObject();
+	void InitWall();
 };
