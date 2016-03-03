@@ -46,7 +46,7 @@ bool TextManager::Initialize(ViewCamera* camera){
 	m_background->Initialize();
 	m_background->SetTexture(m_texture);
 	m_background->property._transform._scale = Vector3(400, 80, 1);
-	m_background->property._transform._translation = Vector3(0.0f, 770.0f, 0.0f);
+	m_background->property._transform._translation = Vector3(-400.0f, 120.0f, 0.0f);
 	m_background->property._color._alpha = 0.3;
 
 	// Šâ‚ÌSE
@@ -62,7 +62,7 @@ bool TextManager::Initialize(ViewCamera* camera){
 	// •K‚¸‰Šú‰»
 	_ASSERT_EXPR(m_text->UpdateText(L"Score:"), "‚Å‚«‚È‚©‚Á‚½");
 
-	m_text->property._transform._translation = Vector3(40.0f, 800.0f, 0.0f);
+	m_text->property._transform._translation = Vector3(-400.0f, 150.0f, 0.0f);
 
 	return true;
 }
@@ -70,32 +70,66 @@ bool TextManager::Initialize(ViewCamera* camera){
 void TextManager::SetID(int id){
 
 	m_id = id;
+	m_flag = 0;
 	m_isRender = true;
 
 	if (m_id == 0){
-		if (m_text->property._transform._translation._y > 150){
-			m_text->property._transform._translation._y -= 4;
-			m_background->property._transform._translation._y -= 4;
+		if (m_text->property._transform._translation._x < 50){
+			m_text->property._transform._translation._x += 5;
 		}
+
+		if (m_background->property._transform._translation._x < 0){
+			m_background->property._transform._translation._x += 5;
+		}
+
 		m_text->UpdateText(L"SPACE‚ð‰Ÿ‚µ‚Ä‚­‚¾‚³‚¢");
 		m_spear->PlayToOneTime();
 	}
 
 	if (m_id == 1){
+		if (m_text->property._transform._translation._x < 50){
+			m_text->property._transform._translation._x += 5;
+		}
+
+		if (m_background->property._transform._translation._x < 0){
+			m_background->property._transform._translation._x += 5;
+		}
+
 		m_rock->PlayToOneTime();
 		m_text->UpdateText(L"‰½‚©‰¹‚ª‚·‚é");
 	}
 
 	if (m_id == 2){
+		if (m_text->property._transform._translation._x < 50){
+			m_text->property._transform._translation._x += 5;
+		}
+
+		if (m_background->property._transform._translation._x < 0){
+			m_background->property._transform._translation._x += 5;
+		}
 		m_spear->PlayToOneTime();
 		m_text->UpdateText(L"‰½‚©‰¹‚ª‚·‚é");
 	}
 
 	if (m_id == 3){
+		if (m_text->property._transform._translation._x < 50){
+			m_text->property._transform._translation._x += 5;
+		}
+
+		if (m_background->property._transform._translation._x < 0){
+			m_background->property._transform._translation._x += 5;
+		}
 		m_text->UpdateText(L"”ð‚¯‚ë");
 	}
 
 	if (m_id == 4){
+		if (m_text->property._transform._translation._x < 50){
+			m_text->property._transform._translation._x += 5;
+		}
+
+		if (m_background->property._transform._translation._x < 0){
+			m_background->property._transform._translation._x += 5;
+		}
 		m_text->UpdateText(L"ö‚è”²‚¯‚ë");
 	}
 
@@ -104,14 +138,19 @@ void TextManager::SetID(int id){
 void TextManager::Render(ShaderBase *m_shader){
 
 	if (!m_isRender){
+		m_background->property._transform._translation = Vector3(-400.0f, 120.0f, 0.0f);
+		m_text->property._transform._translation = Vector3(-400.0f, 150.0f, 0.0f);
 		SetTime();
 	}
 
-	//false‚Å‚Í‚È‚¢ê‡
-	if (!m_isRender)return;
+	if (!m_isRender){
+		return; 
+	}
 
-	if (m_waitTime > 150){
+	if(m_waitTime > 200){
+
 		m_isRender = false;
+		
 	}
 
 	m_waitTime++;
@@ -121,8 +160,19 @@ void TextManager::Render(ShaderBase *m_shader){
 	m_background->Render(m_shader);
 	m_text->Render(m_color);
 	entity.GetDirect3DManager()->Change3DMode();
+
+	
 }
 
 void TextManager:: SetTime(){
 	m_waitTime= 0;
 }
+
+int TextManager::GetTime(){
+	return m_waitTime;
+}
+
+int TextManager::GetFlag(){
+	return m_flag;
+}
+

@@ -27,14 +27,7 @@ bool SceneGame::Initialize()
 	//シーン登録
 	RegisterScene(Scene);
 	RegisterScene(Scene2);
-
-	// UIの作成
-	m_ui = std::make_shared<UiGame>();
-	m_ui->Initialize();
-
-	m_soumatou = std::make_shared<SoumatouManager>();
-	m_soumatou->Initialize();
-
+	
 	// カメラオブジェクトの作成
 	m_camera = std::make_shared<ViewCamera>();
 	m_camera->property._translation = Vector3(-100, -8, 692);
@@ -119,6 +112,14 @@ bool SceneGame::Initialize()
 	m_navigation = std::make_shared<NavigationManager>();
 	m_navigation->Initialize(m_camera.get());
 
+	// UIの作成
+	m_ui = std::make_shared<UiGame>();
+	m_ui->Initialize();
+
+	m_soumatou = std::make_shared<SoumatouManager>();
+	m_soumatou->Initialize();
+
+
 	//テキストの作成
 	m_text = std::make_shared<TextManager>();
 	m_text->Initialize(m_camera.get());
@@ -170,7 +171,9 @@ bool SceneGame::Updater(){
 
 	if (m_naviState == eNaviState::eNaviEvent){
 		m_text->SetID(m_navigation->Navi_IDGet());
-		m_naviState=eNaviState::eNull;
+		if (m_text->GetTime() > 150){
+			m_naviState = eNaviState::eNull;
+		}
 	}
 
 
@@ -182,6 +185,7 @@ bool SceneGame::Updater(){
 			break;
 		}
 	}
+
 	if (m_player->HitWallMesh(m_fallwall->GetFallingWall()))
 	{
 		IsHitWall = true;
@@ -251,7 +255,7 @@ bool SceneGame::Updater(){
 	float b = m_fallwall->GetFallingWall()->property._transform._translation._x;
 	float distance = a - b;
 	//std::cout << distance << std::endl;
-	
+
 	//std::cout << distace << std::endl;
 	//if (m_fallwall->HitMesh(m_player->Get(), m_fallwall->GetFallingWall()))
 	//{
@@ -268,7 +272,7 @@ bool SceneGame::Updater(){
 	if (m_trapState == eTrapState::eSpearEvent2){
 		m_spear->Update2();
 	}
-
+	
 	///	迫りくる壁については、状態遷移をすると槍が空中で停止するので
 	///	距離を算出して駆動させる形式に変更してます。
 	if (distance >= -1500 && distance <= 1000)

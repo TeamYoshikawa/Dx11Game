@@ -1,5 +1,5 @@
 #include "SceneTitle.h"
-#include <Rectangle.h>
+#include <Rectangle3D.h>
 #include "SceneGame.h"
 #include "Rectangle2D.h"
 using namespace aetherClass;
@@ -190,7 +190,7 @@ void SceneTitle::InitStage()
 	m_stage = std::make_shared<FbxModel>();
 	m_stage->LoadFBX("ModelData/models/STAGEMODEL.fbx", eAxisSystem::eAxisOpenGL);
 	m_stage->SetCamera(m_camera.get());
-	m_stage->property._transform._translation = Vector3(1.0f, 1.0f, -1.0f);
+	m_stage->property._transform._scale = Vector3(1.0f, 1.0f, -1.0f);
 
 	m_stage->SetModelMaterialColor(Color(0.0, 0.1, 0.1, 1), eMatrerialType::eAmbient);
 	m_stage->SetModelMaterialColor(Color(0.7, 0.6, 0.6, 0.0), eMatrerialType::eDiffuse);
@@ -229,7 +229,7 @@ void SceneTitle::SceneChange()
 	if (GameController::GetMouse().IsLeftButtonTrigger())
 	{
 		cout << "Called NextScene!" << endl;
-		ChangeScene("Game", LoadState::eUnuse, LoadWaitState::eUnuse);
+		ChangeScene("Game",LoadState::eUse,LoadWaitState::eUse);
 		
 	}
 	

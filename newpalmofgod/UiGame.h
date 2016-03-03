@@ -7,6 +7,8 @@
 #include <Cube.h>
 #include <Sphere.h>
 #include <SpriteBase.h>
+#include <Rectangle3D.h>
+#include "Rectangle2D.h"
 #include <memory>
 #include<iostream>
 
@@ -28,6 +30,7 @@ private:
 
 	std::shared_ptr<aetherClass::SpriteBase>h_ui;
 	std::shared_ptr<aetherClass::SpriteBase>heart[3];
+	std::shared_ptr<aetherClass::ViewCamera>m_uicamera;
 
 	std::shared_ptr<PlayerManager>m_player;
 

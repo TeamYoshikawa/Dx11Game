@@ -15,11 +15,12 @@ public:
 	TextManager()=default;
 	~TextManager()=default;
 
-
 	bool Initialize(aetherClass::ViewCamera* camera);
 	void SetID(int);
 	void Render(aetherClass::ShaderBase *);
 	void SetTime();
+	int GetTime();
+	int GetFlag();
 
 private:
 	aetherClass::Text *m_text;
@@ -33,7 +34,8 @@ private:
 	bool m_isRender;	//レンダーするかどうか
 	int m_id;	//ナビゲーションのID
 	int m_waitTime;	//表示時間
-	
+	int m_flag = 0;
 
+	
 };
 

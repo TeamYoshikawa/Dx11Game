@@ -102,6 +102,8 @@ private:
 	//ƒTƒEƒ“ƒh
 	std::shared_ptr<aetherClass::GameSound> m_sound;
 	std::shared_ptr<aetherClass::ViewCamera> m_camera;
+	
+	
 
 };
 

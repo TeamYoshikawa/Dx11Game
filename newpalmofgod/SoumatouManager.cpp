@@ -68,7 +68,7 @@ void SoumatouManager::Update(){
 }
 
 void SoumatouManager::Render(){
-	std::cout << "hiroki";
+	//std::cout << "hiroki";
 	
 	if (flag==true){
 		m_soumatou->Render(m_pixelShader.get());

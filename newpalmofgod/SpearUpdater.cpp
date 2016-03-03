@@ -36,7 +36,7 @@ void SpearUpdater::Updating(std::shared_ptr<FbxModel>& spear)
 	}
 	
 	Soumatou();
-	std::cout << m_countDown << std::endl;
+	//std::cout << m_countDown << std::endl;
 	return;
 }
 
@@ -59,7 +59,7 @@ void SpearUpdater::Soumatou()
 
 void SpearUpdater::SpearNormal(std::shared_ptr<FbxModel>& spear)
 {
-		std::cout << spear->property._transform._translation._y << std::endl;
+		//std::cout << spear->property._transform._translation._y << std::endl;
 		m_speed = 25.0f;
 		if (flag == true){
 			spear->property._transform._translation._y -= m_speed;
