@@ -103,7 +103,9 @@ private:
 	std::shared_ptr<aetherClass::GameSound> m_sound;
 	std::shared_ptr<aetherClass::ViewCamera> m_camera;
 	
-	
+	//‘€ìà–¾—p
+	std::shared_ptr<aetherClass::ModelBase> m_desc[4];
+	std::shared_ptr<aetherClass::Texture> m_descTexture[4];
 
 };
 

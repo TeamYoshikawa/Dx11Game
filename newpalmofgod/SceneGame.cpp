@@ -59,6 +59,33 @@ bool SceneGame::Initialize()
 	m_skybox->SetCamera(m_camera.get());
 	m_skybox->SetTexture(skytexture);
 
+
+	//操作説明テクスチャ
+	for (int i = 0; i < 4; i++)
+	{
+		m_descTexture[i] = std::make_shared<Texture>();
+	}
+
+	m_descTexture[0]->Load("image/player_dash.png");
+	m_descTexture[1]->Load("image/player_wasd.png");
+	m_descTexture[2]->Load("image/player_kamera.png");
+	m_descTexture[3]->Load("image/player_soumatou.png");
+
+	//操作説明初期化
+	for (int i = 0; i < 4; i++)
+	{
+		m_desc[i] = std::make_shared<Rectangle3D>();
+		m_desc[i]->Initialize();
+		m_desc[i]->SetCamera(m_camera.get());
+		m_desc[i]->SetTexture(m_descTexture[i].get());
+	}
+	m_desc[0]->property._transform._translation = Vector3(0, 0, 0);
+	m_desc[1]->property._transform._translation = Vector3(0, 0, 0);
+	m_desc[2]->property._transform._translation = Vector3(0, 0, 0);
+	m_desc[3]->property._transform._translation = Vector3(0, 0, 0);
+
+
+
 	// シェーダーの詳細情報の設定
 	ShaderDesc textureDesc;
 
@@ -343,6 +370,11 @@ void SceneGame::Render(){
 
 	m_soumatou->Render();
 	
+	//操作説明
+	for (int i = 0; i < 4; i++)
+	{
+		m_desc[i]->Render(m_pixelShader.get());
+	}
 
 	return;
 }
