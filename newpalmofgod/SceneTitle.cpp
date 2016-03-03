@@ -34,7 +34,7 @@ bool SceneTitle::Initialize()
 	feedin->property._transform._scale._y = 1000;
 	
 	Texture *title_tex = new Texture();/*テクスチャ―用*/
-	title_tex->Load("image/TitleTest.png");	/*画像の読み込み*/
+	title_tex->Load("image/Title06.png");	/*画像の読み込み*/
 
 	Texture *press_tex = new Texture();/*press any hogehoge*/
 	press_tex->Load("image/pushspacekey2.png");
@@ -53,12 +53,12 @@ bool SceneTitle::Initialize()
 	press = std::make_shared<aetherClass::Rectangle2D>();
 	press->Initialize();
 	press->SetTexture(press_tex);
-	press->property._transform._translation._y = 350;
-	press->property._transform._translation._x = 250;
+	press->property._transform._translation._y = 400;
+	press->property._transform._translation._x = 260;
 	press->property._transform._translation._z = 0.1;
 
-	press->property._transform._scale._x = 300;
-	press->property._transform._scale._y = 200;
+	press->property._transform._scale._x = 250;
+	press->property._transform._scale._y = 50;
 	press->property._color._alpha = 1;
 
 
