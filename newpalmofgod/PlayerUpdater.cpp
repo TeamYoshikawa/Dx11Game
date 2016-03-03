@@ -148,16 +148,19 @@ void PlayerUpdater::Move(const std::shared_ptr<FbxModel>& playerObject, std::sha
 	//}
 	if (GameController::GetKey().IsKeyDown(DIK_LEFT)){
 		cmry += cm_move * 0.43;
+		m_playerSound->PlayToOneTime();
 	}
 	else if (GameController::GetKey().IsKeyDown(DIK_RIGHT)){
 		cmry -= cm_move * 0.43;
+		m_playerSound->PlayToOneTime();
 	}
 	if (GameController::GetKey().IsKeyDown(DIK_DOWN)){
 		cmrx += cm_move * 0.35;
-
+		m_playerSound->PlayToOneTime();
 	}
 	else if (GameController::GetKey().IsKeyDown(DIK_UP)){
 		cmrx -= cm_move * 0.35;
+		m_playerSound->PlayToOneTime();
 	}
 	if (cmrx < -225){ cmrx = -225; }
 	if (cmrx > -125){ cmrx = -125; }
@@ -167,18 +170,22 @@ void PlayerUpdater::Move(const std::shared_ptr<FbxModel>& playerObject, std::sha
 		if (GameController::GetKey().IsKeyDown(DIK_A)){
 			cmx -= (cm_move*2.0f) * cos(kAetherPI * cmry / 180);
 			cmz += (cm_move*2.0f) * sin(kAetherPI * cmry / 180);
+			m_playerSound->PlayToOneTime();
 		}
 		else if (GameController::GetKey().IsKeyDown(DIK_D)){
 			cmx += (cm_move*2.0f) * cos(kAetherPI * cmry / 180);
 			cmz -= (cm_move*2.0f) * sin(kAetherPI * cmry / 180);
+			m_playerSound->PlayToOneTime();
 		}
 		if (GameController::GetKey().IsKeyDown(DIK_S)){
 			cmx += (cm_move*2.0f) * sin(kAetherPI * cmry / 180);
 			cmz += (cm_move*2.0f) * cos(kAetherPI * cmry / 180);
+			m_playerSound->PlayToOneTime();
 		}
 		else if (GameController::GetKey().IsKeyDown(DIK_W)){
 			cmx -= (cm_move*2.0f) * sin(kAetherPI * cmry / 180);
 			cmz -= (cm_move*2.0f) * cos(kAetherPI * cmry / 180);
+			m_playerSound->PlayToOneTime();
 		}
 	}
 	else
@@ -186,18 +193,22 @@ void PlayerUpdater::Move(const std::shared_ptr<FbxModel>& playerObject, std::sha
 		if (GameController::GetKey().IsKeyDown(DIK_A)){
 			cmx -= cm_move * cos(kAetherPI * cmry / 180);
 			cmz += cm_move * sin(kAetherPI * cmry / 180);
+			m_playerSound->PlayToOneTime();
 		}
 		else if (GameController::GetKey().IsKeyDown(DIK_D)){
 			cmx += cm_move * cos(kAetherPI * cmry / 180);
 			cmz -= cm_move * sin(kAetherPI * cmry / 180);
+			m_playerSound->PlayToOneTime();
 		}
 		if (GameController::GetKey().IsKeyDown(DIK_S)){
 			cmx += cm_move * sin(kAetherPI * cmry / 180);
 			cmz += cm_move * cos(kAetherPI * cmry / 180);
+			m_playerSound->PlayToOneTime();
 		}
 		else if (GameController::GetKey().IsKeyDown(DIK_W)){
 			cmx -= cm_move * sin(kAetherPI * cmry / 180);
 			cmz -= cm_move * cos(kAetherPI * cmry / 180);
+			m_playerSound->PlayToOneTime();
 		}
 	}
 
@@ -219,7 +230,7 @@ void PlayerUpdater::Move(const std::shared_ptr<FbxModel>& playerObject, std::sha
 
 	//// ƒ‚ƒfƒ‹‚Æ˜A“®
 
-	playerObject->property._transform._translation._x =camera->property._translation._x - 10;
+	playerObject->property._transform._translation._x = camera->property._translation._x - 10;
 	playerObject->property._transform._translation._z = camera->property._translation._z;
 
 

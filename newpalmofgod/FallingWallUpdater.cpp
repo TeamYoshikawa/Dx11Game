@@ -10,6 +10,9 @@ FallingWallUpdater::FallingWallUpdater()
 	m_eState = eState::eInterval;
 	m_eEvent = eEvent::eNomal;
 	m_countDown = 150;
+	m_fallWall = std::make_shared<GameSound>();
+	m_fallWall->Load("Sound/FallWall/door02.wav");
+	m_fallWall->SetValume(-2000);
 }
 
 void FallingWallUpdater::Update(ModelBase* fallingWall)
@@ -54,6 +57,7 @@ void FallingWallUpdater::Update(ModelBase* fallingWall)
 			break;
 		case eState::eFalled:
 			isFalled = true;
+			m_fallWall->PlayToOneTime();
 			break;
 		case eState::eMoveUp:
 			fallingWall->property._transform._translation._y -= 3;
@@ -74,6 +78,8 @@ void FallingWallUpdater::Update(ModelBase* fallingWall)
 			break;
 		case eState::eFalled:
 			isFalled = true;
+			m_fallWall->SetSpeed(eSoundSpeed::eSecondSpeed);
+			m_fallWall->PlayToOneTime();
 			break;
 		case eState::eMoveUp:
 			fallingWall->property._transform._translation._y -= 1.5;
@@ -85,6 +91,7 @@ void FallingWallUpdater::Update(ModelBase* fallingWall)
 	if (m_countDown < 0){
 		m_eEvent = eEvent::eNomal;
 		m_countDown = 150;
+		m_fallWall->Stop();
 	}
 }
 

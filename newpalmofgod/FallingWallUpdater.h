@@ -1,6 +1,7 @@
 #pragma once
 #include <ModelBase.h>
 #include <Physics.h>
+#include <GameSound.h>
 
 #include <iostream>
 
@@ -38,5 +39,6 @@ public:
 private:
 	bool isFallflg;
 	int m_countDown;
+	std::shared_ptr<aetherClass::GameSound> m_fallWall;
 };
 

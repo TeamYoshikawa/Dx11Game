@@ -6,6 +6,7 @@
 #include <memory>
 #include <ModelBase.h>
 #include <FbxModel.h>
+#include <GameSound.h>
 //#include<Cube.h>
 
 #define OFF 0
@@ -36,6 +37,9 @@ namespace n_Spear{
 		float m_speed;
 
 		int m_countDown;
+
+		std::shared_ptr<aetherClass::GameSound> m_tobidasuSound;
+		std::shared_ptr<aetherClass::GameSound> m_hikkomuSound;
 	public:
 		SpearUpdaterScond();
 		~SpearUpdaterScond();
