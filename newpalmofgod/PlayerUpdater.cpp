@@ -29,7 +29,7 @@ void PlayerUpdater::Initialize(){
 	m_damageFlg = 0;
 	m_playerSound = std::make_shared<GameSound>();
 	m_playerSound->Load("Sound/Player/chain03.wav");
-	m_playerSound->SetValume(-4000);
+	m_playerSound->SetValume(-1000);
 
 	m_damegeSound = std::make_shared<GameSound>();
 	m_damegeSound->Load("Sound/Player/damage03.wav");
