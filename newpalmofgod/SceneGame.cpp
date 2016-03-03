@@ -88,6 +88,8 @@ bool SceneGame::Initialize()
 	m_player = std::make_shared<PlayerManager>();
 	m_player->Initialize();//m_camera->GetCamera());
 
+	m_player->Status() = PlayerBase::PlayerStatus();
+
 
 	// ステージモデルの作成
 	m_stage = std::make_shared<FbxModel>();
