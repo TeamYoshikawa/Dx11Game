@@ -46,10 +46,10 @@ bool SpearManager::Initialize(ViewCamera *camera)
 		m_collideBoxShader[i]->Initialize(desc[i], ShaderType::eVertex | ShaderType::ePixel);
 	}
 
-	m_spear[0]->property._transform._translation = Vector3(2600.0f, 640.0f, 850.0f);
-	m_spear[1]->property._transform._translation = Vector3(2600.0f, 640.0f, 700.0f);
-	m_spear[2]->property._transform._translation = Vector3(2600.0f, 640.0f, 550.0f);
-	m_spear[3]->property._transform._translation = Vector3(2600.0f, 640.0f, 420.0f);
+	m_spear[0]->property._transform._translation = Vector3(2500.0f, 640.0f, 850.0f);
+	m_spear[1]->property._transform._translation = Vector3(2500.0f, 640.0f, 700.0f);
+	m_spear[2]->property._transform._translation = Vector3(2500.0f, 640.0f, 550.0f);
+	m_spear[3]->property._transform._translation = Vector3(2500.0f, 640.0f, 420.0f);
 	
 
 	for (int i = 0; i < 4; i++){
