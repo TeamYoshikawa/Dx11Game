@@ -86,7 +86,7 @@ void RockUpdater::First(ModelBase*Rock){
 
 	if (m_countDown <= 0)m_event = eEvent::eNormal;
 
-		if (Rock->property._transform._translation._z < 200){
+		if (Rock->property._transform._translation._x > 6200){
 			rock_flag = SET;
 			m_rockSound->Stop();
 		}
