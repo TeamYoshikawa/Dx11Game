@@ -275,7 +275,7 @@ bool SceneGame::Updater(){
 	//}
 
 	//ƒCƒxƒ“ƒg‚ª”­¶‚µ‚Ä‚¢‚½‚çUpdate‚ðŒÄ‚Ô
-	if (m_trapState == eTrapState::eRockEvent){
+	if (m_trapState == eTrapState::eRockEvent || m_trapState == eTrapState::eSpearEvent2){
 		m_rock->Update();
 	}
 	if (m_trapState == eTrapState::eSpearEvent){
