@@ -51,7 +51,7 @@ void SpearUpdaterScond::FlagOn()
 void SpearUpdaterScond::SpearNormal(std::shared_ptr<FbxModel>& spear)
 {
 	//std::cout << spear->property._transform._translation._y << std::endl;
-	m_speed = 25.0f;
+	m_speed = 40.0f;
 	if (flag2 == true){
 		spear->property._transform._translation._z -= m_speed;
 		if (spear->property._transform._translation._z < 620.0f){
