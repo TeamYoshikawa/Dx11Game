@@ -12,7 +12,7 @@
 #include <ViewCamera.h>
 #include <stdio.h>
 
-#define r_max 21
+#define r_max 22
 
 class WallManager
 
@@ -24,14 +24,23 @@ private:
 		eNull
 	};
 private:
-	std::shared_ptr<aetherClass::ModelBase>m_HitWall[20];
+	std::shared_ptr<aetherClass::ModelBase>m_HitWall[21];
+	std::shared_ptr<aetherClass::ModelBase>m_NoHitWall;
 
 	std::shared_ptr<aetherClass::Texture> m_WallTexture;
 	std::shared_ptr<aetherClass::Texture> m_HitWallTexture;
+	std::shared_ptr<aetherClass::Texture> m_NoHitWallTexture;
 	std::shared_ptr<aetherClass::Texture> m_hplayerTexture;
 
 	std::shared_ptr<n_Wall::WallUpdater>m_updater;
 	std::shared_ptr<n_Wall::WallRender>m_render;
+
+	std::shared_ptr<aetherClass::ModelBase>m_descWall01;
+	std::shared_ptr<aetherClass::ModelBase>m_descWall02;
+	std::shared_ptr<aetherClass::ModelBase>m_descWall03;
+	std::shared_ptr<aetherClass::Texture>m_descriptionWalltexture01;
+	std::shared_ptr<aetherClass::Texture>m_descriptionWalltexture02;
+	std::shared_ptr<aetherClass::Texture>m_descriptionWalltexture03;
 
 	int i;
 
