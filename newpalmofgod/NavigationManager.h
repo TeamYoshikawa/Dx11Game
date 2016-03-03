@@ -17,6 +17,14 @@
 
 class NavigationManager
 {
+
+private:
+	struct NaviObject{
+		std::shared_ptr<aetherClass::ModelBase> m_navigation;
+		bool m_isRunEnd;
+		int naviid;
+	};
+
 public:
 	NavigationManager() =default;
 	~NavigationManager() =default;;
@@ -28,7 +36,7 @@ public:
 
 	int Navi_IDGet();
 
-	std::shared_ptr<aetherClass::ModelBase> Navi_Get(int);
+	NaviObject Navi_Get(int);
 	std::shared_ptr<aetherClass::ModelBase> Clear_Get();
 
 	int NaviCnt();
@@ -43,12 +51,6 @@ private:
 
 	std::shared_ptr<NavigationUpdater> m_updater;
 	std::shared_ptr<NavigationRender> m_render;
-
-	struct NaviObject{
-		std::shared_ptr<aetherClass::ModelBase> m_navigation;
-		bool m_isRunEnd;
-		int naviid;
-	};
 
 	NaviObject m_naviObj[5];
 	int m_nowNaviID;

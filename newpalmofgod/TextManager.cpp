@@ -81,8 +81,7 @@ void TextManager::SetID(int id){
 		if (m_background->property._transform._translation._x < 0){
 			m_background->property._transform._translation._x += 5;
 		}
-
-		m_text->UpdateText(L"SPACEを押してください");
+		m_text->UpdateText(L"SPACEを押せ！！");
 		m_spear->PlayToOneTime();
 	}
 
@@ -96,7 +95,7 @@ void TextManager::SetID(int id){
 		}
 
 		m_rock->PlayToOneTime();
-		m_text->UpdateText(L"何か音がする");
+		m_text->UpdateText(L"何か音がした気がする…");
 	}
 
 	if (m_id == 2){
@@ -108,7 +107,7 @@ void TextManager::SetID(int id){
 			m_background->property._transform._translation._x += 5;
 		}
 		m_spear->PlayToOneTime();
-		m_text->UpdateText(L"何か音がする");
+		m_text->UpdateText(L"イヤな予感がする…");
 	}
 
 	if (m_id == 3){
@@ -119,7 +118,7 @@ void TextManager::SetID(int id){
 		if (m_background->property._transform._translation._x < 0){
 			m_background->property._transform._translation._x += 5;
 		}
-		m_text->UpdateText(L"避けろ");
+		m_text->UpdateText(L"よけろ！！");
 	}
 
 	if (m_id == 4){
@@ -130,7 +129,7 @@ void TextManager::SetID(int id){
 		if (m_background->property._transform._translation._x < 0){
 			m_background->property._transform._translation._x += 5;
 		}
-		m_text->UpdateText(L"潜り抜けろ");
+		m_text->UpdateText(L"くぐり抜けろ！");
 	}
 
 }
@@ -147,10 +146,18 @@ void TextManager::Render(ShaderBase *m_shader){
 		return; 
 	}
 
-	if(m_waitTime > 200){
-
-		m_isRender = false;
-		
+	if(m_waitTime > 150){
+		std::cout << m_text->property._transform._translation._x << std::endl;
+		if (m_text->property._transform._translation._x > -440){
+			m_text->property._transform._translation._x -= 8;
+		}
+		if (m_background->property._transform._translation._x > -440){
+			m_background->property._transform._translation._x -= 8;
+		}
+		if (m_text->property._transform._translation._x < -430){
+			std::cout << "hiroki";
+			m_isRender = false;
+		}
 	}
 
 	m_waitTime++;

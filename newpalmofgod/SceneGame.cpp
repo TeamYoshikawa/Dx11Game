@@ -170,8 +170,8 @@ bool SceneGame::Updater(){
 	int hitNaviNumber = 0;
 
 	for (int i = 0; i < m_navigation->NaviCnt(); i++){
-		IsHitNavi = m_navigation->HitMesh(m_player->Get(), m_navigation->Navi_Get(i));
-		if (IsHitNavi){
+		IsHitNavi = m_navigation->HitMesh(m_player->Get(), m_navigation->Navi_Get(i).m_navigation);
+		if (IsHitNavi && !m_navigation->Navi_Get(i).m_isRunEnd){
 			hitNaviNumber = i;
 			//ナビゲーションのIDの設定
 			m_navigation->Update(hitNaviNumber);
@@ -306,7 +306,6 @@ bool SceneGame::Updater(){
 	Singleton<ResultData>::GetInstance().LifePointSet(m_player->LifeGet());
 	Singleton<ResultData>::GetInstance().SoumatouCountSet(m_soumatou->SoumatouGet());
 
-	
 	return true;
 }
 
