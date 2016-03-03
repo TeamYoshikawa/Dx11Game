@@ -20,10 +20,13 @@ void FallingWallUpdater::Update(ModelBase* fallingWall)
 	float gravity = 9.8f;
 	static float cnt = 1;
 	static float interval = 120;
+	static bool isFalled = false;
+
 
 	if (fallingWall->property._transform._translation._y >= -30)
 	{
-		m_eState = eState::eMoveUp;
+		if (isFalled){ m_eState = eState::eMoveUp; }
+		else m_eState = eState::eFalled;
 	}
 	if (fallingWall->property._transform._translation._y <= -470)
 	{
@@ -47,9 +50,14 @@ void FallingWallUpdater::Update(ModelBase* fallingWall)
 			break;
 		case eState::eMoveDown:
 			fallingWall->property._transform._translation._y += gravity * cnt;
+			isFalled = false;
+			break;
+		case eState::eFalled:
+			isFalled = true;
 			break;
 		case eState::eMoveUp:
 			fallingWall->property._transform._translation._y -= 3;
+
 			break;
 		}
 	}
@@ -62,9 +70,14 @@ void FallingWallUpdater::Update(ModelBase* fallingWall)
 			break;
 		case eState::eMoveDown:
 			fallingWall->property._transform._translation._y += gravity * cnt;
+			isFalled = false;
+			break;
+		case eState::eFalled:
+			isFalled = true;
 			break;
 		case eState::eMoveUp:
-			fallingWall->property._transform._translation._y -= 1.5f;
+			fallingWall->property._transform._translation._y -= 3;
+
 			break;
 		}
 		m_countDown--;

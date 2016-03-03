@@ -10,6 +10,7 @@ private:
 	enum class eState
 	{
 		eMoveDown,
+		eFalled,
 		eMoveUp,
 		eInterval,
 		eStop,

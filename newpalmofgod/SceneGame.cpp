@@ -231,6 +231,7 @@ bool SceneGame::Updater(){
 	if (m_player->HitMesh(m_fallwall->GetCollider().get()))
 	{
 		m_player->SetState(PlayerBase::ePlayerMoveState::eDamage);
+		ChangeScene("End", LoadState::eUnuse, LoadWaitState::eUnuse);
 	}
 
 	//各トラップのイベントの呼び出し
@@ -246,11 +247,16 @@ bool SceneGame::Updater(){
 		m_trapState = eTrapState::eSpearEvent2;
 	}
 	
-
-	if (m_fallwall->HitMesh(m_player->Get(), m_fallwall->GetFallingWall()))
-	{
-		m_trapState = eTrapState::efallwall;
-	}
+	float a = m_player->Get()->property._transform._translation._x;
+	float b = m_fallwall->GetFallingWall()->property._transform._translation._x;
+	float distance = a - b;
+	//std::cout << distance << std::endl;
+	
+	//std::cout << distace << std::endl;
+	//if (m_fallwall->HitMesh(m_player->Get(), m_fallwall->GetFallingWall()))
+	//{
+	//	m_trapState = eTrapState::efallwall;
+	//}
 
 	//イベントが発生していたらUpdateを呼ぶ
 	if (m_trapState == eTrapState::eRockEvent){
@@ -262,9 +268,13 @@ bool SceneGame::Updater(){
 	if (m_trapState == eTrapState::eSpearEvent2){
 		m_spear->Update2();
 	}
-	//if (m_trapState == eTrapState::efallwall){
-	m_fallwall->Update();
-	//}
+
+	///	迫りくる壁については、状態遷移をすると槍が空中で停止するので
+	///	距離を算出して駆動させる形式に変更してます。
+	if (distance >= -1500 && distance <= 1000)
+	{
+		m_fallwall->Update();
+	}
 
 	//タイトルに戻る
 	if (GameController::GetKey().IsKeyDown(DIK_R)){
