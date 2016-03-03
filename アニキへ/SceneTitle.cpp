@@ -29,13 +29,13 @@ bool SceneTitle::Initialize()
 	m_flag = 0;
 
 	Texture *title_tex = new Texture();/*テクスチャ―用*/
-	title_tex->Load("image/TitleTest.png");	/*画像の読み込み*/
+	title_tex->Load("image/Title06.png");	/*画像の読み込み*/
 
 	Texture *press_tex = new Texture();/*press any hogehoge*/
 	press_tex->Load("image/pushspacekey2.png");
 
 	Texture *wall_tex = new Texture();
-	wall_tex->Load("Texture/kabetitle.png");
+	wall_tex->Load("image/kabe2.png");
 
 
 	feedin = std::make_shared<aetherClass::Rectangle2D>();
@@ -45,27 +45,68 @@ bool SceneTitle::Initialize()
 	feedin->property._transform._scale._x = 1000;
 	feedin->property._transform._scale._y = 1000;
 
-	m_wall = std::make_shared<aetherClass::Rectangle3D>();
-	m_wall->Initialize();
-	m_wall->SetCamera(m_camera.get());
-	m_wall->SetTexture(wall_tex);
-	m_wall->property._transform._translation = Vector3(220.0, -41, 400);
-	m_wall->property._transform._scale = Vector3(300, 300, 300);
+	for (int i = 0; i < 5; i++)
+	{
+		m_wall[i] = std::make_shared<aetherClass::Cube>();
+		m_wall[i]->Initialize();
+		m_wall[i]->SetCamera(m_camera.get());
+		m_wall[i]->SetTexture(wall_tex);
+	}
+
+	m_wall[5] = std::make_shared<aetherClass::Cube>();
+	m_wall[5]->Initialize();
+	m_wall[5]->SetCamera(m_camera.get());
+	m_wall[5]->SetTexture(wall_tex);
 
 
-	title = std::make_shared<aetherClass::Rectangle2D>();
+
+	m_wall[0]->property._transform._translation = Vector3(-178.0, 100, 0);
+	m_wall[0]->property._transform._scale = Vector3(1500, 300, 10);
+	m_wall[0]->property._transform._rotation._y = 90;
+
+	//窓側
+	m_wall[1]->property._transform._translation = Vector3(14.0, 100, 10);
+	m_wall[1]->property._transform._scale = Vector3(180, 300, 10);
+
+	m_wall[2]->property._transform._translation = Vector3(800.0, 100, 10);
+	m_wall[2]->property._transform._scale = Vector3(300, 300, 10);
+
+	m_wall[5]->property._transform._translation = Vector3(400.0, 275, 10);
+	m_wall[5]->property._transform._scale = Vector3(600, 300, 10);
+	//m_wall[5]->property._transform._rotation._z = 180;
+
+	m_wall[4]->property._transform._translation = Vector3(400.0, -200, 10);
+	m_wall[4]->property._transform._scale = Vector3(600, 40, 10);
+
+	m_wall[3]->property._transform._translation = Vector3(880.0, 100, 900);
+	m_wall[3]->property._transform._scale = Vector3(1610, 300, 10);
+
+
+	title = std::make_shared<aetherClass::Rectangle3D>();
 	title->Initialize();
+	title->SetCamera(m_camera.get());
 	title->SetTexture(title_tex);
-	title->property._transform._translation._y = 35;
-	title->property._transform._translation._x = 25;
-	title->property._transform._translation._z = 0.1;
-	title->property._transform._scale._x = 750;
-	title->property._transform._scale._y = 250;
+	//title->property._transform._translation = Vector3(400, 275, 20);
+	//title->property._transform._scale = Vector3(100, 100, 5);
+	title->property._transform._translation = m_camera->property._translation;
+	title->property._transform._scale = Vector3(150, 150, 10);
+	//title->property._transform._translation._y = 300;
+	//title->property._transform._translation._x = 40;
+	//title->property._transform._translation._z = 50;
+	//title->property._transform._scale._x = 100;
+	//title->property._transform._scale._y = 100;
+
 
 	m_pressFlag = true;
 
 	GameScene *Scene = new SceneGame();
 	RegisterScene(Scene);
+
+	//delete title_tex;
+	//delete press_tex;
+	//delete wall_tex;
+
+
 	return true;
 }
 
@@ -82,6 +123,7 @@ bool SceneTitle::TransitionIn()
 		return kTransitionEnd;
 	}
 
+
 	return kTransitionning;
 }
 
@@ -89,6 +131,23 @@ bool SceneTitle::TransitionIn()
 bool SceneTitle::Updater()
 {
 	SceneChange();
+	if (GameController::GetKey().IsKeyDown(DIK_D))
+	{
+		m_camera->property._translation._x += 1;
+	}
+	if (GameController::GetKey().IsKeyDown(DIK_A))
+	{
+		m_camera->property._translation._x -= 1;
+	}
+	if (GameController::GetKey().IsKeyDown(DIK_W))
+	{
+		m_camera->property._translation._z -= 1;
+	}
+	if (GameController::GetKey().IsKeyDown(DIK_S))
+	{
+		m_camera->property._translation._z += 1;
+	}
+
 	if (GameController::GetKey().IsKeyDown(DIK_ESCAPE)){
 		return false;
 	}
@@ -112,6 +171,7 @@ bool SceneTitle::Updater()
 	std::cout << "y:" << m_camera->property._translation._y << std::endl;
 	std::cout << "z:" << m_camera->property._translation._z << std::endl;
 
+	//m_wall[0]->property._transform._translation = m_camera->property._translation;
 
 	return true;
 }
@@ -122,8 +182,11 @@ void SceneTitle::Render()
 	m_lightmanager->Render();
 	m_stage->Render(m_materialShader.get());
 	title->Render(m_pixelShader.get());
-
-	m_wall->Render(m_texShader.get());
+	
+	for (int i = 0; i < 6; i++)
+	{
+		m_wall[i]->Render(m_texShader.get());
+	}
 
 	return;
 }
