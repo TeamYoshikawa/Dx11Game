@@ -8,7 +8,7 @@ using namespace std;
 const std::string SceneTitle::m_thisName = "Title";
 
 SceneTitle::SceneTitle() :
-GameScene(m_thisName, GetManager())
+GameScene(m_thisName,GetManager())
 {
 }
 
@@ -32,23 +32,23 @@ bool SceneTitle::Initialize()
 	feedin->property._color._alpha = 0;
 	feedin->property._transform._scale._x = 1000;
 	feedin->property._transform._scale._y = 1000;
-
+	
 	Texture *title_tex = new Texture();/*テクスチャ―用*/
 	title_tex->Load("image/TitleTest.png");	/*画像の読み込み*/
 
 	Texture *press_tex = new Texture();/*press any hogehoge*/
-	press_tex->Load("image/Title02.png");
+	press_tex->Load("image/pushspacekey2.png");
 
 	title = std::make_shared<aetherClass::Rectangle2D>();
 	title->Initialize();
 	title->SetTexture(title_tex);
-	title->property._transform._translation._y = 35;
+	title->property._transform._translation._y= 35;
 	title->property._transform._translation._x = 25;
 	title->property._transform._translation._z = 0.1;
 
-	title->property._transform._scale._x = 750;
-	title->property._transform._scale._y = 250;
-
+	title->property._transform._scale._x= 750;
+	title->property._transform._scale._y= 250;
+	
 
 	press = std::make_shared<aetherClass::Rectangle2D>();
 	press->Initialize();
@@ -61,6 +61,7 @@ bool SceneTitle::Initialize()
 	press->property._transform._scale._y = 200;
 	press->property._color._alpha = 1;
 
+
 	m_pressFlag = true;
 
 	GameScene *Scene = new SceneGame();
@@ -68,9 +69,9 @@ bool SceneTitle::Initialize()
 
 
 	/*
-	title->property._transform._scale = Vector3(0.8f, 0.8f, 0.0f);
-	title->property._transform._translation = Vector3(20.0f, -8.2f, 45.0f) + m_uicamera->Translation();
-	title->property._transform._rotation = Vector3(0.0f, 0.0f, 0.0f);
+	title->GetTransform()._scale = Vector3(0.8f, 0.8f, 0.0f);
+	title->GetTransform()._translation = Vector3(20.0f, -8.2f, 45.0f) + m_uicamera->Translation();
+	title->GetTransform()._rotation = Vector3(0.0f, 0.0f, 0.0f);
 	*/
 	return true;
 }
@@ -79,17 +80,17 @@ bool SceneTitle::Initialize()
 bool SceneTitle::TransitionIn()
 {
 	m_camera->Render();
-
+	
 	feedin->property._color._alpha += 0.007;
 	feedin->Render(m_colorShader.get());
 	if (feedin->property._color._alpha < 0){
 		return kTransitionning;
 	}
 	else if (feedin->property._color._alpha > 1){
-
+		
 		return kTransitionEnd;
 
-
+	
 	}
 
 	return kTransitionning;
@@ -108,9 +109,9 @@ bool SceneTitle::Updater()
 		return false;
 	}
 
-
-
-
+	
+	
+		
 	return true;
 }
 
@@ -120,7 +121,7 @@ void SceneTitle::Render()
 	m_lightmanager->Render();
 	m_stage->Render(m_materialShader.get());
 	title->Render(m_pixelShader.get());
-
+	
 	press->Render(m_pixelShader.get());
 
 
@@ -131,14 +132,14 @@ void SceneTitle::Render()
 	else if (press->property._color._alpha < 0){
 		m_pressFlag = false;
 	}
-
+	
 	if (m_pressFlag){
 		press->property._color._alpha -= 0.01;
-
+		
 	}
 	else{
 		press->property._color._alpha += 0.01;
-
+	
 	}
 
 	return;
@@ -157,7 +158,7 @@ void SceneTitle::InitPixelShader()
 
 	textureDesc._vertex._srcFile = L"Shader/VertexShaderBase.hlsl";
 	textureDesc._vertex._entryName = "vs_main";
-
+	
 	m_pixelShader = std::make_shared<PixelShader>();
 	m_pixelShader->Initialize(textureDesc, ShaderType::eVertex | ShaderType::ePixel);
 
@@ -204,7 +205,7 @@ void SceneTitle::InitLight()
 	m_lightmanager = std::make_shared<LightManager>();
 	m_lightmanager->Initialize();
 	m_lightmanager->GetLight()->property._translation = m_camera->property._translation;
-
+	
 	cout << "Initialized Light" << endl;
 }
 
@@ -213,7 +214,7 @@ void SceneTitle::InitCamera()
 	m_camera = std::make_shared<ViewCamera>();
 	m_camera->property._translation = Vector3(-260, -350, 447);
 	m_camera->property._rotation = Vector3(-160.0f, 0.0f, 1.0f);
-
+	
 	cout << "Initialized Camera" << endl;
 }
 
@@ -225,11 +226,11 @@ void SceneTitle::InitKeyObject()
 
 void SceneTitle::SceneChange()
 {
-	if (GameController::GetMouse().IsLeftButtonTrigger())
+	if (GameController::GetKey().IsKeyDown(DIK_SPACE))
 	{
 		cout << "Called NextScene!" << endl;
-		ChangeScene("Game", LoadState::eUse, LoadWaitState::eUse);
-
+		ChangeScene("Game",LoadState::eUse,LoadWaitState::eUse);
+		
 	}
-
+	
 }
