@@ -37,6 +37,18 @@ bool SceneTitle::Initialize()
 	Texture *wall_tex = new Texture();
 	wall_tex->Load("image/kabe2.png");
 
+
+	//ƒTƒEƒ“ƒh
+	m_sound = std::make_shared<GameSound>();
+	m_sound->Load("Sound/BGM/kaze.wav");
+	m_sound->SetValume(-3000);
+	m_sound->PlayToLoop();
+
+	m_tetuSound = std::make_shared<GameSound>();
+	m_tetuSound->Load("Sound/tetugousi.wav");
+	m_sound->SetValume(-3000);
+
+
 	press = std::make_shared<aetherClass::Rectangle2D>();
 	press->Initialize();
 	press->SetTexture(press_tex);
@@ -211,7 +223,7 @@ void SceneTitle::Render()
 
 	if (m_pressFlag){
 		press->property._color._alpha -= 0.01;
-
+		
 	}
 	else{
 		press->property._color._alpha += 0.01;
@@ -307,6 +319,7 @@ void SceneTitle::InitKeyObject()
 void SceneTitle::SceneChange()
 {
 	if (m_camera->property._rotation._y == 180){
+		m_tetuSound->PlayToOneTime();
 		cout << "Called NextScene!" << endl;
 		ChangeScene("Game", LoadState::eUse, LoadWaitState::eUse);
 	}

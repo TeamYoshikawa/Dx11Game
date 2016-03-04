@@ -3,6 +3,7 @@
 #include <iostream>
 
 #include <GameScene.h>
+#include <GameSound.h>
 #include <FbxModel.h>
 #include <Cube.h>
 #include "ViewCamera.h"
@@ -34,6 +35,9 @@ public:
 	static const std::string m_thisName;
 
 private:
+	std::shared_ptr<aetherClass::GameSound> m_sound;
+	std::shared_ptr<aetherClass::GameSound> m_tetuSound;
+
 	std::shared_ptr<aetherClass::ViewCamera> m_camera;
 	std::shared_ptr<aetherClass::FbxModel> m_stage;
 	std::shared_ptr<LightManager> m_lightmanager;
