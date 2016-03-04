@@ -21,7 +21,7 @@
 #include "Light.h"
 #include "UiGame.h"
 #include "GameSound.h"
-
+#include "PixelShader.h"
 
 class SceneGame :
 	public aetherClass::GameScene
@@ -94,6 +94,7 @@ private:
 
 	//シェーダー
 	std::shared_ptr<aetherClass::ShaderBase> m_pixelShader;
+	std::shared_ptr<aetherClass::ShaderBase> m_colorShader;
 	std::shared_ptr<aetherClass::ShaderBase> m_shader;
 	std::shared_ptr<aetherClass::ShaderBase> m_alphashader;
 	std::shared_ptr<aetherClass::MaterialShader> m_materialShader;
