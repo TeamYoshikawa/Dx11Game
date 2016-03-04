@@ -66,8 +66,8 @@ bool SceneGame::Initialize()
 		m_descTexture[i] = std::make_shared<Texture>();
 	}
 
-	m_descTexture[0]->Load("image/player_dash.png");
-	m_descTexture[1]->Load("image/player_wasd.png");
+	m_descTexture[0]->Load("image/player_wasd.png");
+	m_descTexture[1]->Load("image/player_dash.png");
 	m_descTexture[2]->Load("image/player_kamera.png");
 	m_descTexture[3]->Load("image/player_soumatou.png");
 
@@ -79,10 +79,14 @@ bool SceneGame::Initialize()
 		m_desc[i]->SetCamera(m_camera.get());
 		m_desc[i]->SetTexture(m_descTexture[i].get());
 	}
-	m_desc[0]->property._transform._translation = Vector3(0, 0, 0);
-	m_desc[1]->property._transform._translation = Vector3(0, 0, 0);
-	m_desc[2]->property._transform._translation = Vector3(0, 0, 0);
-	m_desc[3]->property._transform._translation = Vector3(0, 0, 0);
+	m_desc[0]->property._transform._translation = Vector3(14.0f, 100.0f,40.0f);
+	m_desc[0]->property._transform._scale = Vector3(100,-100,100);
+	m_desc[1]->property._transform._translation = Vector3(350.0f, 80.0f, 40.0f);
+	m_desc[1]->property._transform._scale = Vector3(100, -100, 500);
+	m_desc[2]->property._transform._translation = Vector3(14.0f, -90.0f, 41.0f);
+	m_desc[2]->property._transform._scale = Vector3(100, -100, 500);
+	m_desc[3]->property._transform._translation = Vector3(14.0f,-30.0f, 870.0f);
+	m_desc[3]->property._transform._scale = Vector3(-100, -100, 500);
 
 
 
@@ -93,7 +97,7 @@ bool SceneGame::Initialize()
 	textureDesc._vertex._srcFile = L"Shader/VertexShaderBase.hlsl";
 
 	textureDesc._pixel._entryName = "ps_main";
-	textureDesc._pixel._srcFile = L"Shader/ColorTextureAdd2.ps";
+	textureDesc._pixel._srcFile = L"Shader/Texture.ps";
 
 
 	// ピクセルシェーダーの作成
@@ -197,15 +201,15 @@ bool SceneGame::Updater(){
 	int hitNaviNumber = 0;
 
 	for (int i = 0; i < m_navigation->NaviCnt(); i++){
-		IsHitNavi = m_navigation->HitMesh(m_player->Get(), m_navigation->Navi_Get(i).m_navigation);
-		if (IsHitNavi && !m_navigation->Navi_Get(i).m_isRunEnd){
-			hitNaviNumber = i;
-			//ナビゲーションのIDの設定
-			m_navigation->Update(hitNaviNumber);
-			m_naviState = eNaviState::eNaviEvent;
-			break;
-		}
+		//IsHitNavi = m_navigation->HitMesh(m_player->Get(), m_navigation->Navi_Get(i).m_navigation);
+		//if (IsHitNavi && !m_navigation->Navi_Get(i).m_isRunEnd){
+		hitNaviNumber = i;
+		//ナビゲーションのIDの設定
+		m_navigation->Update(hitNaviNumber);
+		m_naviState = eNaviState::eNaviEvent;
+		break;
 	}
+//}
 
 	if (m_naviState == eNaviState::eNaviEvent){
 		m_text->SetID(m_navigation->Navi_IDGet());

@@ -17,36 +17,7 @@ bool WallManager::Initialize(ViewCamera* camera){
 	m_hplayerTexture = std::make_shared<Texture>();
 	m_hplayerTexture->Load("Title.png");
 
-	m_descriptionWalltexture01 = std::make_shared<Texture>();
-	m_descriptionWalltexture01->Load("Playerkamera.png");
-	m_descriptionWalltexture02 = std::make_shared<Texture>();
-	m_descriptionWalltexture02->Load("Playersoumatou.png");
-	m_descriptionWalltexture03 = std::make_shared<Texture>();
-	m_descriptionWalltexture03->Load("Playerwasd.png");
-
-	/*m_descWall01->Initialize();
-	m_descWall01->SetCamera(camera);
-	m_descWall01->SetTexture(m_descriptionWalltexture01.get());
-	m_descWall01 = std::make_shared<Cube>();
-	m_descWall01->property._transform._translation = Vector3(-178.0f, 100.0f, 0.0f);
-	m_descWall01->property._transform._scale = Vector3(1500.0f, 300.0f, 10.0f);
-	m_descWall01->property._transform._rotation._y = 90;
-
-	m_descWall02->Initialize();
-	m_descWall02->SetCamera(camera);
-	m_descWall02->SetTexture(m_descriptionWalltexture02.get());
-	m_descWall02 = std::make_shared<Cube>();
-	m_descWall02->property._transform._translation = Vector3(-178.0f, 100.0f, 0.0f);
-	m_descWall02->property._transform._scale = Vector3(1500.0f, 300.0f, 10.0f);
-	m_descWall02->property._transform._rotation._y = 90;
-
-	m_descWall03->Initialize();
-	m_descWall03->SetCamera(camera);
-	m_descWall03->SetTexture(m_descriptionWalltexture03.get());
-	m_descWall03 = std::make_shared<Cube>();	
-	m_descWall03->property._transform._translation = Vector3(-178.0f, 100.0f, 0.0f);
-	m_descWall03->property._transform._scale = Vector3(1500.0f, 300.0f, 10.0f);
-	m_descWall03->property._transform._rotation._y = 90;*/
+	
 	
 	for (i = 0; i < r_max; i++){
 		m_HitWall[i] = std::make_shared<Cube>();
@@ -78,16 +49,16 @@ bool WallManager::Initialize(ViewCamera* camera){
 	m_HitWall[1]->property._transform._scale = Vector3(1610.0f, 300.0f, 10.0f);
 
 	//スタートすぐ後ろ
-	m_HitWall[14]->property._transform._translation = Vector3(14.0f, 100.0f, 10.0f);
+	m_HitWall[14]->property._transform._translation = Vector3(14.0f, 100.0f, 15.0f);
 	m_HitWall[14]->property._transform._scale = Vector3(180.0f, 300.0f, 10.0f);
 
-	m_HitWall[18]->property._transform._translation = Vector3(800.0f, 100.0f, 10.0f);
+	m_HitWall[18]->property._transform._translation = Vector3(800.0f, 100.0f, 16.0f);
 	m_HitWall[18]->property._transform._scale = Vector3(300.0f, 300.0f, 10.0f);
 
-	m_HitWall[19]->property._transform._translation = Vector3(400.0f, 275.0f, 10.0f);
+	m_HitWall[19]->property._transform._translation = Vector3(400.0f, 275.0f, 17.0f);
 	m_HitWall[19]->property._transform._scale = Vector3(600.0f, 300.0f, 10.0f);
 
-	m_HitWall[20]->property._transform._translation = Vector3(400.0f, -200.0f, 10.0f);
+	m_HitWall[20]->property._transform._translation = Vector3(400.0f, -200.0f, 14.0f);
 	m_HitWall[20]->property._transform._scale = Vector3(600.0f, 40.0f, 10.0f);
 
 	//スタート左の壁
