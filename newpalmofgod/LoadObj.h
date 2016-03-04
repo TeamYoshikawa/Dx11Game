@@ -18,7 +18,10 @@ public:
 	void Initialize()override;
 	void Finalize()override;
 	void Run()override;
+	
 	bool WaitRun()override;
+	
+
 private:
 	std::shared_ptr<aetherClass::ViewCamera> m_camera;
 	std::shared_ptr<aetherClass::ModelBase>load;
@@ -27,7 +30,9 @@ private:
 	std::shared_ptr<aetherClass::SpriteBase> feed_out;
 	std::shared_ptr<aetherClass::SpriteBase> feed_in;
 	std::shared_ptr<LightManager> m_lightmanager;
+	std::shared_ptr<aetherClass::SpriteBase>press;
 	bool m_pressFlag;
+	bool m_SpaceFlag;
 	int m_flag;
 private:
 	void SceneChange();

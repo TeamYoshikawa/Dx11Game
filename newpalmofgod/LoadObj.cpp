@@ -55,13 +55,27 @@ void LoadObj::Initialize()
 	feed_in->property._transform._scale._x = 800;
 	feed_in->property._transform._scale._y = 600;
 
+	Texture *press_tex = new Texture();/*press any hogehoge*/
+	press_tex->Load("image/pushspacekey2.png");
+	press = std::make_shared<aetherClass::Rectangle2D>();
+	press->Initialize();
+	press->SetTexture(press_tex);
+	press->property._transform._translation._y = 550;
+	press->property._transform._translation._x = 540;
+	press->property._transform._translation._z = +0.1;
+	press->property._transform._scale._x = 250;
+	press->property._transform._scale._y = 50;
+	press->property._color._alpha = 1;
+	press->property._color = Vector3(0.6f,0.5f,0.4);
+
+	m_SpaceFlag = true;
 	m_pressFlag = true;
 }
 
 void LoadObj::InitPixelShader()
 {
 	ShaderDesc textureDesc;
-	textureDesc._pixel._srcFile = L"Shader/ColorTexture.ps";
+	textureDesc._pixel._srcFile = L"Shader/Transparent.ps";
 	textureDesc._pixel._entryName = "ps_main";
 
 	textureDesc._vertex._srcFile = L"Shader/VertexShaderBase.hlsl";
@@ -87,21 +101,43 @@ void LoadObj::InitCamera()
 
 
 bool LoadObj::WaitRun(){
-
+	DirectXEntity entity;
+	entity.GetDirect3DManager()->Change2DMode();
 	feed_in->Render(m_pixelShader.get());
 	load02->Render(m_pixelShader.get());
+	
+	press->Render(m_pixelShader.get());
+	entity.GetDirect3DManager()->Change3DMode();
 
 	std::cout << "”CˆÓ‚Ìˆ—‚Ü‚¿" << std::endl;
 	GameController::GetKey().Read();
 
+	if (press->property._color._alpha == 1.0){
+		m_SpaceFlag = true;
+	}
+	else if (press->property._color._alpha < 0){
+		m_SpaceFlag = false;
+	}
+	if (m_SpaceFlag){
+		std::cout << "true" << press->property._color._alpha << std::endl;
+		press->property._color._alpha -= 0.01;
+	}
+	else{
+		std::cout <<"false"<< press->property._color._alpha<<std::endl;
+		press->property._color._alpha += 0.01;
+	}
+	
+
+
+	//////
 	if (feed_in->property._color._alpha < 0){
-		
 		m_pressFlag = true;
 	}
 	else if (feed_in->property._color._alpha == 1){
 		m_pressFlag = false;
 	}
 	
+
 	if (GameController::GetKey().IsKeyDown(DIK_SPACE))
 	{
 		m_flag = 1;
@@ -118,11 +154,14 @@ bool LoadObj::WaitRun(){
 		else{	
 			return kWaitting;
 		}
+		
+
 }
 
 void LoadObj::Run()
 {
 	m_camera->Render();
+
 	load->Render(m_pixelShader.get());
 	return;
 
