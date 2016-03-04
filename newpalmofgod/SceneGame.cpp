@@ -124,7 +124,7 @@ bool SceneGame::Initialize()
 
 	// ステージモデルの作成
 	m_stage = std::make_shared<FbxModel>();
-	m_stage->LoadFBX("ModelData/models/Stage_ananashi2.fbx", eAxisSystem::eAxisOpenGL);
+	m_stage->LoadFBX("ModelData/models/Stage_Door2.fbx", eAxisSystem::eAxisOpenGL);
 	m_stage->SetCamera(m_camera.get());//m_camera->GetCamera().get());
 	m_stage->property._transform._scale = Vector3(1.0f, 1.0f, -1.0f);
 
