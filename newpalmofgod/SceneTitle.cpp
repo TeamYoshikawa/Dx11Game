@@ -46,6 +46,7 @@ bool SceneTitle::Initialize()
 	press->property._transform._scale._x = 250;
 	press->property._transform._scale._y = 50;
 	press->property._color._alpha = 1;
+	press->property._color = Color(0.7f, 0.6f, 0.4f, 1.0f);
 
 	feedin = std::make_shared<aetherClass::Rectangle2D>();
 	feedin->Initialize();
@@ -95,8 +96,10 @@ bool SceneTitle::Initialize()
 	title->Initialize();
 	title->SetCamera(m_camera.get());
 	title->SetTexture(title_tex);
+	
+	title->property._transform._scale = Vector3(260, 120, 10);
 	title->property._transform._translation = m_camera->property._translation;
-	title->property._transform._scale = Vector3(150, 150, 10);
+	title->property._transform._translation._x += 10;
 	title->property._transform._translation._y = 70;
 	title->property._transform._translation._z -= 409;
 	title->property._transform._rotation._z =180;

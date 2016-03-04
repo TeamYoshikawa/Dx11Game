@@ -16,6 +16,8 @@ SoumatouManager::~SoumatouManager()
 
 bool SoumatouManager::Initialize(){
 
+	damage_flag = false;
+
 	ShaderDesc textureDesc;
 	textureDesc._pixel._srcFile = L"Shader/Transparent.ps";
 	textureDesc._pixel._entryName = "ps_main";
@@ -45,6 +47,15 @@ bool SoumatouManager::Initialize(){
 	m_soumatou->property._transform._scale._x = 800;
 	m_soumatou->property._transform._scale._y = 600;
 	m_soumatou->SetTexture(m_soumaTexture.get());
+
+
+	m_damage = std::make_shared<Rectangle2D>();
+	m_damage->Initialize();
+	m_damage->property._transform._translation = Vector3(0.0f, 0.0f, 0.0f);
+	m_damage->property._color = Color(1.0f, 0.0f, 0.0f, 0.6f);
+	m_damage->property._transform._scale._x = 800;
+	m_damage->property._transform._scale._y = 600;
+	m_damage->SetTexture(m_soumaTexture.get());
 	
 	m_countDown = 150;
 	m_pressCount = 0;
@@ -61,13 +72,22 @@ void SoumatouManager::Update(){
 	
 	if (flag==true){
 		m_countDown--;
-		
 	}
 	if (m_countDown < 0){
 		m_pressCount += 1;
 		m_countDown = 150;
 		flag = false;
 	}
+
+
+}
+
+void SoumatouManager::DamageFlagTrue(){
+	damage_flag = true;
+}
+
+void SoumatouManager::DamageFlagFalse(){
+	damage_flag = false;
 }
 
 int SoumatouManager::SoumatouGet(){
@@ -77,12 +97,23 @@ void SoumatouManager::SoumatouSet(int Set){
 	m_pressCount=Set;
 }
 
+int SoumatouManager::DamageGet(){
+	return m_damageCount;
+}
+
+void SoumatouManager::DamageSet(int damage){
+	m_damageCount = damage;
+}
+
 void SoumatouManager::Render(){
 	
-	if (flag==true){
-		m_soumatou->Render(m_pixelShader.get());
+	if (damage_flag){
+		//std::cout << "hiromu";
+		m_damage->Render(m_pixelShader.get());
 	}
 	
-	//m_soumatou->Render(m_colorShader.get());
+	if (flag == true){
+		m_soumatou->Render(m_pixelShader.get());
+	}
 
 }

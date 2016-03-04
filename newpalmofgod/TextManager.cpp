@@ -147,7 +147,7 @@ void TextManager::Render(ShaderBase *m_shader){
 	}
 
 	if(m_waitTime > 150){
-		std::cout << m_text->property._transform._translation._x << std::endl;
+		//std::cout << m_text->property._transform._translation._x << std::endl;
 		if (m_text->property._transform._translation._x > -440){
 			m_text->property._transform._translation._x -= 8;
 		}
@@ -155,7 +155,7 @@ void TextManager::Render(ShaderBase *m_shader){
 			m_background->property._transform._translation._x -= 8;
 		}
 		if (m_text->property._transform._translation._x < -430){
-			std::cout << "hiroki";
+			//std::cout << "hiroki";
 			m_isRender = false;
 		}
 	}

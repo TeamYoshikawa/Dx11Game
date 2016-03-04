@@ -38,7 +38,7 @@ void PlayerUpdater::Initialize(){
 	m_isHitting = false;
 	m_prevKey = NULL;
 
-	m_currentPos = Vector3(-50, -8, 692);
+	m_currentPos = Vector3(-50, -8, 407);
 	m_nextPos = m_currentPos;
 
 	//std::cout << "Init!!!!!!!!!!!!!!!!!!!!!" << std::endl;
@@ -81,7 +81,7 @@ bool PlayerUpdater::HittingProcessor(ModelBase* player, ModelBase* other){
 		return false;
 	}
 	if (SendStatus()._muteki == true)return false;
-	std::cout << "ìñÇΩÇ¡ÇΩÇÊ";
+	//std::cout << "ìñÇΩÇ¡ÇΩÇÊ";
 	m_damegeSound->PlayToOneTime();
 	SendStatus()._life -= 1;
 	SendStatus()._muteki = true;
@@ -103,7 +103,7 @@ bool PlayerUpdater::HittingWall(ModelBase* player, ModelBase* wall)
 
 // ìÆÇ¢ÇƒÇÈÇ∆Ç´ÇÃèàóù
 void PlayerUpdater::Move(const std::shared_ptr<FbxModel>& playerObject, std::shared_ptr<aetherClass::ViewCamera> camera, bool IsHitWall){
-	static float cmx = -50.0f, cmy = -8.0f, cmz = 692.0f, cmrx = -170, cmry = -90;
+	static float cmx = -50.0f, cmy = -8.0f, cmz = 692.0f, cmrx = -170, cmry = 0;
 	//std::cout << "CurrentPosition:" << std::endl;
 	//std::cout << "X:" << m_currentPos._x << std::endl;
 	//std::cout << "Y:" << m_currentPos._y << std::endl;
@@ -121,7 +121,7 @@ void PlayerUpdater::Move(const std::shared_ptr<FbxModel>& playerObject, std::sha
 		camera->property._translation = m_currentPos;
 		playerObject->property._transform._translation._x = camera->property._translation._x - 10;
 		playerObject->property._transform._translation._z = camera->property._translation._z;
-		std::cout << "ï«Ç…ìñÇΩÇ¡ÇΩÇÊ" << std::endl;
+		//std::cout << "ï«Ç…ìñÇΩÇ¡ÇΩÇÊ" << std::endl;
 	}
 	else
 	{
@@ -165,7 +165,7 @@ void PlayerUpdater::Move(const std::shared_ptr<FbxModel>& playerObject, std::sha
 	if (cmrx < -225){ cmrx = -225; }
 	if (cmrx > -125){ cmrx = -125; }
 
-	if (GameController::GetKey().IsKeyDown(DIK_LCONTROL))
+	if (GameController::GetKey().IsKeyDown(DIK_LSHIFT))
 	{
 		if (GameController::GetKey().IsKeyDown(DIK_A)){
 			cmx -= (cm_move*2.0f) * cos(kAetherPI * cmry / 180);
@@ -277,5 +277,5 @@ void PlayerUpdater::TimeSpiral()
 
 	time--;
 
-	std::cout << time << std::endl;
+	//std::cout << time << std::endl;
 }

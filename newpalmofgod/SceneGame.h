@@ -38,8 +38,17 @@ public:
 
 private:
 	//トラップイベント
-	enum class eTrapState{
+	enum class eRockState{
 		eRockEvent,
+		eNull
+	};
+
+	enum class eDamageState{
+		eDamageEvent,
+		eNull
+	};
+
+	enum class eTrapState{
 		eSpearEvent,
 		eSpearEvent2,
 		efallwall,
@@ -56,8 +65,11 @@ private:
 	//イベント
 	eTrapState m_trapState;
 	eNaviState m_naviState;
-
+	eRockState m_rockState;
+	eDamageState m_damageState;
 	
+
+
 	//skybox
 	std::shared_ptr<aetherClass::Skybox> m_skybox;
 	std::shared_ptr<aetherClass::Texture> m_texture;

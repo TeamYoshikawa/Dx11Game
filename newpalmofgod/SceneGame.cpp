@@ -66,10 +66,10 @@ bool SceneGame::Initialize()
 		m_descTexture[i] = std::make_shared<Texture>();
 	}
 
-	m_descTexture[0]->Load("image/player_wasd.png");
-	m_descTexture[1]->Load("image/player_dash.png");
-	m_descTexture[2]->Load("image/player_kamera.png");
-	m_descTexture[3]->Load("image/player_soumatou.png");
+	m_descTexture[0]->Load("image/player_wasd.png");	//キャラ移動
+	m_descTexture[1]->Load("image/player_dash.png");	//走る
+	m_descTexture[2]->Load("image/player_kamera.png");	//カメラ
+	m_descTexture[3]->Load("image/player_soumatou.png");	//走馬灯
 
 	//操作説明初期化
 	for (int i = 0; i < 4; i++)
@@ -81,9 +81,9 @@ bool SceneGame::Initialize()
 	}
 	m_desc[0]->property._transform._translation = Vector3(14.0f, 100.0f,40.0f);
 	m_desc[0]->property._transform._scale = Vector3(100,-100,100);
-	m_desc[1]->property._transform._translation = Vector3(350.0f, 80.0f, 40.0f);
-	m_desc[1]->property._transform._scale = Vector3(100, -100, 500);
-	m_desc[2]->property._transform._translation = Vector3(14.0f, -90.0f, 41.0f);
+	m_desc[1]->property._transform._translation = Vector3(300.0f, -30.0f, 870.0f);
+	m_desc[1]->property._transform._scale = Vector3(-100, -100, 500);
+	m_desc[2]->property._transform._translation = Vector3(400.0f, 80.0f, 40.0f);
 	m_desc[2]->property._transform._scale = Vector3(100, -100, 500);
 	m_desc[3]->property._transform._translation = Vector3(14.0f,-30.0f, 870.0f);
 	m_desc[3]->property._transform._scale = Vector3(-100, -100, 500);
@@ -188,6 +188,8 @@ bool SceneGame::Initialize()
 	//各イベントの初期化
 	m_trapState = eTrapState::eNull;
 	m_naviState = eNaviState::eNull;
+	m_rockState = eRockState::eNull;
+	m_damageState = eDamageState::eNull;
 
 	return true;
 }
@@ -201,15 +203,15 @@ bool SceneGame::Updater(){
 	int hitNaviNumber = 0;
 
 	for (int i = 0; i < m_navigation->NaviCnt(); i++){
-		//IsHitNavi = m_navigation->HitMesh(m_player->Get(), m_navigation->Navi_Get(i).m_navigation);
-		//if (IsHitNavi && !m_navigation->Navi_Get(i).m_isRunEnd){
+		IsHitNavi = m_navigation->HitMesh(m_player->Get(), m_navigation->Navi_Get(i).m_navigation);
+		if (IsHitNavi && !m_navigation->Navi_Get(i).m_isRunEnd){
 		hitNaviNumber = i;
 		//ナビゲーションのIDの設定
 		m_navigation->Update(hitNaviNumber);
 		m_naviState = eNaviState::eNaviEvent;
 		break;
 	}
-//}
+}
 
 	if (m_naviState == eNaviState::eNaviEvent){
 		m_text->SetID(m_navigation->Navi_IDGet());
@@ -240,7 +242,7 @@ bool SceneGame::Updater(){
 
 	//プレイヤー
 	m_player->Update(m_camera, IsHitWall);
-
+	
 	//ライト
 	m_lightmanager->Update();
 
@@ -258,12 +260,14 @@ bool SceneGame::Updater(){
 	if (m_player->HitMesh(m_rock->Get().get()))
 	{
 		m_player->SetState(PlayerBase::ePlayerMoveState::eDamage);
+		m_damageState=eDamageState::eDamageEvent;
 	}
 
 	for (int i = 0; i < m_spear->SpearCnt(); i++){
 		if (m_player->HitMesh(m_spear->Get(i).get()))
 		{
 			m_player->SetState(PlayerBase::ePlayerMoveState::eDamage);
+			m_damageState = eDamageState::eDamageEvent;
 		}
 	}
 	
@@ -272,6 +276,7 @@ bool SceneGame::Updater(){
 		if (m_player->HitMesh(m_spear->Get2(i).get()))
 		{
 			m_player->SetState(PlayerBase::ePlayerMoveState::eDamage);
+			m_damageState = eDamageState::eDamageEvent;
 		}
 	}
 
@@ -284,7 +289,7 @@ bool SceneGame::Updater(){
 	//各トラップのイベントの呼び出し
 	if (m_rock->HitMesh(m_player->Get(), m_rock->Switch_Get()))
 	{
-		m_trapState = eTrapState::eRockEvent;
+		m_rockState = eRockState::eRockEvent;
 	}
 
 	if (m_spear->HitMesh(m_player->Get(), m_spear->Switch_Get())){
@@ -293,20 +298,18 @@ bool SceneGame::Updater(){
 	if (m_spear->HitMesh2(m_player->Get(), m_spear->Switch_Get2())){
 		m_trapState = eTrapState::eSpearEvent2;
 	}
-	
+	if (m_rock->Get()->property._transform._translation._x > 6200){
+		m_rockState = eRockState::eNull;
+	}
+
+
 	float a = m_player->Get()->property._transform._translation._x;
 	float b = m_fallwall->GetFallingWall()->property._transform._translation._x;
 	float distance = a - b;
-	//std::cout << distance << std::endl;
-
-	//std::cout << distace << std::endl;
-	//if (m_fallwall->HitMesh(m_player->Get(), m_fallwall->GetFallingWall()))
-	//{
-	//	m_trapState = eTrapState::efallwall;
-	//}
+	
 
 	//イベントが発生していたらUpdateを呼ぶ
-	if (m_trapState == eTrapState::eRockEvent || m_trapState == eTrapState::eSpearEvent2){
+	if (m_rockState == eRockState::eRockEvent){
 		m_rock->Update();
 	}
 	if (m_trapState == eTrapState::eSpearEvent){
@@ -333,6 +336,24 @@ bool SceneGame::Updater(){
 	Singleton<ResultData>::GetInstance().LifePointSet(m_player->LifeGet());
 	Singleton<ResultData>::GetInstance().SoumatouCountSet(m_soumatou->SoumatouGet());
 
+	static int damage_cnt = 0;
+	if (m_damageState == eDamageState::eDamageEvent){
+		m_soumatou->DamageFlagTrue();
+		damage_cnt++;
+		std::cout << damage_cnt << std::endl;
+	}
+
+	if (damage_cnt > 150){
+		damage_cnt = 0;
+		m_damageState = eDamageState::eNull;
+		m_soumatou->DamageFlagFalse();
+
+	}
+
+
+	/*std::cout << "x"<<m_camera->property._translation._x;
+	std::cout << "y" << m_camera->property._translation._y;
+	std::cout << "z" << m_camera->property._translation._z;*/
 	return true;
 }
 
@@ -341,10 +362,6 @@ void SceneGame::Render(){
 
 	//カメラ
 	m_camera->Render();
-
-	//UI
-	m_ui->Render();
-	
 
 	//ステージ
 	m_stage->Render(m_materialShader.get());
@@ -365,6 +382,9 @@ void SceneGame::Render(){
 
 	//ナビゲーション
 	m_navigation->Render(m_pixelShader);
+
+	//UI
+	m_ui->Render();
 
 	//テキスト
 	m_text->Render(m_pixelShader.get());

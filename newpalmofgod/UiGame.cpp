@@ -57,13 +57,13 @@ bool UiGame::Initialize(){
 
 
 	h_ui->property._transform._translation = Vector3(10.0f, 10.0f, 0.1f);
-	h_ui->property._transform._scale = Vector3(250.0f, 70.0f, 0.0f);
+	h_ui->property._transform._scale = Vector3(220.0f, 70.0f, 0.0f);
 	h_ui->property._transform._rotation = Vector3(0.0f, 0.0f, 0.0f);
 
 
 	for (i = 0; i < h_max; i++){
 		heart[i]->property._transform._scale = Vector3(38.0f, 38.0f, 0.0f);
-		heart[i]->property._transform._translation = Vector3(26.0f + i* 90.0, 24.0f, 0.0f);
+		heart[i]->property._transform._translation = Vector3(40.0f + i* 60.0, 24.0f, 0.0f);
 	}
 
 	return true;

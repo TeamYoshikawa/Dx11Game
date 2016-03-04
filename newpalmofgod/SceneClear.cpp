@@ -109,23 +109,26 @@ bool SceneClear::Initialize()
 }
 void SceneClear::UIRender(){
 
+	int Rank = (SCORE + Singleton<ResultData>::GetInstance().LifePointGet()) - Singleton<ResultData>::GetInstance().SoumatouCountGet();
+
 	clear->Render(m_pixelShader.get());
-	if ((SCORE + Singleton<ResultData>::GetInstance().LifePointGet()) - Singleton<ResultData>::GetInstance().SoumatouCountGet() >= 8){ //S
+	if (Rank >= 8){ //S
 		m_rankS->Render(m_pixelShader.get());
 	}
 
-	if ((SCORE + Singleton<ResultData>::GetInstance().LifePointGet()) - Singleton<ResultData>::GetInstance().SoumatouCountGet() >= 6){ //A
+	if (Rank>= 6 &&Rank<8)
+	{ //A
 		m_rankA->Render(m_pixelShader.get());
 	}
 
-	if ((SCORE + Singleton<ResultData>::GetInstance().LifePointGet()) - Singleton<ResultData>::GetInstance().SoumatouCountGet() >= 5){ //B
-		m_rankB->Render(m_colorShader.get());
+	if (Rank >= 5&&Rank<6){ //B
+		m_rankB->Render(m_pixelShader.get());
 	}
 
-	if ((SCORE + Singleton<ResultData>::GetInstance().LifePointGet()) - Singleton<ResultData>::GetInstance().SoumatouCountGet() >= 3){ //C
+	if (Rank >= 3&&Rank<5){ //C
 		m_rankC->Render(m_pixelShader.get());
 	}
-	if ((SCORE + Singleton<ResultData>::GetInstance().LifePointGet()) - Singleton<ResultData>::GetInstance().SoumatouCountGet() <= 2){ //D
+	if (Rank <= 2){ //D
 		m_rankD->Render(m_pixelShader.get());
 	}
 	
@@ -244,7 +247,7 @@ void SceneClear::SceneChange()
 	if (GameController::GetMouse().IsLeftButtonTrigger())
 	{
 		cout << "Called NextScene!" << endl;
-		ChangeScene("Game", LoadState::eUnuse, LoadWaitState::eUnuse);
+		ChangeScene("Title", LoadState::eUnuse, LoadWaitState::eUnuse);
 
 	}
 
