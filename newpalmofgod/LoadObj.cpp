@@ -38,7 +38,7 @@ void LoadObj::Initialize()
 	load02 = std::make_shared<aetherClass::Rectangle2D>();
 	load02->Initialize();
     Texture *load_tex02 = new Texture();
-	load_tex02->Load("image/Story02.png");
+	load_tex02->Load("image/Story03.png");
 	load02->SetTexture(load_tex02);
 	//load02->property._transform._camera._z =-1;
 	load02->property._transform._scale._x = 800;
@@ -61,7 +61,7 @@ void LoadObj::Initialize()
 	press->Initialize();
 	press->SetTexture(press_tex);
 	press->property._transform._translation._y = 550;
-	press->property._transform._translation._x = 540;
+	press->property._transform._translation._x = 555;
 	press->property._transform._translation._z = +0.1;
 	press->property._transform._scale._x = 250;
 	press->property._transform._scale._y = 50;
