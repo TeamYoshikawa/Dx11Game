@@ -66,10 +66,10 @@ bool SceneGame::Initialize()
 		m_descTexture[i] = std::make_shared<Texture>();
 	}
 
-	m_descTexture[0]->Load("image/player_wasd.png");	//キャラ移動
+	m_descTexture[0]->Load("image/Controlls.png");	//キャラ移動
 	m_descTexture[1]->Load("image/player_dash.png");	//走る
 	m_descTexture[2]->Load("image/player_kamera.png");	//カメラ
-	m_descTexture[3]->Load("image/player_soumatou.png");	//走馬灯
+	m_descTexture[3]->Load("image/Controlls2.png");	//走馬灯
 
 	//操作説明初期化
 	for (int i = 0; i < 4; i++)
@@ -79,15 +79,17 @@ bool SceneGame::Initialize()
 		m_desc[i]->SetCamera(m_camera.get());
 		m_desc[i]->SetTexture(m_descTexture[i].get());
 	}
-	m_desc[0]->property._transform._translation = Vector3(14.0f, 100.0f,40.0f);
-	m_desc[0]->property._transform._scale = Vector3(100,-100,100);
-	m_desc[1]->property._transform._translation = Vector3(300.0f, -30.0f, 870.0f);
+	m_desc[0]->property._transform._translation = Vector3(370.0f, 80.0f,40.0f);
+	m_desc[0]->property._transform._scale = Vector3(150,-80,100);
+	//m_desc[1]->property._transform._translation = Vector3(300.0f, -30.0f, 870.0f); //配列個数いじるとなぜか起動しないので不要画像を亜空間に消えていただきました＾＾；
+	m_desc[1]->property._transform._translation = Vector3(300.0f, -30.0f, 80000.0f);
 	m_desc[1]->property._transform._scale = Vector3(-100, -100, 500);
-	m_desc[2]->property._transform._translation = Vector3(400.0f, 80.0f, 40.0f);
+	//m_desc[2]->property._transform._translation = Vector3(400.0f, 80.0f, 40.0f);//同上
+	m_desc[2]->property._transform._translation = Vector3(400.0f, 80.0f, 80000.0f);
 	m_desc[2]->property._transform._scale = Vector3(100, -100, 500);
-	m_desc[3]->property._transform._translation = Vector3(14.0f,-30.0f, 870.0f);
-	m_desc[3]->property._transform._scale = Vector3(-100, -100, 500);
-
+	m_desc[3]->property._transform._translation = Vector3(3075.0f,40.0f, 700.0f);
+	m_desc[3]->property._transform._scale = Vector3(-200, -80, 500);
+	m_desc[3]->property._transform._rotation._y = 90;
 
 
 	// シェーダーの詳細情報の設定
