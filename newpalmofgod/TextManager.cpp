@@ -81,7 +81,7 @@ void TextManager::SetID(int id){
 		if (m_background->property._transform._translation._x < 0){
 			m_background->property._transform._translation._x += 5;
 		}
-		m_text->UpdateText(L"SPACEを押せ！！");
+		m_text->UpdateText(L"スローを使え");
 		m_spear->PlayToOneTime();
 	}
 

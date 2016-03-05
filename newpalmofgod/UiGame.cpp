@@ -1,5 +1,6 @@
 #include "UiGame.h"
 #include "Rectangle2D.h"
+#include "DirectXEntity.h"
 #include <iostream>
 
 using namespace aetherClass;
@@ -96,17 +97,17 @@ int UiGame::Set(int h_player){
 
 void UiGame::Render(){
 
+	DirectXEntity entity;
 	h_ui->Render(m_shader.get());
 
 	for (int i = 0; i < h_max; i++){
 		if (heart[i]){
+			entity.GetDirect3DManager()->Change2DMode();
 			heart[i]->Render(m_shader.get());
+			entity.GetDirect3DManager()->Change3DMode();
 		}
+
 	}
-
-
-
 	return;
+
 }
-
-
