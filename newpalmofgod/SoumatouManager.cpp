@@ -33,6 +33,12 @@ bool SoumatouManager::Initialize(){
 	m_colorShader->Initialize(textureDesc, ShaderType::eVertex | ShaderType::ePixel);*/
 
 
+	m_sound = std::make_shared<GameSound>();
+	m_sound->Load("Sound/soumatou.wav");
+	m_sound->SetValume(-1000);
+	
+
+
 	m_soumaTexture = std::make_shared<Texture>();
 
 	bool hoge;
@@ -67,6 +73,7 @@ bool SoumatouManager::Initialize(){
 void SoumatouManager::Update(){
 
 	if (GameController::GetKey().IsKeyDown(DIK_SPACE)){
+		m_sound->PlayToOneTime();
 		flag = true;
 	}
 	

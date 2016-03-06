@@ -2,6 +2,7 @@
 #include <memory>
 #include <ModelBase.h>
 #include "Rectangle2D.h"
+#include "GameSound.h"
 
 
 class SoumatouManager
@@ -33,6 +34,7 @@ public:
 
 
 private:
+	std::shared_ptr<aetherClass::GameSound> m_sound;
 	std::shared_ptr<aetherClass::Texture> m_soumaTexture;
 	std::shared_ptr<aetherClass::Rectangle2D> m_soumatou;
 	std::shared_ptr<aetherClass::Rectangle2D> m_damage;
