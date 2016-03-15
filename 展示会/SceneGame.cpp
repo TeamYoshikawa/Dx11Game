@@ -66,7 +66,7 @@ bool SceneGame::Initialize()
 		m_descTexture[i] = std::make_shared<Texture>();
 	}
 
-	m_descTexture[0]->Load("image/Controlls.png");	//キャラ移動
+	m_descTexture[0]->Load("image/Controlls1.png");	//キャラ移動
 	m_descTexture[1]->Load("image/player_dash.png");	//走る
 	m_descTexture[2]->Load("image/player_kamera.png");	//カメラ
 	m_descTexture[3]->Load("image/Controlls2.png");	//走馬灯
